@@ -1,0 +1,6806 @@
+{
+  "stationary": [
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.1299317639232709,
+          0.27194513485396826
+        ],
+        [
+          7.971506625199953,
+          0.06607319464317776
+        ],
+        [
+          -8.775909774151275,
+          -2.2934874556841898
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0880569037016524
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.1299317639232926,
+          0.2719451348539684
+        ],
+        [
+          7.971506625200123,
+          0.06607319464319307
+        ],
+        [
+          -8.775909774151438,
+          -2.2934874556842075
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08805690370165567
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.1299317639232493,
+          0.2719451348539742
+        ],
+        [
+          7.971506625199867,
+          0.0660731946431632
+        ],
+        [
+          -8.775909774151206,
+          -2.293487455684182
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08805690370165072
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.1299317639232604,
+          0.27194513485397415
+        ],
+        [
+          7.971506625199922,
+          0.06607319464315559
+        ],
+        [
+          -8.775909774151254,
+          -2.293487455684174
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08805690370165166
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.1299317639232709,
+          0.27194513485396826
+        ],
+        [
+          7.971506625199953,
+          0.06607319464317776
+        ],
+        [
+          -8.775909774151275,
+          -2.2934874556841898
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0880569037016524
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.95091767334244,
+          -0.05557260122584365
+        ],
+        [
+          0.1619714685561759,
+          1.2548926772728224
+        ],
+        [
+          -2.8071168711057646,
+          -3.1183875529736547
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.5659127679494438
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -1.2903989305304628,
+          0.3582013971041253
+        ],
+        [
+          9.963719575515785,
+          1.324113784402229
+        ],
+        [
+          -10.661001519610723,
+          -3.6624259901134804
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.32956312826918666
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          2.8615852220183022,
+          2.034682813345923
+        ],
+        [
+          -5.485928143005892,
+          -3.9731795542271637
+        ],
+        [
+          1.1236166001153325,
+          0.3643945844546935
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 3.5155739045009553
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.34548457337883814,
+          0.11226910935349614
+        ],
+        [
+          -0.04584599449410496,
+          0.18938610875110934
+        ],
+        [
+          -0.4153049902012895,
+          -1.4271063603311527
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.028890321201165983
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.34548457337883853,
+          0.11226910935350523
+        ],
+        [
+          -0.04584599449410579,
+          0.18938610875107073
+        ],
+        [
+          -0.415304990201289,
+          -1.427106360331119
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.028890321201165345
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.34548457337883964,
+          0.11226910935351035
+        ],
+        [
+          -0.045845994494109164,
+          0.1893861087510523
+        ],
+        [
+          -0.4153049902012868,
+          -1.427106360331104
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.02889032120116504
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.34548457337883826,
+          0.11226910935350339
+        ],
+        [
+          -0.0458459944941057,
+          0.18938610875107717
+        ],
+        [
+          -0.41530499020128875,
+          -1.4271063603311238
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.02889032120116541
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.34548457337883814,
+          0.11226910935349614
+        ],
+        [
+          -0.04584599449410496,
+          0.18938610875110934
+        ],
+        [
+          -0.4153049902012895,
+          -1.4271063603311527
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.028890321201165983
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.3514944386562428,
+          0.135041037162443
+        ],
+        [
+          0.00767174826985774,
+          0.07295633617772837
+        ],
+        [
+          -0.47103474143796165,
+          -1.2583330065036147
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.04371504355130262
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.24337133034358568,
+          0.059207442070510784
+        ],
+        [
+          1.0421420157719328,
+          0.941344822755883
+        ],
+        [
+          -1.4996066141244686,
+          -2.2254068364089568
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.12228883573297769
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.30470180148981046,
+          0.06605791583709263
+        ],
+        [
+          0.3550308729608786,
+          0.6611973841580998
+        ],
+        [
+          -0.7910350879697943,
+          -1.8281648105982282
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.09002825133539001
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7643382989522888,
+          0.16948288586614593
+        ],
+        [
+          -1.7758823334511789,
+          0.6878297049759475
+        ],
+        [
+          0.47618141214144366,
+          -2.105219531295386
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0849785012725139
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7643382989522927,
+          0.16948288586614174
+        ],
+        [
+          -1.7758823334512015,
+          0.6878297049759703
+        ],
+        [
+          0.4761814121414663,
+          -2.1052195312954076
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08497850127251322
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7643382989522969,
+          0.16948288586614874
+        ],
+        [
+          -1.7758823334512217,
+          0.6878297049759345
+        ],
+        [
+          0.4761814121414846,
+          -2.1052195312953743
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08497850127251194
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7643382989522891,
+          0.16948288586614613
+        ],
+        [
+          -1.7758823334511804,
+          0.6878297049759468
+        ],
+        [
+          0.4761814121414454,
+          -2.1052195312953854
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.08497850127251372
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7643382989522888,
+          0.16948288586614593
+        ],
+        [
+          -1.7758823334511789,
+          0.6878297049759475
+        ],
+        [
+          0.47618141214144366,
+          -2.105219531295386
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0849785012725139
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.8759206571769267,
+          0.13362931888468316
+        ],
+        [
+          -1.6429220142029741,
+          1.012190805312447
+        ],
+        [
+          0.28083766950193995,
+          -2.32712603200713
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07914027909724047
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6818806151419812,
+          0.9258285589985362
+        ],
+        [
+          -5.023325498674609,
+          -1.7598078038993958
+        ],
+        [
+          3.3936147878948,
+          -0.15459940268853362
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.06643595557747471
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.6397093582228671,
+          -0.04715141109869617
+        ],
+        [
+          -1.1268356541550923,
+          2.229214254738636
+        ],
+        [
+          0.6033521223384736,
+          -3.148254113785415
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.1382726317669845
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6724714667383556,
+          1.3036887370897485
+        ],
+        [
+          -5.981781001149874,
+          -2.6371233516157324
+        ],
+        [
+          5.377002773792351,
+          0.0046535228844107246
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.03422682079420616
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6724714667383584,
+          1.303688737089742
+        ],
+        [
+          -5.9817810011498915,
+          -2.6371233516157018
+        ],
+        [
+          5.377002773792372,
+          0.004653522884385852
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.034226820794206275
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6724714667383394,
+          1.303688737089742
+        ],
+        [
+          -5.981781001149804,
+          -2.637123351615703
+        ],
+        [
+          5.3770027737922925,
+          0.004653522884385751
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.034226820794205914
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6724714667383394,
+          1.3036887370897443
+        ],
+        [
+          -5.981781001149811,
+          -2.637123351615717
+        ],
+        [
+          5.3770027737923005,
+          0.0046535228843982085
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.03422682079420545
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6724714667383556,
+          1.3036887370897485
+        ],
+        [
+          -5.981781001149874,
+          -2.6371233516157324
+        ],
+        [
+          5.377002773792351,
+          0.0046535228844107246
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.03422682079420616
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          5.3774919162138515,
+          5.69177536538913
+        ],
+        [
+          -23.57781069380346,
+          -23.82872406651305
+        ],
+        [
+          23.499085169839493,
+          22.00053774787268
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 4.848158508850845
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.217460536127343,
+          0.7199833701192335
+        ],
+        [
+          -3.5098192835941258,
+          0.5643817808676302
+        ],
+        [
+          3.271994825739668,
+          -2.686758339928299
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.18077998065352605
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          2.0594001233195525,
+          1.7760193807036089
+        ],
+        [
+          -6.922597385065735,
+          -3.6304270520115107
+        ],
+        [
+          6.060091837916619,
+          0.7450620428425638
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.15558375208322517
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.29370854847360245,
+          0.41280459271551023
+        ],
+        [
+          0.559816694664034,
+          0.05677455473720804
+        ],
+        [
+          -1.390222809170395,
+          -1.8218299821894217
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0009015961757630447
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.2937085484735973,
+          0.4128045927155104
+        ],
+        [
+          0.5598166946640568,
+          0.05677455473720716
+        ],
+        [
+          -1.3902228091704143,
+          -1.821829982189421
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.000901596175762991
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.2937085484736084,
+          0.41280459271551584
+        ],
+        [
+          0.5598166946640102,
+          0.05677455473718692
+        ],
+        [
+          -1.3902228091703757,
+          -1.8218299821894053
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0009015961757631095
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.2937085484735938,
+          0.41280459271549924
+        ],
+        [
+          0.5598166946640736,
+          0.05677455473725589
+        ],
+        [
+          -1.3902228091704296,
+          -1.8218299821894632
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0009015961757629587
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.29370854847360245,
+          0.41280459271551023
+        ],
+        [
+          0.559816694664034,
+          0.05677455473720804
+        ],
+        [
+          -1.390222809170395,
+          -1.8218299821894217
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0009015961757630447
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.19984425523302018,
+          0.33276350522892595
+        ],
+        [
+          0.9664051171393307,
+          0.4314194334243181
+        ],
+        [
+          -1.599346244069977,
+          -2.0916559388956597
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.004034249393994487
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.0675373311141194,
+          0.30191193040265246
+        ],
+        [
+          2.0852271881323667,
+          0.9922940581997708
+        ],
+        [
+          -2.763299571385665,
+          -2.7051913249212207
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.029670016259437066
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          -0.038402104825641284,
+          0.3026299063783668
+        ],
+        [
+          2.8794319050959087,
+          1.0871083792471923
+        ],
+        [
+          -3.390460505408558,
+          -2.7852829290759686
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.076343997504083
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.10943218352135554,
+          0.559988216180218
+        ],
+        [
+          1.6249716699080174,
+          -2.107688556734612
+        ],
+        [
+          -1.971062372592767,
+          0.36084945157314824
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.005062723604938033
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.10943218352135403,
+          0.5599882161802183
+        ],
+        [
+          1.6249716699080266,
+          -2.107688556734613
+        ],
+        [
+          -1.971062372592776,
+          0.3608494515731492
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.005062723604938067
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.10943218352135198,
+          0.5599882161802227
+        ],
+        [
+          1.624971669908038,
+          -2.1076885567346433
+        ],
+        [
+          -1.9710623725927867,
+          0.3608494515731793
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.005062723604938143
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.10943218352135081,
+          0.5599882161802233
+        ],
+        [
+          1.6249716699080474,
+          -2.107688556734646
+        ],
+        [
+          -1.9710623725927963,
+          0.36084945157318127
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.00506272360493824
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.10943218352135554,
+          0.559988216180218
+        ],
+        [
+          1.6249716699080174,
+          -2.107688556734612
+        ],
+        [
+          -1.971062372592767,
+          0.36084945157314824
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.005062723604938033
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.051409114565889105,
+          0.5307069850553695
+        ],
+        [
+          2.713750917759142,
+          -1.8443264393987624
+        ],
+        [
+          -3.028314916330997,
+          0.13767725317731816
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.03846455821022272
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.4131047128963469,
+          1.0010115201206102
+        ],
+        [
+          -0.5946503443102121,
+          -4.3975417811081465
+        ],
+        [
+          0.7892915932980318,
+          2.7281474952173084
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.1159861613304638
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.2367012457606219,
+          0.7820122016724338
+        ],
+        [
+          2.2190569076759092,
+          -1.719460583581618
+        ],
+        [
+          -2.6934138288343745,
+          -0.23084220765724175
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.11195520651707162
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.12312860900204407,
+          0.40163982691191574
+        ],
+        [
+          1.2195279458188315,
+          -0.8683086636448345
+        ],
+        [
+          -1.7622834903156674,
+          -0.7127422408794531
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.002580477377877641
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.12312860900204481,
+          0.4016398269119126
+        ],
+        [
+          1.2195279458188346,
+          -0.8683086636448082
+        ],
+        [
+          -1.7622834903156728,
+          -0.712742240879481
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.002580477377877828
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.12312860900204246,
+          0.4016398269119128
+        ],
+        [
+          1.2195279458188426,
+          -0.8683086636448174
+        ],
+        [
+          -1.762283490315679,
+          -0.7127422408794701
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0025804773778777498
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.1231286090020449,
+          0.40163982691191435
+        ],
+        [
+          1.219527945818831,
+          -0.8683086636448325
+        ],
+        [
+          -1.7622834903156683,
+          -0.7127422408794531
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.002580477377877628
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.12312860900204407,
+          0.40163982691191574
+        ],
+        [
+          1.2195279458188315,
+          -0.8683086636448345
+        ],
+        [
+          -1.7622834903156674,
+          -0.7127422408794531
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.002580477377877641
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.844216651660036,
+          0.8371600532481241
+        ],
+        [
+          -0.6893852969417174,
+          -2.2734942634776907
+        ],
+        [
+          -0.5221895915946326,
+          0.3526070794608943
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.11424230101422524
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.12430285256129893,
+          0.41035359117829623
+        ],
+        [
+          0.7331013813668927,
+          -1.1429191331696316
+        ],
+        [
+          -0.6133293619720707,
+          -0.09153290271176907
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0872828422083623
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7760477210805954,
+          0.9464771283587148
+        ],
+        [
+          -9.414028340267585,
+          -11.248066507121873
+        ],
+        [
+          17.11036651736334,
+          17.663273175068646
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 25.58764997763301
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.4081480131149223,
+          0.20508898701801745
+        ],
+        [
+          1.4883873772902598,
+          0.6338130697576803
+        ],
+        [
+          -2.674297779746807,
+          -2.411194729636478
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.05538196042067275
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.40814801311492627,
+          0.20508898701802108
+        ],
+        [
+          1.4883873772902363,
+          0.6338130697576715
+        ],
+        [
+          -2.674297779746785,
+          -2.411194729636472
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.055381960420672206
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.40814801311492677,
+          0.20508898701802447
+        ],
+        [
+          1.4883873772902254,
+          0.6338130697576491
+        ],
+        [
+          -2.674297779746773,
+          -2.4111947296364504
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.055381960420672234
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.40814801311492055,
+          0.20508898701801745
+        ],
+        [
+          1.4883873772902716,
+          0.633813069757678
+        ],
+        [
+          -2.6742977797468184,
+          -2.4111947296364753
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.05538196042067304
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.4081480131149223,
+          0.20508898701801745
+        ],
+        [
+          1.4883873772902598,
+          0.6338130697576803
+        ],
+        [
+          -2.674297779746807,
+          -2.411194729636478
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.05538196042067275
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.7112303387112828,
+          0.43398048051891214
+        ],
+        [
+          3.5704496193802338,
+          2.4152107482124885
+        ],
+        [
+          -5.942943634317655,
+          -5.439694904343428
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.23902006846561202
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.6355839877871898,
+          1.3059182095594537
+        ],
+        [
+          -4.351174941127672,
+          -5.168233722016014
+        ],
+        [
+          3.495190274588612,
+          4.282964857995235
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.2864904115115403
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          2.9777677592984557,
+          3.235870990661246
+        ],
+        [
+          -5.729660948259261,
+          -7.006975791449241
+        ],
+        [
+          2.090053763495814,
+          2.2985174336130467
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 4.104779517598293
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.5135814071896814,
+          0.23961899181220545
+        ],
+        [
+          -0.3770613434241396,
+          -0.2840192131348559
+        ],
+        [
+          -0.38840772307673704,
+          -0.937681341449208
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.6694788724153087e-05
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.5135814071896986,
+          0.23961899181221952
+        ],
+        [
+          -0.37706134342420355,
+          -0.2840192131349056
+        ],
+        [
+          -0.388407723076686,
+          -0.9376813414491694
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.66947887241628e-05
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.5135814071896992,
+          0.2396189918122338
+        ],
+        [
+          -0.3770613434242034,
+          -0.2840192131349565
+        ],
+        [
+          -0.38840772307668736,
+          -0.93768134144913
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.669478872415355e-05
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.5135814071896763,
+          0.23961899181221147
+        ],
+        [
+          -0.3770613434241219,
+          -0.2840192131348756
+        ],
+        [
+          -0.38840772307675053,
+          -0.9376813414491935
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.6694788724148692e-05
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.5135814071896814,
+          0.23961899181220545
+        ],
+        [
+          -0.3770613434241396,
+          -0.2840192131348559
+        ],
+        [
+          -0.38840772307673704,
+          -0.937681341449208
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 1.6694788724153087e-05
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.3563542972139675,
+          0.0694766409549241
+        ],
+        [
+          0.2635122791828886,
+          0.40912001331914377
+        ],
+        [
+          -0.8812076684738686,
+          -1.470858168117799
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.0023785373164211033
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          2.02947231308938,
+          1.7402292381694349
+        ],
+        [
+          -4.247783508738705,
+          -4.1277098927083875
+        ],
+        [
+          2.027898952828089,
+          1.4687461990275548
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.12406486688235421
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          1.144884803173559,
+          0.8928333627472372
+        ],
+        [
+          -2.2384121437795153,
+          -2.1879788193808998
+        ],
+        [
+          0.9986885569432346,
+          0.46383428174018454
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.02173897532179446
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.22588446909286672,
+          0.5290445871328103
+        ],
+        [
+          1.7271368568161285,
+          -0.979210624547831
+        ],
+        [
+          -3.1713488858083037,
+          -0.8962892131405037
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07260516472763559
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.22588446909286636,
+          0.5290445871328017
+        ],
+        [
+          1.7271368568161438,
+          -0.9792106245477868
+        ],
+        [
+          -3.1713488858083223,
+          -0.8962892131405443
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07260516472763584
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.22588446909286555,
+          0.5290445871328143
+        ],
+        [
+          1.727136856816134,
+          -0.979210624547845
+        ],
+        [
+          -3.1713488858083094,
+          -0.8962892131404939
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07260516472763542
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.22588446909286883,
+          0.5290445871328076
+        ],
+        [
+          1.7271368568161265,
+          -0.979210624547826
+        ],
+        [
+          -3.171348885808306,
+          -0.8962892131405055
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07260516472763619
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "n_corrupted": 0,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.22588446909286672,
+          0.5290445871328103
+        ],
+        [
+          1.7271368568161285,
+          -0.979210624547831
+        ],
+        [
+          -3.1713488858083037,
+          -0.8962892131405037
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.07260516472763559
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "n_corrupted": 2,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.9222375144943084,
+          0.44854718535387045
+        ],
+        [
+          -0.7611625493361088,
+          -0.740037232226433
+        ],
+        [
+          -1.2571708824011858,
+          -1.041706786580987
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.1818998060154517
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "n_corrupted": 3,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          0.1783900864821331,
+          1.18858734666944
+        ],
+        [
+          2.008227061211999,
+          -3.26392521155435
+        ],
+        [
+          -3.3534969610718552,
+          1.0051001139407456
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 0.12127899930320513
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "n_corrupted": 4,
+      "clean_regret_theta_true_star": 0.0,
+      "theta_grpo_star_contam": [
+        [
+          2.3504033254496184,
+          2.4531328783563744
+        ],
+        [
+          -8.834372895440445,
+          -10.453121742363242
+        ],
+        [
+          9.413282057149415,
+          10.55491093308624
+        ]
+      ],
+      "clean_regret_theta_grpo_star_contam": 3.383152065770737
+    }
+  ],
+  "training": [
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.006105741522012915,
+          "ci": [
+            0.00027370147271027316,
+            0.011937781571315557
+          ],
+          "regrets": [
+            0.005926229568086768,
+            0.0024179633674959234,
+            0.013307785255211172,
+            0.007369566834790771,
+            0.001507162584479943
+          ]
+        },
+        "grpo": {
+          "mean": 0.09244705768247966,
+          "ci": [
+            0.05650535284469449,
+            0.12838876252026482
+          ],
+          "regrets": [
+            0.09375195337541893,
+            0.08181227690075406,
+            0.058192974303217654,
+            0.09064188125166088,
+            0.1378362025813467
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.010733091678432945,
+          "ci": [
+            0.0045143900024547335,
+            0.016951793354411156
+          ],
+          "regrets": [
+            0.01076989150330235,
+            0.008334676809347045,
+            0.005306583295128527,
+            0.010455430169897088,
+            0.018798876614489726
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.0437345664641297,
+          "ci": [
+            0.012897686269192823,
+            0.07457144665906658
+          ],
+          "regrets": [
+            0.06524826899153244,
+            0.025533243234118947,
+            0.022218839574786917,
+            0.07568792149574642,
+            0.02998455902446381
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 2.004410911775463,
+          "ci": [
+            1.8692290044480095,
+            2.139592819102917
+          ],
+          "regrets": [
+            2.1545093283324737,
+            1.8607020295714085,
+            2.0514967947878477,
+            1.994752517022693,
+            1.9605938891628933
+          ]
+        },
+        "grpo": {
+          "mean": 0.08986851910486379,
+          "ci": [
+            0.046380175834575835,
+            0.13335686237515176
+          ],
+          "regrets": [
+            0.060034427496044526,
+            0.1400472075116569,
+            0.06595474019754324,
+            0.11310746430904008,
+            0.07019875601003416
+          ]
+        },
+        "batchnorm": {
+          "mean": 1.9793168025444328,
+          "ci": [
+            1.7436433248396777,
+            2.2149902802491876
+          ],
+          "regrets": [
+            2.2245916904102714,
+            1.785001237231786,
+            1.8431048290827026,
+            1.9124053448752316,
+            2.1314809111221735
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 1.9555152375418878,
+          "ci": [
+            1.6050595422692895,
+            2.3059709328144864
+          ],
+          "regrets": [
+            1.7031301992405938,
+            2.3497069467532326,
+            1.6595222687268005,
+            2.0384896166039868,
+            2.0267271563848244
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 1.2506337540849644,
+          "ci": [
+            1.0055437383353623,
+            1.4957237698345665
+          ],
+          "regrets": [
+            1.5338648078233592,
+            1.0690620847666774,
+            1.373299123365657,
+            1.1034502292393964,
+            1.173492525229731
+          ]
+        },
+        "grpo": {
+          "mean": 0.08018968864905532,
+          "ci": [
+            0.05971639569857945,
+            0.10066298159953119
+          ],
+          "regrets": [
+            0.06968227106272686,
+            0.08050593785006942,
+            0.06471721732251011,
+            0.0787337435268592,
+            0.10730927348311102
+          ]
+        },
+        "batchnorm": {
+          "mean": 1.1762820158636376,
+          "ci": [
+            0.9251292469932262,
+            1.427434784734049
+          ],
+          "regrets": [
+            1.0819547681841972,
+            0.9715127941748485,
+            1.1953596403981972,
+            1.124905533195,
+            1.507677343365945
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 1.148949728592542,
+          "ci": [
+            0.8018568866528095,
+            1.4960425705322746
+          ],
+          "regrets": [
+            1.1536682087238312,
+            0.9557693522620797,
+            1.4339254515776403,
+            1.4083919041090456,
+            0.7929937262901139
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.8426144809812571,
+          "ci": [
+            0.6787277558079008,
+            1.0065012061546135
+          ],
+          "regrets": [
+            0.7047740210148294,
+            0.9794080856036785,
+            0.7727990589243005,
+            0.7671682028378423,
+            0.9889230365256345
+          ]
+        },
+        "grpo": {
+          "mean": 0.06781361856274588,
+          "ci": [
+            0.04904656641768768,
+            0.08658067070780409
+          ],
+          "regrets": [
+            0.05362813363741915,
+            0.09247417494251288,
+            0.06728301886610856,
+            0.05761232962810841,
+            0.06807043573958041
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.9104167490048258,
+          "ci": [
+            0.7503766904826397,
+            1.070456807527012
+          ],
+          "regrets": [
+            0.7868596261476385,
+            0.7762341977556784,
+            0.9108307967950448,
+            1.0330609494781187,
+            1.045098174847649
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 1.001229512749479,
+          "ci": [
+            0.7078043824873373,
+            1.2946546430116208
+          ],
+          "regrets": [
+            1.066412773575295,
+            0.7855587948067697,
+            1.0786785228616185,
+            1.3240638838465923,
+            0.7514335886571187
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.018285494574629774,
+          "ci": [
+            -0.003419908525554561,
+            0.039990897674814105
+          ],
+          "regrets": [
+            0.00875028139998677,
+            0.04758832480333403,
+            0.020656714478349745,
+            0.01053755562086944,
+            0.0038945965706088806
+          ]
+        },
+        "grpo": {
+          "mean": 0.09670880943833607,
+          "ci": [
+            0.07283057382386958,
+            0.12058704505280256
+          ],
+          "regrets": [
+            0.0779062439762599,
+            0.10052652362890398,
+            0.08278359806900092,
+            0.12696544343469152,
+            0.09536223808282408
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.011562862333701417,
+          "ci": [
+            0.008005092388481289,
+            0.015120632278921546
+          ],
+          "regrets": [
+            0.01339106011096917,
+            0.013165526601867901,
+            0.014224932002041698,
+            0.00931669912383329,
+            0.007716093829795027
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.023587594690973806,
+          "ci": [
+            0.013224627801078262,
+            0.03395056158086935
+          ],
+          "regrets": [
+            0.017322749515867365,
+            0.027267879994802024,
+            0.02375939602866014,
+            0.014237175976221568,
+            0.03535077193931794
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 3.568595052499375,
+          "ci": [
+            3.104563784491662,
+            4.032626320507087
+          ],
+          "regrets": [
+            3.1834005325952592,
+            3.815406482146824,
+            3.223147034052447,
+            3.572826931327091,
+            4.048194282375255
+          ]
+        },
+        "grpo": {
+          "mean": 0.5845321971149844,
+          "ci": [
+            0.5121355876188889,
+            0.6569288066110799
+          ],
+          "regrets": [
+            0.5304039352957177,
+            0.5838081940339573,
+            0.6266450038534342,
+            0.6572848532265265,
+            0.5245189991652854
+          ]
+        },
+        "batchnorm": {
+          "mean": 3.3655558163646075,
+          "ci": [
+            2.9184348078984916,
+            3.8126768248307235
+          ],
+          "regrets": [
+            2.757717921320465,
+            3.7082697975198653,
+            3.5278885569040197,
+            3.4089441807262175,
+            3.4249586253524735
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 3.6722239026842063,
+          "ci": [
+            3.102569251904792,
+            4.2418785534636205
+          ],
+          "regrets": [
+            4.323990586196826,
+            3.4261748695551826,
+            3.981713380166182,
+            3.264400773418492,
+            3.3648399040843486
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 5.836559105430541,
+          "ci": [
+            4.975445361512493,
+            6.697672849348589
+          ],
+          "regrets": [
+            6.051802194390601,
+            5.947599076759693,
+            6.700597350960346,
+            4.788516933833978,
+            5.6942799712080845
+          ]
+        },
+        "grpo": {
+          "mean": 0.34167785648167975,
+          "ci": [
+            0.26339127008951724,
+            0.41996444287384227
+          ],
+          "regrets": [
+            0.37363576295072215,
+            0.41866763218512426,
+            0.3549652757508742,
+            0.30610514480097223,
+            0.25501546672070596
+          ]
+        },
+        "batchnorm": {
+          "mean": 5.974712283298407,
+          "ci": [
+            4.9457086247233395,
+            7.003715941873475
+          ],
+          "regrets": [
+            5.3985269627205525,
+            6.259979770535775,
+            7.2531069886745,
+            5.155431714308644,
+            5.806515980252567
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 6.068187194552876,
+          "ci": [
+            5.186290215835246,
+            6.950084173270506
+          ],
+          "regrets": [
+            6.597111230767155,
+            5.531390796946968,
+            6.212929327353556,
+            6.8422532694781335,
+            5.15725134821857
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 0,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 10.173102847598818,
+          "ci": [
+            8.369558836662776,
+            11.97664685853486
+          ],
+          "regrets": [
+            11.688970229228234,
+            9.228482022137117,
+            10.523696608256547,
+            8.178998912271178,
+            11.245366466101018
+          ]
+        },
+        "grpo": {
+          "mean": 2.9074393575264237,
+          "ci": [
+            2.7421395055083435,
+            3.072739209544504
+          ],
+          "regrets": [
+            2.811775329421272,
+            3.008148294517051,
+            2.741561093980995,
+            2.913194324097742,
+            3.062517745615059
+          ]
+        },
+        "batchnorm": {
+          "mean": 9.798390187374446,
+          "ci": [
+            9.03275382387987,
+            10.564026550869022
+          ],
+          "regrets": [
+            10.782143164873434,
+            9.511880607498712,
+            9.247191285854713,
+            10.005139726489904,
+            9.445596152155456
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 9.826275346995008,
+          "ci": [
+            7.63163802068758,
+            12.020912673302435
+          ],
+          "regrets": [
+            7.378309999613655,
+            9.980601036580266,
+            10.014795241471793,
+            12.332885900711132,
+            9.424784556598192
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.011156379595792281,
+          "ci": [
+            -0.0016142551948629211,
+            0.02392701438644748
+          ],
+          "regrets": [
+            0.012302515608467957,
+            0.005205941391564476,
+            0.0020296277885200136,
+            0.028272690204581504,
+            0.007971122985827458
+          ]
+        },
+        "grpo": {
+          "mean": 0.0313887998299836,
+          "ci": [
+            0.02392593898851838,
+            0.038851660671448816
+          ],
+          "regrets": [
+            0.027357046747275314,
+            0.03510547717158498,
+            0.03095721397319908,
+            0.03931078877096834,
+            0.024213472486890302
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.019842140796230246,
+          "ci": [
+            -0.000286862902528405,
+            0.0399711444949889
+          ],
+          "regrets": [
+            0.0046224768808662805,
+            0.02417834410357756,
+            0.0033042512072179657,
+            0.04225105798074564,
+            0.024854573808743785
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.03331832519410484,
+          "ci": [
+            -0.00016790215042501722,
+            0.0668045525386347
+          ],
+          "regrets": [
+            0.0340532315080118,
+            0.05150294342684873,
+            0.0046766790503035465,
+            0.06742359378355355,
+            0.008935178201806596
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.03737525747554804,
+          "ci": [
+            0.009507144417468746,
+            0.06524337053362733
+          ],
+          "regrets": [
+            0.023657055149483068,
+            0.03297569706392901,
+            0.01903834856234731,
+            0.07568621095094764,
+            0.03551897565103319
+          ]
+        },
+        "grpo": {
+          "mean": 0.040944948241930276,
+          "ci": [
+            0.02437325794859574,
+            0.057516638535264814
+          ],
+          "regrets": [
+            0.050209555683200825,
+            0.05159380801608853,
+            0.02863413591669634,
+            0.024243747268350435,
+            0.050043494325315234
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.05497512969982245,
+          "ci": [
+            0.023736415506441007,
+            0.08621384389320388
+          ],
+          "regrets": [
+            0.09671918552067155,
+            0.05899726166921573,
+            0.04346767425350596,
+            0.043034943389728145,
+            0.03265658366599083
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.03999666038838844,
+          "ci": [
+            0.029283382707120872,
+            0.05070993806965601
+          ],
+          "regrets": [
+            0.0439586651585648,
+            0.03394968547687865,
+            0.03169737668395235,
+            0.03735543451973955,
+            0.05302214010280686
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.2290572353952486,
+          "ci": [
+            0.1883108833314459,
+            0.2698035874590513
+          ],
+          "regrets": [
+            0.2479631210763894,
+            0.2732221611682381,
+            0.20663769963521042,
+            0.22704372111629156,
+            0.19041947398011372
+          ]
+        },
+        "grpo": {
+          "mean": 0.03641390050642902,
+          "ci": [
+            0.020295312004409607,
+            0.05253248900844844
+          ],
+          "regrets": [
+            0.024808281909273432,
+            0.029226847454642903,
+            0.057477631217059046,
+            0.03072493444151825,
+            0.03983180750965146
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.31448646738431807,
+          "ci": [
+            0.23163616057081726,
+            0.3973367741978189
+          ],
+          "regrets": [
+            0.30495011805623307,
+            0.41717124689655943,
+            0.2337733739824765,
+            0.29121017602867005,
+            0.3253274219576513
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.31201463650807276,
+          "ci": [
+            0.239136251755348,
+            0.3848930212607975
+          ],
+          "regrets": [
+            0.3192166095742078,
+            0.3693406461727221,
+            0.23123724507220406,
+            0.3636413747263166,
+            0.2766373069949132
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.1506757646863629,
+          "ci": [
+            0.12822330336615753,
+            0.17312822600656827
+          ],
+          "regrets": [
+            0.13204404412502888,
+            0.17292015974440977,
+            0.14870456597151008,
+            0.16503278442822011,
+            0.13467726916264564
+          ]
+        },
+        "grpo": {
+          "mean": 0.03762792543368858,
+          "ci": [
+            0.018623332239005242,
+            0.05663251862837192
+          ],
+          "regrets": [
+            0.06334618869658207,
+            0.03644237424754473,
+            0.036426459163432776,
+            0.025409242028682198,
+            0.02651536303220108
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.15036534484446465,
+          "ci": [
+            0.12154210344716013,
+            0.17918858624176917
+          ],
+          "regrets": [
+            0.12736668553743238,
+            0.17845580788049759,
+            0.1721738474819854,
+            0.13698948189591634,
+            0.13684090142649152
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.16458452138182525,
+          "ci": [
+            0.11084095441957934,
+            0.21832808834407116
+          ],
+          "regrets": [
+            0.1508530994740706,
+            0.19302070748773922,
+            0.22504230955037732,
+            0.12410247022136313,
+            0.12990402017557606
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.02540023759133402,
+          "ci": [
+            -0.018533890448455857,
+            0.0693343656311239
+          ],
+          "regrets": [
+            0.017559331862481174,
+            0.00926953470207843,
+            0.0006247299597165229,
+            0.011798433050414189,
+            0.08774915838197979
+          ]
+        },
+        "grpo": {
+          "mean": 0.04514517535355954,
+          "ci": [
+            0.017843480163151803,
+            0.07244687054396727
+          ],
+          "regrets": [
+            0.046071590536266874,
+            0.07913810024692855,
+            0.01981710604639688,
+            0.033641252477244254,
+            0.04705782746096109
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.022205877649960105,
+          "ci": [
+            0.017518661040354738,
+            0.026893094259565473
+          ],
+          "regrets": [
+            0.02700651386493043,
+            0.02296067371241229,
+            0.01686583224479447,
+            0.02365475313625847,
+            0.02054161529140487
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.027446941294294324,
+          "ci": [
+            -0.013436424135987748,
+            0.06833030672457639
+          ],
+          "regrets": [
+            0.0011216104077791979,
+            0.010681281645513515,
+            0.08239400373723889,
+            0.00983592551939571,
+            0.033201885161544306
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.044621124373991496,
+          "ci": [
+            0.01816444126373801,
+            0.07107780748424498
+          ],
+          "regrets": [
+            0.031331033528844254,
+            0.014984640287269731,
+            0.05128465287900955,
+            0.05731326877508892,
+            0.06819202639974503
+          ]
+        },
+        "grpo": {
+          "mean": 0.03893917750459088,
+          "ci": [
+            0.016191030392663692,
+            0.061687324616518074
+          ],
+          "regrets": [
+            0.024760775415141104,
+            0.03202067647339493,
+            0.04887739961537318,
+            0.022923699826512472,
+            0.06611333619253273
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.03426944488291338,
+          "ci": [
+            -0.0006753707761141328,
+            0.06921426054194088
+          ],
+          "regrets": [
+            0.02415738670001423,
+            0.031422020369268416,
+            0.08144996584896348,
+            0.006060915128011236,
+            0.028256936368309497
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.027326233880596372,
+          "ci": [
+            0.006411444503963595,
+            0.04824102325722915
+          ],
+          "regrets": [
+            0.03469787439751422,
+            0.01173114134481238,
+            0.022464665530577837,
+            0.05294898824257492,
+            0.0147884998875025
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 16.728132029689817,
+          "ci": [
+            16.28011679512089,
+            17.176147264258745
+          ],
+          "regrets": [
+            16.547170480160094,
+            17.25324789523241,
+            16.73645170265372,
+            16.277962759355855,
+            16.825827311047007
+          ]
+        },
+        "grpo": {
+          "mean": 0.11710322210532842,
+          "ci": [
+            0.08826208945919654,
+            0.1459443547514603
+          ],
+          "regrets": [
+            0.11059563966565146,
+            0.10846951989805728,
+            0.0927010885585846,
+            0.11865502880837868,
+            0.15509483359597004
+          ]
+        },
+        "batchnorm": {
+          "mean": 17.69124244738066,
+          "ci": [
+            16.812257241190554,
+            18.570227653570765
+          ],
+          "regrets": [
+            18.65015121694622,
+            16.85146031977293,
+            17.381501218759464,
+            18.151031815841737,
+            17.422067665582937
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 18.70814366192996,
+          "ci": [
+            17.42851243005988,
+            19.98777489380004
+          ],
+          "regrets": [
+            18.034596861075368,
+            19.610558240891812,
+            18.956013658395218,
+            19.65410269779035,
+            17.28544685149706
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 4.191502233574366,
+          "ci": [
+            3.9562177930437574,
+            4.426786674104974
+          ],
+          "regrets": [
+            3.984367952079063,
+            4.115694072234288,
+            4.072447150682044,
+            4.391758787700228,
+            4.393243205176203
+          ]
+        },
+        "grpo": {
+          "mean": 0.13199642082977975,
+          "ci": [
+            0.08754483756563236,
+            0.17644800409392714
+          ],
+          "regrets": [
+            0.141118818145935,
+            0.15654372311606213,
+            0.08839800212725214,
+            0.10167152726818655,
+            0.17225003349146287
+          ]
+        },
+        "batchnorm": {
+          "mean": 4.657272888155053,
+          "ci": [
+            4.159363205148102,
+            5.155182571162005
+          ],
+          "regrets": [
+            4.335246622328356,
+            4.522887725932368,
+            5.2494935451402505,
+            4.3052005555219415,
+            4.87353599185235
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 4.2720702171317315,
+          "ci": [
+            3.6086937711400258,
+            4.935446663123438
+          ],
+          "regrets": [
+            3.3437968283975494,
+            4.6972204164271885,
+            4.438564933241591,
+            4.353989134982012,
+            4.526779772610315
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.004761281183375127,
+          "ci": [
+            0.00013098247827499424,
+            0.00939157988847526
+          ],
+          "regrets": [
+            0.009735326416648118,
+            0.007020191574957757,
+            0.001329400688096082,
+            0.004701841564500464,
+            0.0010196456726732158
+          ]
+        },
+        "grpo": {
+          "mean": 0.08738249193883081,
+          "ci": [
+            0.06544929606332903,
+            0.1093156878143326
+          ],
+          "regrets": [
+            0.07695158062449718,
+            0.10695344515189185,
+            0.07213464967086,
+            0.10632888368335087,
+            0.07454390056355414
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0063065396786473145,
+          "ci": [
+            -0.0007931786995473752,
+            0.013406258056842004
+          ],
+          "regrets": [
+            0.00028019388584170775,
+            0.005205156866627913,
+            0.005857681188234278,
+            0.01576687480916381,
+            0.004422791643368862
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.008522626254449498,
+          "ci": [
+            -0.0003187082531851092,
+            0.017363960762084105
+          ],
+          "regrets": [
+            0.0017040267419340324,
+            0.019035413668426537,
+            0.004003623856119267,
+            0.012473081595591648,
+            0.005396985410176005
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.1505704557006447,
+          "ci": [
+            0.08066378048581838,
+            0.22047713091547103
+          ],
+          "regrets": [
+            0.19945447000887853,
+            0.10208363848976326,
+            0.13832907755246557,
+            0.0943696521681541,
+            0.21861544028396196
+          ]
+        },
+        "grpo": {
+          "mean": 0.07618912345082512,
+          "ci": [
+            0.061816749639798246,
+            0.090561497261852
+          ],
+          "regrets": [
+            0.07108417602901766,
+            0.0684603335446232,
+            0.06436911154884978,
+            0.08671046613011173,
+            0.09032153000152328
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.1561291579214993,
+          "ci": [
+            0.0815526820248715,
+            0.23070563381812714
+          ],
+          "regrets": [
+            0.24319495732492902,
+            0.10572834309158666,
+            0.10081039409046456,
+            0.18863791652686993,
+            0.14227417857364646
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.1721252428629072,
+          "ci": [
+            0.13399244506007604,
+            0.21025804066573836
+          ],
+          "regrets": [
+            0.14332193954750147,
+            0.1753929846637999,
+            0.222862906013511,
+            0.15502524358995742,
+            0.16402314049976613
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.19002057961482816,
+          "ci": [
+            0.17873619667281362,
+            0.2013049625568427
+          ],
+          "regrets": [
+            0.20116535162881627,
+            0.18281256317627087,
+            0.19831385720950173,
+            0.1862129913851517,
+            0.18159813467440025
+          ]
+        },
+        "grpo": {
+          "mean": 0.10199860660645618,
+          "ci": [
+            0.0693062492223138,
+            0.13469096399059854
+          ],
+          "regrets": [
+            0.09014595542384857,
+            0.1455225036070664,
+            0.09138417996038041,
+            0.10567914750797627,
+            0.07726124653300927
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.18583271898406534,
+          "ci": [
+            0.15282399871105218,
+            0.2188414392570785
+          ],
+          "regrets": [
+            0.14628889439904805,
+            0.20400469484389666,
+            0.19500213938460725,
+            0.21161170161481246,
+            0.1722561646779622
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.19907546245315588,
+          "ci": [
+            0.17782337641062226,
+            0.2203275484956895
+          ],
+          "regrets": [
+            0.20823608827837967,
+            0.2240519550095152,
+            0.18535229983384868,
+            0.194672435000559,
+            0.18306453414347693
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.10008928607907201,
+          "ci": [
+            0.07895795320348079,
+            0.12122061895466324
+          ],
+          "regrets": [
+            0.12239339386909223,
+            0.08142726494118666,
+            0.10997235690788232,
+            0.0854640993815454,
+            0.10118931529565349
+          ]
+        },
+        "grpo": {
+          "mean": 0.08267451766048495,
+          "ci": [
+            0.057855932465167195,
+            0.1074931028558027
+          ],
+          "regrets": [
+            0.05606365016944597,
+            0.07766247596284213,
+            0.10609265062189861,
+            0.07488615214772915,
+            0.09866765940050885
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.10023412633214171,
+          "ci": [
+            0.07848834894053208,
+            0.12197990372375134
+          ],
+          "regrets": [
+            0.10517957330594839,
+            0.12420411500425746,
+            0.10580606293703569,
+            0.08195962167247496,
+            0.08402125874099202
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.11711284918813938,
+          "ci": [
+            0.09868958113699323,
+            0.13553611723928552
+          ],
+          "regrets": [
+            0.11545002198546873,
+            0.10572434864132216,
+            0.13792812805122628,
+            0.1251626565176658,
+            0.10129909074501381
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.002326590382129574,
+          "ci": [
+            0.00026291654449624906,
+            0.0043902642197628985
+          ],
+          "regrets": [
+            0.0034280008167893255,
+            0.0007574622234928029,
+            0.004534387390446011,
+            0.000754516182544992,
+            0.0021585852973747383
+          ]
+        },
+        "grpo": {
+          "mean": 0.08486611679284431,
+          "ci": [
+            0.058266061709021294,
+            0.11146617187666732
+          ],
+          "regrets": [
+            0.08133375105795111,
+            0.077122561763091,
+            0.06638202195687179,
+            0.12186888295519413,
+            0.07762336623111346
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.005664084082439202,
+          "ci": [
+            -0.003462872784590007,
+            0.014791040949468412
+          ],
+          "regrets": [
+            0.0008349955616880359,
+            0.0020138803426036447,
+            0.018065368622133385,
+            0.0067028755345196365,
+            0.0007033003512513065
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.008445258299697686,
+          "ci": [
+            0.0012674864346778943,
+            0.015623030164717477
+          ],
+          "regrets": [
+            0.014125119842341449,
+            0.014900858140146042,
+            0.00681002049482578,
+            0.0022122474124366483,
+            0.0041780456087385145
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 4.46725920881901,
+          "ci": [
+            4.148092196557744,
+            4.786426221080276
+          ],
+          "regrets": [
+            4.198788000247742,
+            4.438458343163883,
+            4.691181331400993,
+            4.240726278799895,
+            4.7671420904825395
+          ]
+        },
+        "grpo": {
+          "mean": 0.07582373771405186,
+          "ci": [
+            0.05256374965309521,
+            0.09908372577500851
+          ],
+          "regrets": [
+            0.06438575018326632,
+            0.10640293767242029,
+            0.05798455188343581,
+            0.07822963733839478,
+            0.07211581149274213
+          ]
+        },
+        "batchnorm": {
+          "mean": 4.6729090610478154,
+          "ci": [
+            3.5520248499001403,
+            5.79379327219549
+          ],
+          "regrets": [
+            5.544290610414513,
+            5.180018793566644,
+            5.148709775492467,
+            4.13151933174573,
+            3.360006794019723
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 4.341888008833594,
+          "ci": [
+            3.2406452935496066,
+            5.443130724117582
+          ],
+          "regrets": [
+            5.496840590713479,
+            3.3232624536942548,
+            3.582256499534384,
+            4.696090551152395,
+            4.61098994907346
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 5.230289277707422,
+          "ci": [
+            4.770768351599153,
+            5.689810203815692
+          ],
+          "regrets": [
+            5.072420111962638,
+            5.674754176497846,
+            4.7018559490722005,
+            5.2592985754480415,
+            5.44311757555638
+          ]
+        },
+        "grpo": {
+          "mean": 0.04346388142618702,
+          "ci": [
+            0.024558488367801057,
+            0.06236927448457298
+          ],
+          "regrets": [
+            0.0339596404763349,
+            0.04110298928025064,
+            0.07004199866095556,
+            0.03900304810447998,
+            0.033211730608914
+          ]
+        },
+        "batchnorm": {
+          "mean": 5.105615790439375,
+          "ci": [
+            4.51610038863223,
+            5.695131192246519
+          ],
+          "regrets": [
+            5.6650094994874145,
+            4.655467346220553,
+            4.892487942729438,
+            4.7481157715178925,
+            5.566998392241572
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 5.213365899417357,
+          "ci": [
+            4.6662761002961926,
+            5.760455698538522
+          ],
+          "regrets": [
+            5.348977346868069,
+            4.926946973203984,
+            4.866709496211304,
+            5.926972684842744,
+            4.9972229959606835
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 7.1987451710413755,
+          "ci": [
+            6.357516777533368,
+            8.039973564549383
+          ],
+          "regrets": [
+            8.04764408172388,
+            7.33510213636887,
+            6.927433244602258,
+            6.221959195467278,
+            7.461587197044594
+          ]
+        },
+        "grpo": {
+          "mean": 0.13371818227749252,
+          "ci": [
+            0.08766505928662399,
+            0.17977130526836105
+          ],
+          "regrets": [
+            0.18367790106716703,
+            0.14145069691880424,
+            0.10098759983747056,
+            0.09327284757008464,
+            0.14920186599393612
+          ]
+        },
+        "batchnorm": {
+          "mean": 7.083724207725929,
+          "ci": [
+            6.312497264719289,
+            7.854951150732569
+          ],
+          "regrets": [
+            7.6158719667840025,
+            7.308392512032893,
+            7.3495942363866815,
+            7.127309648086917,
+            6.017452675339151
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 6.106201534804063,
+          "ci": [
+            4.6460482437559625,
+            7.566354825852163
+          ],
+          "regrets": [
+            6.600239706543986,
+            4.161185638707648,
+            7.231053676805747,
+            5.964352837624967,
+            6.574175814337971
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.011609118559580231,
+          "ci": [
+            0.0010930895593323185,
+            0.022125147559828143
+          ],
+          "regrets": [
+            0.00900046402342334,
+            0.024957360556637605,
+            0.009661413333747407,
+            0.012667240080818012,
+            0.0017591148032747971
+          ]
+        },
+        "grpo": {
+          "mean": 0.03860729742573862,
+          "ci": [
+            0.03011331109421629,
+            0.04710128375726094
+          ],
+          "regrets": [
+            0.0493479287445016,
+            0.036364069825511026,
+            0.03991931031329953,
+            0.03661461062282851,
+            0.03079056762255243
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.006934100925261517,
+          "ci": [
+            0.0010304587337802975,
+            0.012837743116742736
+          ],
+          "regrets": [
+            0.002491643028294464,
+            0.0033548673298832285,
+            0.004767662367455104,
+            0.012830319162784282,
+            0.011226012737890504
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.020437621333798357,
+          "ci": [
+            0.0061995555038751645,
+            0.03467568716372155
+          ],
+          "regrets": [
+            0.03405293232194954,
+            0.030192045767669897,
+            0.017997715819946827,
+            0.00677475379357213,
+            0.01317065896585339
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.07031478755638203,
+          "ci": [
+            0.05668637796353263,
+            0.08394319714923143
+          ],
+          "regrets": [
+            0.08606151496395667,
+            0.06192428542762592,
+            0.07099354267803763,
+            0.07438378333745507,
+            0.058210811374834866
+          ]
+        },
+        "grpo": {
+          "mean": 0.034510355152473554,
+          "ci": [
+            0.02833562046246053,
+            0.040685089842486574
+          ],
+          "regrets": [
+            0.0301797705392542,
+            0.02892825483287207,
+            0.04110183280261849,
+            0.03602198226200191,
+            0.03631993532562112
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.06062241084489726,
+          "ci": [
+            0.05269792688642964,
+            0.06854689480336487
+          ],
+          "regrets": [
+            0.059020405734771145,
+            0.06100832153738625,
+            0.050963540719296645,
+            0.06408685880646096,
+            0.06803292742657129
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.09046301177509045,
+          "ci": [
+            0.07720972339543189,
+            0.103716300154749
+          ],
+          "regrets": [
+            0.08604933258117807,
+            0.09420042190575427,
+            0.10743232566440315,
+            0.08320615321452879,
+            0.08142682550958795
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.43011097127145687,
+          "ci": [
+            0.3717886567492428,
+            0.48843328579367096
+          ],
+          "regrets": [
+            0.47529081058273176,
+            0.36413142924113473,
+            0.4747724985264383,
+            0.4268769241465643,
+            0.4094831938604153
+          ]
+        },
+        "grpo": {
+          "mean": 0.03415114131965796,
+          "ci": [
+            0.02822909456415513,
+            0.0400731880751608
+          ],
+          "regrets": [
+            0.031070977443974985,
+            0.028677098436847515,
+            0.03644339931575032,
+            0.033629898785874995,
+            0.040934332615842006
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.3748305019924182,
+          "ci": [
+            0.35356551397545655,
+            0.3960954900093798
+          ],
+          "regrets": [
+            0.3560866146721505,
+            0.37199930891150856,
+            0.37985172890048946,
+            0.3650567997536417,
+            0.4011580577243006
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.26068353399589284,
+          "ci": [
+            0.22651656379050358,
+            0.2948505042012821
+          ],
+          "regrets": [
+            0.2961997073728313,
+            0.25905610849940114,
+            0.23244331927844597,
+            0.23605044513972245,
+            0.2796680896890633
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.30029987482748455,
+          "ci": [
+            0.26999713064289566,
+            0.33060261901207344
+          ],
+          "regrets": [
+            0.32539686017211156,
+            0.30634573583385366,
+            0.26425635536169184,
+            0.3169778441458429,
+            0.2885225786239228
+          ]
+        },
+        "grpo": {
+          "mean": 0.03436705999548666,
+          "ci": [
+            0.025008580092518093,
+            0.04372553989845522
+          ],
+          "regrets": [
+            0.03759041355240591,
+            0.03136016093516567,
+            0.03591759224604564,
+            0.04357890188121318,
+            0.02338823136260291
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.258204027263938,
+          "ci": [
+            0.21979999567616948,
+            0.2966080588517065
+          ],
+          "regrets": [
+            0.3003691351947548,
+            0.27074482721528287,
+            0.21690061539993863,
+            0.24458976213752434,
+            0.2584157963721891
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.2338142444215563,
+          "ci": [
+            0.17493418268909522,
+            0.29269430615401737
+          ],
+          "regrets": [
+            0.2755596240465057,
+            0.2025488730375493,
+            0.18002969912804756,
+            0.2904244526605379,
+            0.220508573235141
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.003143030486029926,
+          "ci": [
+            0.001889465134825744,
+            0.004396595837234108
+          ],
+          "regrets": [
+            0.0016473601325278854,
+            0.0034308485988480547,
+            0.0029780446401626525,
+            0.0032019083336533452,
+            0.004456990724957691
+          ]
+        },
+        "grpo": {
+          "mean": 0.037780946449706684,
+          "ci": [
+            0.029710053890541495,
+            0.045851839008871874
+          ],
+          "regrets": [
+            0.03377504242774876,
+            0.04609581108744224,
+            0.03272577968922936,
+            0.03276954197777675,
+            0.04353855706633636
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.004702617217439164,
+          "ci": [
+            -0.0036460359194382926,
+            0.013051270354316621
+          ],
+          "regrets": [
+            0.0019871362281464393,
+            0.0022732602094806117,
+            0.0016018901044991753,
+            0.0009529444517098622,
+            0.01669785509335973
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.02165548578406493,
+          "ci": [
+            0.0069946738058896275,
+            0.036316297762240234
+          ],
+          "regrets": [
+            0.01022933300694505,
+            0.02377571622922819,
+            0.04095118771222231,
+            0.017098544374856965,
+            0.016222647597072135
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 9.418997325737232,
+          "ci": [
+            8.501369299228953,
+            10.33662535224551
+          ],
+          "regrets": [
+            9.634722547592657,
+            8.115582700648751,
+            9.702725152525522,
+            9.954321413494203,
+            9.687634814425028
+          ]
+        },
+        "grpo": {
+          "mean": 0.5281723890926434,
+          "ci": [
+            0.49767989234620597,
+            0.5586648858390808
+          ],
+          "regrets": [
+            0.5237537913021886,
+            0.5210854839378474,
+            0.5201385676940179,
+            0.5702464845192574,
+            0.5056376180099057
+          ]
+        },
+        "batchnorm": {
+          "mean": 8.666478914422086,
+          "ci": [
+            7.776519749455575,
+            9.556438079388597
+          ],
+          "regrets": [
+            9.370932881696854,
+            7.8954903321307235,
+            7.969847343348703,
+            9.354428140439058,
+            8.74169587449509
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 7.409304866918544,
+          "ci": [
+            5.8919884775846905,
+            8.926621256252396
+          ],
+          "regrets": [
+            5.489836898903516,
+            7.8177170405964835,
+            7.010715101013124,
+            8.09978428883717,
+            8.628471005242423
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 4.983384223656044,
+          "ci": [
+            4.373544688445323,
+            5.593223758866765
+          ],
+          "regrets": [
+            4.771108084977793,
+            4.699047524997712,
+            4.511280238738953,
+            5.196721757225914,
+            5.738763512339847
+          ]
+        },
+        "grpo": {
+          "mean": 0.17089068734044438,
+          "ci": [
+            0.14450957132335018,
+            0.19727180335753858
+          ],
+          "regrets": [
+            0.17940561205719088,
+            0.18838892649002398,
+            0.13437897682906985,
+            0.17173757870738238,
+            0.18054234261855484
+          ]
+        },
+        "batchnorm": {
+          "mean": 4.845372696006031,
+          "ci": [
+            4.157212575021283,
+            5.533532816990778
+          ],
+          "regrets": [
+            5.649722821160606,
+            5.136592949163469,
+            4.374035310588438,
+            4.33341033493762,
+            4.733102064180022
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 4.371407993769307,
+          "ci": [
+            3.1981593835132305,
+            5.544656604025384
+          ],
+          "regrets": [
+            2.94620158114832,
+            4.22015992971132,
+            4.808797741829769,
+            5.522839207195057,
+            4.359041508962074
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 7.430238759788684,
+          "ci": [
+            6.7502874996216296,
+            8.110190019955738
+          ],
+          "regrets": [
+            6.624951450546462,
+            8.105841669302425,
+            7.715639240072433,
+            7.3749146910750625,
+            7.329846747947033
+          ]
+        },
+        "grpo": {
+          "mean": 0.1598824204007602,
+          "ci": [
+            0.1215297149679187,
+            0.1982351258336017
+          ],
+          "regrets": [
+            0.15301522686005983,
+            0.1408131732202503,
+            0.12334531935065494,
+            0.19883558819228309,
+            0.1834027943805528
+          ]
+        },
+        "batchnorm": {
+          "mean": 6.621329048214491,
+          "ci": [
+            5.962793447334947,
+            7.279864649094035
+          ],
+          "regrets": [
+            6.5146243372838075,
+            6.447975779760003,
+            6.550359882283713,
+            6.083727674904745,
+            7.509957566840194
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 7.568670384569967,
+          "ci": [
+            6.614860201327364,
+            8.52248056781257
+          ],
+          "regrets": [
+            8.329550485211666,
+            7.300598447856531,
+            6.894427523396918,
+            6.87246890488612,
+            8.446306561498599
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0008551925938098121,
+          "ci": [
+            0.00014979950319039175,
+            0.0015605856844292327
+          ],
+          "regrets": [
+            0.0005439965971143222,
+            0.0013227241303597963,
+            2.486710118325038e-05,
+            0.0013638906759972443,
+            0.0010204844643944481
+          ]
+        },
+        "grpo": {
+          "mean": 0.004686543520850312,
+          "ci": [
+            0.004173251566136332,
+            0.005199835475564293
+          ],
+          "regrets": [
+            0.004727084493779465,
+            0.004711255998367834,
+            0.00500670268965882,
+            0.004996101493378225,
+            0.003991572929067217
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.005058659651292043,
+          "ci": [
+            0.0007310588897696327,
+            0.009386260412814453
+          ],
+          "regrets": [
+            0.007745698387053685,
+            0.0061625518667575725,
+            0.00859097772844668,
+            0.0020523619085701357,
+            0.0007417083656321386
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.007779309796929902,
+          "ci": [
+            0.0033362321674995895,
+            0.012222387426360216
+          ],
+          "regrets": [
+            0.01038371136680741,
+            0.0034051957026642525,
+            0.00553068389913377,
+            0.012255463432054029,
+            0.007321494583990051
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.06559890032282993,
+          "ci": [
+            0.0488537656816391,
+            0.08234403496402076
+          ],
+          "regrets": [
+            0.05412187301924764,
+            0.07515612904613468,
+            0.05181304973054566,
+            0.06367810450540311,
+            0.08322534531281864
+          ]
+        },
+        "grpo": {
+          "mean": 0.002237631236730565,
+          "ci": [
+            0.0012107151313171794,
+            0.0032645473421439508
+          ],
+          "regrets": [
+            0.001574528113967999,
+            0.003190493599285486,
+            0.0012325662564703374,
+            0.002347901409705959,
+            0.002842666804223044
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.08479702459181358,
+          "ci": [
+            0.06699160484007384,
+            0.10260244434355333
+          ],
+          "regrets": [
+            0.09036860227616586,
+            0.07415109445053567,
+            0.07057480028810202,
+            0.08240974873108521,
+            0.10648087721317916
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.07856243356084183,
+          "ci": [
+            0.028118273371407813,
+            0.12900659375027584
+          ],
+          "regrets": [
+            0.0590068830216924,
+            0.07395041099776166,
+            0.14842331080688664,
+            0.044015367016857904,
+            0.06741619596101053
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.047849887143275566,
+          "ci": [
+            0.03991344918128903,
+            0.0557863251052621
+          ],
+          "regrets": [
+            0.04725045201739799,
+            0.05171549025215873,
+            0.055867039215173546,
+            0.045385143963161165,
+            0.03903131026848642
+          ]
+        },
+        "grpo": {
+          "mean": 0.004824044795477448,
+          "ci": [
+            0.0029055678599237524,
+            0.006742521731031144
+          ],
+          "regrets": [
+            0.005886921907201746,
+            0.005288806103492224,
+            0.005454275939226051,
+            0.0020901095416223964,
+            0.005400110485844823
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.047125509482525973,
+          "ci": [
+            0.03161269745610207,
+            0.06263832150894988
+          ],
+          "regrets": [
+            0.03225956314479896,
+            0.04987479418873762,
+            0.06572657000613372,
+            0.04008997738355689,
+            0.04767664268940268
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.05304494981093304,
+          "ci": [
+            0.03167053666357533,
+            0.07441936295829074
+          ],
+          "regrets": [
+            0.04591758850913888,
+            0.04587542182883123,
+            0.035703605188761485,
+            0.05699140932827797,
+            0.08073672419965565
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.03972730991397162,
+          "ci": [
+            0.027891716206147645,
+            0.0515629036217956
+          ],
+          "regrets": [
+            0.04289333737892836,
+            0.03646070256279687,
+            0.03758911127894895,
+            0.05380175431367151,
+            0.02789164403551243
+          ]
+        },
+        "grpo": {
+          "mean": 0.004652481101375641,
+          "ci": [
+            -0.0012670092764959558,
+            0.010571971479247239
+          ],
+          "regrets": [
+            0.005745335365992819,
+            0.0008506243614102136,
+            0.0027289374918291354,
+            0.0014536324778459675,
+            0.01248387580980007
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.03581210030876375,
+          "ci": [
+            0.01871285648975314,
+            0.05291134412777436
+          ],
+          "regrets": [
+            0.03702710049875273,
+            0.028921618399484247,
+            0.026264296371056036,
+            0.027571335471084375,
+            0.059276150803441355
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.03808874643903773,
+          "ci": [
+            0.01815349093962608,
+            0.05802400193844938
+          ],
+          "regrets": [
+            0.055067349691394235,
+            0.031436481675175196,
+            0.018725960748330772,
+            0.05449846947805564,
+            0.030715470602232824
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.003134514010404039,
+          "ci": [
+            -1.1220473751338226e-05,
+            0.006280248494559416
+          ],
+          "regrets": [
+            0.002536849154414342,
+            0.004313959555193392,
+            0.0009264439470493436,
+            0.0009704229828976119,
+            0.0069248944124655045
+          ]
+        },
+        "grpo": {
+          "mean": 0.0012257571666527834,
+          "ci": [
+            0.0006190571600855402,
+            0.0018324571732200267
+          ],
+          "regrets": [
+            0.0005689309964572768,
+            0.0012211122156061164,
+            0.001163513050191542,
+            0.0012285926568137197,
+            0.0019466369141952627
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0019640579973744794,
+          "ci": [
+            0.0011252770898037643,
+            0.0028028389049451945
+          ],
+          "regrets": [
+            0.0021087690429230457,
+            0.002816687550576016,
+            0.0010597341827081126,
+            0.002274841807197911,
+            0.0015602574034673125
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.007769835210356615,
+          "ci": [
+            0.0038833225304865803,
+            0.01165634789022665
+          ],
+          "regrets": [
+            0.008950431557643497,
+            0.012184062473711083,
+            0.00443951604867225,
+            0.005111889909370842,
+            0.008163276062385398
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 5.2893722164142005,
+          "ci": [
+            4.30963945047382,
+            6.269104982354581
+          ],
+          "regrets": [
+            4.732193614821242,
+            4.957331490906562,
+            6.663071475854561,
+            5.227796676906349,
+            4.866467823582291
+          ]
+        },
+        "grpo": {
+          "mean": 0.008438280642876637,
+          "ci": [
+            -0.002811152263810653,
+            0.019687713549563925
+          ],
+          "regrets": [
+            0.003201430174919707,
+            0.024231439847857406,
+            0.003418228483540713,
+            0.0033294876867421878,
+            0.008010817021323167
+          ]
+        },
+        "batchnorm": {
+          "mean": 5.675172205268444,
+          "ci": [
+            4.497181791831131,
+            6.853162618705757
+          ],
+          "regrets": [
+            5.100656983226859,
+            4.73763756201048,
+            7.058376025688289,
+            5.254992453735365,
+            6.224198001681226
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 5.0725919213659285,
+          "ci": [
+            3.5532969889650867,
+            6.59188685376677
+          ],
+          "regrets": [
+            5.1950608328492205,
+            5.339350046329656,
+            2.9768529867823053,
+            6.090735269448739,
+            5.760960471419723
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 6.009563460858592,
+          "ci": [
+            5.033388642712018,
+            6.985738279005166
+          ],
+          "regrets": [
+            4.976839222480331,
+            6.331159214623481,
+            5.472729984385552,
+            6.290400607124879,
+            6.97668827567872
+          ]
+        },
+        "grpo": {
+          "mean": 0.026922533960806738,
+          "ci": [
+            0.021824875257323583,
+            0.0320201926642899
+          ],
+          "regrets": [
+            0.022747869606135722,
+            0.029724448792382393,
+            0.029556152359532295,
+            0.022144128926727888,
+            0.03044007011925541
+          ]
+        },
+        "batchnorm": {
+          "mean": 5.451454358912857,
+          "ci": [
+            4.873973296926013,
+            6.028935420899701
+          ],
+          "regrets": [
+            5.236136013307677,
+            5.6938635376157425,
+            5.036338566191164,
+            6.151675541263547,
+            5.139258136186152
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 5.757462724005533,
+          "ci": [
+            4.011525271715001,
+            7.503400176296065
+          ],
+          "regrets": [
+            4.510959836698159,
+            6.396054965798071,
+            5.898410604508994,
+            7.696568811758266,
+            4.285319401264179
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 11.629109240155643,
+          "ci": [
+            10.815122646645886,
+            12.4430958336654
+          ],
+          "regrets": [
+            12.434318212684504,
+            11.328032616720174,
+            10.94801482209173,
+            11.217347678297639,
+            12.217832870984171
+          ]
+        },
+        "grpo": {
+          "mean": 0.09980047904843296,
+          "ci": [
+            0.06178245615733263,
+            0.1378185019395333
+          ],
+          "regrets": [
+            0.11862770619489532,
+            0.05026422626853253,
+            0.09038422214250104,
+            0.11496379935604839,
+            0.12476244128018756
+          ]
+        },
+        "batchnorm": {
+          "mean": 11.617921882606987,
+          "ci": [
+            10.804885043466825,
+            12.43095872174715
+          ],
+          "regrets": [
+            10.849200477809212,
+            11.656729977548439,
+            12.48957987339349,
+            11.967025753986558,
+            11.127073330297238
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 11.936729529944152,
+          "ci": [
+            8.809962467627066,
+            15.063496592261238
+          ],
+          "regrets": [
+            13.976445039297126,
+            10.292232049664035,
+            15.018842473697099,
+            8.982473532933938,
+            11.413654554128561
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.004825489055153028,
+          "ci": [
+            -0.004774400695204979,
+            0.014425378805511035
+          ],
+          "regrets": [
+            0.0009595616775794347,
+            0.0012662993217721712,
+            0.018590923227235823,
+            0.0026306224824347783,
+            0.0006800385667429317
+          ]
+        },
+        "grpo": {
+          "mean": 0.006048831421892502,
+          "ci": [
+            0.004230802294451743,
+            0.007866860549333261
+          ],
+          "regrets": [
+            0.008415427662419222,
+            0.005472166445370488,
+            0.005795831232983733,
+            0.004444610443330574,
+            0.0061161213253584906
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0026829498211378227,
+          "ci": [
+            0.0012616873915467684,
+            0.004104212250728877
+          ],
+          "regrets": [
+            0.0009431153384183998,
+            0.0022789085925465163,
+            0.0036712804221599457,
+            0.003711344479446261,
+            0.0028101002731179907
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.023752106786701227,
+          "ci": [
+            -0.004892444387000247,
+            0.0523966579604027
+          ],
+          "regrets": [
+            0.006458718749712919,
+            0.05756912428428489,
+            0.03733004977377156,
+            0.013637922055028295,
+            0.0037647190707084757
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.05773571545580256,
+          "ci": [
+            0.050392364595844265,
+            0.06507906631576087
+          ],
+          "regrets": [
+            0.05755949185946575,
+            0.06253963472227252,
+            0.05664713441876802,
+            0.048571872213494446,
+            0.0633604440650121
+          ]
+        },
+        "grpo": {
+          "mean": 0.008364853732613328,
+          "ci": [
+            0.004761510020125564,
+            0.011968197445101091
+          ],
+          "regrets": [
+            0.008958303851935445,
+            0.00802491236900847,
+            0.004467036886573699,
+            0.007801021984173349,
+            0.012572993571375674
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.06764916923619543,
+          "ci": [
+            0.060315790368156055,
+            0.07498254810423481
+          ],
+          "regrets": [
+            0.06839950225545027,
+            0.06313133415921228,
+            0.06024192147841632,
+            0.07402676865218276,
+            0.07244631963571556
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.05671346828590233,
+          "ci": [
+            0.03947933735705622,
+            0.07394759921474844
+          ],
+          "regrets": [
+            0.054483737144708874,
+            0.05697038943572737,
+            0.07994255830172195,
+            0.0462581851456138,
+            0.045912471401739686
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.01849785477749923,
+          "ci": [
+            0.003970500402943975,
+            0.03302520915205448
+          ],
+          "regrets": [
+            0.010644903099079107,
+            0.008626952612962402,
+            0.01589291669225113,
+            0.03801725537159124,
+            0.019307246111612275
+          ]
+        },
+        "grpo": {
+          "mean": 0.005948072908590918,
+          "ci": [
+            0.004188927575412832,
+            0.007707218241769004
+          ],
+          "regrets": [
+            0.007991368628349258,
+            0.005860594170203911,
+            0.004484156617839922,
+            0.00481270102848831,
+            0.006591544098073189
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.014120611932013711,
+          "ci": [
+            0.008787427317477135,
+            0.019453796546550287
+          ],
+          "regrets": [
+            0.007453590659193119,
+            0.013446838473081542,
+            0.015439361566899932,
+            0.01925530130685626,
+            0.015007967654037694
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.031189571358618145,
+          "ci": [
+            0.0028740602063921337,
+            0.05950508251084416
+          ],
+          "regrets": [
+            0.014889492669176722,
+            0.009541157181482653,
+            0.02351562224410558,
+            0.06509671731130985,
+            0.04290486738701591
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.25731497497936173,
+          "ci": [
+            0.20509000615597864,
+            0.3095399438027448
+          ],
+          "regrets": [
+            0.2809699960698771,
+            0.2962292462224474,
+            0.22053652870488052,
+            0.20369355685474697,
+            0.2851455470448567
+          ]
+        },
+        "grpo": {
+          "mean": 0.00924170294705481,
+          "ci": [
+            0.0032072973135297686,
+            0.015276108580579852
+          ],
+          "regrets": [
+            0.005590307776548081,
+            0.007844112357852496,
+            0.009951025893462206,
+            0.005526365309012663,
+            0.01729670339839861
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.25636004729371253,
+          "ci": [
+            0.23125192823782698,
+            0.2814681663495981
+          ],
+          "regrets": [
+            0.23769598210013276,
+            0.24079095360259645,
+            0.2651228888226974,
+            0.25115486554494354,
+            0.2870355463981927
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.2125876940505842,
+          "ci": [
+            0.14269306974323187,
+            0.2824823183579365
+          ],
+          "regrets": [
+            0.24312172321281397,
+            0.28969723955986565,
+            0.16509603856428937,
+            0.21193923762040137,
+            0.1530842312955508
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.004179330025309149,
+          "ci": [
+            -0.0005025798463579503,
+            0.008861239896976248
+          ],
+          "regrets": [
+            0.0011198002820906928,
+            0.0008652263627252326,
+            0.009676877840988776,
+            0.006338000972702604,
+            0.0028967446680384407
+          ]
+        },
+        "grpo": {
+          "mean": 0.010441844585517772,
+          "ci": [
+            0.003573546741613058,
+            0.017310142429422484
+          ],
+          "regrets": [
+            0.018386713076884657,
+            0.004952851798899853,
+            0.009515846022674109,
+            0.005994960321493159,
+            0.01335885170763708
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0024029801808782684,
+          "ci": [
+            0.0006295995410206129,
+            0.004176360820735924
+          ],
+          "regrets": [
+            0.0005290754022995864,
+            0.0016881376147581395,
+            0.0034787286666634137,
+            0.004117346177357939,
+            0.0022016130433122625
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.012534220957253464,
+          "ci": [
+            0.0014469458470016301,
+            0.0236214960675053
+          ],
+          "regrets": [
+            0.015275490438477498,
+            0.00668336948977664,
+            0.0027013355679429327,
+            0.025960599637543807,
+            0.012050309652526446
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 3.7330701902565506,
+          "ci": [
+            3.2830925801089927,
+            4.1830478004041085
+          ],
+          "regrets": [
+            3.748071640812432,
+            4.312009740754301,
+            3.390134584293674,
+            3.464688195412886,
+            3.7504467900094616
+          ]
+        },
+        "grpo": {
+          "mean": 0.044878463262247675,
+          "ci": [
+            0.02930303831395821,
+            0.06045388821053714
+          ],
+          "regrets": [
+            0.05465146079868197,
+            0.04195588592273366,
+            0.048698771169923015,
+            0.02447944814493657,
+            0.05460675027496314
+          ]
+        },
+        "batchnorm": {
+          "mean": 3.687283252892054,
+          "ci": [
+            3.07951727597191,
+            4.295049229812198
+          ],
+          "regrets": [
+            2.916648116488337,
+            3.670396116285281,
+            3.996762924228448,
+            4.2039259139030065,
+            3.6486831935551973
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 4.139401460869276,
+          "ci": [
+            3.36862252018158,
+            4.910180401556973
+          ],
+          "regrets": [
+            4.089203559457372,
+            4.794577774756324,
+            4.1479883310422885,
+            4.511332880640185,
+            3.15390475845021
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 5.543342534393805,
+          "ci": [
+            5.336542707735482,
+            5.750142361052127
+          ],
+          "regrets": [
+            5.5692332278195344,
+            5.81948092415062,
+            5.487580032558449,
+            5.4375375234770615,
+            5.402880963963358
+          ]
+        },
+        "grpo": {
+          "mean": 0.14312098873464577,
+          "ci": [
+            0.12712592976346015,
+            0.15911604770583138
+          ],
+          "regrets": [
+            0.1631744337446914,
+            0.13073520440907083,
+            0.13499706668930178,
+            0.14793869930356435,
+            0.1387595395266004
+          ]
+        },
+        "batchnorm": {
+          "mean": 5.840576425681375,
+          "ci": [
+            5.214479808674982,
+            6.466673042687768
+          ],
+          "regrets": [
+            5.371322504348686,
+            6.338153528198907,
+            5.733950484206337,
+            5.362613301788211,
+            6.396842309864736
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 4.452909613769905,
+          "ci": [
+            3.5795679421724644,
+            5.326251285367346
+          ],
+          "regrets": [
+            5.581912784128595,
+            3.889616832587158,
+            4.691613144960699,
+            4.1073423573147005,
+            3.994062949858375
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 15.075378849627722,
+          "ci": [
+            13.79222370455924,
+            16.358533994696206
+          ],
+          "regrets": [
+            15.826230291911795,
+            14.201176618144814,
+            14.95594140730417,
+            13.992603803371901,
+            16.400942127405933
+          ]
+        },
+        "grpo": {
+          "mean": 0.10704258201160373,
+          "ci": [
+            0.08956742837802252,
+            0.12451773564518494
+          ],
+          "regrets": [
+            0.1242883763300817,
+            0.10828866416727627,
+            0.09614552799587538,
+            0.11639338360875354,
+            0.09009695795603183
+          ]
+        },
+        "batchnorm": {
+          "mean": 15.34674448910312,
+          "ci": [
+            14.17771216767097,
+            16.51577681053527
+          ],
+          "regrets": [
+            15.665614286104342,
+            16.796990926732146,
+            15.201327447426475,
+            14.562144197672671,
+            14.50764558757996
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 15.483463062262103,
+          "ci": [
+            13.614657528385747,
+            17.35226859613846
+          ],
+          "regrets": [
+            17.055277697605415,
+            15.634606621393306,
+            13.705228799601702,
+            14.206495590511109,
+            16.815706602198983
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.005414616599890526,
+          "ci": [
+            0.0003738914134272077,
+            0.010455341786353843
+          ],
+          "regrets": [
+            0.0014133406276039058,
+            0.004948003392516925,
+            0.012260143295458648,
+            0.004286552820805618,
+            0.004165042863067534
+          ]
+        },
+        "grpo": {
+          "mean": 0.004836397182905511,
+          "ci": [
+            0.0026305817548031626,
+            0.00704221261100786
+          ],
+          "regrets": [
+            0.0031459541955965544,
+            0.00400795010130144,
+            0.0037581788839310764,
+            0.005784148708752666,
+            0.00748575402494582
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.003540193166627171,
+          "ci": [
+            -0.0010690141010855497,
+            0.008149400434339892
+          ],
+          "regrets": [
+            0.0008435189030058678,
+            0.0015756373145321477,
+            0.009299574309236688,
+            0.005251029692243741,
+            0.0007312056141174112
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.015604212279990693,
+          "ci": [
+            -0.006708965936230313,
+            0.0379173904962117
+          ],
+          "regrets": [
+            0.029051527632004904,
+            0.0011682366214926716,
+            0.0027291536567256654,
+            0.04043359339184705,
+            0.004638550097883167
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.10138044804463076,
+          "ci": [
+            0.06925875657002026,
+            0.13350213951924125
+          ],
+          "regrets": [
+            0.11478751304644443,
+            0.07314393190422847,
+            0.07443676810399638,
+            0.11514338364474523,
+            0.1293906435237392
+          ]
+        },
+        "grpo": {
+          "mean": 0.0056972625432453764,
+          "ci": [
+            0.0010146311476059476,
+            0.010379893938884804
+          ],
+          "regrets": [
+            0.011055408198083259,
+            0.00831298456256362,
+            0.0032578229860265955,
+            0.0031196716426326507,
+            0.0027404253269207608
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.10234987012689756,
+          "ci": [
+            0.0678431896834687,
+            0.13685655057032642
+          ],
+          "regrets": [
+            0.0739212213999381,
+            0.14826200415917382,
+            0.09268275420675821,
+            0.10340018160723448,
+            0.09348318926138321
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.12267274218248234,
+          "ci": [
+            0.09495686410565088,
+            0.1503886202593138
+          ],
+          "regrets": [
+            0.14925988090005743,
+            0.11820277307152627,
+            0.08846145562298001,
+            0.12535782757740835,
+            0.13208177374043964
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.08027789188941564,
+          "ci": [
+            0.05702488036824821,
+            0.10353090341058307
+          ],
+          "regrets": [
+            0.09335216297106884,
+            0.07670693551559091,
+            0.07058219874336855,
+            0.1040925704644713,
+            0.0566555917525786
+          ]
+        },
+        "grpo": {
+          "mean": 0.005789534831075237,
+          "ci": [
+            0.002278671322836409,
+            0.009300398339314064
+          ],
+          "regrets": [
+            0.009216629620795894,
+            0.0028499305481505485,
+            0.003600513479323392,
+            0.008276518695386656,
+            0.005004081811719695
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0716464536409074,
+          "ci": [
+            0.04311305141399978,
+            0.10017985586781501
+          ],
+          "regrets": [
+            0.06366287393945501,
+            0.06370826045366357,
+            0.11252049869062394,
+            0.057834607015805437,
+            0.06050602810498903
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.1003794782243328,
+          "ci": [
+            0.05166404838588964,
+            0.14909490806277595
+          ],
+          "regrets": [
+            0.07759112505295691,
+            0.1069936369842588,
+            0.1631603461401449,
+            0.09390823275607535,
+            0.06024405018822801
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.10534267302166922,
+          "ci": [
+            0.09136142197625424,
+            0.1193239240670842
+          ],
+          "regrets": [
+            0.12250816636592404,
+            0.10799087807443149,
+            0.09195516675880867,
+            0.1004535320567078,
+            0.10380562185247408
+          ]
+        },
+        "grpo": {
+          "mean": 0.0070863189670663535,
+          "ci": [
+            0.0034880081763245,
+            0.010684629757808206
+          ],
+          "regrets": [
+            0.004992689832870596,
+            0.005243453584756833,
+            0.011139931145282934,
+            0.009192819322121789,
+            0.004862700950299614
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.10684406445906566,
+          "ci": [
+            0.0939677638788556,
+            0.11972036503927573
+          ],
+          "regrets": [
+            0.09451139767913379,
+            0.0991988306579931,
+            0.12076724874461074,
+            0.10794336154445623,
+            0.11179948366913445
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.10763210694888745,
+          "ci": [
+            0.10291753212466849,
+            0.1123466817731064
+          ],
+          "regrets": [
+            0.11036973523259318,
+            0.10263123111372684,
+            0.10507135202030723,
+            0.11191118218346877,
+            0.10817703419434117
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0018392295959906995,
+          "ci": [
+            0.0005275785361623826,
+            0.0031508806558190163
+          ],
+          "regrets": [
+            0.0023307417588696116,
+            0.00209241579160755,
+            0.0032124712239835224,
+            0.0006591858699437902,
+            0.0009013333355490223
+          ]
+        },
+        "grpo": {
+          "mean": 0.011862910743525098,
+          "ci": [
+            0.002998913799928879,
+            0.020726907687121317
+          ],
+          "regrets": [
+            0.01132336579746096,
+            0.012495168169612814,
+            0.005682984659862879,
+            0.006349628271514712,
+            0.02346340681917413
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0018041576431152048,
+          "ci": [
+            0.0005207273129135903,
+            0.003087587973316819
+          ],
+          "regrets": [
+            0.003420648622695242,
+            0.0022170849261874985,
+            0.0014036376630501381,
+            0.0010284505863046133,
+            0.0009509664173385334
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.005097907800625533,
+          "ci": [
+            -0.00031288689511881334,
+            0.010508702496369881
+          ],
+          "regrets": [
+            0.006570352406540434,
+            0.011750512104043907,
+            0.0001515767253347187,
+            0.0034233468276842704,
+            0.0035937509395243374
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 7.847751540424603,
+          "ci": [
+            7.168867687109006,
+            8.526635393740202
+          ],
+          "regrets": [
+            7.387085981869784,
+            7.7756162341106805,
+            8.202890203999669,
+            7.2898853000527986,
+            8.583279982090085
+          ]
+        },
+        "grpo": {
+          "mean": 0.10629423397200584,
+          "ci": [
+            0.09585771825117595,
+            0.11673074969283573
+          ],
+          "regrets": [
+            0.11127198163099929,
+            0.10603880835115752,
+            0.10426835704990745,
+            0.093765421952569,
+            0.11612660087539597
+          ]
+        },
+        "batchnorm": {
+          "mean": 7.9398252518698005,
+          "ci": [
+            7.47362875830631,
+            8.406021745433291
+          ],
+          "regrets": [
+            7.799416419404484,
+            7.56618270686694,
+            8.040375206217773,
+            8.53961455085935,
+            7.753537376000458
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 8.053799567245726,
+          "ci": [
+            6.736870526288029,
+            9.370728608203422
+          ],
+          "regrets": [
+            7.099692676994251,
+            7.367849033799652,
+            8.637111273077474,
+            7.528566448638639,
+            9.635778403718612
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 9.04404241912325,
+          "ci": [
+            7.533743654423267,
+            10.554341183823231
+          ],
+          "regrets": [
+            10.349859896476461,
+            9.673370491921242,
+            7.114823702933464,
+            9.258931846853223,
+            8.823226157431858
+          ]
+        },
+        "grpo": {
+          "mean": 0.08094450686307215,
+          "ci": [
+            0.07398941772556,
+            0.0878995960005843
+          ],
+          "regrets": [
+            0.07573269249683659,
+            0.08698419383252469,
+            0.07718023749336475,
+            0.08707007216581324,
+            0.07775533832682151
+          ]
+        },
+        "batchnorm": {
+          "mean": 9.043511205546036,
+          "ci": [
+            7.482415834147618,
+            10.604606576944454
+          ],
+          "regrets": [
+            7.574154119210445,
+            8.413961526048702,
+            10.54296479202993,
+            10.161602598659522,
+            8.524872991781583
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 8.862161063451236,
+          "ci": [
+            7.00404231518011,
+            10.720279811722362
+          ],
+          "regrets": [
+            10.864024608500586,
+            8.385081208124168,
+            8.83295576645809,
+            6.7720878341160375,
+            9.456655900057292
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 20.334454411034535,
+          "ci": [
+            18.639153340602952,
+            22.02975548146612
+          ],
+          "regrets": [
+            19.503370343148546,
+            19.11934012588573,
+            22.603247714308942,
+            20.465312764471435,
+            19.981001107358043
+          ]
+        },
+        "grpo": {
+          "mean": 25.36944461530898,
+          "ci": [
+            24.607473462403586,
+            26.13141576821437
+          ],
+          "regrets": [
+            25.224954023541763,
+            26.086172625604434,
+            25.168283417967086,
+            25.84059104106747,
+            24.52722196836415
+          ]
+        },
+        "batchnorm": {
+          "mean": 19.697095190268318,
+          "ci": [
+            18.9145375320025,
+            20.479652848534133
+          ],
+          "regrets": [
+            20.0657144067797,
+            18.747398474875965,
+            19.35057807769132,
+            20.1413744358171,
+            20.180410556177492
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 17.535809617921956,
+          "ci": [
+            15.261890890629829,
+            19.809728345214083
+          ],
+          "regrets": [
+            16.943533850571598,
+            19.38163332774781,
+            16.435273907208952,
+            19.512909989990604,
+            15.405697014090814
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.007812371958707688,
+          "ci": [
+            -0.002387510911237364,
+            0.018012254828652742
+          ],
+          "regrets": [
+            0.00959705889935134,
+            0.0020007224039603256,
+            0.021280688516046583,
+            0.004962378341300464,
+            0.0012210116328797316
+          ]
+        },
+        "grpo": {
+          "mean": 0.06497480712047718,
+          "ci": [
+            0.050795551386520095,
+            0.07915406285443427
+          ],
+          "regrets": [
+            0.054244716030654734,
+            0.07906469720029251,
+            0.07502823082776015,
+            0.05535813675673338,
+            0.06117825478694507
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.004973093450920578,
+          "ci": [
+            0.00014072581907507205,
+            0.009805461082766084
+          ],
+          "regrets": [
+            0.007026938778777845,
+            0.0023691973602067316,
+            0.0007960403123045579,
+            0.010574456503955021,
+            0.0040988342993587374
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.017902303565928836,
+          "ci": [
+            0.006830643858793704,
+            0.02897396327306397
+          ],
+          "regrets": [
+            0.003487701177857868,
+            0.021029401221631713,
+            0.026651290338375804,
+            0.015953611638295825,
+            0.022389513453482977
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.5717840315236427,
+          "ci": [
+            0.5376423877060925,
+            0.6059256753411928
+          ],
+          "regrets": [
+            0.6194289060840321,
+            0.5532616063204076,
+            0.5654504377801685,
+            0.5529271626322655,
+            0.5678520448013402
+          ]
+        },
+        "grpo": {
+          "mean": 0.056351705534625304,
+          "ci": [
+            0.041114775415331234,
+            0.07158863565391937
+          ],
+          "regrets": [
+            0.07347960801800107,
+            0.04248204240749784,
+            0.056130091190411485,
+            0.0473515897425096,
+            0.06231519631470654
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.5785638575184278,
+          "ci": [
+            0.5521128426725554,
+            0.6050148723643001
+          ],
+          "regrets": [
+            0.5863266119835762,
+            0.6124489366358896,
+            0.5684210547265385,
+            0.5608579707882585,
+            0.5647647134578764
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.6084775676624307,
+          "ci": [
+            0.5666292410935021,
+            0.6503258942313592
+          ],
+          "regrets": [
+            0.6668805177499999,
+            0.5962081562296516,
+            0.5826472256697135,
+            0.6057057831201017,
+            0.5909461555426866
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 1.7009943572854997,
+          "ci": [
+            1.6311278961430233,
+            1.7708608184279762
+          ],
+          "regrets": [
+            1.6609546535264863,
+            1.6285277085376826,
+            1.7376572913574484,
+            1.7107233298132587,
+            1.7671088031926228
+          ]
+        },
+        "grpo": {
+          "mean": 0.06448207991503287,
+          "ci": [
+            0.04994073303905515,
+            0.07902342679101058
+          ],
+          "regrets": [
+            0.050009615875617065,
+            0.07247445128345115,
+            0.059534079456811655,
+            0.07982662719387439,
+            0.060565625765410074
+          ]
+        },
+        "batchnorm": {
+          "mean": 1.7141510782225062,
+          "ci": [
+            1.6415227882426884,
+            1.786779368202324
+          ],
+          "regrets": [
+            1.7874559015507543,
+            1.6884886925273155,
+            1.7311406503241478,
+            1.7331972121597574,
+            1.6304729345505564
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 1.6773692440295345,
+          "ci": [
+            1.5148374244051535,
+            1.8399010636539155
+          ],
+          "regrets": [
+            1.6239046414694094,
+            1.8463086837119624,
+            1.657105719486069,
+            1.5028869750573173,
+            1.7566402004229145
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.9573053475673714,
+          "ci": [
+            0.8942259013525882,
+            1.0203847937821546
+          ],
+          "regrets": [
+            0.9130160926088091,
+            1.0315294326165558,
+            0.9286733950350559,
+            0.9247781830143641,
+            0.9885296345620717
+          ]
+        },
+        "grpo": {
+          "mean": 0.049310832577799404,
+          "ci": [
+            0.04066618099780843,
+            0.05795548415779038
+          ],
+          "regrets": [
+            0.053102015939688836,
+            0.05744531871112814,
+            0.03957504131110368,
+            0.05105841043136364,
+            0.04537337649571274
+          ]
+        },
+        "batchnorm": {
+          "mean": 1.0004932254055405,
+          "ci": [
+            0.9308270009782772,
+            1.0701594498328038
+          ],
+          "regrets": [
+            0.9921779083809582,
+            0.9251232704764488,
+            1.0398624491970971,
+            0.9762272184559293,
+            1.0690752805172692
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.9451521244643981,
+          "ci": [
+            0.7066391219397388,
+            1.1836651269890575
+          ],
+          "regrets": [
+            0.894107769999642,
+            0.8019914977032013,
+            1.2731866559116154,
+            0.8152526777878378,
+            0.9412220209196934
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.010763428836531547,
+          "ci": [
+            0.0013868659475521575,
+            0.02013999172551094
+          ],
+          "regrets": [
+            0.02314827391882063,
+            0.0029071698171854675,
+            0.007227261564647162,
+            0.010318036319663718,
+            0.010216402562340762
+          ]
+        },
+        "grpo": {
+          "mean": 0.06093262117581581,
+          "ci": [
+            0.048276379106298055,
+            0.07358886324533358
+          ],
+          "regrets": [
+            0.06763340796245579,
+            0.06353762349280918,
+            0.07214486193557326,
+            0.05439454243763388,
+            0.04695267005060692
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.005386920945291487,
+          "ci": [
+            0.0022504702970997394,
+            0.008523371593483235
+          ],
+          "regrets": [
+            0.0056857901810820006,
+            0.005590596485154683,
+            0.009310804965524567,
+            0.003488758891262859,
+            0.002858654203433323
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.02141653859309762,
+          "ci": [
+            0.009197608598996123,
+            0.03363546858719911
+          ],
+          "regrets": [
+            0.019871775110158443,
+            0.011005064686275105,
+            0.0377460358728425,
+            0.019655797136604942,
+            0.018804020159607113
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 3.2634391464250276,
+          "ci": [
+            3.163997189200796,
+            3.362881103649259
+          ],
+          "regrets": [
+            3.2179465580801403,
+            3.378736819745627,
+            3.2270073685282035,
+            3.1819110044049603,
+            3.3115939813662094
+          ]
+        },
+        "grpo": {
+          "mean": 0.25301109588698345,
+          "ci": [
+            0.2081876666941288,
+            0.2978345250798381
+          ],
+          "regrets": [
+            0.2256261474824645,
+            0.29380161528848514,
+            0.20866977618317387,
+            0.25517058758496053,
+            0.2817873528958332
+          ]
+        },
+        "batchnorm": {
+          "mean": 3.2389965341336953,
+          "ci": [
+            2.8454297013037464,
+            3.632563366963644
+          ],
+          "regrets": [
+            3.1659339429087354,
+            2.830874891664302,
+            3.717695204094521,
+            3.220039717312632,
+            3.2604389146882857
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 2.6918997445764137,
+          "ci": [
+            2.331095627659929,
+            3.0527038614928985
+          ],
+          "regrets": [
+            2.4785434960767816,
+            2.4920467860861977,
+            2.621325374527478,
+            3.1890202952825035,
+            2.6785627709091084
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 9.810633571321281,
+          "ci": [
+            9.00037543687553,
+            10.620891705767033
+          ],
+          "regrets": [
+            10.833271811702657,
+            9.732376482058331,
+            9.24082568127228,
+            9.26516922996539,
+            9.98152465160775
+          ]
+        },
+        "grpo": {
+          "mean": 1.0928840637467732,
+          "ci": [
+            0.9380091824350261,
+            1.2477589450585203
+          ],
+          "regrets": [
+            0.9241975363346245,
+            1.2453688834118715,
+            1.1716314228675242,
+            1.0272011129372667,
+            1.0960213631825786
+          ]
+        },
+        "batchnorm": {
+          "mean": 9.56555764058715,
+          "ci": [
+            8.874633093705137,
+            10.256482187469162
+          ],
+          "regrets": [
+            9.723503482655028,
+            9.606563683175475,
+            10.31661865460881,
+            9.404051853144463,
+            8.777050529351975
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 7.698564679288253,
+          "ci": [
+            6.350391555773089,
+            9.046737802803417
+          ],
+          "regrets": [
+            8.785490703996897,
+            7.918920695775529,
+            8.462777984889113,
+            6.047945584204871,
+            7.277688427574856
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 12.355008032865356,
+          "ci": [
+            11.47202411502321,
+            13.237991950707503
+          ],
+          "regrets": [
+            11.652836831429747,
+            11.988923222142288,
+            12.87940190568646,
+            11.929487913881534,
+            13.324390291186763
+          ]
+        },
+        "grpo": {
+          "mean": 3.3370965706915108,
+          "ci": [
+            3.057739112526614,
+            3.6164540288564075
+          ],
+          "regrets": [
+            3.1573256046522804,
+            3.646135724798292,
+            3.4702646322689357,
+            3.0998536442606883,
+            3.3119032474773578
+          ]
+        },
+        "batchnorm": {
+          "mean": 12.808223015565876,
+          "ci": [
+            11.835955723534264,
+            13.780490307597487
+          ],
+          "regrets": [
+            11.573946655636012,
+            13.078934337342542,
+            12.911053005343083,
+            13.725853677868834,
+            12.751327401638898
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 12.903593529754868,
+          "ci": [
+            11.702263005951071,
+            14.104924053558666
+          ],
+          "regrets": [
+            13.349789900902964,
+            12.86881177857773,
+            13.393694886903011,
+            11.249197803631109,
+            13.656473278759538
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.002754519577564955,
+          "ci": [
+            -0.00012285082755475723,
+            0.005631889982684667
+          ],
+          "regrets": [
+            0.003982583705287359,
+            0.0004213990142659383,
+            0.005868805392314537,
+            0.0005642450294999462,
+            0.0029355647464569938
+          ]
+        },
+        "grpo": {
+          "mean": 0.0026882450227023727,
+          "ci": [
+            -0.00039808207667087984,
+            0.005774572122075625
+          ],
+          "regrets": [
+            0.00018831321329920876,
+            0.006504709010412053,
+            0.0037284529313680883,
+            0.0016502002238219591,
+            0.001369549734610555
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.004438042327791583,
+          "ci": [
+            0.0029894820026195815,
+            0.005886602652963584
+          ],
+          "regrets": [
+            0.004216894177842608,
+            0.004088823283386704,
+            0.006322760532200117,
+            0.0044355818982566575,
+            0.003126151747271824
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.003779917883778892,
+          "ci": [
+            -0.0033013292574018537,
+            0.010861165024959638
+          ],
+          "regrets": [
+            0.0019417552456846882,
+            0.0013748393325340865,
+            0.0013957363062246481,
+            0.0002639412814816007,
+            0.013923317252969436
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0035844802294309292,
+          "ci": [
+            -0.0008225764352196036,
+            0.007991536894081462
+          ],
+          "regrets": [
+            0.004703558003861274,
+            0.001618910563774107,
+            0.001679020148576877,
+            0.009311165985242219,
+            0.0006097464457001723
+          ]
+        },
+        "grpo": {
+          "mean": 0.0030441654892064047,
+          "ci": [
+            -0.0019095834319164244,
+            0.007997914410329234
+          ],
+          "regrets": [
+            0.0021444711893656245,
+            0.0004548515227175219,
+            0.0025418488533556927,
+            0.009935547345608524,
+            0.00014410853498466025
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.012698163674294568,
+          "ci": [
+            0.006986398928248479,
+            0.018409928420340657
+          ],
+          "regrets": [
+            0.011629338964445806,
+            0.019519115359167,
+            0.014932901343668795,
+            0.008912633553953853,
+            0.008496829150237398
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.0025132202942554534,
+          "ci": [
+            0.0017333791905987405,
+            0.0032930613979121662
+          ],
+          "regrets": [
+            0.0016728595448315638,
+            0.002475868618455283,
+            0.0023266054933402873,
+            0.0026786269453106634,
+            0.00341214086933947
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.006229189660714642,
+          "ci": [
+            -0.0007389565327106332,
+            0.013197335854139918
+          ],
+          "regrets": [
+            0.006582671622681695,
+            0.008044390187790301,
+            0.002008158936946709,
+            0.014418899819536151,
+            9.182773661835509e-05
+          ]
+        },
+        "grpo": {
+          "mean": 0.002337417209574369,
+          "ci": [
+            -0.0001111916381140777,
+            0.0047860260572628165
+          ],
+          "regrets": [
+            0.0055155564738230516,
+            0.0012921397084975923,
+            0.0008414449179101305,
+            0.0010387129767589385,
+            0.0029992319708821336
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.004334458233103924,
+          "ci": [
+            0.0016476657902505213,
+            0.007021250675957328
+          ],
+          "regrets": [
+            0.0031995778640499157,
+            0.0064942156439773725,
+            0.005923386375370487,
+            0.0011787656964024709,
+            0.004876345585719376
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.0019982831069154583,
+          "ci": [
+            0.0007400723055025584,
+            0.003256493908328358
+          ],
+          "regrets": [
+            0.002237861203417163,
+            0.003277663068763121,
+            0.0025241894066406617,
+            0.0011271743541160395,
+            0.0008245275016403067
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.006914287215583655,
+          "ci": [
+            -0.0012417341052064663,
+            0.015070308536373776
+          ],
+          "regrets": [
+            0.00029628312950310035,
+            0.013214174447646542,
+            0.0015254632420618143,
+            0.014446251317738596,
+            0.005089263940968219
+          ]
+        },
+        "grpo": {
+          "mean": 0.0009918641020062386,
+          "ci": [
+            -4.7651991288019235e-05,
+            0.0020313801953004964
+          ],
+          "regrets": [
+            0.0007326041907767876,
+            0.0023063674393655345,
+            0.0004601435453459579,
+            0.001272637820108396,
+            0.00018756751443451726
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.008930520804388142,
+          "ci": [
+            0.0010047829841082021,
+            0.01685625862466808
+          ],
+          "regrets": [
+            0.009498203570814271,
+            0.01848308552988041,
+            0.0014612220992734695,
+            0.010064812012142503,
+            0.00514528080983006
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.004010794448468048,
+          "ci": [
+            0.0015782399851201395,
+            0.006443348911815957
+          ],
+          "regrets": [
+            0.004729909037687291,
+            0.005002433783593695,
+            0.004452581525144326,
+            0.005315706166881276,
+            0.0005533417290336515
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0031907512721882384,
+          "ci": [
+            -0.00030614737955070737,
+            0.006687649923927184
+          ],
+          "regrets": [
+            0.0006336974832634767,
+            0.004040718035033162,
+            0.0016393138397252172,
+            0.001926117139672022,
+            0.007713909863247314
+          ]
+        },
+        "grpo": {
+          "mean": 0.00126560354543869,
+          "ci": [
+            0.0002506114355574989,
+            0.002280595655319881
+          ],
+          "regrets": [
+            0.000876484023789616,
+            0.0013873799886242014,
+            0.0026386876111413873,
+            0.0007831987434517367,
+            0.0006422673601865087
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.0038383644617124165,
+          "ci": [
+            0.0005437341047068852,
+            0.007132994818717948
+          ],
+          "regrets": [
+            0.0003629467562988704,
+            0.002146001979896453,
+            0.006741367283377425,
+            0.00602608680921558,
+            0.003915419479773755
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.004390991367884643,
+          "ci": [
+            0.0009754671386548266,
+            0.00780651559711446
+          ],
+          "regrets": [
+            0.004433972636363947,
+            0.002988900891531266,
+            0.006687581503475868,
+            0.0005617943347954571,
+            0.0072827074732566745
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 2.452016045206368,
+          "ci": [
+            2.022200277544294,
+            2.881831812868442
+          ],
+          "regrets": [
+            3.044520134727553,
+            2.1394105794525666,
+            2.410099441216484,
+            2.3179914833542052,
+            2.3480585872810313
+          ]
+        },
+        "grpo": {
+          "mean": 0.005127582290282183,
+          "ci": [
+            0.0009634309581681468,
+            0.00929173362239622
+          ],
+          "regrets": [
+            0.0013816205662407675,
+            0.008302716926704512,
+            0.0020049246525050152,
+            0.008441162761841899,
+            0.005507486544118722
+          ]
+        },
+        "batchnorm": {
+          "mean": 2.8003415606171767,
+          "ci": [
+            2.4053426397221496,
+            3.1953404815122037
+          ],
+          "regrets": [
+            2.8364123618622985,
+            3.079894720649812,
+            2.6520807374445,
+            3.097031758203079,
+            2.336288224926195
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 2.9746030330010087,
+          "ci": [
+            1.63694673258277,
+            4.312259333419247
+          ],
+          "regrets": [
+            2.6816993369812105,
+            2.7628993197217184,
+            4.856966120971249,
+            2.384150318309018,
+            2.1873000690218465
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 13.504455037989354,
+          "ci": [
+            12.807239957645674,
+            14.201670118333034
+          ],
+          "regrets": [
+            13.44918813660292,
+            12.901678047809893,
+            13.14991648526095,
+            14.368831678171626,
+            13.652660842101374
+          ]
+        },
+        "grpo": {
+          "mean": 0.046074471879329275,
+          "ci": [
+            0.03708421905429618,
+            0.05506472470436237
+          ],
+          "regrets": [
+            0.03651235542591185,
+            0.040736614484707084,
+            0.05394974503501794,
+            0.048346113775791275,
+            0.05082753067521819
+          ]
+        },
+        "batchnorm": {
+          "mean": 14.226706428689113,
+          "ci": [
+            13.366854795102379,
+            15.086558062275847
+          ],
+          "regrets": [
+            15.390236570731762,
+            14.170491198714883,
+            13.57371034903626,
+            14.1253498714216,
+            13.87374415354106
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 15.290091013421957,
+          "ci": [
+            14.290939657647822,
+            16.289242369196092
+          ],
+          "regrets": [
+            14.970285658890758,
+            14.212474251726558,
+            15.189259056263976,
+            15.727766542890144,
+            16.350669557338346
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 6.936864960672248,
+          "ci": [
+            6.481377002776039,
+            7.3923529185684576
+          ],
+          "regrets": [
+            7.1141642316728895,
+            6.2929418425822385,
+            7.163950069372827,
+            7.133924934754196,
+            6.979343724979086
+          ]
+        },
+        "grpo": {
+          "mean": 0.016047124652977605,
+          "ci": [
+            0.004517836170225173,
+            0.02757641313573004
+          ],
+          "regrets": [
+            0.019885272359633967,
+            0.008944863025720683,
+            0.013991939913592889,
+            0.03013757375811694,
+            0.007275974207823549
+          ]
+        },
+        "batchnorm": {
+          "mean": 6.423058473910002,
+          "ci": [
+            5.325422945552059,
+            7.520694002267945
+          ],
+          "regrets": [
+            6.377560163265057,
+            5.967445657462162,
+            7.638102263473567,
+            5.296346902735618,
+            6.835837382613605
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 6.143727726815215,
+          "ci": [
+            4.587616243763785,
+            7.699839209866646
+          ],
+          "regrets": [
+            4.5928503782889045,
+            7.823448475308152,
+            6.14248286294257,
+            6.803698446283466,
+            5.356158471252982
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0019422388670426402,
+          "ci": [
+            -0.00024637475417712456,
+            0.004130852488262405
+          ],
+          "regrets": [
+            0.00044371045858815534,
+            5.3075102293774026e-05,
+            0.002713851281890595,
+            0.004389539249090599,
+            0.0021110182433500767
+          ]
+        },
+        "grpo": {
+          "mean": 0.07897710247262855,
+          "ci": [
+            0.07367757071081163,
+            0.08427663423444548
+          ],
+          "regrets": [
+            0.08452908534535243,
+            0.07882002512210513,
+            0.07430345323254532,
+            0.08177194784689044,
+            0.07546100081624944
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.007035136346078175,
+          "ci": [
+            0.002316503553104657,
+            0.011753769139051693
+          ],
+          "regrets": [
+            0.006328340055279403,
+            0.012437967632788975,
+            0.0018861041428245295,
+            0.00640656258701886,
+            0.008116707312479106
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.021266798137054926,
+          "ci": [
+            0.0039662258622790054,
+            0.03856737041183085
+          ],
+          "regrets": [
+            0.023510563340302427,
+            0.019487276345772152,
+            0.009242286576814343,
+            0.04373444238537315,
+            0.010359422037012561
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 0.27796188618199447,
+          "ci": [
+            0.2456673028196214,
+            0.31025646954436753
+          ],
+          "regrets": [
+            0.3079746284521824,
+            0.2978571696521292,
+            0.28080246339901854,
+            0.249347820361702,
+            0.2538273490449402
+          ]
+        },
+        "grpo": {
+          "mean": 0.09310172424454202,
+          "ci": [
+            0.06558186839761151,
+            0.12062158009147253
+          ],
+          "regrets": [
+            0.08013606259811853,
+            0.09084338023577741,
+            0.066802579048306,
+            0.12477148554979087,
+            0.1029551137907173
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.26243518956693135,
+          "ci": [
+            0.22845195553088266,
+            0.29641842360298004
+          ],
+          "regrets": [
+            0.25488083161298714,
+            0.2950345598552326,
+            0.2395842423810441,
+            0.2873373100297409,
+            0.23533900395565174
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.2900975880941193,
+          "ci": [
+            0.2200891336794264,
+            0.3601060425088122
+          ],
+          "regrets": [
+            0.3813867939714576,
+            0.2566427755774429,
+            0.2367199836750249,
+            0.2736561214161674,
+            0.30208226583050357
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 0.4947521065250573,
+          "ci": [
+            0.4368963895864413,
+            0.5526078234636733
+          ],
+          "regrets": [
+            0.49381717339534703,
+            0.4642152677850174,
+            0.49715338641222523,
+            0.5697968788166101,
+            0.4487778262160863
+          ]
+        },
+        "grpo": {
+          "mean": 0.0738527179128868,
+          "ci": [
+            0.046454160197987066,
+            0.10125127562778655
+          ],
+          "regrets": [
+            0.07748681788443389,
+            0.10315540416339458,
+            0.05551955273331264,
+            0.048759877478407106,
+            0.0843419373048858
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.5064303640549029,
+          "ci": [
+            0.4681483718209692,
+            0.5447123562888366
+          ],
+          "regrets": [
+            0.4978597949366042,
+            0.4749220073834077,
+            0.4815700768734495,
+            0.5367278699308927,
+            0.5410720711501609
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.5635401551752949,
+          "ci": [
+            0.4854123105769625,
+            0.6416679997736273
+          ],
+          "regrets": [
+            0.6233666539866779,
+            0.4855877075402248,
+            0.6167114708000702,
+            0.583028178803947,
+            0.509006764745555
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "scale",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 0.3276780004180885,
+          "ci": [
+            0.25986018197182575,
+            0.3954958188643512
+          ],
+          "regrets": [
+            0.26422921543974837,
+            0.37388310514154893,
+            0.3946256408067474,
+            0.30806202238744274,
+            0.2975900183149551
+          ]
+        },
+        "grpo": {
+          "mean": 0.06541401476103356,
+          "ci": [
+            0.05968728494448455,
+            0.07114074457758257
+          ],
+          "regrets": [
+            0.05793164260694842,
+            0.06602193655605897,
+            0.06912189018359019,
+            0.06923001238161938,
+            0.06476459207695086
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.3480052030530271,
+          "ci": [
+            0.27587917018662333,
+            0.4201312359194309
+          ],
+          "regrets": [
+            0.35050663802559856,
+            0.30931911642557686,
+            0.3638202526523094,
+            0.43413903839447154,
+            0.28224096976717933
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.33370554782378975,
+          "ci": [
+            0.22148612492206132,
+            0.4459249707255182
+          ],
+          "regrets": [
+            0.24897781127371588,
+            0.4485993484679874,
+            0.27743586629669265,
+            0.280475522026127,
+            0.4130391910544257
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.0,
+      "per_method": {
+        "rloo": {
+          "mean": 0.0022760566553926627,
+          "ci": [
+            -0.00025896701975518417,
+            0.00481108033054051
+          ],
+          "regrets": [
+            0.005648300294752691,
+            0.0005534280624594333,
+            0.0025323940526132765,
+            0.0008479130618045283,
+            0.0017982478053333824
+          ]
+        },
+        "grpo": {
+          "mean": 0.07276725774806787,
+          "ci": [
+            0.050154309369691674,
+            0.09538020612644407
+          ],
+          "regrets": [
+            0.045605978540737085,
+            0.08763042507629117,
+            0.0643103190991666,
+            0.07677590012490952,
+            0.08951366589923496
+          ]
+        },
+        "batchnorm": {
+          "mean": 0.005480640758068369,
+          "ci": [
+            0.0012559109834498674,
+            0.00970537053268687
+          ],
+          "regrets": [
+            0.006772779081151029,
+            0.0013339519117281124,
+            0.007780996335011172,
+            0.002441303977927626,
+            0.009074172484523906
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 0.01250205703459496,
+          "ci": [
+            -0.003632259367839799,
+            0.028636373437029718
+          ],
+          "regrets": [
+            0.004656674147185491,
+            0.02309945888399091,
+            0.02976839642975536,
+            0.0037254821005495253,
+            0.0012602736114935102
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.1,
+      "per_method": {
+        "rloo": {
+          "mean": 3.4327722166410175,
+          "ci": [
+            3.294402569859654,
+            3.571141863422381
+          ],
+          "regrets": [
+            3.523247947239817,
+            3.377330094507367,
+            3.5791179485042917,
+            3.3586431088365787,
+            3.3255219841170347
+          ]
+        },
+        "grpo": {
+          "mean": 0.16754192506148266,
+          "ci": [
+            0.15783802490298873,
+            0.1772458252199766
+          ],
+          "regrets": [
+            0.16623561152596616,
+            0.17942583842381019,
+            0.16750486340783236,
+            0.16705836189205028,
+            0.15748495005775445
+          ]
+        },
+        "batchnorm": {
+          "mean": 3.3494569832527112,
+          "ci": [
+            3.1346915708819334,
+            3.564222395623489
+          ],
+          "regrets": [
+            3.11658466310147,
+            3.414625816103377,
+            3.588324609283928,
+            3.3421792753380393,
+            3.285570552436743
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 3.4490069150869878,
+          "ci": [
+            3.273952430291838,
+            3.6240613998821374
+          ],
+          "regrets": [
+            3.4284489560585594,
+            3.6386614494498306,
+            3.5351515765862036,
+            3.3608786147534717,
+            3.281893978586875
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.2,
+      "per_method": {
+        "rloo": {
+          "mean": 2.6260209271964188,
+          "ci": [
+            2.264535191311011,
+            2.9875066630818266
+          ],
+          "regrets": [
+            2.9078411306498637,
+            2.377063234740786,
+            2.254090027075544,
+            2.825622108749632,
+            2.7654881347662683
+          ]
+        },
+        "grpo": {
+          "mean": 0.11460918741502797,
+          "ci": [
+            0.10381958592781561,
+            0.12539878890224032
+          ],
+          "regrets": [
+            0.10936075198909105,
+            0.11057647528688254,
+            0.12874522088270532,
+            0.11700965696099849,
+            0.1073538319554624
+          ]
+        },
+        "batchnorm": {
+          "mean": 2.6264137222813817,
+          "ci": [
+            2.3619378372269693,
+            2.890889607335794
+          ],
+          "regrets": [
+            2.2841667247963557,
+            2.7065266796589795,
+            2.673033021265565,
+            2.6066363122010157,
+            2.861705873484991
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 2.951716419115831,
+          "ci": [
+            2.2617898389409907,
+            3.6416429992906716
+          ],
+          "regrets": [
+            3.631623523690052,
+            3.0355373704945894,
+            3.2883199599978115,
+            2.248242240623079,
+            2.5548590007736234
+          ]
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "corrupt_type": "target",
+      "f": 0.3,
+      "per_method": {
+        "rloo": {
+          "mean": 22.563064952800378,
+          "ci": [
+            20.935837682476098,
+            24.190292223124658
+          ],
+          "regrets": [
+            22.27351027363594,
+            23.082258305553502,
+            24.230410744047543,
+            20.630411926201802,
+            22.598733514563097
+          ]
+        },
+        "grpo": {
+          "mean": 1.024142592588247,
+          "ci": [
+            0.864787921877009,
+            1.1834972632994851
+          ],
+          "regrets": [
+            1.1222207398537274,
+            0.857614595011642,
+            0.9323752978853859,
+            1.164572470419752,
+            1.043929859770729
+          ]
+        },
+        "batchnorm": {
+          "mean": 21.609234164461686,
+          "ci": [
+            19.500594263755577,
+            23.717874065167795
+          ],
+          "regrets": [
+            20.474824572551096,
+            23.033994506622353,
+            23.81020457402428,
+            20.73208335072444,
+            19.99506381838625
+          ]
+        },
+        "grpo_sigma_sample": {
+          "mean": 22.817435014851476,
+          "ci": [
+            19.056474331476114,
+            26.57839569822684
+          ],
+          "regrets": [
+            27.13688130542709,
+            21.732488957804435,
+            18.951386834616773,
+            24.06006191091316,
+            22.206356065495914
+          ]
+        }
+      }
+    }
+  ]
+}

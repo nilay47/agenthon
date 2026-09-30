@@ -1,0 +1,30 @@
+{
+  "ac": {
+    "a_rloo_uniform": {
+      "median_dist_true_star": 0.09258102017323341,
+      "median_dist_grpo_star": 0.09699950544650411
+    },
+    "b_grpo_uniform": {
+      "median_dist_true_star": 0.055633346676939324,
+      "median_dist_grpo_star": 0.04598518212149302
+    },
+    "c_grpo_neyman_exact": {
+      "median_dist_true_star": 0.11307989781756622,
+      "median_dist_grpo_star": 0.11560688208138448
+    }
+  },
+  "bandit": {
+    "a_rloo_uniform": {
+      "median_dist_true_star": 0.4527061761955754,
+      "median_dist_grpo_star": 1.0404975494988542
+    },
+    "b_grpo_uniform": {
+      "median_dist_true_star": 0.9863442048632917,
+      "median_dist_grpo_star": 0.2654459936421471
+    },
+    "c_grpo_neyman_exact": {
+      "median_dist_true_star": 0.2525381013350019,
+      "median_dist_grpo_star": 1.1823718787927953
+    }
+  }
+}

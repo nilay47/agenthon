@@ -1,0 +1,3602 @@
+[
+  {
+    "seed": 0,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 7.879246928558379e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 7.879246928558379e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.932865009823805e-06,
+    "dist_newton_to_old_fp": 3.929353021203144e-06,
+    "exact_loss": 0.010366511741493445,
+    "predicted_loss": 0.0001967447240304712,
+    "predicted_loss_v2": 0.011605265314526535,
+    "weight_spread": 161.15198240685626,
+    "antisym_ratio": 0.04170575785188774,
+    "delta_plain_norm_ratio": 0.1528629730258571,
+    "delta_plain_cosine": 0.9996211005459608,
+    "delta_hat_norm_ratio": 1.6657179162530353,
+    "delta_hat_cosine": 0.9775895439417529,
+    "theta_true_star": [
+      0.20310320445761132,
+      -0.016499359269039067,
+      0.058659597956193396
+    ],
+    "theta_grpo_star": [
+      0.18071641645535957,
+      -0.023566377450835025,
+      0.08258061500534737
+    ]
+  },
+  {
+    "seed": 1,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.5503699941529332e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.5503699941529332e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.985825936329017e-07,
+    "dist_newton_to_old_fp": 2.5069023273266087e-07,
+    "exact_loss": 0.007214033146178744,
+    "predicted_loss": 0.0002742763990296335,
+    "predicted_loss_v2": 0.010283150069319243,
+    "weight_spread": 183.75489644792188,
+    "antisym_ratio": 0.029590206985928662,
+    "delta_plain_norm_ratio": 0.21893406446297542,
+    "delta_plain_cosine": 0.9998194988122892,
+    "delta_hat_norm_ratio": 1.888021615621895,
+    "delta_hat_cosine": 0.9724420500642553,
+    "theta_true_star": [
+      0.19123946659627522,
+      -0.02029006637235923,
+      0.0710955692122716
+    ],
+    "theta_grpo_star": [
+      0.17217842467952546,
+      -0.025898939901102685,
+      0.09186477899090152
+    ]
+  },
+  {
+    "seed": 2,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.7794850687544834e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.7794850687544834e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.00046410718184076907,
+    "dist_newton_to_old_fp": 0.0004640444588444376,
+    "exact_loss": 0.002654576313615875,
+    "predicted_loss": 0.0001367265216258791,
+    "predicted_loss_v2": 0.003498327254228088,
+    "weight_spread": 260.64158472053373,
+    "antisym_ratio": 0.01730034069096071,
+    "delta_plain_norm_ratio": 0.24663144848997454,
+    "delta_plain_cosine": 0.9997412693645228,
+    "delta_hat_norm_ratio": 1.5820813422024733,
+    "delta_hat_cosine": 0.9801989068472226,
+    "theta_true_star": [
+      0.17913236079734876,
+      -0.02402951876311872,
+      0.0843160420379574
+    ],
+    "theta_grpo_star": [
+      0.16810821692992983,
+      -0.0268291130480497,
+      0.09618046008506839
+    ]
+  },
+  {
+    "seed": 3,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.440540056418071e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.440540056418071e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.406652366197744e-09,
+    "dist_newton_to_old_fp": 2.009455340627283e-08,
+    "exact_loss": 0.001252221560536948,
+    "predicted_loss": 6.046179158467705e-05,
+    "predicted_loss_v2": 0.0014491472863347138,
+    "weight_spread": 219.56232135730622,
+    "antisym_ratio": 0.02115453296448873,
+    "delta_plain_norm_ratio": 0.2313169473632613,
+    "delta_plain_cosine": 0.9999494121769316,
+    "delta_hat_norm_ratio": 1.349171526727434,
+    "delta_hat_cosine": 0.9900946458411639,
+    "theta_true_star": [
+      0.18386122302343064,
+      -0.022617254849963152,
+      0.07913217831280181
+    ],
+    "theta_grpo_star": [
+      0.17599237463194892,
+      -0.024910536274393626,
+      0.08774350986433369
+    ]
+  },
+  {
+    "seed": 4,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.834515996078783e-09,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.834515996078783e-09,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.1309591727666304e-05,
+    "dist_newton_to_old_fp": 1.1947195666488223e-05,
+    "exact_loss": 0.00848781169835744,
+    "predicted_loss": 0.00023759850520681394,
+    "predicted_loss_v2": 0.008657380420577922,
+    "weight_spread": 135.12738621714905,
+    "antisym_ratio": 0.04472149434407161,
+    "delta_plain_norm_ratio": 0.1832127999986217,
+    "delta_plain_cosine": 0.9994948744381044,
+    "delta_hat_norm_ratio": 1.547889151072083,
+    "delta_hat_cosine": 0.9801233072083969,
+    "theta_true_star": [
+      0.20615073858690824,
+      -0.015554566398539887,
+      0.0556151850004299
+    ],
+    "theta_grpo_star": [
+      0.18476749791080813,
+      -0.022337667950042443,
+      0.07813923909612704
+    ]
+  },
+  {
+    "seed": 5,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.7299931410423912e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.7299931410423912e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.908500149108714e-07,
+    "dist_newton_to_old_fp": 2.376586845444118e-07,
+    "exact_loss": 0.008995244053498858,
+    "predicted_loss": 0.00016404056284513344,
+    "predicted_loss_v2": 0.013179832571153165,
+    "weight_spread": 316.51264885274486,
+    "antisym_ratio": 0.028347356108198857,
+    "delta_plain_norm_ratio": 0.1521003283958547,
+    "delta_plain_cosine": 0.9998193519824575,
+    "delta_hat_norm_ratio": 1.9526677246359254,
+    "delta_hat_cosine": 0.9710930186943243,
+    "theta_true_star": [
+      0.19257143083845166,
+      -0.019862163298511003,
+      0.06966229280072415
+    ],
+    "theta_grpo_star": [
+      0.17253392361643347,
+      -0.025811177449527906,
+      0.09148329400195447
+    ]
+  },
+  {
+    "seed": 6,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.552670258809986e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.552670258809986e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.346879433281723e-08,
+    "dist_newton_to_old_fp": 8.313814324202814e-08,
+    "exact_loss": 0.003936104156537501,
+    "predicted_loss": 0.00018491914213152088,
+    "predicted_loss_v2": 0.005748190788983995,
+    "weight_spread": 248.30089394084766,
+    "antisym_ratio": 0.024470332828753247,
+    "delta_plain_norm_ratio": 0.23690761822431056,
+    "delta_plain_cosine": 0.9998519698968117,
+    "delta_hat_norm_ratio": 1.7421104505655989,
+    "delta_hat_cosine": 0.9786518153756871,
+    "theta_true_star": [
+      0.18595338358963595,
+      -0.021968466890018055,
+      0.07684148245669832
+    ],
+    "theta_grpo_star": [
+      0.17239286945217663,
+      -0.0258461151192877,
+      0.0916347341734493
+    ]
+  },
+  {
+    "seed": 7,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.074513512875416e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.074513512875416e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.3841670628121238e-07,
+    "dist_newton_to_old_fp": 1.0798682965842923e-07,
+    "exact_loss": 0.0035900293366002423,
+    "predicted_loss": 0.00011399924826842825,
+    "predicted_loss_v2": 0.004658025651749855,
+    "weight_spread": 218.72862978406778,
+    "antisym_ratio": 0.02847822435095581,
+    "delta_plain_norm_ratio": 0.19308036342424856,
+    "delta_plain_cosine": 0.9999152486880708,
+    "delta_hat_norm_ratio": 1.592326348868967,
+    "delta_hat_cosine": 0.9829877324992199,
+    "theta_true_star": [
+      0.18967699294387105,
+      -0.02079027144277657,
+      0.07278543110357263
+    ],
+    "theta_grpo_star": [
+      0.17622632882855419,
+      -0.02484679537721157,
+      0.08748896906562438
+    ]
+  },
+  {
+    "seed": 8,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.8476715399180578e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.8476715399180578e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.8494692899055625e-07,
+    "dist_newton_to_old_fp": 1.2599289282766047e-07,
+    "exact_loss": 0.002042461382353672,
+    "predicted_loss": 0.00012362601988260335,
+    "predicted_loss_v2": 0.002548981835321063,
+    "weight_spread": 60.24725172594318,
+    "antisym_ratio": 0.02971867637045422,
+    "delta_plain_norm_ratio": 0.26285515746843363,
+    "delta_plain_cosine": 0.9999447212816185,
+    "delta_hat_norm_ratio": 1.4858043249931472,
+    "delta_hat_cosine": 0.9871961654352351,
+    "theta_true_star": [
+      0.19042623310843645,
+      -0.020550708418108476,
+      0.07197403539814082
+    ],
+    "theta_grpo_star": [
+      0.1788852929032132,
+      -0.02410071219025416,
+      0.08458644487048982
+    ]
+  },
+  {
+    "seed": 9,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 7.304406562037503e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 7.304406562037503e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.213428323404357e-07,
+    "dist_newton_to_old_fp": 9.831298739421559e-08,
+    "exact_loss": 0.004581612427920434,
+    "predicted_loss": 0.00013384381685084974,
+    "predicted_loss_v2": 0.006277723295058104,
+    "weight_spread": 203.24475664152027,
+    "antisym_ratio": 0.027747814253607166,
+    "delta_plain_norm_ratio": 0.18644999432980905,
+    "delta_plain_cosine": 0.9998970512867543,
+    "delta_hat_norm_ratio": 1.6943193237750636,
+    "delta_hat_cosine": 0.9796460676607924,
+    "theta_true_star": [
+      0.18946123631918768,
+      -0.020859138977770128,
+      0.07301942871578271
+    ],
+    "theta_grpo_star": [
+      0.17509448249169454,
+      -0.02515204113526303,
+      0.08871881212483812
+    ]
+  },
+  {
+    "seed": 10,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.7521107178469813e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.7521107178469813e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.568098713012183e-08,
+    "dist_newton_to_old_fp": 8.359603486592253e-08,
+    "exact_loss": 0.0029518829924054524,
+    "predicted_loss": 0.00013989310668079854,
+    "predicted_loss_v2": 0.003673604138671438,
+    "weight_spread": 376.6511244176372,
+    "antisym_ratio": 0.02471271543738859,
+    "delta_plain_norm_ratio": 0.2356835939992918,
+    "delta_plain_cosine": 0.9998658938570996,
+    "delta_hat_norm_ratio": 1.5433457960915058,
+    "delta_hat_cosine": 0.9819569138167689,
+    "theta_true_star": [
+      0.18428196430013533,
+      -0.022487750094878307,
+      0.07867110097696976
+    ],
+    "theta_grpo_star": [
+      0.17246284276754742,
+      -0.025828802325505683,
+      0.09155962088254341
+    ]
+  },
+  {
+    "seed": 11,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.0662595497651476e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.0662595497651476e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0993294427758744e-06,
+    "dist_newton_to_old_fp": 9.302643100043532e-07,
+    "exact_loss": 0.010850132548358732,
+    "predicted_loss": 0.00022239585601715355,
+    "predicted_loss_v2": 0.016007146517239446,
+    "weight_spread": 154.28181582065176,
+    "antisym_ratio": 0.03388680884689674,
+    "delta_plain_norm_ratio": 0.16280646515485606,
+    "delta_plain_cosine": 0.9996065290154944,
+    "delta_hat_norm_ratio": 2.1000266429119163,
+    "delta_hat_cosine": 0.969285102124528,
+    "theta_true_star": [
+      0.2021253676569063,
+      -0.01680635304719257,
+      0.05965133993274215
+    ],
+    "theta_grpo_star": [
+      0.17620382913713473,
+      -0.024852939701450576,
+      0.08751345563252148
+    ]
+  },
+  {
+    "seed": 12,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.430119416920173e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.430119416920173e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.1499964017095927e-07,
+    "dist_newton_to_old_fp": 9.533327072660331e-08,
+    "exact_loss": 0.0037934795616860195,
+    "predicted_loss": 0.00014755285211517943,
+    "predicted_loss_v2": 0.004744355829490572,
+    "weight_spread": 317.3204549077344,
+    "antisym_ratio": 0.02640271832903774,
+    "delta_plain_norm_ratio": 0.214221169642632,
+    "delta_plain_cosine": 0.9999009879812035,
+    "delta_hat_norm_ratio": 1.58038775921254,
+    "delta_hat_cosine": 0.9815065166000141,
+    "theta_true_star": [
+      0.18835329804825368,
+      -0.021211798417956944,
+      0.07422325103761829
+    ],
+    "theta_grpo_star": [
+      0.17494277032304278,
+      -0.02519234271685624,
+      0.08888333537928714
+    ]
+  },
+  {
+    "seed": 13,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.6248868742027184e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.6248868742027184e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.1587821959999872e-08,
+    "dist_newton_to_old_fp": 5.02686093821237e-08,
+    "exact_loss": 0.002412540041138639,
+    "predicted_loss": 0.0001053868959095726,
+    "predicted_loss_v2": 0.0036529149840203593,
+    "weight_spread": 325.95854432154806,
+    "antisym_ratio": 0.022222550955911358,
+    "delta_plain_norm_ratio": 0.2247545945197858,
+    "delta_plain_cosine": 0.99988002919685,
+    "delta_hat_norm_ratio": 1.6523703815179922,
+    "delta_hat_cosine": 0.9844323924952098,
+    "theta_true_star": [
+      0.18335301464179612,
+      -0.022772961777994753,
+      0.07968929280816854
+    ],
+    "theta_grpo_star": [
+      0.1726639206186506,
+      -0.025778845307731238,
+      0.0913436389852629
+    ]
+  },
+  {
+    "seed": 14,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.1185701537664656e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.1185701537664656e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.812985315537654e-08,
+    "dist_newton_to_old_fp": 8.160084120057285e-08,
+    "exact_loss": 0.0028771636662986433,
+    "predicted_loss": 0.00013000702318513308,
+    "predicted_loss_v2": 0.0039280759573387634,
+    "weight_spread": 205.35200441811642,
+    "antisym_ratio": 0.024065144681142323,
+    "delta_plain_norm_ratio": 0.22986389913645897,
+    "delta_plain_cosine": 0.9998826448763141,
+    "delta_hat_norm_ratio": 1.6092791652732032,
+    "delta_hat_cosine": 0.9827454940735324,
+    "theta_true_star": [
+      0.1851847924613619,
+      -0.02220816032169237,
+      0.07768234905316475
+    ],
+    "theta_grpo_star": [
+      0.17328703185146718,
+      -0.02562212556403954,
+      0.09067312519156681
+    ]
+  },
+  {
+    "seed": 15,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.2673527663346857e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.2673527663346857e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.6736056293622518e-06,
+    "dist_newton_to_old_fp": 1.3845122954458837e-06,
+    "exact_loss": 0.00885579511164325,
+    "predicted_loss": 0.0003589688132606552,
+    "predicted_loss_v2": 0.011995769671717046,
+    "weight_spread": 98.08764478055387,
+    "antisym_ratio": 0.03548877938767466,
+    "delta_plain_norm_ratio": 0.22363965847188647,
+    "delta_plain_cosine": 0.9995733516390469,
+    "delta_hat_norm_ratio": 1.9316556951964357,
+    "delta_hat_cosine": 0.9725656947981111,
+    "theta_true_star": [
+      0.2038983159257865,
+      -0.01625102519594985,
+      0.05785839485394993
+    ],
+    "theta_grpo_star": [
+      0.18095679221988722,
+      -0.0234951434960308,
+      0.0823170763506616
+    ]
+  },
+  {
+    "seed": 16,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.648110472293738e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.648110472293738e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.00046929216260043697,
+    "dist_newton_to_old_fp": 0.0004692294136288682,
+    "exact_loss": 0.007615660590215428,
+    "predicted_loss": 0.00033276657131557733,
+    "predicted_loss_v2": 0.012331146803225737,
+    "weight_spread": 517.3406745772304,
+    "antisym_ratio": 0.016887584375330885,
+    "delta_plain_norm_ratio": 0.235338443048839,
+    "delta_plain_cosine": 0.9996806111633785,
+    "delta_hat_norm_ratio": 2.050312552660496,
+    "delta_hat_cosine": 0.9665638968950653,
+    "theta_true_star": [
+      0.1855675207153727,
+      -0.02208898435155982,
+      0.0772635164208472
+    ],
+    "theta_grpo_star": [
+      0.16830911288537181,
+      -0.026786677508722788,
+      0.09597000418812116
+    ]
+  },
+  {
+    "seed": 17,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.15256406376432e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.15256406376432e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.184693940452523e-07,
+    "dist_newton_to_old_fp": 9.991343464317605e-08,
+    "exact_loss": 0.001688762902572194,
+    "predicted_loss": 7.997188046707702e-05,
+    "predicted_loss_v2": 0.001985543102585989,
+    "weight_spread": 143.15883061709485,
+    "antisym_ratio": 0.02717018761517594,
+    "delta_plain_norm_ratio": 0.23218660486562376,
+    "delta_plain_cosine": 0.9999138917427606,
+    "delta_hat_norm_ratio": 1.4127154793983925,
+    "delta_hat_cosine": 0.9872787176445124,
+    "theta_true_star": [
+      0.18391563954021753,
+      -0.022600535137573943,
+      0.07907253630311781
+    ],
+    "theta_grpo_star": [
+      0.17415602705795313,
+      -0.025398902583290976,
+      0.08973514901269963
+    ]
+  },
+  {
+    "seed": 18,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.1441699969932321e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.1441699969932321e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.610934013393391e-06,
+    "dist_newton_to_old_fp": 1.4562050771953133e-06,
+    "exact_loss": 0.003409785948534194,
+    "predicted_loss": 0.0001292242650473425,
+    "predicted_loss_v2": 0.003803772648495563,
+    "weight_spread": 205.31759270940944,
+    "antisym_ratio": 0.03870067825227721,
+    "delta_plain_norm_ratio": 0.21051433089273341,
+    "delta_plain_cosine": 0.9999229204427568,
+    "delta_hat_norm_ratio": 1.4563654544804108,
+    "delta_hat_cosine": 0.9847195418451128,
+    "theta_true_star": [
+      0.19106939838936746,
+      -0.020344619434780067,
+      0.07127907763521256
+    ],
+    "theta_grpo_star": [
+      0.177492539192013,
+      -0.024496289865963493,
+      0.08610874618315925
+    ]
+  },
+  {
+    "seed": 19,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.255835000676008e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.255835000676008e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.785810172622206e-08,
+    "dist_newton_to_old_fp": 7.202598811069153e-08,
+    "exact_loss": 0.0073323685031530805,
+    "predicted_loss": 0.0003789034661419187,
+    "predicted_loss_v2": 0.009537607951413778,
+    "weight_spread": 167.49257491477798,
+    "antisym_ratio": 0.022943524507109604,
+    "delta_plain_norm_ratio": 0.25578380077093515,
+    "delta_plain_cosine": 0.9998206532933505,
+    "delta_hat_norm_ratio": 1.9261917785307856,
+    "delta_hat_cosine": 0.9653858954549938,
+    "theta_true_star": [
+      0.1922460955059867,
+      -0.019966768181152547,
+      0.07001170386315886
+    ],
+    "theta_grpo_star": [
+      0.1724816331242529,
+      -0.02582414687904824,
+      0.09153944613994999
+    ]
+  },
+  {
+    "seed": 20,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.295221975516657e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.295221975516657e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.356710991464466e-06,
+    "dist_newton_to_old_fp": 1.1281768063325333e-06,
+    "exact_loss": 0.006663267265577422,
+    "predicted_loss": 0.0002457699503874959,
+    "predicted_loss_v2": 0.009894189782728569,
+    "weight_spread": 209.66530535042344,
+    "antisym_ratio": 0.034736151928954816,
+    "delta_plain_norm_ratio": 0.21398994172699112,
+    "delta_plain_cosine": 0.9997772146053485,
+    "delta_hat_norm_ratio": 1.9484247330364886,
+    "delta_hat_cosine": 0.9745765348143172,
+    "theta_true_star": [
+      0.19893413326884962,
+      -0.017818519583619255,
+      0.06293439967106304
+    ],
+    "theta_grpo_star": [
+      0.17774888447889703,
+      -0.024424241309727784,
+      0.08582884494685405
+    ]
+  },
+  {
+    "seed": 21,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.5330855104036107e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.5330855104036107e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.97302284215302e-08,
+    "dist_newton_to_old_fp": 7.601924541753083e-08,
+    "exact_loss": 0.0070969284728261695,
+    "predicted_loss": 0.00021106038188524576,
+    "predicted_loss_v2": 0.010627933362069707,
+    "weight_spread": 360.7777258967451,
+    "antisym_ratio": 0.022801684705556536,
+    "delta_plain_norm_ratio": 0.19303034467498556,
+    "delta_plain_cosine": 0.9998259602607319,
+    "delta_hat_norm_ratio": 1.9553899132698327,
+    "delta_hat_cosine": 0.9707363669018407,
+    "theta_true_star": [
+      0.19076899668948166,
+      -0.020440922528848028,
+      0.07160348312819613
+    ],
+    "theta_grpo_star": [
+      0.17232096440909486,
+      -0.025863866975281258,
+      0.09171189575579422
+    ]
+  },
+  {
+    "seed": 22,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.339955305542282e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.339955305542282e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 0.0004894859849816813,
+    "dist_newton_to_old_fp": 3.2343347770922393e-06,
+    "exact_loss": 0.0014806487528004064,
+    "predicted_loss": 8.883047175864766e-05,
+    "predicted_loss_v2": 0.0016564497829579976,
+    "weight_spread": 293.83610657840876,
+    "antisym_ratio": 0.01723182888045179,
+    "delta_plain_norm_ratio": 0.26090024458697436,
+    "delta_plain_cosine": 0.9998340782461301,
+    "delta_hat_norm_ratio": 1.3712466482811003,
+    "delta_hat_cosine": 0.9853609761846415,
+    "theta_true_star": [
+      0.17722441673424033,
+      -0.02457126590175667,
+      0.08640134798822943
+    ],
+    "theta_grpo_star": [
+      0.1690096753089009,
+      -0.026635715937454566,
+      0.09523383712697271
+    ]
+  },
+  {
+    "seed": 23,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.342511644527127e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.342511644527127e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.8701619499678116e-07,
+    "dist_newton_to_old_fp": 2.976833007001045e-07,
+    "exact_loss": 0.009713322035052901,
+    "predicted_loss": 0.0003318936677757167,
+    "predicted_loss_v2": 0.01369719577362886,
+    "weight_spread": 221.4531726720064,
+    "antisym_ratio": 0.03002642535426268,
+    "delta_plain_norm_ratio": 0.206995483487633,
+    "delta_plain_cosine": 0.9998233350401912,
+    "delta_hat_norm_ratio": 1.947754032436085,
+    "delta_hat_cosine": 0.970765022787776,
+    "theta_true_star": [
+      0.19611556200812372,
+      -0.018721776242506306,
+      0.065887828596899
+    ],
+    "theta_grpo_star": [
+      0.17539896515007106,
+      -0.025070711149797968,
+      0.08838837645779954
+    ]
+  },
+  {
+    "seed": 24,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.005776165798606e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.005776165798606e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.8185671457696838e-07,
+    "dist_newton_to_old_fp": 1.392169580610639e-07,
+    "exact_loss": 0.0021373254491750815,
+    "predicted_loss": 0.00010771507870250417,
+    "predicted_loss_v2": 0.0022785758152831185,
+    "weight_spread": 113.10296434884746,
+    "antisym_ratio": 0.03167106835644825,
+    "delta_plain_norm_ratio": 0.23945609394834524,
+    "delta_plain_cosine": 0.9999374591881716,
+    "delta_hat_norm_ratio": 1.3565092502994445,
+    "delta_hat_cosine": 0.9873201915599603,
+    "theta_true_star": [
+      0.1869583823974778,
+      -0.02165298577564222,
+      0.07574352956019462
+    ],
+    "theta_grpo_star": [
+      0.17654154024092525,
+      -0.024760400963068675,
+      0.08714577034447255
+    ]
+  },
+  {
+    "seed": 25,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.004137969731305e-09,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.004137969731305e-09,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.2292952335060715e-06,
+    "dist_newton_to_old_fp": 6.686143043142896e-06,
+    "exact_loss": 0.00411223244389336,
+    "predicted_loss": 0.00010824672892592994,
+    "predicted_loss_v2": 0.004692224505583044,
+    "weight_spread": 477.8621349430702,
+    "antisym_ratio": 0.04837034214091904,
+    "delta_plain_norm_ratio": 0.1743104054100273,
+    "delta_plain_cosine": 0.9997968291197028,
+    "delta_hat_norm_ratio": 1.5025989908561317,
+    "delta_hat_cosine": 0.9851965338661623,
+    "theta_true_star": [
+      0.20139066908257225,
+      -0.017038077553137833,
+      0.06040101166684355
+    ],
+    "theta_grpo_star": [
+      0.18549508137214263,
+      -0.02211156961074054,
+      0.07734277297310929
+    ]
+  },
+  {
+    "seed": 26,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.239366765100089e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.239366765100089e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.6536391142232744e-07,
+    "dist_newton_to_old_fp": 1.2552445200182907e-07,
+    "exact_loss": 0.002884510286206038,
+    "predicted_loss": 0.00017240043206179884,
+    "predicted_loss_v2": 0.0031718630459481164,
+    "weight_spread": 124.02927604054527,
+    "antisym_ratio": 0.0307594913572082,
+    "delta_plain_norm_ratio": 0.2630979186869816,
+    "delta_plain_cosine": 0.999925962123103,
+    "delta_hat_norm_ratio": 1.4358511178513929,
+    "delta_hat_cosine": 0.984280845639611,
+    "theta_true_star": [
+      0.18859014376699848,
+      -0.02113655938017112,
+      0.07396561121541162
+    ],
+    "theta_grpo_star": [
+      0.17645194013453003,
+      -0.02478501841282092,
+      0.08724335440865028
+    ]
+  },
+  {
+    "seed": 27,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.969104520497441e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.969104520497441e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.3820474997507277e-06,
+    "dist_newton_to_old_fp": 2.3352077006417482e-06,
+    "exact_loss": 0.001258619903764302,
+    "predicted_loss": 5.6432573169616645e-05,
+    "predicted_loss_v2": 0.0013979096758964023,
+    "weight_spread": 138.562940766222,
+    "antisym_ratio": 0.043229138598185106,
+    "delta_plain_norm_ratio": 0.22151484686051937,
+    "delta_plain_cosine": 0.9999741771008922,
+    "delta_hat_norm_ratio": 1.264053591615849,
+    "delta_hat_cosine": 0.9943343514904465,
+    "theta_true_star": [
+      0.189470466828902,
+      -0.020856193858866844,
+      0.073009414802626
+    ],
+    "theta_grpo_star": [
+      0.18150425322102376,
+      -0.023332033675901854,
+      0.08171675415140019
+    ]
+  },
+  {
+    "seed": 28,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.204025359004915e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.204025359004915e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.153059758158602e-06,
+    "dist_newton_to_old_fp": 3.965614995397846e-06,
+    "exact_loss": 0.010036230452414918,
+    "predicted_loss": 0.00021270494632073483,
+    "predicted_loss_v2": 0.010431996822313178,
+    "weight_spread": 283.8064234741847,
+    "antisym_ratio": 0.042166209861217725,
+    "delta_plain_norm_ratio": 0.16072118177767336,
+    "delta_plain_cosine": 0.9997909815465053,
+    "delta_hat_norm_ratio": 1.5754496005564942,
+    "delta_hat_cosine": 0.9775443151663648,
+    "theta_true_star": [
+      0.19915899308463775,
+      -0.01774676690360389,
+      0.06270085715459223
+    ],
+    "theta_grpo_star": [
+      0.17936199088435986,
+      -0.023963088207133155,
+      0.08406464550861016
+    ]
+  },
+  {
+    "seed": 29,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.001397405462358e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.001397405462358e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.7915390980061605e-07,
+    "dist_newton_to_old_fp": 1.546962216033102e-07,
+    "exact_loss": 0.000761413201199379,
+    "predicted_loss": 3.399406807958806e-05,
+    "predicted_loss_v2": 0.0009009614845731328,
+    "weight_spread": 105.97044990763075,
+    "antisym_ratio": 0.030801434663041354,
+    "delta_plain_norm_ratio": 0.22050123514822512,
+    "delta_plain_cosine": 0.999954599497608,
+    "delta_hat_norm_ratio": 1.2787703980948149,
+    "delta_hat_cosine": 0.9945490586971323,
+    "theta_true_star": [
+      0.1811071228959397,
+      -0.023450473568647615,
+      0.08215224320008728
+    ],
+    "theta_grpo_star": [
+      0.17490486128355592,
+      -0.025202389747042107,
+      0.08892443277543643
+    ]
+  },
+  {
+    "seed": 30,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.7525641155647675e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.7525641155647675e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.794793153455596e-08,
+    "dist_newton_to_old_fp": 9.19388243284738e-08,
+    "exact_loss": 0.002123061891606992,
+    "predicted_loss": 9.742335613939886e-05,
+    "predicted_loss_v2": 0.00273878173596857,
+    "weight_spread": 145.76914192198444,
+    "antisym_ratio": 0.024978286169248482,
+    "delta_plain_norm_ratio": 0.22873574809109787,
+    "delta_plain_cosine": 0.9998660381810048,
+    "delta_hat_norm_ratio": 1.4532654084565182,
+    "delta_hat_cosine": 0.9879822370530553,
+    "theta_true_star": [
+      0.18014281633514398,
+      -0.023735374840961984,
+      0.08320932050759511
+    ],
+    "theta_grpo_star": [
+      0.17107527566596645,
+      -0.026164973927335772,
+      0.09304436304330578
+    ]
+  },
+  {
+    "seed": 31,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.4247119119032528e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.4247119119032528e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.338146357873627e-07,
+    "dist_newton_to_old_fp": 4.497574644968714e-07,
+    "exact_loss": 0.0027552142218926212,
+    "predicted_loss": 9.272804084461546e-05,
+    "predicted_loss_v2": 0.0031125503234895246,
+    "weight_spread": 263.7943081243066,
+    "antisym_ratio": 0.0317154822582795,
+    "delta_plain_norm_ratio": 0.19627845288403561,
+    "delta_plain_cosine": 0.999934915515523,
+    "delta_hat_norm_ratio": 1.4447259296410675,
+    "delta_hat_cosine": 0.9860422842310473,
+    "theta_true_star": [
+      0.1934938622603915,
+      -0.01956537702534488,
+      0.06867410748682078
+    ],
+    "theta_grpo_star": [
+      0.18087597100857497,
+      -0.023519120935657323,
+      0.0824056893937885
+    ]
+  },
+  {
+    "seed": 32,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.002052502447231e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.002052502447231e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.00045005084278131405,
+    "dist_newton_to_old_fp": 0.0004499862673333229,
+    "exact_loss": 0.00169366427463849,
+    "predicted_loss": 9.522111281996839e-05,
+    "predicted_loss_v2": 0.002026417549769048,
+    "weight_spread": 80.2513497136732,
+    "antisym_ratio": 0.02052592906858851,
+    "delta_plain_norm_ratio": 0.2529638537718095,
+    "delta_plain_cosine": 0.9997966032035738,
+    "delta_hat_norm_ratio": 1.3873474935737222,
+    "delta_hat_cosine": 0.9873093350742281,
+    "theta_true_star": [
+      0.17569414858748109,
+      -0.024991306537965774,
+      0.08806773664869458
+    ],
+    "theta_grpo_star": [
+      0.16755727623548566,
+      -0.02694348577557352,
+      0.09675607284103328
+    ]
+  },
+  {
+    "seed": 33,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.977136293628253e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.977136293628253e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.884116085851667e-07,
+    "dist_newton_to_old_fp": 3.024824639906212e-07,
+    "exact_loss": 0.006416299928757724,
+    "predicted_loss": 0.00023830652769005176,
+    "predicted_loss_v2": 0.008384555128757614,
+    "weight_spread": 118.93672571320892,
+    "antisym_ratio": 0.030702105040801505,
+    "delta_plain_norm_ratio": 0.21455060222556713,
+    "delta_plain_cosine": 0.9998556758064298,
+    "delta_hat_norm_ratio": 1.8183774041947356,
+    "delta_hat_cosine": 0.9720859572097297,
+    "theta_true_star": [
+      0.1928690808897664,
+      -0.0197664232331901,
+      0.06934301318249753
+    ],
+    "theta_grpo_star": [
+      0.1743582478616371,
+      -0.025346205417762536,
+      0.08951642908703938
+    ]
+  },
+  {
+    "seed": 34,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.714375749070406e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.714375749070406e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.2416180633665609e-07,
+    "dist_newton_to_old_fp": 1.104993946707538e-07,
+    "exact_loss": 0.0028348861972006256,
+    "predicted_loss": 0.00016694231221638448,
+    "predicted_loss_v2": 0.00336694727431538,
+    "weight_spread": 216.6168270930898,
+    "antisym_ratio": 0.028600627528893634,
+    "delta_plain_norm_ratio": 0.26203956677232954,
+    "delta_plain_cosine": 0.9998931694720512,
+    "delta_hat_norm_ratio": 1.4844066901528123,
+    "delta_hat_cosine": 0.9840304424343774,
+    "theta_true_star": [
+      0.1856565139449685,
+      -0.02206122075432969,
+      0.07716615960474844
+    ],
+    "theta_grpo_star": [
+      0.17382890532038936,
+      -0.02548355388643737,
+      0.09008861178353116
+    ]
+  },
+  {
+    "seed": 35,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.67072832942491e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.67072832942491e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.6799496840283624e-07,
+    "dist_newton_to_old_fp": 2.847996694015126e-07,
+    "exact_loss": 0.004379310800652125,
+    "predicted_loss": 0.0001786369859787576,
+    "predicted_loss_v2": 0.005632212578674141,
+    "weight_spread": 313.1665425193736,
+    "antisym_ratio": 0.028747504949169705,
+    "delta_plain_norm_ratio": 0.22188581143087607,
+    "delta_plain_cosine": 0.9998811609155654,
+    "delta_hat_norm_ratio": 1.666351424706168,
+    "delta_hat_cosine": 0.978743090760564,
+    "theta_true_star": [
+      0.19006036855707223,
+      -0.020667766413458546,
+      0.07237001546093871
+    ],
+    "theta_grpo_star": [
+      0.17448319717364655,
+      -0.02531350628749511,
+      0.08938120527809974
+    ]
+  },
+  {
+    "seed": 36,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.997143044341096e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.997143044341096e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.7000400998419783e-08,
+    "dist_newton_to_old_fp": 6.708430805194807e-08,
+    "exact_loss": 0.010742189844461042,
+    "predicted_loss": 0.0007151696844119445,
+    "predicted_loss_v2": 0.016367341425156803,
+    "weight_spread": 157.59988395498326,
+    "antisym_ratio": 0.020015381779171643,
+    "delta_plain_norm_ratio": 0.29688731122281947,
+    "delta_plain_cosine": 0.9997510989009453,
+    "delta_hat_norm_ratio": 2.3104530912317394,
+    "delta_hat_cosine": 0.9571776477191144,
+    "theta_true_star": [
+      0.19603778252554094,
+      -0.018746777933694395,
+      0.06596997781409682
+    ],
+    "theta_grpo_star": [
+      0.17145633316693637,
+      -0.02607417860011626,
+      0.09263764888617053
+    ]
+  },
+  {
+    "seed": 37,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.2448259504636e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.2448259504636e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0246121676314138e-07,
+    "dist_newton_to_old_fp": 9.589998510708139e-08,
+    "exact_loss": 0.0027568520183957057,
+    "predicted_loss": 0.00012508810771161085,
+    "predicted_loss_v2": 0.0035265454680575284,
+    "weight_spread": 197.1575949645097,
+    "antisym_ratio": 0.026449183734828186,
+    "delta_plain_norm_ratio": 0.23150116264898085,
+    "delta_plain_cosine": 0.9998715336202173,
+    "delta_hat_norm_ratio": 1.5815481761600565,
+    "delta_hat_cosine": 0.9816384239880576,
+    "theta_true_star": [
+      0.185759129834751,
+      -0.02202918331160739,
+      0.07705391544350902
+    ],
+    "theta_grpo_star": [
+      0.17302219506460617,
+      -0.025689084079875593,
+      0.09095832918446002
+    ]
+  },
+  {
+    "seed": 38,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.917504948053781e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.917504948053781e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0062645623490508e-07,
+    "dist_newton_to_old_fp": 9.839764401259829e-08,
+    "exact_loss": 0.0014604782084109702,
+    "predicted_loss": 8.302347746822421e-05,
+    "predicted_loss_v2": 0.0019856096147214787,
+    "weight_spread": 163.42505926029983,
+    "antisym_ratio": 0.024952238081824535,
+    "delta_plain_norm_ratio": 0.25356809671664393,
+    "delta_plain_cosine": 0.9998946333772813,
+    "delta_hat_norm_ratio": 1.469446923418472,
+    "delta_hat_cosine": 0.9895276342772126,
+    "theta_true_star": [
+      0.1810143553363535,
+      -0.02347804976568336,
+      0.08225396145455849
+    ],
+    "theta_grpo_star": [
+      0.17229254590693216,
+      -0.02587087200742541,
+      0.09174238463687936
+    ]
+  },
+  {
+    "seed": 39,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.16438718295327e-15,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.16438718295327e-15,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.615266777426028e-08,
+    "dist_newton_to_old_fp": 5.061426384223318e-08,
+    "exact_loss": 0.001937685979995385,
+    "predicted_loss": 0.00010199608244062924,
+    "predicted_loss_v2": 0.0022397694883922944,
+    "weight_spread": 190.5877719452137,
+    "antisym_ratio": 0.02059455945031402,
+    "delta_plain_norm_ratio": 0.24455277718443724,
+    "delta_plain_cosine": 0.9998901903227213,
+    "delta_hat_norm_ratio": 1.4015402797292984,
+    "delta_hat_cosine": 0.9863495415990995,
+    "theta_true_star": [
+      0.18139688059068543,
+      -0.02336411776861604,
+      0.08183450355602184
+    ],
+    "theta_grpo_star": [
+      0.17230346193586007,
+      -0.0258681819876013,
+      0.09173067381918619
+    ]
+  },
+  {
+    "seed": 40,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.737257644620625e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.737257644620625e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.4533833443964365e-06,
+    "dist_newton_to_old_fp": 1.2610986579442543e-06,
+    "exact_loss": 0.005095681224616788,
+    "predicted_loss": 0.00022642121544417097,
+    "predicted_loss_v2": 0.0065215951835626475,
+    "weight_spread": 253.61152010742225,
+    "antisym_ratio": 0.03692485924409119,
+    "delta_plain_norm_ratio": 0.23256051661406785,
+    "delta_plain_cosine": 0.9998580731606075,
+    "delta_hat_norm_ratio": 1.7148970850525804,
+    "delta_hat_cosine": 0.9781871971973584,
+    "theta_true_star": [
+      0.1959052657110153,
+      -0.01878938084884555,
+      0.06611001542558684
+    ],
+    "theta_grpo_star": [
+      0.17754583778683927,
+      -0.024481338935591648,
+      0.08605056182347831
+    ]
+  },
+  {
+    "seed": 41,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 7.153903257852989e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 7.153903257852989e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.0005531050627356767,
+    "dist_newton_to_old_fp": 0.0005530489055400611,
+    "exact_loss": 0.0006535003428572439,
+    "predicted_loss": 3.4338197278954615e-05,
+    "predicted_loss_v2": 0.000787757526902977,
+    "weight_spread": 256.0347515540154,
+    "antisym_ratio": 0.019312160453237873,
+    "delta_plain_norm_ratio": 0.23817693840978393,
+    "delta_plain_cosine": 0.9999399985793064,
+    "delta_hat_norm_ratio": 1.2790135513304144,
+    "delta_hat_cosine": 0.9943133490733411,
+    "theta_true_star": [
+      0.1763859596443947,
+      -0.02480311632318744,
+      0.08731519988653164
+    ],
+    "theta_grpo_star": [
+      0.17135506266433975,
+      -0.0260984235700883,
+      0.09274581694110957
+    ]
+  },
+  {
+    "seed": 42,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.3015696218959776e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.3015696218959776e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.352898470791417e-08,
+    "dist_newton_to_old_fp": 9.26202320345228e-08,
+    "exact_loss": 0.0032051160443599402,
+    "predicted_loss": 0.00014187494899872114,
+    "predicted_loss_v2": 0.004689744733694094,
+    "weight_spread": 111.19475428799501,
+    "antisym_ratio": 0.025514355470835512,
+    "delta_plain_norm_ratio": 0.22910936156464126,
+    "delta_plain_cosine": 0.9998241413890567,
+    "delta_hat_norm_ratio": 1.6618047069709219,
+    "delta_hat_cosine": 0.9827199164022139,
+    "theta_true_star": [
+      0.1833717101315244,
+      -0.022767248225001105,
+      0.07966879525009218
+    ],
+    "theta_grpo_star": [
+      0.1710284397328062,
+      -0.026176051745607533,
+      0.09309429596121929
+    ]
+  },
+  {
+    "seed": 43,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.8451283976405204e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.8451283976405204e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.9630598807400467e-07,
+    "dist_newton_to_old_fp": 3.4058408270608236e-07,
+    "exact_loss": 0.0033842614240612023,
+    "predicted_loss": 9.818633266168503e-05,
+    "predicted_loss_v2": 0.0040217387143658455,
+    "weight_spread": 305.2353938025547,
+    "antisym_ratio": 0.03230484072616511,
+    "delta_plain_norm_ratio": 0.1847321641938823,
+    "delta_plain_cosine": 0.9998766992790947,
+    "delta_hat_norm_ratio": 1.4748416951832357,
+    "delta_hat_cosine": 0.984991937330572,
+    "theta_true_star": [
+      0.1855636284306432,
+      -0.022090198200410624,
+      0.07726777478391504
+    ],
+    "theta_grpo_star": [
+      0.17316335507995922,
+      -0.025653458248717113,
+      0.09080635298165006
+    ]
+  },
+  {
+    "seed": 44,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.6463427976771195e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.6463427976771195e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 5.747839751838596e-08,
+    "dist_newton_to_old_fp": 7.713227417832237e-08,
+    "exact_loss": 0.007614237196418044,
+    "predicted_loss": 0.00025910571473216986,
+    "predicted_loss_v2": 0.011712007533623876,
+    "weight_spread": 297.82430638714476,
+    "antisym_ratio": 0.023191719455132265,
+    "delta_plain_norm_ratio": 0.20788554098389758,
+    "delta_plain_cosine": 0.9997319220918723,
+    "delta_hat_norm_ratio": 2.002249591218809,
+    "delta_hat_cosine": 0.967766710248875,
+    "theta_true_star": [
+      0.18747782764096596,
+      -0.021489107275374213,
+      0.07517685690226424
+    ],
+    "theta_grpo_star": [
+      0.16939471491392247,
+      -0.0265508145508888,
+      0.09482777931923617
+    ]
+  },
+  {
+    "seed": 45,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.5682859039758e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.5682859039758e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.261066367816039e-07,
+    "dist_newton_to_old_fp": 2.318846784984213e-07,
+    "exact_loss": 0.007637146289097091,
+    "predicted_loss": 0.00035671785438412995,
+    "predicted_loss_v2": 0.011439987978206317,
+    "weight_spread": 170.51856210320022,
+    "antisym_ratio": 0.026494402509102632,
+    "delta_plain_norm_ratio": 0.24219237548457057,
+    "delta_plain_cosine": 0.999822791731973,
+    "delta_hat_norm_ratio": 2.026418399794972,
+    "delta_hat_cosine": 0.9697062112759118,
+    "theta_true_star": [
+      0.1960226660747791,
+      -0.018751637337597788,
+      0.06598594735459082
+    ],
+    "theta_grpo_star": [
+      0.17523722657315233,
+      -0.025113986535215186,
+      0.08856394058497284
+    ]
+  },
+  {
+    "seed": 46,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.273265233742522e-15,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.273265233742522e-15,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.9487124618959584e-08,
+    "dist_newton_to_old_fp": 7.262930791569019e-08,
+    "exact_loss": 0.003793284661610108,
+    "predicted_loss": 0.0002019691695661444,
+    "predicted_loss_v2": 0.005582603149025922,
+    "weight_spread": 220.1038499212,
+    "antisym_ratio": 0.021098775719955196,
+    "delta_plain_norm_ratio": 0.2543760956203001,
+    "delta_plain_cosine": 0.9997252567756079,
+    "delta_hat_norm_ratio": 1.7671896297728769,
+    "delta_hat_cosine": 0.9759675133416168,
+    "theta_true_star": [
+      0.18228066974794005,
+      -0.023098726997826894,
+      0.08086523960878697
+    ],
+    "theta_grpo_star": [
+      0.16869124041741368,
+      -0.026704902904350344,
+      0.09556888579536524
+    ]
+  },
+  {
+    "seed": 47,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.7083181899518913e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.7083181899518913e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.605468287536936e-08,
+    "dist_newton_to_old_fp": 5.0410908014397546e-08,
+    "exact_loss": 0.00262240631754454,
+    "predicted_loss": 0.0001153908504962326,
+    "predicted_loss_v2": 0.003111354974819635,
+    "weight_spread": 266.4186444529282,
+    "antisym_ratio": 0.024889119052747474,
+    "delta_plain_norm_ratio": 0.2257929725966822,
+    "delta_plain_cosine": 0.9998826671433699,
+    "delta_hat_norm_ratio": 1.4754217733598254,
+    "delta_hat_cosine": 0.9837406033001396,
+    "theta_true_star": [
+      0.18384381920884074,
+      -0.022622600350035386,
+      0.07915125387632557
+    ],
+    "theta_grpo_star": [
+      0.17290675957854243,
+      -0.02571810890171124,
+      0.09108254139352416
+    ]
+  },
+  {
+    "seed": 48,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.926560623418127e-15,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.926560623418127e-15,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.3932340229804793e-08,
+    "dist_newton_to_old_fp": 6.189280474013282e-08,
+    "exact_loss": 0.0032182411554348977,
+    "predicted_loss": 0.00011596087377014121,
+    "predicted_loss_v2": 0.00419263595275086,
+    "weight_spread": 515.2253654818688,
+    "antisym_ratio": 0.020123158233540533,
+    "delta_plain_norm_ratio": 0.20642109197688546,
+    "delta_plain_cosine": 0.9998050064888772,
+    "delta_hat_norm_ratio": 1.587915245946645,
+    "delta_hat_cosine": 0.9805828619865362,
+    "theta_true_star": [
+      0.18204287561833882,
+      -0.023170420592114844,
+      0.08112603934413674
+    ],
+    "theta_grpo_star": [
+      0.1702256823931519,
+      -0.02636307242002574,
+      0.09394813400974793
+    ]
+  },
+  {
+    "seed": 49,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.566134671567526e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.566134671567526e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.42787747200813e-07,
+    "dist_newton_to_old_fp": 6.920956121923201e-07,
+    "exact_loss": 0.002568778360359708,
+    "predicted_loss": 7.980431553114152e-05,
+    "predicted_loss_v2": 0.0029132173901694116,
+    "weight_spread": 244.52833493693174,
+    "antisym_ratio": 0.03731501088039469,
+    "delta_plain_norm_ratio": 0.18792574422859495,
+    "delta_plain_cosine": 0.9999312026182999,
+    "delta_hat_norm_ratio": 1.4212403652411318,
+    "delta_hat_cosine": 0.9878085611467052,
+    "theta_true_star": [
+      0.19481259315240046,
+      -0.019140899048929672,
+      0.06726825236900617
+    ],
+    "theta_grpo_star": [
+      0.18239527115337423,
+      -0.023064102315205153,
+      0.08073955212980978
+    ]
+  },
+  {
+    "seed": 50,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.167449888226937e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.167449888226937e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.336196991777977e-07,
+    "dist_newton_to_old_fp": 3.7443296320640144e-07,
+    "exact_loss": 0.003866952353052261,
+    "predicted_loss": 0.00011217023205910722,
+    "predicted_loss_v2": 0.005182837075921516,
+    "weight_spread": 278.67451321085,
+    "antisym_ratio": 0.03351469797848293,
+    "delta_plain_norm_ratio": 0.18572207075609679,
+    "delta_plain_cosine": 0.9998866314789208,
+    "delta_hat_norm_ratio": 1.6227254874864716,
+    "delta_hat_cosine": 0.9825296570195015,
+    "theta_true_star": [
+      0.18804215108458672,
+      -0.021310505139400245,
+      0.07456194474569634
+    ],
+    "theta_grpo_star": [
+      0.17417180205062174,
+      -0.02539480176212357,
+      0.08971809277792794
+    ]
+  },
+  {
+    "seed": 51,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.3321713115676333e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.3321713115676333e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.0004626391783631309,
+    "dist_newton_to_old_fp": 0.00046257350596662177,
+    "exact_loss": 0.001972109493997093,
+    "predicted_loss": 0.00010301118321290872,
+    "predicted_loss_v2": 0.0026046200831232307,
+    "weight_spread": 239.257169230042,
+    "antisym_ratio": 0.019502037658374775,
+    "delta_plain_norm_ratio": 0.2453470407943752,
+    "delta_plain_cosine": 0.9997834060883273,
+    "delta_hat_norm_ratio": 1.4927790316602663,
+    "delta_hat_cosine": 0.9855802853275122,
+    "theta_true_star": [
+      0.17719881409705676,
+      -0.024578404520487988,
+      0.08642927928201502
+    ],
+    "theta_grpo_star": [
+      0.16805289387638117,
+      -0.02684073102563477,
+      0.09623836356945965
+    ]
+  },
+  {
+    "seed": 52,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.634847098034775e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.634847098034775e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.3183876846642663e-07,
+    "dist_newton_to_old_fp": 2.004836718984268e-07,
+    "exact_loss": 0.0006605068120438817,
+    "predicted_loss": 2.347210734994163e-05,
+    "predicted_loss_v2": 0.0007825591758275625,
+    "weight_spread": 338.7138967528076,
+    "antisym_ratio": 0.03435004808754128,
+    "delta_plain_norm_ratio": 0.19597008918678505,
+    "delta_plain_cosine": 0.9999659633334648,
+    "delta_hat_norm_ratio": 1.25985967858681,
+    "delta_hat_cosine": 0.9955763139652897,
+    "theta_true_star": [
+      0.18179759367914428,
+      -0.02324415322760653,
+      0.08139504915565401
+    ],
+    "theta_grpo_star": [
+      0.17603245772388193,
+      -0.024899639016403553,
+      0.08769991128598703
+    ]
+  },
+  {
+    "seed": 53,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.514978862349947e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.514978862349947e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.227597843966737e-08,
+    "dist_newton_to_old_fp": 5.0721297725639176e-08,
+    "exact_loss": 0.0015288933865400534,
+    "predicted_loss": 4.335653749973222e-05,
+    "predicted_loss_v2": 0.0018635603974823042,
+    "weight_spread": 370.73647133515,
+    "antisym_ratio": 0.022159280452505408,
+    "delta_plain_norm_ratio": 0.17841402682772767,
+    "delta_plain_cosine": 0.9999067989067167,
+    "delta_hat_norm_ratio": 1.3943419258385505,
+    "delta_hat_cosine": 0.9890350675445028,
+    "theta_true_star": [
+      0.18079867930165403,
+      -0.023542026124856605,
+      0.08249042909663315
+    ],
+    "theta_grpo_star": [
+      0.1726159853682624,
+      -0.025790782306641325,
+      0.09139514508135461
+    ]
+  },
+  {
+    "seed": 54,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.059951650051691e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.059951650051691e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.769441352996772e-07,
+    "dist_newton_to_old_fp": 7.619690607607884e-07,
+    "exact_loss": 0.001852423710642731,
+    "predicted_loss": 5.731810466648018e-05,
+    "predicted_loss_v2": 0.0022735764911806307,
+    "weight_spread": 207.5827858831897,
+    "antisym_ratio": 0.04067270193582561,
+    "delta_plain_norm_ratio": 0.18628259911736753,
+    "delta_plain_cosine": 0.9999579269471496,
+    "delta_hat_norm_ratio": 1.410572730142998,
+    "delta_hat_cosine": 0.9906400122570636,
+    "theta_true_star": [
+      0.19095149638819706,
+      -0.020382425586287223,
+      0.07140636093364286
+    ],
+    "theta_grpo_star": [
+      0.18067934466504376,
+      -0.023577341918974558,
+      0.08262125570017823
+    ]
+  },
+  {
+    "seed": 55,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.218289004630856e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.218289004630856e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.43894032408239e-08,
+    "dist_newton_to_old_fp": 8.002968282174655e-08,
+    "exact_loss": 0.006423684747446701,
+    "predicted_loss": 0.00028852451441626595,
+    "predicted_loss_v2": 0.009308610211278939,
+    "weight_spread": 244.15912054309769,
+    "antisym_ratio": 0.024809916352654497,
+    "delta_plain_norm_ratio": 0.23664729513188054,
+    "delta_plain_cosine": 0.9998465333499517,
+    "delta_hat_norm_ratio": 1.912144189599124,
+    "delta_hat_cosine": 0.9722812838652211,
+    "theta_true_star": [
+      0.192544294397423,
+      -0.019870890184081336,
+      0.06969142022877385
+    ],
+    "theta_grpo_star": [
+      0.17373459165173735,
+      -0.025507821848369614,
+      0.09019043766079793
+    ]
+  },
+  {
+    "seed": 56,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.271405168770435e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.271405168770435e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 5.536011501842641e-08,
+    "dist_newton_to_old_fp": 7.562305096476192e-08,
+    "exact_loss": 0.004718440036790034,
+    "predicted_loss": 0.00020001072852178042,
+    "predicted_loss_v2": 0.006465902300056803,
+    "weight_spread": 123.3235769459531,
+    "antisym_ratio": 0.02113883981097687,
+    "delta_plain_norm_ratio": 0.22694146641363042,
+    "delta_plain_cosine": 0.9997778330267002,
+    "delta_hat_norm_ratio": 1.712634818956427,
+    "delta_hat_cosine": 0.9765676722714695,
+    "theta_true_star": [
+      0.18425469881823342,
+      -0.022496158260327345,
+      0.07870097545754809
+    ],
+    "theta_grpo_star": [
+      0.17009858058595093,
+      -0.026392180800784926,
+      0.09408296590734101
+    ]
+  },
+  {
+    "seed": 57,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.0748134762570505e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.0748134762570505e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.519235716964055e-08,
+    "dist_newton_to_old_fp": 5.826367031388894e-08,
+    "exact_loss": 0.00457594229282815,
+    "predicted_loss": 0.00032920699281130736,
+    "predicted_loss_v2": 0.007664935787326767,
+    "weight_spread": 160.5881302820876,
+    "antisym_ratio": 0.014543635565254004,
+    "delta_plain_norm_ratio": 0.29840054621208445,
+    "delta_plain_cosine": 0.9996191047895923,
+    "delta_hat_norm_ratio": 1.9635112792895628,
+    "delta_hat_cosine": 0.9705691254993813,
+    "theta_true_star": [
+      0.18124770847848984,
+      -0.02340861689485543,
+      0.08199808551640532
+    ],
+    "theta_grpo_star": [
+      0.16685520593053238,
+      -0.027084874916325056,
+      0.09748617708365369
+    ]
+  },
+  {
+    "seed": 58,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.7777420635913846e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.7777420635913846e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.632231244837679e-07,
+    "dist_newton_to_old_fp": 5.286794684905932e-07,
+    "exact_loss": 0.002940953966632215,
+    "predicted_loss": 0.0001206184356369643,
+    "predicted_loss_v2": 0.0037385413241329104,
+    "weight_spread": 84.16753302437243,
+    "antisym_ratio": 0.035567444765840193,
+    "delta_plain_norm_ratio": 0.21772640190146503,
+    "delta_plain_cosine": 0.9999320567781553,
+    "delta_hat_norm_ratio": 1.5387649429959307,
+    "delta_hat_cosine": 0.9856937304613168,
+    "theta_true_star": [
+      0.19233412620004575,
+      -0.019938468358391713,
+      0.069917114543628
+    ],
+    "theta_grpo_star": [
+      0.1792762738570139,
+      -0.02398791472035758,
+      0.08415849595698696
+    ]
+  },
+  {
+    "seed": 59,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.22810980273293e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.22810980273293e-13,
+        "newton_iters": 2
+      }
+    ],
+    "old_fixed_point_shift": 0.0004979125808928424,
+    "dist_newton_to_old_fp": 0.0004978466842408691,
+    "exact_loss": 0.0030170610578170443,
+    "predicted_loss": 9.498327791922409e-05,
+    "predicted_loss_v2": 0.0045841942164687255,
+    "weight_spread": 313.9255794636604,
+    "antisym_ratio": 0.017632807797113688,
+    "delta_plain_norm_ratio": 0.1937389173089173,
+    "delta_plain_cosine": 0.9997709311041927,
+    "delta_hat_norm_ratio": 1.7554340371099493,
+    "delta_hat_cosine": 0.9778039438433627,
+    "theta_true_star": [
+      0.18160949604883347,
+      -0.023300542410594993,
+      0.0816013370744882
+    ],
+    "theta_grpo_star": [
+      0.1693904365419716,
+      -0.02655176531528982,
+      0.0948322967115294
+    ]
+  },
+  {
+    "seed": 60,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.800187099063957e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.800187099063957e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.428619399028043e-06,
+    "dist_newton_to_old_fp": 4.199933122443807e-06,
+    "exact_loss": 0.006578724797146246,
+    "predicted_loss": 0.00022274911259407193,
+    "predicted_loss_v2": 0.00754173013286736,
+    "weight_spread": 151.87496665718902,
+    "antisym_ratio": 0.04113284731483247,
+    "delta_plain_norm_ratio": 0.20259704758335484,
+    "delta_plain_cosine": 0.9997289893376256,
+    "delta_hat_norm_ratio": 1.6578490496861717,
+    "delta_hat_cosine": 0.9779115343498442,
+    "theta_true_star": [
+      0.2012245307552924,
+      -0.017090596099864897,
+      0.060571062366988455
+    ],
+    "theta_grpo_star": [
+      0.1810027814987198,
+      -0.02348148796769697,
+      0.08226665183748282
+    ]
+  },
+  {
+    "seed": 61,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 4.1564713456366646e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 4.1564713456366646e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0287779903670477e-07,
+    "dist_newton_to_old_fp": 9.14844142139183e-08,
+    "exact_loss": 0.003125295059169142,
+    "predicted_loss": 9.451733906093481e-05,
+    "predicted_loss_v2": 0.003843423471215266,
+    "weight_spread": 397.5233046046631,
+    "antisym_ratio": 0.025735594893106156,
+    "delta_plain_norm_ratio": 0.18801123509456213,
+    "delta_plain_cosine": 0.9998888554826284,
+    "delta_hat_norm_ratio": 1.5282907571302666,
+    "delta_hat_cosine": 0.9828412142455,
+    "theta_true_star": [
+      0.18563535701920808,
+      -0.02206782292688607,
+      0.07718930373501734
+    ],
+    "theta_grpo_star": [
+      0.17364813682249075,
+      -0.02553001273831891,
+      0.0902837456680373
+    ]
+  },
+  {
+    "seed": 62,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.148752867107266e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.148752867107266e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.2362671126894252e-06,
+    "dist_newton_to_old_fp": 9.805842870217987e-07,
+    "exact_loss": 0.008817592023963788,
+    "predicted_loss": 0.00026780810572436136,
+    "predicted_loss_v2": 0.012496704856718482,
+    "weight_spread": 201.6093138321436,
+    "antisym_ratio": 0.03212628486990844,
+    "delta_plain_norm_ratio": 0.19457019638700765,
+    "delta_plain_cosine": 0.9997900862899469,
+    "delta_hat_norm_ratio": 1.9279589401277526,
+    "delta_hat_cosine": 0.9730469290224874,
+    "theta_true_star": [
+      0.19827689054385417,
+      -0.01802854955180688,
+      0.0636188410225308
+    ],
+    "theta_grpo_star": [
+      0.1770695320120019,
+      -0.024614395624174053,
+      0.08657029579998186
+    ]
+  },
+  {
+    "seed": 63,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.519285842036099e-15,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.519285842036099e-15,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.292410122080481e-08,
+    "dist_newton_to_old_fp": 6.173912852864697e-08,
+    "exact_loss": 0.0015092042756217061,
+    "predicted_loss": 8.34858048833284e-05,
+    "predicted_loss_v2": 0.0018340249420972822,
+    "weight_spread": 202.86207928874288,
+    "antisym_ratio": 0.018670857461549933,
+    "delta_plain_norm_ratio": 0.24986462741939855,
+    "delta_plain_cosine": 0.9998710895241885,
+    "delta_hat_norm_ratio": 1.4057652482364196,
+    "delta_hat_cosine": 0.987579915685302,
+    "theta_true_star": [
+      0.1787552236295255,
+      -0.024138072693204293,
+      0.08472876117842774
+    ],
+    "theta_grpo_star": [
+      0.17059376847823476,
+      -0.026277993021405325,
+      0.09355710266595398
+    ]
+  },
+  {
+    "seed": 64,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.0745010701375923e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.0745010701375923e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.995101932217102e-08,
+    "dist_newton_to_old_fp": 3.928084159062627e-08,
+    "exact_loss": 0.0008639241401256492,
+    "predicted_loss": 4.8993732054417095e-05,
+    "predicted_loss_v2": 0.001000289828303622,
+    "weight_spread": 154.1895320821676,
+    "antisym_ratio": 0.02308825887041292,
+    "delta_plain_norm_ratio": 0.24839722886054044,
+    "delta_plain_cosine": 0.9999531194596324,
+    "delta_hat_norm_ratio": 1.276485608530401,
+    "delta_hat_cosine": 0.9937402971514501,
+    "theta_true_star": [
+      0.1806065751852236,
+      -0.02359884798885762,
+      0.08270102820017622
+    ],
+    "theta_grpo_star": [
+      0.1745398311765919,
+      -0.025298650706050765,
+      0.08931989454489819
+    ]
+  },
+  {
+    "seed": 65,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.40896769846528e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.40896769846528e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.504233049844608e-07,
+    "dist_newton_to_old_fp": 1.945499918619849e-07,
+    "exact_loss": 0.008844582056131756,
+    "predicted_loss": 0.00028951229625401174,
+    "predicted_loss_v2": 0.018182509409738288,
+    "weight_spread": 206.6215251507972,
+    "antisym_ratio": 0.02533093236185614,
+    "delta_plain_norm_ratio": 0.20530182778735623,
+    "delta_plain_cosine": 0.9998001386729204,
+    "delta_hat_norm_ratio": 2.389907508012437,
+    "delta_hat_cosine": 0.9687115416159255,
+    "theta_true_star": [
+      0.19414586577256154,
+      -0.019355506387655253,
+      0.06797797753384616
+    ],
+    "theta_grpo_star": [
+      0.1723869332991174,
+      -0.025847582127002704,
+      0.09164110525806869
+    ]
+  },
+  {
+    "seed": 66,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.1699578877560373e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.1699578877560373e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.670791054424483e-08,
+    "dist_newton_to_old_fp": 5.475459317993007e-08,
+    "exact_loss": 0.0010800149166411699,
+    "predicted_loss": 6.134438387733723e-05,
+    "predicted_loss_v2": 0.0013178758951715376,
+    "weight_spread": 162.1615068828661,
+    "antisym_ratio": 0.0262687824154202,
+    "delta_plain_norm_ratio": 0.25050426328276043,
+    "delta_plain_cosine": 0.999930044666359,
+    "delta_hat_norm_ratio": 1.340507680080439,
+    "delta_hat_cosine": 0.992200365944977,
+    "theta_true_star": [
+      0.18036207760757308,
+      -0.023670941590432135,
+      0.08296902639579737
+    ],
+    "theta_grpo_star": [
+      0.1733026751804701,
+      -0.02561815454113207,
+      0.09065626889772695
+    ]
+  },
+  {
+    "seed": 67,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.5817874265531132e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.5817874265531132e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.6042130153034822e-07,
+    "dist_newton_to_old_fp": 1.028142180429793e-07,
+    "exact_loss": 0.0018298930969951055,
+    "predicted_loss": 9.16489084887024e-05,
+    "predicted_loss_v2": 0.00230717272112056,
+    "weight_spread": 139.65602816303993,
+    "antisym_ratio": 0.027376710156609838,
+    "delta_plain_norm_ratio": 0.23778899010236215,
+    "delta_plain_cosine": 0.9999515777852653,
+    "delta_hat_norm_ratio": 1.467134063835346,
+    "delta_hat_cosine": 0.9880358935844643,
+    "theta_true_star": [
+      0.18865766899724787,
+      -0.02111509284924632,
+      0.07389218602117978
+    ],
+    "theta_grpo_star": [
+      0.17841327793307024,
+      -0.024235891165737763,
+      0.08510277011972127
+    ]
+  },
+  {
+    "seed": 68,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.212566194118046e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.212566194118046e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.9576685920998325e-08,
+    "dist_newton_to_old_fp": 4.613740562698997e-08,
+    "exact_loss": 0.003719680635203809,
+    "predicted_loss": 0.00014450273241278428,
+    "predicted_loss_v2": 0.004985336898533144,
+    "weight_spread": 288.34627963152695,
+    "antisym_ratio": 0.02203572459810418,
+    "delta_plain_norm_ratio": 0.21502845903986417,
+    "delta_plain_cosine": 0.9998668957950901,
+    "delta_hat_norm_ratio": 1.6680565998596606,
+    "delta_hat_cosine": 0.9788384327988819,
+    "theta_true_star": [
+      0.18648021781601312,
+      -0.021803361050439108,
+      0.07626567799687363
+    ],
+    "theta_grpo_star": [
+      0.17301605499676298,
+      -0.025690630393272917,
+      0.09096493764800816
+    ]
+  },
+  {
+    "seed": 69,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.769336637624984e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.769336637624984e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.2338214726748834e-07,
+    "dist_newton_to_old_fp": 1.0869499791127297e-07,
+    "exact_loss": 0.002370836694888828,
+    "predicted_loss": 9.275564625191586e-05,
+    "predicted_loss_v2": 0.002730729514168598,
+    "weight_spread": 481.0801664659826,
+    "antisym_ratio": 0.028407247283886872,
+    "delta_plain_norm_ratio": 0.21127592237515483,
+    "delta_plain_cosine": 0.9999022305247168,
+    "delta_hat_norm_ratio": 1.3993461701920287,
+    "delta_hat_cosine": 0.9870239460057874,
+    "theta_true_star": [
+      0.1831249039832963,
+      -0.022842583682085815,
+      0.07993940624116033
+    ],
+    "theta_grpo_star": [
+      0.17338941347403408,
+      -0.02559610422503876,
+      0.09056278524372119
+    ]
+  },
+  {
+    "seed": 70,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.205431351095572e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.205431351095572e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.795023314811454e-07,
+    "dist_newton_to_old_fp": 4.137960155960966e-07,
+    "exact_loss": 0.00294926582928684,
+    "predicted_loss": 0.00011861798888261342,
+    "predicted_loss_v2": 0.0035125152718180077,
+    "weight_spread": 112.25270744261977,
+    "antisym_ratio": 0.034117850568894235,
+    "delta_plain_norm_ratio": 0.21662909839031527,
+    "delta_plain_cosine": 0.9999078996942438,
+    "delta_hat_norm_ratio": 1.4729901538012091,
+    "delta_hat_cosine": 0.9855653362972456,
+    "theta_true_star": [
+      0.1872758937084373,
+      -0.021552876708813867,
+      0.07539707843619062
+    ],
+    "theta_grpo_star": [
+      0.17496364512751444,
+      -0.02518680627906813,
+      0.08886070269076017
+    ]
+  },
+  {
+    "seed": 71,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 7.760121174409823e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 7.760121174409823e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.0805103422741865e-07,
+    "dist_newton_to_old_fp": 3.2441063020890764e-07,
+    "exact_loss": 0.0038242533576666182,
+    "predicted_loss": 0.00011690456562766458,
+    "predicted_loss_v2": 0.005280409106289145,
+    "weight_spread": 164.46959375314398,
+    "antisym_ratio": 0.03063895444557269,
+    "delta_plain_norm_ratio": 0.19094699457894213,
+    "delta_plain_cosine": 0.9998921428269101,
+    "delta_hat_norm_ratio": 1.6727430213415173,
+    "delta_hat_cosine": 0.981435681964391,
+    "theta_true_star": [
+      0.18921244199460616,
+      -0.020938479146693098,
+      0.0732894381437586
+    ],
+    "theta_grpo_star": [
+      0.17476073341622306,
+      -0.025240502215330612,
+      0.08908063504952239
+    ]
+  },
+  {
+    "seed": 72,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.740709687384461e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.740709687384461e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.466756724223457e-08,
+    "dist_newton_to_old_fp": 4.3811565654620075e-08,
+    "exact_loss": 3.435991044767328e-05,
+    "predicted_loss": 1.7835164521309415e-06,
+    "predicted_loss_v2": 3.5544660826253646e-05,
+    "weight_spread": 113.94554645553134,
+    "antisym_ratio": 0.03207543404905733,
+    "delta_plain_norm_ratio": 0.2300548871561321,
+    "delta_plain_cosine": 0.9999967503292806,
+    "delta_hat_norm_ratio": 1.0541318927443453,
+    "delta_hat_cosine": 0.9996635145628897,
+    "theta_true_star": [
+      0.17681490716688797,
+      -0.024685005974188393,
+      0.08684791001443495
+    ],
+    "theta_grpo_star": [
+      0.17548141337028253,
+      -0.025048587366289076,
+      0.08829884670406267
+    ]
+  },
+  {
+    "seed": 73,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.833987450894885e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.833987450894885e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.7899610569875623e-06,
+    "dist_newton_to_old_fp": 1.6183307915152955e-06,
+    "exact_loss": 0.0026000546276666314,
+    "predicted_loss": 6.835687508751343e-05,
+    "predicted_loss_v2": 0.002848613431702978,
+    "weight_spread": 98.35181614422213,
+    "antisym_ratio": 0.03894075616760479,
+    "delta_plain_norm_ratio": 0.17370376312578745,
+    "delta_plain_cosine": 0.9999399790722249,
+    "delta_hat_norm_ratio": 1.3860309282899763,
+    "delta_hat_cosine": 0.9880152490774619,
+    "theta_true_star": [
+      0.19126917864010137,
+      -0.020280533321933896,
+      0.07106352032504289
+    ],
+    "theta_grpo_star": [
+      0.17907711202483312,
+      -0.02404546447944811,
+      0.08437651679994722
+    ]
+  },
+  {
+    "seed": 74,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.2150639020065594e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.2150639020065594e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 7.899482232380979e-08,
+    "dist_newton_to_old_fp": 6.520624633444691e-08,
+    "exact_loss": 0.011624676777152287,
+    "predicted_loss": 0.00035707367124957433,
+    "predicted_loss_v2": 0.016911382402315947,
+    "weight_spread": 204.05681704618053,
+    "antisym_ratio": 0.02317452530995982,
+    "delta_plain_norm_ratio": 0.19914491198728224,
+    "delta_plain_cosine": 0.9997040287583617,
+    "delta_hat_norm_ratio": 2.169359583683064,
+    "delta_hat_cosine": 0.9636052802420422,
+    "theta_true_star": [
+      0.19990089374854467,
+      -0.017510441879413245,
+      0.061932615391364985
+    ],
+    "theta_grpo_star": [
+      0.17522544447021726,
+      -0.02511713250060032,
+      0.08857672635424527
+    ]
+  },
+  {
+    "seed": 75,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.1609793114413213e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.1609793114413213e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 4.900921120059324e-07,
+    "dist_newton_to_old_fp": 3.595280703198522e-07,
+    "exact_loss": 0.003916932102878995,
+    "predicted_loss": 0.00010665839973333035,
+    "predicted_loss_v2": 0.004936292731515958,
+    "weight_spread": 192.53343679928017,
+    "antisym_ratio": 0.031099589162109753,
+    "delta_plain_norm_ratio": 0.17852386269704346,
+    "delta_plain_cosine": 0.9999213592624095,
+    "delta_hat_norm_ratio": 1.5742663728704582,
+    "delta_hat_cosine": 0.9828684938113795,
+    "theta_true_star": [
+      0.19057392859804123,
+      -0.020503415529704014,
+      0.07181431449354078
+    ],
+    "theta_grpo_star": [
+      0.17707910045601372,
+      -0.024611735039321923,
+      0.08655986026048815
+    ]
+  },
+  {
+    "seed": 76,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 9.520447856303568e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 9.520447856303568e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.582992660534255e-08,
+    "dist_newton_to_old_fp": 7.908308786792236e-08,
+    "exact_loss": 0.004761504130792821,
+    "predicted_loss": 0.0002820292392953527,
+    "predicted_loss_v2": 0.007925553990910382,
+    "weight_spread": 240.76980675807064,
+    "antisym_ratio": 0.023022222632760263,
+    "delta_plain_norm_ratio": 0.2707766399318142,
+    "delta_plain_cosine": 0.9997968386098433,
+    "delta_hat_norm_ratio": 1.9851137611834666,
+    "delta_hat_cosine": 0.9728195661342433,
+    "theta_true_star": [
+      0.1873249090669449,
+      -0.021537405055337886,
+      0.07534361552638391
+    ],
+    "theta_grpo_star": [
+      0.1709602331305364,
+      -0.026192151884502374,
+      0.0931669901850074
+    ]
+  },
+  {
+    "seed": 77,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.053168228541389e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.053168228541389e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.0350862803665863e-07,
+    "dist_newton_to_old_fp": 2.2737937719025515e-07,
+    "exact_loss": 0.0062226185149443225,
+    "predicted_loss": 0.00017269462030735608,
+    "predicted_loss_v2": 0.00740731744804772,
+    "weight_spread": 326.80985427533807,
+    "antisym_ratio": 0.027291363366509853,
+    "delta_plain_norm_ratio": 0.18491485160805238,
+    "delta_plain_cosine": 0.9998474012595185,
+    "delta_hat_norm_ratio": 1.676013612557812,
+    "delta_hat_cosine": 0.9743523774264776,
+    "theta_true_star": [
+      0.18996386557690448,
+      -0.02069861888249196,
+      0.07247453778065921
+    ],
+    "theta_grpo_star": [
+      0.17297460968458306,
+      -0.02570106072560954,
+      0.09100954005560555
+    ]
+  },
+  {
+    "seed": 78,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.941623374011725e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.941623374011725e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 9.435981725461891e-07,
+    "dist_newton_to_old_fp": 8.240184010380464e-07,
+    "exact_loss": 0.0008804916596176771,
+    "predicted_loss": 6.158846389675274e-05,
+    "predicted_loss_v2": 0.0010199930037329947,
+    "weight_spread": 49.56408371366563,
+    "antisym_ratio": 0.03810417015850756,
+    "delta_plain_norm_ratio": 0.2752299658461617,
+    "delta_plain_cosine": 0.9999797783782185,
+    "delta_hat_norm_ratio": 1.269949038525958,
+    "delta_hat_cosine": 0.9951027675864693,
+    "theta_true_star": [
+      0.18879375581204336,
+      -0.021071809746750485,
+      0.07374424793236639
+    ],
+    "theta_grpo_star": [
+      0.18180536494014618,
+      -0.02324182062321341,
+      0.08138652623125514
+    ]
+  },
+  {
+    "seed": 79,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.0692601347803832e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.0692601347803832e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 5.752028183259858e-09,
+    "dist_newton_to_old_fp": 2.7566215373727052e-08,
+    "exact_loss": 1.2860845030410184e-05,
+    "predicted_loss": 5.530519601044549e-07,
+    "predicted_loss_v2": 1.3071003848707749e-05,
+    "weight_spread": 157.89002106400372,
+    "antisym_ratio": 0.02730277131121917,
+    "delta_plain_norm_ratio": 0.208593804900508,
+    "delta_plain_cosine": 0.9999985987847901,
+    "delta_hat_norm_ratio": 1.031005686698434,
+    "delta_hat_cosine": 0.9998563220595859,
+    "theta_true_star": [
+      0.17515958942855195,
+      -0.025134700267481453,
+      0.08864818250067405
+    ],
+    "theta_grpo_star": [
+      0.17437962094489382,
+      -0.02534061955285843,
+      0.08949330279273746
+    ]
+  },
+  {
+    "seed": 80,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.330778241764458e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.330778241764458e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 7.487551348168127e-08,
+    "dist_newton_to_old_fp": 7.020458848139952e-08,
+    "exact_loss": 0.005618627629304651,
+    "predicted_loss": 0.0003158310848663752,
+    "predicted_loss_v2": 0.007980953290294027,
+    "weight_spread": 138.71223771189517,
+    "antisym_ratio": 0.022468011876186886,
+    "delta_plain_norm_ratio": 0.26301903211325284,
+    "delta_plain_cosine": 0.9998579662801077,
+    "delta_hat_norm_ratio": 1.869531685206445,
+    "delta_hat_cosine": 0.9724067905824532,
+    "theta_true_star": [
+      0.19094043379403916,
+      -0.020385972303513182,
+      0.07141830641296076
+    ],
+    "theta_grpo_star": [
+      0.17367038899122014,
+      -0.025524306173622342,
+      0.09025973263758186
+    ]
+  },
+  {
+    "seed": 81,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.20109281069102e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.20109281069102e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.249996815435205e-08,
+    "dist_newton_to_old_fp": 7.454248857378686e-08,
+    "exact_loss": 0.0050716564392480346,
+    "predicted_loss": 0.00019375687712433988,
+    "predicted_loss_v2": 0.0077281262024078996,
+    "weight_spread": 330.0588483171069,
+    "antisym_ratio": 0.022424993479945955,
+    "delta_plain_norm_ratio": 0.21738901190895615,
+    "delta_plain_cosine": 0.9998129329630582,
+    "delta_hat_norm_ratio": 1.908025277753541,
+    "delta_hat_cosine": 0.9726994549860413,
+    "theta_true_star": [
+      0.18808792586468137,
+      -0.021295993749119425,
+      0.07451210146358946
+    ],
+    "theta_grpo_star": [
+      0.17150187934069633,
+      -0.02606324754707249,
+      0.09258898217619647
+    ]
+  },
+  {
+    "seed": 82,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.6641647423955515e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.6641647423955515e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.710447371715483e-07,
+    "dist_newton_to_old_fp": 5.424958696367881e-07,
+    "exact_loss": 0.002190059494408564,
+    "predicted_loss": 7.959965793039382e-05,
+    "predicted_loss_v2": 0.0026878428943306345,
+    "weight_spread": 162.99498638221795,
+    "antisym_ratio": 0.03484565531933844,
+    "delta_plain_norm_ratio": 0.20332888426136922,
+    "delta_plain_cosine": 0.9999475466449965,
+    "delta_hat_norm_ratio": 1.4514245110977095,
+    "delta_hat_cosine": 0.9885806177240927,
+    "theta_true_star": [
+      0.19085141082972973,
+      -0.020414509717279306,
+      0.07151445056488498
+    ],
+    "theta_grpo_star": [
+      0.17947442143280912,
+      -0.02393047188599626,
+      0.0839415318094487
+    ]
+  },
+  {
+    "seed": 83,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.214942236879982e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.214942236879982e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0972796042929527e-07,
+    "dist_newton_to_old_fp": 9.415483272197926e-08,
+    "exact_loss": 0.002707906000453536,
+    "predicted_loss": 0.00013649360121399066,
+    "predicted_loss_v2": 0.003488448853504329,
+    "weight_spread": 300.0036677516339,
+    "antisym_ratio": 0.026511548171957982,
+    "delta_plain_norm_ratio": 0.24241199188814577,
+    "delta_plain_cosine": 0.9998966984634772,
+    "delta_hat_norm_ratio": 1.5592417611421372,
+    "delta_hat_cosine": 0.9832227659696462,
+    "theta_true_star": [
+      0.18595617463580122,
+      -0.021967593865318602,
+      0.07683843067300689
+    ],
+    "theta_grpo_star": [
+      0.17406086500712412,
+      -0.025423604459088363,
+      0.08983801890010838
+    ]
+  },
+  {
+    "seed": 84,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.119049341674507e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.119049341674507e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 3.4263637632997484e-08,
+    "dist_newton_to_old_fp": 5.143531349799362e-08,
+    "exact_loss": 0.00044076745128288075,
+    "predicted_loss": 2.7014709240580215e-05,
+    "predicted_loss_v2": 0.0005111710079453619,
+    "weight_spread": 84.89939358555303,
+    "antisym_ratio": 0.024236529450935896,
+    "delta_plain_norm_ratio": 0.2553223616342095,
+    "delta_plain_cosine": 0.9999667922910581,
+    "delta_hat_norm_ratio": 1.212339381460631,
+    "delta_hat_cosine": 0.9966239275654004,
+    "theta_true_star": [
+      0.1775790222229415,
+      -0.02447202248694834,
+      0.08601433222689744
+    ],
+    "theta_grpo_star": [
+      0.17338097882505538,
+      -0.025598250828373213,
+      0.09057187729368625
+    ]
+  },
+  {
+    "seed": 85,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.0459157649230823e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.0459157649230823e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.3044039269809285e-06,
+    "dist_newton_to_old_fp": 1.086698227557205e-06,
+    "exact_loss": 0.008085784409038815,
+    "predicted_loss": 0.0003071219934008539,
+    "predicted_loss_v2": 0.011403062546671165,
+    "weight_spread": 152.62020563671146,
+    "antisym_ratio": 0.03379028424428644,
+    "delta_plain_norm_ratio": 0.21640587598410085,
+    "delta_plain_cosine": 0.9998188592614584,
+    "delta_hat_norm_ratio": 1.8514733693976255,
+    "delta_hat_cosine": 0.9763685592179351,
+    "theta_true_star": [
+      0.19749614473053392,
+      -0.01827857106899972,
+      0.06443533063257147
+    ],
+    "theta_grpo_star": [
+      0.17747864627539003,
+      -0.02450018445613114,
+      0.0861239115730986
+    ]
+  },
+  {
+    "seed": 86,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.1507569000941131e-11,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.1507569000941131e-11,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.012227763984698e-07,
+    "dist_newton_to_old_fp": 4.2699197180332826e-07,
+    "exact_loss": 0.00664634974830855,
+    "predicted_loss": 0.00019914929393160456,
+    "predicted_loss_v2": 0.008884529312442001,
+    "weight_spread": 226.16044577852102,
+    "antisym_ratio": 0.03139137167143572,
+    "delta_plain_norm_ratio": 0.18970234284668078,
+    "delta_plain_cosine": 0.999760643794781,
+    "delta_hat_norm_ratio": 1.7964100245632788,
+    "delta_hat_cosine": 0.9769598583254452,
+    "theta_true_star": [
+      0.2006957647517742,
+      -0.017258020934141194,
+      0.06111355010875278
+    ],
+    "theta_grpo_star": [
+      0.18149515545492648,
+      -0.023334753876130872,
+      0.0817267312486119
+    ]
+  },
+  {
+    "seed": 87,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 3.001548605536084e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 3.001548605536084e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.1328647846883825e-07,
+    "dist_newton_to_old_fp": 1.8822244262633115e-07,
+    "exact_loss": 0.000287433402507864,
+    "predicted_loss": 1.1952179274179025e-05,
+    "predicted_loss_v2": 0.0003277205237175014,
+    "weight_spread": 130.50663593025405,
+    "antisym_ratio": 0.031580986177034254,
+    "delta_plain_norm_ratio": 0.20966117337097123,
+    "delta_plain_cosine": 0.9999774357933595,
+    "delta_hat_norm_ratio": 1.1819767688694136,
+    "delta_hat_cosine": 0.99762780014913,
+    "theta_true_star": [
+      0.17904568991787173,
+      -0.02405452683157991,
+      0.08441090910746164
+    ],
+    "theta_grpo_star": [
+      0.175119217752029,
+      -0.02514545624625143,
+      0.08869198044110813
+    ]
+  },
+  {
+    "seed": 88,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.730429434300678e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.730429434300678e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.9314755841974065e-06,
+    "dist_newton_to_old_fp": 1.804957357409226e-06,
+    "exact_loss": 0.0019010935821706099,
+    "predicted_loss": 7.11402260175621e-05,
+    "predicted_loss_v2": 0.0024055868130709967,
+    "weight_spread": 127.46275403256527,
+    "antisym_ratio": 0.039157466212470064,
+    "delta_plain_norm_ratio": 0.20509768669567036,
+    "delta_plain_cosine": 0.999956624228819,
+    "delta_hat_norm_ratio": 1.4233986972173076,
+    "delta_hat_cosine": 0.9911664832811471,
+    "theta_true_star": [
+      0.19056361964499333,
+      -0.020506717185348692,
+      0.07182546029745232
+    ],
+    "theta_grpo_star": [
+      0.18019733424917317,
+      -0.023719373544630114,
+      0.08314957695539342
+    ]
+  },
+  {
+    "seed": 89,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.488528305511989e-15,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.488528305511989e-15,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.6531488521476338e-08,
+    "dist_newton_to_old_fp": 6.180191541881439e-08,
+    "exact_loss": 0.0018349153525859807,
+    "predicted_loss": 8.611312415842204e-05,
+    "predicted_loss_v2": 0.0022443378264638695,
+    "weight_spread": 271.56328500878595,
+    "antisym_ratio": 0.020737806269361583,
+    "delta_plain_norm_ratio": 0.23167224195286384,
+    "delta_plain_cosine": 0.999851815049098,
+    "delta_hat_norm_ratio": 1.434514804058695,
+    "delta_hat_cosine": 0.9864833140610911,
+    "theta_true_star": [
+      0.17969277873911213,
+      -0.02386695880714394,
+      0.08370238140792363
+    ],
+    "theta_grpo_star": [
+      0.1705218707862434,
+      -0.0262947020800051,
+      0.09363354667474058
+    ]
+  },
+  {
+    "seed": 90,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.4216738198930904e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.4216738198930904e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.237819675394335e-06,
+    "dist_newton_to_old_fp": 2.1329692000497922e-06,
+    "exact_loss": 0.003188407238515517,
+    "predicted_loss": 8.990617654265571e-05,
+    "predicted_loss_v2": 0.0036743364518480003,
+    "weight_spread": 270.103091565919,
+    "antisym_ratio": 0.041479675041987255,
+    "delta_plain_norm_ratio": 0.18003921747175305,
+    "delta_plain_cosine": 0.9998966250822033,
+    "delta_hat_norm_ratio": 1.4603096315108253,
+    "delta_hat_cosine": 0.9870293706133827,
+    "theta_true_star": [
+      0.19703137350476022,
+      -0.018427638446143837,
+      0.0649230963489709
+    ],
+    "theta_grpo_star": [
+      0.18297699957701166,
+      -0.022887634326184052,
+      0.08010159025445018
+    ]
+  },
+  {
+    "seed": 91,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.838562573008565e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.838562573008565e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 8.79248496428764e-08,
+    "dist_newton_to_old_fp": 7.925693170668035e-08,
+    "exact_loss": 0.0031048181240960204,
+    "predicted_loss": 0.00014692544298666892,
+    "predicted_loss_v2": 0.003773611502947404,
+    "weight_spread": 156.20375428187305,
+    "antisym_ratio": 0.024041034769406316,
+    "delta_plain_norm_ratio": 0.23640769142411222,
+    "delta_plain_cosine": 0.9998824638695005,
+    "delta_hat_norm_ratio": 1.560727435796915,
+    "delta_hat_cosine": 0.9806299045072002,
+    "theta_true_star": [
+      0.1866166896156018,
+      -0.021760491819250043,
+      0.07611660583358835
+    ],
+    "theta_grpo_star": [
+      0.17364261276116302,
+      -0.025531428840959162,
+      0.09028970653203156
+    ]
+  },
+  {
+    "seed": 92,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.851397658824748e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.851397658824748e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.9943218656560123e-06,
+    "dist_newton_to_old_fp": 1.8929865160821481e-06,
+    "exact_loss": 0.0036838710380661943,
+    "predicted_loss": 9.535771917494875e-05,
+    "predicted_loss_v2": 0.003939471024017031,
+    "weight_spread": 218.64929327229774,
+    "antisym_ratio": 0.04212175623898652,
+    "delta_plain_norm_ratio": 0.1738270197931114,
+    "delta_plain_cosine": 0.999900401156081,
+    "delta_hat_norm_ratio": 1.4442056946478907,
+    "delta_hat_cosine": 0.9848067894113653,
+    "theta_true_star": [
+      0.1956797917026199,
+      -0.018861885466989994,
+      0.06634850374623406
+    ],
+    "theta_grpo_star": [
+      0.1807630606850845,
+      -0.023552573319156247,
+      0.08252947879090292
+    ]
+  },
+  {
+    "seed": 93,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 8.506811134173698e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 8.506811134173698e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 5.058885781084326e-07,
+    "dist_newton_to_old_fp": 4.1077379742737267e-07,
+    "exact_loss": 0.0023167957956637952,
+    "predicted_loss": 0.00012119922675122668,
+    "predicted_loss_v2": 0.0025772067124712437,
+    "weight_spread": 69.48129627554682,
+    "antisym_ratio": 0.03289337776817808,
+    "delta_plain_norm_ratio": 0.24496784993279444,
+    "delta_plain_cosine": 0.9999252518141242,
+    "delta_hat_norm_ratio": 1.3891288007074043,
+    "delta_hat_cosine": 0.9872323859184106,
+    "theta_true_star": [
+      0.18656294647474436,
+      -0.02177737866065765,
+      0.07617530668577908
+    ],
+    "theta_grpo_star": [
+      0.1756500681142202,
+      -0.02500319871799566,
+      0.0881156365548205
+    ]
+  },
+  {
+    "seed": 94,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.750965255512022e-10,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.750965255512022e-10,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.8564789564250394e-06,
+    "dist_newton_to_old_fp": 2.555207330725484e-06,
+    "exact_loss": 0.008086174922877915,
+    "predicted_loss": 0.00021791301128483854,
+    "predicted_loss_v2": 0.011054137809437592,
+    "weight_spread": 149.7669539830149,
+    "antisym_ratio": 0.03488242656505068,
+    "delta_plain_norm_ratio": 0.18266444431030268,
+    "delta_plain_cosine": 0.99985151039826,
+    "delta_hat_norm_ratio": 1.7807054642328335,
+    "delta_hat_cosine": 0.9778114317955838,
+    "theta_true_star": [
+      0.19472245451069967,
+      -0.019169910259986978,
+      0.06736407493878593
+    ],
+    "theta_grpo_star": [
+      0.17554104580727764,
+      -0.025032559354177225,
+      0.08823407846807604
+    ]
+  },
+  {
+    "seed": 95,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 7.857623425871292e-14,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 7.857623425871292e-14,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 6.058699085307744e-08,
+    "dist_newton_to_old_fp": 6.94754922881094e-08,
+    "exact_loss": 0.007762616298004232,
+    "predicted_loss": 0.0004099222211275421,
+    "predicted_loss_v2": 0.009628701731578107,
+    "weight_spread": 97.25334562443612,
+    "antisym_ratio": 0.021272057820935192,
+    "delta_plain_norm_ratio": 0.25797105257834035,
+    "delta_plain_cosine": 0.9998212920735062,
+    "delta_hat_norm_ratio": 1.8434903293447316,
+    "delta_hat_cosine": 0.9670678565025722,
+    "theta_true_star": [
+      0.19134673395123047,
+      -0.020255646780542817,
+      0.07097988122250456
+    ],
+    "theta_grpo_star": [
+      0.17226917000732755,
+      -0.025876629419146,
+      0.09176746050617575
+    ]
+  },
+  {
+    "seed": 96,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 5.51215094218456e-09,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 5.51215094218456e-09,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 9.930448326931951e-06,
+    "dist_newton_to_old_fp": 1.2243900834022018e-05,
+    "exact_loss": 0.005558440543198151,
+    "predicted_loss": 0.00011943818578862185,
+    "predicted_loss_v2": 0.006557608870712677,
+    "weight_spread": 189.3385305664304,
+    "antisym_ratio": 0.05403508424700573,
+    "delta_plain_norm_ratio": 0.15944887581154496,
+    "delta_plain_cosine": 0.9997855981735665,
+    "delta_hat_norm_ratio": 1.5569408137934506,
+    "delta_hat_cosine": 0.9842656453746563,
+    "theta_true_star": [
+      0.20054590792769336,
+      -0.017305543996046613,
+      0.06126764348914376
+    ],
+    "theta_grpo_star": [
+      0.18271053182583277,
+      -0.022968614030029505,
+      0.08039380625917883
+    ]
+  },
+  {
+    "seed": 97,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 6.799020909842915e-13,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 6.799020909842915e-13,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 1.0674056211769973e-07,
+    "dist_newton_to_old_fp": 9.068005009234305e-08,
+    "exact_loss": 0.005626364294467057,
+    "predicted_loss": 0.00017838912128670127,
+    "predicted_loss_v2": 0.00825763807529862,
+    "weight_spread": 598.558114599943,
+    "antisym_ratio": 0.026644078903293664,
+    "delta_plain_norm_ratio": 0.1963041703489716,
+    "delta_plain_cosine": 0.9998789643392404,
+    "delta_hat_norm_ratio": 1.8261780259106835,
+    "delta_hat_cosine": 0.9768023718263199,
+    "theta_true_star": [
+      0.1914982100192164,
+      -0.02020702757211154,
+      0.07081658958355842
+    ],
+    "theta_grpo_star": [
+      0.17491692300578887,
+      -0.02519919404471171,
+      0.08891135715706332
+    ]
+  },
+  {
+    "seed": 98,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 1.1983726043953822e-09,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 1.1983726043953822e-09,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 5.426849132826386e-06,
+    "dist_newton_to_old_fp": 5.549277667043655e-06,
+    "exact_loss": 0.002684552976976229,
+    "predicted_loss": 8.512022932408354e-05,
+    "predicted_loss_v2": 0.003300425040041957,
+    "weight_spread": 118.110842493507,
+    "antisym_ratio": 0.04416467386922491,
+    "delta_plain_norm_ratio": 0.1904420708048506,
+    "delta_plain_cosine": 0.9998961004814311,
+    "delta_hat_norm_ratio": 1.490072701710406,
+    "delta_hat_cosine": 0.9880122652009381,
+    "theta_true_star": [
+      0.1973938504399451,
+      -0.018311366531832466,
+      0.0645425776043582
+    ],
+    "theta_grpo_star": [
+      0.18366104178476156,
+      -0.022678683801043445,
+      0.07935160244157305
+    ]
+  },
+  {
+    "seed": 99,
+    "testbed": "ac_phi1",
+    "resolved": true,
+    "final_F_norm": 2.28978587521674e-12,
+    "newton_method": "direct_newton_from_old_fixed_point",
+    "newton_attempts": [
+      {
+        "start": "direct_old_fixed_point",
+        "ok": true,
+        "final_F_norm": 2.28978587521674e-12,
+        "newton_iters": 1
+      }
+    ],
+    "old_fixed_point_shift": 2.1981873327242719e-07,
+    "dist_newton_to_old_fp": 1.4858612209358155e-07,
+    "exact_loss": 0.00203313485990525,
+    "predicted_loss": 0.00014152085509619534,
+    "predicted_loss_v2": 0.002340648562745078,
+    "weight_spread": 284.13023876256796,
+    "antisym_ratio": 0.03015960065860404,
+    "delta_plain_norm_ratio": 0.27962792399201564,
+    "delta_plain_cosine": 0.9999550444811411,
+    "delta_hat_norm_ratio": 1.4014594295998193,
+    "delta_hat_cosine": 0.9886521246755637,
+    "theta_true_star": [
+      0.1918863279162187,
+      -0.020082384485541453,
+      0.07039860909747328
+    ],
+    "theta_grpo_star": [
+      0.18125078726804736,
+      -0.02340769936053026,
+      0.08199470940591022
+    ]
+  }
+]

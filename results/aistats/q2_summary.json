@@ -1,0 +1,17 @@
+{
+  "n_problems": 20,
+  "correlation": 0.975525000708099,
+  "slope": 0.9985095974812773,
+  "intercept": -0.0006193463290330159,
+  "pooled_nearer_frac": 0.79,
+  "ac": {
+    "correlation": 0.8759937383667042,
+    "slope": 1.435708003302867,
+    "nearer_frac": 0.62
+  },
+  "bandit": {
+    "correlation": 0.9928147654550223,
+    "slope": 1.0126762901924282,
+    "nearer_frac": 0.96
+  }
+}

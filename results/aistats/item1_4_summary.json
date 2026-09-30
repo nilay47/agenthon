@@ -1,0 +1,36 @@
+{
+  "ac_phi1": {
+    "n_total": 100,
+    "n_included": 93,
+    "n_excluded": 7,
+    "exclusion_reason_counts": {
+      "non_convergence": 7
+    },
+    "correlation": 0.9571214385254796,
+    "slope": 1.0238755697270359,
+    "n_used": 93,
+    "correlation_v2_delta_hat": 0.9954091152605768,
+    "slope_v2_delta_hat": 0.9356826156558653,
+    "n_used_v2": 93,
+    "delta_plain_norm_ratio_median": 0.21662428048353283,
+    "delta_plain_cosine_median": 0.9998811598248883,
+    "delta_hat_norm_ratio_median": 1.5607213117007903,
+    "delta_hat_cosine_median": 0.9828413845967966
+  },
+  "bandit": {
+    "n_total": 100,
+    "n_included": 100,
+    "n_excluded": 0,
+    "exclusion_reason_counts": {},
+    "correlation": 0.7910107444495985,
+    "slope": 1.1647423067773461,
+    "n_used": 100,
+    "correlation_v2_delta_hat": 0.9986045655870256,
+    "slope_v2_delta_hat": 0.9921405150657308,
+    "n_used_v2": 100,
+    "delta_plain_norm_ratio_median": 0.44213056211155566,
+    "delta_plain_cosine_median": 0.9907007048610613,
+    "delta_hat_norm_ratio_median": 1.0013639192548398,
+    "delta_hat_cosine_median": 0.9995585588470228
+  }
+}

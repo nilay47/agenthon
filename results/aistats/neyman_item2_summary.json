@@ -1,0 +1,66 @@
+{
+  "ac": {
+    "a_rloo_uniform": {
+      "median_regret": 0.06699480704776484,
+      "mean_regret": 0.07685957430616272,
+      "mean_dist_true_star": 0.1116989424910921,
+      "mean_dist_grpo_star": 0.11577072199718756
+    },
+    "b_grpo_uniform": {
+      "median_regret": 0.06075628534647512,
+      "mean_regret": 0.06600688736582169,
+      "mean_dist_true_star": 0.07144605587506236,
+      "mean_dist_grpo_star": 0.06588565864123559
+    },
+    "c_grpo_neyman_exact": {
+      "median_regret": 0.057622302248434266,
+      "mean_regret": 0.059738999218002055,
+      "mean_dist_true_star": 0.12591917067855846,
+      "mean_dist_grpo_star": 0.12863212810580266
+    },
+    "d_grpo_neyman_estimated": {
+      "median_regret": 0.08263911569143811,
+      "mean_regret": 0.0911442123605852,
+      "mean_dist_true_star": 0.08594310168181231,
+      "mean_dist_grpo_star": 0.09271772402817136
+    },
+    "e_grpo_neyman_wrong": {
+      "median_regret": 0.06739016410919663,
+      "mean_regret": 0.06994262059704993,
+      "mean_dist_true_star": 0.09437934767003338,
+      "mean_dist_grpo_star": 0.0866964956650079
+    }
+  },
+  "bandit": {
+    "a_rloo_uniform": {
+      "median_regret": 0.031670042947822705,
+      "mean_regret": 0.02580852476530384,
+      "mean_dist_true_star": 0.7785549417415271,
+      "mean_dist_grpo_star": 1.5177488022109482
+    },
+    "b_grpo_uniform": {
+      "median_regret": 0.05307587901930147,
+      "mean_regret": 0.06821395507127884,
+      "mean_dist_true_star": 1.552617338476249,
+      "mean_dist_grpo_star": 1.1000105516574312
+    },
+    "c_grpo_neyman_exact": {
+      "median_regret": 0.012822607744737256,
+      "mean_regret": 0.013620377209880302,
+      "mean_dist_true_star": 0.48293956344424344,
+      "mean_dist_grpo_star": 1.5689593061731526
+    },
+    "d_grpo_neyman_estimated": {
+      "median_regret": 0.029667881258267397,
+      "mean_regret": 0.030425360624251156,
+      "mean_dist_true_star": 0.5446198426623956,
+      "mean_dist_grpo_star": 1.5358977383441201
+    },
+    "e_grpo_neyman_wrong": {
+      "median_regret": 0.13168538185212153,
+      "mean_regret": 0.2128870109060673,
+      "mean_dist_true_star": 3.1611317809327866,
+      "mean_dist_grpo_star": 2.698819754972484
+    }
+  }
+}

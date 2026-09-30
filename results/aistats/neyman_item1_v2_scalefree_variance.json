@@ -1,0 +1,2066 @@
+{
+  "ac": [
+    {
+      "book_seed": 1000,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.3454801657722066,
+            "mean_cosine": 0.9794020388365415
+          },
+          "b": {
+            "noise_to_signal": 0.022343764539905338,
+            "mean_cosine": 0.9913027537248607
+          },
+          "c": {
+            "noise_to_signal": 0.02388952661684653,
+            "mean_cosine": 0.9907356447587443
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 6.354388572568723,
+            "mean_cosine": -0.10304399142878257
+          },
+          "b": {
+            "noise_to_signal": 1.414844983163798,
+            "mean_cosine": 0.6062458333410683
+          },
+          "c": {
+            "noise_to_signal": 0.6954454699969405,
+            "mean_cosine": 0.7588221307655638
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.25326739937589243,
+            "mean_cosine": 0.9771058751010314
+          },
+          "b": {
+            "noise_to_signal": 0.07878173059297354,
+            "mean_cosine": 0.9867549382994374
+          },
+          "c": {
+            "noise_to_signal": 0.07148282332859435,
+            "mean_cosine": 0.9889130095604579
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 1.1560779249909146,
+            "mean_cosine": 0.9747183833571048
+          },
+          "b": {
+            "noise_to_signal": 0.08798654545515516,
+            "mean_cosine": 0.9846022679486726
+          },
+          "c": {
+            "noise_to_signal": 0.03857563527381385,
+            "mean_cosine": 0.9934446170963613
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 1.0869420668523277,
+            "mean_cosine": 0.6896011938528716
+          },
+          "b": {
+            "noise_to_signal": 0.1447038035239767,
+            "mean_cosine": 0.9685263352767809
+          },
+          "c": {
+            "noise_to_signal": 0.40622177396662434,
+            "mean_cosine": 0.8555122401075655
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.20858449465750756,
+            "mean_cosine": 0.9871737453708932
+          },
+          "b": {
+            "noise_to_signal": 0.042485650690244035,
+            "mean_cosine": 0.9911129256807711
+          },
+          "c": {
+            "noise_to_signal": 0.0399911151066885,
+            "mean_cosine": 0.9915762631090095
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.7823826577473103,
+            "mean_cosine": 0.7565183192331829
+          },
+          "b": {
+            "noise_to_signal": 0.15056222700790936,
+            "mean_cosine": 0.9648983832025719
+          },
+          "c": {
+            "noise_to_signal": 0.3146458246853051,
+            "mean_cosine": 0.8904420592236352
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1001,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.2227852457188895,
+            "mean_cosine": 0.9838780388708412
+          },
+          "b": {
+            "noise_to_signal": 0.022820542490378952,
+            "mean_cosine": 0.9913377214649781
+          },
+          "c": {
+            "noise_to_signal": 0.023504394832198634,
+            "mean_cosine": 0.9907705212272034
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 108.75436141110765,
+            "mean_cosine": 0.13660638735368935
+          },
+          "b": {
+            "noise_to_signal": 12.009161371546094,
+            "mean_cosine": 0.3106532861332325
+          },
+          "c": {
+            "noise_to_signal": 47.94029764604832,
+            "mean_cosine": 0.20465352322467234
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.5780968757709004,
+            "mean_cosine": 0.9124559923793015
+          },
+          "b": {
+            "noise_to_signal": 0.1003020845259048,
+            "mean_cosine": 0.9830391099831666
+          },
+          "c": {
+            "noise_to_signal": 0.09900277692475609,
+            "mean_cosine": 0.9821057061912598
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 13.006932363268898,
+            "mean_cosine": 0.2884017638254811
+          },
+          "b": {
+            "noise_to_signal": 3.887984640040941,
+            "mean_cosine": 0.38095699548615186
+          },
+          "c": {
+            "noise_to_signal": 5.402407089091162,
+            "mean_cosine": 0.3419458393165855
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.16276919887212896,
+            "mean_cosine": 0.9938121837220307
+          },
+          "b": {
+            "noise_to_signal": 0.014032750438566392,
+            "mean_cosine": 0.9957029407481677
+          },
+          "c": {
+            "noise_to_signal": 0.013696395651690698,
+            "mean_cosine": 0.9959948528548513
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.5535520999509772,
+            "mean_cosine": 0.928649120473398
+          },
+          "b": {
+            "noise_to_signal": 0.10061010733973716,
+            "mean_cosine": 0.9816790362538466
+          },
+          "c": {
+            "noise_to_signal": 0.09109208526718868,
+            "mean_cosine": 0.9841917918819441
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 15.97688883741868,
+            "mean_cosine": 0.19368434205067334
+          },
+          "b": {
+            "noise_to_signal": 15.339274971762972,
+            "mean_cosine": 0.2817773208507368
+          },
+          "c": {
+            "noise_to_signal": 4.858469404508856,
+            "mean_cosine": 0.37569010672880176
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1002,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.3514512736376877,
+            "mean_cosine": 0.9829386964387645
+          },
+          "b": {
+            "noise_to_signal": 0.02443788405241283,
+            "mean_cosine": 0.9904437114129996
+          },
+          "c": {
+            "noise_to_signal": 0.023339726726699938,
+            "mean_cosine": 0.9908360302007131
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 0.5505331269405397,
+            "mean_cosine": 0.9442093561314298
+          },
+          "b": {
+            "noise_to_signal": 0.1278128908103364,
+            "mean_cosine": 0.9789232077234403
+          },
+          "c": {
+            "noise_to_signal": 0.10935020659087777,
+            "mean_cosine": 0.9826977525395163
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 3.288578111534921,
+            "mean_cosine": 0.4633555141797966
+          },
+          "b": {
+            "noise_to_signal": 1.567187784758511,
+            "mean_cosine": 0.5603615270179896
+          },
+          "c": {
+            "noise_to_signal": 1.0869211636229248,
+            "mean_cosine": 0.6484619725083371
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 4.916664914088417,
+            "mean_cosine": 0.37561579859342265
+          },
+          "b": {
+            "noise_to_signal": 2.349215990151499,
+            "mean_cosine": 0.4836113542212754
+          },
+          "c": {
+            "noise_to_signal": 1.4526872423739565,
+            "mean_cosine": 0.5769833507951618
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 1.3000021250760811,
+            "mean_cosine": 0.7238144862596946
+          },
+          "b": {
+            "noise_to_signal": 0.5552685660579135,
+            "mean_cosine": 0.7953032165389055
+          },
+          "c": {
+            "noise_to_signal": 0.23464357158702753,
+            "mean_cosine": 0.9276532300989642
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 291.8826351804979,
+            "mean_cosine": 0.07721742654508783
+          },
+          "b": {
+            "noise_to_signal": 59.335547913506794,
+            "mean_cosine": 0.11137232550398231
+          },
+          "c": {
+            "noise_to_signal": 43.87521844029285,
+            "mean_cosine": 0.12944985736334952
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.2567044979916481,
+            "mean_cosine": 0.9862046077117856
+          },
+          "b": {
+            "noise_to_signal": 0.02134549479633108,
+            "mean_cosine": 0.9924312889662775
+          },
+          "c": {
+            "noise_to_signal": 0.020423872539569163,
+            "mean_cosine": 0.9926843500937862
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1003,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.19044769629931205,
+            "mean_cosine": 0.9848644163997275
+          },
+          "b": {
+            "noise_to_signal": 0.022351821415567016,
+            "mean_cosine": 0.9912226524769128
+          },
+          "c": {
+            "noise_to_signal": 0.023358797420350307,
+            "mean_cosine": 0.9910045407910831
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 4.920717656437799,
+            "mean_cosine": 0.4780685821842453
+          },
+          "b": {
+            "noise_to_signal": 1.0645266513371983,
+            "mean_cosine": 0.7382795902529667
+          },
+          "c": {
+            "noise_to_signal": 1.8490061683481882,
+            "mean_cosine": 0.6588079068178812
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 6.939751360587506,
+            "mean_cosine": 0.23411137268692978
+          },
+          "b": {
+            "noise_to_signal": 3.914715415639061,
+            "mean_cosine": 0.4084470896827223
+          },
+          "c": {
+            "noise_to_signal": 2.0515423095628424,
+            "mean_cosine": 0.5233362699126981
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 170.69588374189988,
+            "mean_cosine": 0.11870811115120987
+          },
+          "b": {
+            "noise_to_signal": 0.9036588534558623,
+            "mean_cosine": 0.7080533220667528
+          },
+          "c": {
+            "noise_to_signal": 46.609779296261046,
+            "mean_cosine": 0.18076050975189373
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.6847986054958557,
+            "mean_cosine": 0.8595047579466364
+          },
+          "b": {
+            "noise_to_signal": 0.5044760563949062,
+            "mean_cosine": 0.8308224579253554
+          },
+          "c": {
+            "noise_to_signal": 0.147905527232348,
+            "mean_cosine": 0.9732096777059579
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.2179310012637408,
+            "mean_cosine": 0.9924633865633548
+          },
+          "b": {
+            "noise_to_signal": 0.014213314853216865,
+            "mean_cosine": 0.9958568061012618
+          },
+          "c": {
+            "noise_to_signal": 0.014050582086184127,
+            "mean_cosine": 0.995955405907232
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.30131772613258123,
+            "mean_cosine": 0.9898796832970115
+          },
+          "b": {
+            "noise_to_signal": 0.025803123822075,
+            "mean_cosine": 0.9938391945004388
+          },
+          "c": {
+            "noise_to_signal": 0.02106237227028131,
+            "mean_cosine": 0.995001778297687
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1004,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.23932862347097916,
+            "mean_cosine": 0.9849393740967964
+          },
+          "b": {
+            "noise_to_signal": 0.02095245087001755,
+            "mean_cosine": 0.992101485810186
+          },
+          "c": {
+            "noise_to_signal": 0.02111937755463693,
+            "mean_cosine": 0.9920083521043347
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 1.9683591646470064,
+            "mean_cosine": 0.51975244900226
+          },
+          "b": {
+            "noise_to_signal": 1.2050914418618712,
+            "mean_cosine": 0.6207333348736195
+          },
+          "c": {
+            "noise_to_signal": 0.7349947889180094,
+            "mean_cosine": 0.7394464739371996
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.3463004791038123,
+            "mean_cosine": 0.9839422804808257
+          },
+          "b": {
+            "noise_to_signal": 0.04754500557961243,
+            "mean_cosine": 0.9919458859676029
+          },
+          "c": {
+            "noise_to_signal": 0.036310973682067815,
+            "mean_cosine": 0.9932026259690132
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 3.2333667156986543,
+            "mean_cosine": 0.40787906202660906
+          },
+          "b": {
+            "noise_to_signal": 2.4020286968371374,
+            "mean_cosine": 0.4950400236926866
+          },
+          "c": {
+            "noise_to_signal": 1.1006589671799085,
+            "mean_cosine": 0.6516834975681531
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.3165131719358533,
+            "mean_cosine": 0.9788154102883506
+          },
+          "b": {
+            "noise_to_signal": 0.0880592642371791,
+            "mean_cosine": 0.9853200380504793
+          },
+          "c": {
+            "noise_to_signal": 0.04245475472135921,
+            "mean_cosine": 0.9920613152153946
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.2175173828578245,
+            "mean_cosine": 0.9902591318305367
+          },
+          "b": {
+            "noise_to_signal": 0.013966343231092337,
+            "mean_cosine": 0.9955690673507591
+          },
+          "c": {
+            "noise_to_signal": 0.01426465254831681,
+            "mean_cosine": 0.9953886430502282
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.29205045761081905,
+            "mean_cosine": 0.9782248585832433
+          },
+          "b": {
+            "noise_to_signal": 0.040982116139270344,
+            "mean_cosine": 0.99072456328667
+          },
+          "c": {
+            "noise_to_signal": 0.03927929509736788,
+            "mean_cosine": 0.9910620799934703
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1005,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.18991742699312564,
+            "mean_cosine": 0.9843286942987265
+          },
+          "b": {
+            "noise_to_signal": 0.024287827105545615,
+            "mean_cosine": 0.9906643242493158
+          },
+          "c": {
+            "noise_to_signal": 0.02490649377113419,
+            "mean_cosine": 0.9904395616092957
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 1.581871306782889,
+            "mean_cosine": 0.5254141387908664
+          },
+          "b": {
+            "noise_to_signal": 10.494705586947896,
+            "mean_cosine": 0.256094441295828
+          },
+          "c": {
+            "noise_to_signal": 0.5086117966732422,
+            "mean_cosine": 0.8180997520564386
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.8981060345138279,
+            "mean_cosine": 0.737366598677731
+          },
+          "b": {
+            "noise_to_signal": 1.2282102081169577,
+            "mean_cosine": 0.6287004545602755
+          },
+          "c": {
+            "noise_to_signal": 0.17578156442118553,
+            "mean_cosine": 0.9611814448259395
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 2.519029549310419,
+            "mean_cosine": 0.4950126286415398
+          },
+          "b": {
+            "noise_to_signal": 1.2368305416634353,
+            "mean_cosine": 0.6409569867996272
+          },
+          "c": {
+            "noise_to_signal": 1.6643223874692117,
+            "mean_cosine": 0.5605861715449036
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.2027599516058781,
+            "mean_cosine": 0.9926135039613924
+          },
+          "b": {
+            "noise_to_signal": 0.013498761852727307,
+            "mean_cosine": 0.9958163443265944
+          },
+          "c": {
+            "noise_to_signal": 0.013760879006894542,
+            "mean_cosine": 0.9958759656063951
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.24185485677805468,
+            "mean_cosine": 0.9740637076315197
+          },
+          "b": {
+            "noise_to_signal": 0.24012705021635877,
+            "mean_cosine": 0.9308880738976044
+          },
+          "c": {
+            "noise_to_signal": 0.07882781254248017,
+            "mean_cosine": 0.985385370007142
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.5038852040175499,
+            "mean_cosine": 0.9516520233796377
+          },
+          "b": {
+            "noise_to_signal": 0.19750339000631384,
+            "mean_cosine": 0.954835160458917
+          },
+          "c": {
+            "noise_to_signal": 0.06535736554495901,
+            "mean_cosine": 0.990846615920399
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1006,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.14230132513772276,
+            "mean_cosine": 0.9888414137666987
+          },
+          "b": {
+            "noise_to_signal": 0.020274182986399547,
+            "mean_cosine": 0.9921837287740807
+          },
+          "c": {
+            "noise_to_signal": 0.019227032885711166,
+            "mean_cosine": 0.9926856469564808
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 4.581625859348771,
+            "mean_cosine": 0.3401011117443268
+          },
+          "b": {
+            "noise_to_signal": 64.9106081910027,
+            "mean_cosine": 0.07905435056731057
+          },
+          "c": {
+            "noise_to_signal": 2.292461289058058,
+            "mean_cosine": 0.49108150659447186
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 5.402396010665096,
+            "mean_cosine": 0.4027836603553318
+          },
+          "b": {
+            "noise_to_signal": 0.9970876419061687,
+            "mean_cosine": 0.6880065759497311
+          },
+          "c": {
+            "noise_to_signal": 3.4464594132941797,
+            "mean_cosine": 0.4419995516778657
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 39.23879945861433,
+            "mean_cosine": 0.20878006139658964
+          },
+          "b": {
+            "noise_to_signal": 2.176797658701535,
+            "mean_cosine": 0.5075477429664831
+          },
+          "c": {
+            "noise_to_signal": 20.831320751653355,
+            "mean_cosine": 0.24089939222590073
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.11982146019048803,
+            "mean_cosine": 0.9928957065181606
+          },
+          "b": {
+            "noise_to_signal": 0.02017382426733663,
+            "mean_cosine": 0.9951334455973775
+          },
+          "c": {
+            "noise_to_signal": 0.022157640203794158,
+            "mean_cosine": 0.9945403092013153
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.10880961378638582,
+            "mean_cosine": 0.9940733859517782
+          },
+          "b": {
+            "noise_to_signal": 0.013265787633185835,
+            "mean_cosine": 0.9959048358405357
+          },
+          "c": {
+            "noise_to_signal": 0.013863486687161052,
+            "mean_cosine": 0.9957213601522195
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.18620462632082477,
+            "mean_cosine": 0.9874579030912084
+          },
+          "b": {
+            "noise_to_signal": 0.032693641315688825,
+            "mean_cosine": 0.9924344618466796
+          },
+          "c": {
+            "noise_to_signal": 0.03249367020211277,
+            "mean_cosine": 0.9923656746704725
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1007,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.1449932302686491,
+            "mean_cosine": 0.9842900554235312
+          },
+          "b": {
+            "noise_to_signal": 0.024025463238242655,
+            "mean_cosine": 0.9908282798201793
+          },
+          "c": {
+            "noise_to_signal": 0.025748652393995156,
+            "mean_cosine": 0.9900180346426375
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 2.2085895812744893,
+            "mean_cosine": 0.5705122985613575
+          },
+          "b": {
+            "noise_to_signal": 1.889291894490688,
+            "mean_cosine": 0.6755666193822893
+          },
+          "c": {
+            "noise_to_signal": 0.8542095623204642,
+            "mean_cosine": 0.7504090031084102
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.9946743906509755,
+            "mean_cosine": 0.7193174703924753
+          },
+          "b": {
+            "noise_to_signal": 0.47837247133298544,
+            "mean_cosine": 0.8247422623634784
+          },
+          "c": {
+            "noise_to_signal": 0.3617617418797806,
+            "mean_cosine": 0.8739832912838594
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 0.705913811033084,
+            "mean_cosine": 0.8098070875215075
+          },
+          "b": {
+            "noise_to_signal": 0.5259888262353559,
+            "mean_cosine": 0.8137922586554309
+          },
+          "c": {
+            "noise_to_signal": 0.21802357198890007,
+            "mean_cosine": 0.9352004313886295
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 2.1295432436326234,
+            "mean_cosine": 0.5316649542636274
+          },
+          "b": {
+            "noise_to_signal": 0.7641296682046503,
+            "mean_cosine": 0.7236548776280654
+          },
+          "c": {
+            "noise_to_signal": 0.8880385783781364,
+            "mean_cosine": 0.6894713239540676
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.5898326379750327,
+            "mean_cosine": 0.8804838411080759
+          },
+          "b": {
+            "noise_to_signal": 0.8986737461449544,
+            "mean_cosine": 0.6856069675087968
+          },
+          "c": {
+            "noise_to_signal": 0.1286101143183863,
+            "mean_cosine": 0.9775399401177166
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.39907574247797234,
+            "mean_cosine": 0.9631138687952927
+          },
+          "b": {
+            "noise_to_signal": 0.17293389363389255,
+            "mean_cosine": 0.9566674614247163
+          },
+          "c": {
+            "noise_to_signal": 0.07193898188996588,
+            "mean_cosine": 0.9872030202543495
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1008,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.2360757230647007,
+            "mean_cosine": 0.9745794162349635
+          },
+          "b": {
+            "noise_to_signal": 0.02530049570528445,
+            "mean_cosine": 0.9900714412210705
+          },
+          "c": {
+            "noise_to_signal": 0.02860139762116894,
+            "mean_cosine": 0.9889765271593154
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 6.031220319524822,
+            "mean_cosine": 0.381458378585894
+          },
+          "b": {
+            "noise_to_signal": 0.1565823234674696,
+            "mean_cosine": 0.9619749850833338
+          },
+          "c": {
+            "noise_to_signal": 2.6051269214672734,
+            "mean_cosine": 0.4482288003036253
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 32.47413549236739,
+            "mean_cosine": 0.24877057076882586
+          },
+          "b": {
+            "noise_to_signal": 0.20542152317398257,
+            "mean_cosine": 0.9441288342818748
+          },
+          "c": {
+            "noise_to_signal": 12.813601294815369,
+            "mean_cosine": 0.2517059977628313
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 4.764002493390938,
+            "mean_cosine": 0.20508569901127935
+          },
+          "b": {
+            "noise_to_signal": 0.5106682537412599,
+            "mean_cosine": 0.8201842141456309
+          },
+          "c": {
+            "noise_to_signal": 1.2725947888748075,
+            "mean_cosine": 0.6197555636215215
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 1.3698619828192764,
+            "mean_cosine": 0.6157494302862355
+          },
+          "b": {
+            "noise_to_signal": 0.14550906607395944,
+            "mean_cosine": 0.9688677181818501
+          },
+          "c": {
+            "noise_to_signal": 0.5807993482841846,
+            "mean_cosine": 0.7896386041718382
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.7439531424123842,
+            "mean_cosine": 0.847604151696621
+          },
+          "b": {
+            "noise_to_signal": 0.12513736049834442,
+            "mean_cosine": 0.9533535150601692
+          },
+          "c": {
+            "noise_to_signal": 0.08591110761277602,
+            "mean_cosine": 0.9725525381429562
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 6.158719509735968,
+            "mean_cosine": 0.15503200279703674
+          },
+          "b": {
+            "noise_to_signal": 0.44360428317711526,
+            "mean_cosine": 0.8386933779571271
+          },
+          "c": {
+            "noise_to_signal": 1.8309632342533602,
+            "mean_cosine": 0.5270027202034063
+          }
+        }
+      }
+    },
+    {
+      "book_seed": 1009,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.23623500286519042,
+            "mean_cosine": 0.9801269713473402
+          },
+          "b": {
+            "noise_to_signal": 0.023783868582362748,
+            "mean_cosine": 0.9909156125843896
+          },
+          "c": {
+            "noise_to_signal": 0.02411728383973337,
+            "mean_cosine": 0.9907955322149065
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 838.0518816320458,
+            "mean_cosine": 0.11265935611717783
+          },
+          "b": {
+            "noise_to_signal": 6.199250558954581,
+            "mean_cosine": 0.30083116780770397
+          },
+          "c": {
+            "noise_to_signal": 109.61603699975593,
+            "mean_cosine": 0.08696013972921082
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 1.1085832354810694,
+            "mean_cosine": 0.6687007345083641
+          },
+          "b": {
+            "noise_to_signal": 0.9364116085096691,
+            "mean_cosine": 0.6881944488580157
+          },
+          "c": {
+            "noise_to_signal": 0.30216850153695163,
+            "mean_cosine": 0.8998125821734894
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 0.4346353086602644,
+            "mean_cosine": 0.9825796723176821
+          },
+          "b": {
+            "noise_to_signal": 0.06102247706022172,
+            "mean_cosine": 0.9894056260389946
+          },
+          "c": {
+            "noise_to_signal": 0.03800720866317966,
+            "mean_cosine": 0.993463514230059
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.30157719496469704,
+            "mean_cosine": 0.9912983081306846
+          },
+          "b": {
+            "noise_to_signal": 0.01808157222647063,
+            "mean_cosine": 0.9952873065917845
+          },
+          "c": {
+            "noise_to_signal": 0.016374996967793185,
+            "mean_cosine": 0.9956389175572837
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.5630982043357405,
+            "mean_cosine": 0.8988826745813825
+          },
+          "b": {
+            "noise_to_signal": 0.16773642063466693,
+            "mean_cosine": 0.9620397112135908
+          },
+          "c": {
+            "noise_to_signal": 0.0963373112507792,
+            "mean_cosine": 0.9839760095940643
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.5354820982293154,
+            "mean_cosine": 0.9596527648866404
+          },
+          "b": {
+            "noise_to_signal": 0.08033435846247579,
+            "mean_cosine": 0.9771011567686279
+          },
+          "c": {
+            "noise_to_signal": 0.04582374320612062,
+            "mean_cosine": 0.9885949855888357
+          }
+        }
+      }
+    }
+  ],
+  "bandit": [
+    {
+      "problem_idx": 0,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 1.017796491278511,
+            "mean_cosine": 0.7324892189245271
+          },
+          "b": {
+            "noise_to_signal": 0.9356144824167163,
+            "mean_cosine": 0.7228365701817204
+          },
+          "c": {
+            "noise_to_signal": 0.7144140087628168,
+            "mean_cosine": 0.7850754468529597
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 23.844341405662455,
+            "mean_cosine": 0.13762632000461145
+          },
+          "b": {
+            "noise_to_signal": 12.617410284807278,
+            "mean_cosine": 0.2430021607733074
+          },
+          "c": {
+            "noise_to_signal": 18.911262983023846,
+            "mean_cosine": 0.19959571067582596
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 14.109066977052194,
+            "mean_cosine": 0.2571680329756174
+          },
+          "b": {
+            "noise_to_signal": 2.4663825188912396,
+            "mean_cosine": 0.5065991989034695
+          },
+          "c": {
+            "noise_to_signal": 10.875511332501526,
+            "mean_cosine": 0.2561784323889515
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 28.170346363435744,
+            "mean_cosine": 0.20792623292289913
+          },
+          "b": {
+            "noise_to_signal": 2.2261749575464105,
+            "mean_cosine": 0.5327599971376981
+          },
+          "c": {
+            "noise_to_signal": 27.13327563259667,
+            "mean_cosine": 0.16531299786365214
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.21330923237667243,
+            "mean_cosine": 0.9628223829244653
+          },
+          "b": {
+            "noise_to_signal": 0.19122386399845256,
+            "mean_cosine": 0.9394975068275422
+          },
+          "c": {
+            "noise_to_signal": 0.09173929223338184,
+            "mean_cosine": 0.9730554701843146
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.454519453913142,
+            "mean_cosine": 0.8652436640139558
+          },
+          "b": {
+            "noise_to_signal": 0.46866103464563613,
+            "mean_cosine": 0.8367264586716023
+          },
+          "c": {
+            "noise_to_signal": 0.3162729640903648,
+            "mean_cosine": 0.8948178266367076
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.7515285753814022,
+            "mean_cosine": 0.7679794532756921
+          },
+          "b": {
+            "noise_to_signal": 0.9598235633978509,
+            "mean_cosine": 0.6975991393367045
+          },
+          "c": {
+            "noise_to_signal": 0.5149237297174554,
+            "mean_cosine": 0.8247386092084634
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 1,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.893603363663345,
+            "mean_cosine": 0.8868135259724486
+          },
+          "b": {
+            "noise_to_signal": 0.19434475992158623,
+            "mean_cosine": 0.9318304457221319
+          },
+          "c": {
+            "noise_to_signal": 0.04605442280457017,
+            "mean_cosine": 0.9871528362098659
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 4.6729806831050515,
+            "mean_cosine": 0.38082814089843575
+          },
+          "b": {
+            "noise_to_signal": 19.254697715940882,
+            "mean_cosine": 0.19770890817686002
+          },
+          "c": {
+            "noise_to_signal": 1.1338158062577988,
+            "mean_cosine": 0.6462407722085213
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 1.5434643240401527,
+            "mean_cosine": 0.6252154726719716
+          },
+          "b": {
+            "noise_to_signal": 0.8790392892269454,
+            "mean_cosine": 0.7019146438448776
+          },
+          "c": {
+            "noise_to_signal": 0.2974598554425926,
+            "mean_cosine": 0.8967811260203721
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 1.9075224221662657,
+            "mean_cosine": 0.6403443842027025
+          },
+          "b": {
+            "noise_to_signal": 0.9926180657158933,
+            "mean_cosine": 0.7320590993652507
+          },
+          "c": {
+            "noise_to_signal": 0.3650283903120782,
+            "mean_cosine": 0.8817715955786155
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.8105681273703659,
+            "mean_cosine": 0.9442985322436573
+          },
+          "b": {
+            "noise_to_signal": 0.14701872965272078,
+            "mean_cosine": 0.9559320582022146
+          },
+          "c": {
+            "noise_to_signal": 0.03288994988180363,
+            "mean_cosine": 0.9903356248498073
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.8637378220689084,
+            "mean_cosine": 0.9315233289137084
+          },
+          "b": {
+            "noise_to_signal": 0.16681182130154742,
+            "mean_cosine": 0.954461666705247
+          },
+          "c": {
+            "noise_to_signal": 0.038752579723007254,
+            "mean_cosine": 0.9898082349631893
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.8949717181646926,
+            "mean_cosine": 0.9321693715018253
+          },
+          "b": {
+            "noise_to_signal": 0.19176195305043106,
+            "mean_cosine": 0.9438407043766412
+          },
+          "c": {
+            "noise_to_signal": 0.03586778232645526,
+            "mean_cosine": 0.9903890361318088
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 2,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 1.1262128407991259,
+            "mean_cosine": 0.7482698259208593
+          },
+          "b": {
+            "noise_to_signal": 1.3586330411587817,
+            "mean_cosine": 0.6699949145025629
+          },
+          "c": {
+            "noise_to_signal": 0.30189699757801763,
+            "mean_cosine": 0.9008383367752888
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 9.757823758694565,
+            "mean_cosine": 0.36621611233662893
+          },
+          "b": {
+            "noise_to_signal": 1.767546399831483,
+            "mean_cosine": 0.6004470520389168
+          },
+          "c": {
+            "noise_to_signal": 5.203760603074702,
+            "mean_cosine": 0.43604287287074783
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 6.057937025520397,
+            "mean_cosine": 0.3735944186450226
+          },
+          "b": {
+            "noise_to_signal": 4.697253040979353,
+            "mean_cosine": 0.4025045807817695
+          },
+          "c": {
+            "noise_to_signal": 2.8779485698491034,
+            "mean_cosine": 0.5269718164884194
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 3.466449821807145,
+            "mean_cosine": 0.35228969088997325
+          },
+          "b": {
+            "noise_to_signal": 38.188889121440084,
+            "mean_cosine": 0.18941791849683573
+          },
+          "c": {
+            "noise_to_signal": 1.582429918049872,
+            "mean_cosine": 0.5686866830658927
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.31060746463166633,
+            "mean_cosine": 0.9489767169722454
+          },
+          "b": {
+            "noise_to_signal": 0.1623817884243557,
+            "mean_cosine": 0.951578220560102
+          },
+          "c": {
+            "noise_to_signal": 0.09286133852909953,
+            "mean_cosine": 0.9702683586374344
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.8373933489235096,
+            "mean_cosine": 0.8380326676260575
+          },
+          "b": {
+            "noise_to_signal": 0.27278774341797063,
+            "mean_cosine": 0.909547020411133
+          },
+          "c": {
+            "noise_to_signal": 0.25972575237972984,
+            "mean_cosine": 0.9145901930241273
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.5532811437555375,
+            "mean_cosine": 0.9519398482726479
+          },
+          "b": {
+            "noise_to_signal": 0.13071523555795744,
+            "mean_cosine": 0.9567503372311716
+          },
+          "c": {
+            "noise_to_signal": 0.06542909720675502,
+            "mean_cosine": 0.9803668542051168
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 3,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 1.7826675262588818,
+            "mean_cosine": 0.6425938137646872
+          },
+          "b": {
+            "noise_to_signal": 0.8437573658512492,
+            "mean_cosine": 0.771404291657266
+          },
+          "c": {
+            "noise_to_signal": 0.946750241846344,
+            "mean_cosine": 0.7415067448883703
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 7.765718354346726,
+            "mean_cosine": 0.27328400699385924
+          },
+          "b": {
+            "noise_to_signal": 13.994798385198056,
+            "mean_cosine": 0.25774892904451335
+          },
+          "c": {
+            "noise_to_signal": 5.898142007512724,
+            "mean_cosine": 0.3427903473578952
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 3.8029012045183603,
+            "mean_cosine": 0.4307730139789542
+          },
+          "b": {
+            "noise_to_signal": 1.8176802212484762,
+            "mean_cosine": 0.5596239978111384
+          },
+          "c": {
+            "noise_to_signal": 2.5875862314404037,
+            "mean_cosine": 0.49685656107939635
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 123.54064775007544,
+            "mean_cosine": 0.08917435473858444
+          },
+          "b": {
+            "noise_to_signal": 5.088187855239134,
+            "mean_cosine": 0.37145863611850277
+          },
+          "c": {
+            "noise_to_signal": 179.21138924407254,
+            "mean_cosine": 0.0684932733490516
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.18541449134437016,
+            "mean_cosine": 0.9794740536107057
+          },
+          "b": {
+            "noise_to_signal": 0.052135577859434824,
+            "mean_cosine": 0.9810783219835316
+          },
+          "c": {
+            "noise_to_signal": 0.038026128927011876,
+            "mean_cosine": 0.9867157484751475
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.16656510305742495,
+            "mean_cosine": 0.9799201142672934
+          },
+          "b": {
+            "noise_to_signal": 0.04156961614401733,
+            "mean_cosine": 0.9847480004736058
+          },
+          "c": {
+            "noise_to_signal": 0.04001601915131396,
+            "mean_cosine": 0.9856791822264354
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.27083953535197824,
+            "mean_cosine": 0.9442403982203725
+          },
+          "b": {
+            "noise_to_signal": 0.23486654063027423,
+            "mean_cosine": 0.9256270784348986
+          },
+          "c": {
+            "noise_to_signal": 0.1143911853596862,
+            "mean_cosine": 0.9631004791103721
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 4,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 1.143892214888065,
+            "mean_cosine": 0.7423014313475972
+          },
+          "b": {
+            "noise_to_signal": 0.6753402711025578,
+            "mean_cosine": 0.8050753850229523
+          },
+          "c": {
+            "noise_to_signal": 0.6432584622440536,
+            "mean_cosine": 0.8162603464705076
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 2.1486380497055717,
+            "mean_cosine": 0.5485201221173454
+          },
+          "b": {
+            "noise_to_signal": 2.3100473013644636,
+            "mean_cosine": 0.513974259759088
+          },
+          "c": {
+            "noise_to_signal": 1.6255771473943221,
+            "mean_cosine": 0.5971111100857784
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 3.7497532864461776,
+            "mean_cosine": 0.42740273081362684
+          },
+          "b": {
+            "noise_to_signal": 5.136165687043266,
+            "mean_cosine": 0.3735785057902746
+          },
+          "c": {
+            "noise_to_signal": 2.6833093291721166,
+            "mean_cosine": 0.4956017702234338
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 3.239686721299405,
+            "mean_cosine": 0.44158565688817464
+          },
+          "b": {
+            "noise_to_signal": 3.682763005586389,
+            "mean_cosine": 0.4279640100754179
+          },
+          "c": {
+            "noise_to_signal": 2.0585567996922944,
+            "mean_cosine": 0.5356652046732073
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.5934454260117985,
+            "mean_cosine": 0.8267357580206632
+          },
+          "b": {
+            "noise_to_signal": 0.5498901666602162,
+            "mean_cosine": 0.8257490480044827
+          },
+          "c": {
+            "noise_to_signal": 0.4304033350417433,
+            "mean_cosine": 0.858620597357296
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.2779805032490293,
+            "mean_cosine": 0.9564112763056571
+          },
+          "b": {
+            "noise_to_signal": 0.1879875913084982,
+            "mean_cosine": 0.9421621408404217
+          },
+          "c": {
+            "noise_to_signal": 0.1001388078112811,
+            "mean_cosine": 0.9716017249922541
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.33441108325216745,
+            "mean_cosine": 0.9005450195078276
+          },
+          "b": {
+            "noise_to_signal": 0.2973896061406297,
+            "mean_cosine": 0.897097119734794
+          },
+          "c": {
+            "noise_to_signal": 0.22858928054098013,
+            "mean_cosine": 0.9212838426212048
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 5,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.36065448036192727,
+            "mean_cosine": 0.8962527711100567
+          },
+          "b": {
+            "noise_to_signal": 0.40511969116422325,
+            "mean_cosine": 0.8633258927240763
+          },
+          "c": {
+            "noise_to_signal": 0.19848409268559591,
+            "mean_cosine": 0.9349074700035517
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 6.668614305994435,
+            "mean_cosine": 0.3152330310051833
+          },
+          "b": {
+            "noise_to_signal": 6.0130831303253975,
+            "mean_cosine": 0.36357308478389316
+          },
+          "c": {
+            "noise_to_signal": 4.893232460297933,
+            "mean_cosine": 0.3693516908756422
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 0.8474027935150085,
+            "mean_cosine": 0.7316971680679419
+          },
+          "b": {
+            "noise_to_signal": 0.7930665567417429,
+            "mean_cosine": 0.7554211959760117
+          },
+          "c": {
+            "noise_to_signal": 0.6206053639846314,
+            "mean_cosine": 0.7857015379427121
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 3.314954627220041,
+            "mean_cosine": 0.4233043428180107
+          },
+          "b": {
+            "noise_to_signal": 3.0682192941157767,
+            "mean_cosine": 0.4559082529112526
+          },
+          "c": {
+            "noise_to_signal": 2.041593517217691,
+            "mean_cosine": 0.5321738503600648
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 1.1226982294582966,
+            "mean_cosine": 0.6900062728681373
+          },
+          "b": {
+            "noise_to_signal": 1.2092090645332023,
+            "mean_cosine": 0.6594166791520754
+          },
+          "c": {
+            "noise_to_signal": 0.7874856472449842,
+            "mean_cosine": 0.7553250669593774
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 2.1948389901683663,
+            "mean_cosine": 0.5178574791415411
+          },
+          "b": {
+            "noise_to_signal": 3.043898247541222,
+            "mean_cosine": 0.48192014873426975
+          },
+          "c": {
+            "noise_to_signal": 1.3568848471497605,
+            "mean_cosine": 0.624509692317146
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.8047267800851486,
+            "mean_cosine": 0.7592704698080864
+          },
+          "b": {
+            "noise_to_signal": 0.8776831754562919,
+            "mean_cosine": 0.7328269717734768
+          },
+          "c": {
+            "noise_to_signal": 0.49096222524333716,
+            "mean_cosine": 0.8302232751451252
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 6,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.32219207867456645,
+            "mean_cosine": 0.9134509048638584
+          },
+          "b": {
+            "noise_to_signal": 0.3018497934188932,
+            "mean_cosine": 0.897568551584091
+          },
+          "c": {
+            "noise_to_signal": 0.17625332434233196,
+            "mean_cosine": 0.9419108084832983
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 7.1686492158318895,
+            "mean_cosine": 0.32742120923388596
+          },
+          "b": {
+            "noise_to_signal": 6.804975190863367,
+            "mean_cosine": 0.34378447475359575
+          },
+          "c": {
+            "noise_to_signal": 4.6896119421689715,
+            "mean_cosine": 0.3886665414009795
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 1.8122244295169523,
+            "mean_cosine": 0.6125890827745547
+          },
+          "b": {
+            "noise_to_signal": 1.9908112645769938,
+            "mean_cosine": 0.5661004619182354
+          },
+          "c": {
+            "noise_to_signal": 1.1900064572416562,
+            "mean_cosine": 0.6903363421067736
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 1.9549922180357584,
+            "mean_cosine": 0.5776637323789172
+          },
+          "b": {
+            "noise_to_signal": 1.8155479575211564,
+            "mean_cosine": 0.5885508312148561
+          },
+          "c": {
+            "noise_to_signal": 1.4164439553832595,
+            "mean_cosine": 0.6396403030147374
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.24990072082876405,
+            "mean_cosine": 0.9513242555345056
+          },
+          "b": {
+            "noise_to_signal": 0.18701320493258763,
+            "mean_cosine": 0.9422159677038713
+          },
+          "c": {
+            "noise_to_signal": 0.11721016733135443,
+            "mean_cosine": 0.9658178565423459
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.2829438445908697,
+            "mean_cosine": 0.9306165919177067
+          },
+          "b": {
+            "noise_to_signal": 0.20220000109499559,
+            "mean_cosine": 0.9318337157058886
+          },
+          "c": {
+            "noise_to_signal": 0.14838487080572785,
+            "mean_cosine": 0.9486643587291317
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.18027354017055713,
+            "mean_cosine": 0.9704542749764062
+          },
+          "b": {
+            "noise_to_signal": 0.1377951494097409,
+            "mean_cosine": 0.9592483169848386
+          },
+          "c": {
+            "noise_to_signal": 0.06869529521880068,
+            "mean_cosine": 0.9796925347744594
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 7,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 1.9182377690214296,
+            "mean_cosine": 0.6423798011209068
+          },
+          "b": {
+            "noise_to_signal": 2.0911568078613403,
+            "mean_cosine": 0.5844600434629599
+          },
+          "c": {
+            "noise_to_signal": 1.0954001661913435,
+            "mean_cosine": 0.7240126587712864
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 16.56558872492875,
+            "mean_cosine": 0.23611766427345945
+          },
+          "b": {
+            "noise_to_signal": 7.841858857731588,
+            "mean_cosine": 0.3173782905039478
+          },
+          "c": {
+            "noise_to_signal": 12.524697263702317,
+            "mean_cosine": 0.23903055638922485
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 18.362193121428366,
+            "mean_cosine": 0.20654493965686518
+          },
+          "b": {
+            "noise_to_signal": 24.6740748511252,
+            "mean_cosine": 0.20235631964693682
+          },
+          "c": {
+            "noise_to_signal": 17.521457165777647,
+            "mean_cosine": 0.22270068270261634
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 6.190816297438383,
+            "mean_cosine": 0.32782553723512353
+          },
+          "b": {
+            "noise_to_signal": 6.471857921952174,
+            "mean_cosine": 0.35319484949930097
+          },
+          "c": {
+            "noise_to_signal": 5.718190366209742,
+            "mean_cosine": 0.35469543605217163
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 1.1354760497923218,
+            "mean_cosine": 0.6728490181472091
+          },
+          "b": {
+            "noise_to_signal": 1.0486127681253234,
+            "mean_cosine": 0.6970550032076556
+          },
+          "c": {
+            "noise_to_signal": 0.7757774628084817,
+            "mean_cosine": 0.7521440513850794
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.5486431086683188,
+            "mean_cosine": 0.8471723602273501
+          },
+          "b": {
+            "noise_to_signal": 0.556687796636123,
+            "mean_cosine": 0.8046885339450719
+          },
+          "c": {
+            "noise_to_signal": 0.311175135119125,
+            "mean_cosine": 0.896318083573411
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 1.0566209464790743,
+            "mean_cosine": 0.695582151916012
+          },
+          "b": {
+            "noise_to_signal": 0.9283112428926547,
+            "mean_cosine": 0.7170104223199254
+          },
+          "c": {
+            "noise_to_signal": 0.6970942300659637,
+            "mean_cosine": 0.7700336977822808
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 8,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 0.46592759126030914,
+            "mean_cosine": 0.9363237283515868
+          },
+          "b": {
+            "noise_to_signal": 0.1372643002157744,
+            "mean_cosine": 0.9515943160124316
+          },
+          "c": {
+            "noise_to_signal": 0.08213987250140685,
+            "mean_cosine": 0.9742432469940588
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 1.0334276458379985,
+            "mean_cosine": 0.7740940177259554
+          },
+          "b": {
+            "noise_to_signal": 0.46020463928983313,
+            "mean_cosine": 0.8557050378147226
+          },
+          "c": {
+            "noise_to_signal": 0.42522961052008923,
+            "mean_cosine": 0.860752397927832
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 6.623789972110079,
+            "mean_cosine": 0.3815796000726284
+          },
+          "b": {
+            "noise_to_signal": 3.514839782406144,
+            "mean_cosine": 0.4519853885830683
+          },
+          "c": {
+            "noise_to_signal": 3.0573819113258276,
+            "mean_cosine": 0.4651940567769188
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 2.1261143639969493,
+            "mean_cosine": 0.6245541909225535
+          },
+          "b": {
+            "noise_to_signal": 0.9751056806527104,
+            "mean_cosine": 0.7116536743653921
+          },
+          "c": {
+            "noise_to_signal": 0.8972681424345951,
+            "mean_cosine": 0.7290599314220477
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 0.4973924748807824,
+            "mean_cosine": 0.9169559230984607
+          },
+          "b": {
+            "noise_to_signal": 0.1714169903259269,
+            "mean_cosine": 0.946263025208708
+          },
+          "c": {
+            "noise_to_signal": 0.16205321272441342,
+            "mean_cosine": 0.9486609736678324
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.33723205945011453,
+            "mean_cosine": 0.971292297230231
+          },
+          "b": {
+            "noise_to_signal": 0.06798721307322901,
+            "mean_cosine": 0.9806346239687009
+          },
+          "c": {
+            "noise_to_signal": 0.05080124657052262,
+            "mean_cosine": 0.9850675662837035
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 0.32172500878805527,
+            "mean_cosine": 0.9721424584888941
+          },
+          "b": {
+            "noise_to_signal": 0.06629536351025196,
+            "mean_cosine": 0.9807400703508323
+          },
+          "c": {
+            "noise_to_signal": 0.05311283135608314,
+            "mean_cosine": 0.9847563692972028
+          }
+        }
+      }
+    },
+    {
+      "problem_idx": 9,
+      "points": {
+        "init": {
+          "a": {
+            "noise_to_signal": 4.636130495280901,
+            "mean_cosine": 0.46333285817848024
+          },
+          "b": {
+            "noise_to_signal": 2.6414721101146394,
+            "mean_cosine": 0.5678477668833284
+          },
+          "c": {
+            "noise_to_signal": 3.413861494727173,
+            "mean_cosine": 0.532793408374484
+          }
+        },
+        "traj_0": {
+          "a": {
+            "noise_to_signal": 3.150609361967756,
+            "mean_cosine": 0.39432478524699455
+          },
+          "b": {
+            "noise_to_signal": 26.70903727526019,
+            "mean_cosine": 0.20468901629759978
+          },
+          "c": {
+            "noise_to_signal": 1.94841626131426,
+            "mean_cosine": 0.5433233913107512
+          }
+        },
+        "traj_1": {
+          "a": {
+            "noise_to_signal": 3.1250207909950216,
+            "mean_cosine": 0.40301990513259145
+          },
+          "b": {
+            "noise_to_signal": 56.104501951444135,
+            "mean_cosine": 0.15018089078876407
+          },
+          "c": {
+            "noise_to_signal": 1.7778948286733751,
+            "mean_cosine": 0.5603582340588589
+          }
+        },
+        "traj_2": {
+          "a": {
+            "noise_to_signal": 11.992702154199469,
+            "mean_cosine": 0.21317153706318454
+          },
+          "b": {
+            "noise_to_signal": 3.3357023754804453,
+            "mean_cosine": 0.4251223247798606
+          },
+          "c": {
+            "noise_to_signal": 8.631247366684029,
+            "mean_cosine": 0.3043730727165042
+          }
+        },
+        "random_0": {
+          "a": {
+            "noise_to_signal": 2.194145977855136,
+            "mean_cosine": 0.48343683493430206
+          },
+          "b": {
+            "noise_to_signal": 3.1102781080099215,
+            "mean_cosine": 0.4765907276570879
+          },
+          "c": {
+            "noise_to_signal": 1.2078516053510524,
+            "mean_cosine": 0.6502028484114624
+          }
+        },
+        "random_1": {
+          "a": {
+            "noise_to_signal": 0.7375461939444747,
+            "mean_cosine": 0.7809841352638034
+          },
+          "b": {
+            "noise_to_signal": 0.48585020559766334,
+            "mean_cosine": 0.8350043219386987
+          },
+          "c": {
+            "noise_to_signal": 0.5272470972540367,
+            "mean_cosine": 0.8289439000928481
+          }
+        },
+        "random_2": {
+          "a": {
+            "noise_to_signal": 3.80634182756429,
+            "mean_cosine": 0.4503549813500449
+          },
+          "b": {
+            "noise_to_signal": 1.0088487279624758,
+            "mean_cosine": 0.6842116072208779
+          },
+          "c": {
+            "noise_to_signal": 2.8113066144283514,
+            "mean_cosine": 0.48517252481744155
+          }
+        }
+      }
+    }
+  ]
+}

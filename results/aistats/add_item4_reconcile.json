@@ -1,0 +1,112 @@
+{
+  "root_cause": {
+    "v3_bandit_median": 0.02360969785961222,
+    "add4_bandit_median": 0.010697444684013579,
+    "v3_ac_median": 0.05833993180642963,
+    "add4_ac_median": 0.06074914207513912,
+    "swap_test_v3_formula_median": 0.0195,
+    "swap_test_add4_formula_median": 0.0123
+  },
+  "ac_paired_cis": {
+    "plugin_G0=1": {
+      "mean": 0.07650564960163352,
+      "ci": [
+        0.06715927280770172,
+        0.0883066301240639
+      ]
+    },
+    "plugin_G0=4": {
+      "mean": 0.06565125533129369,
+      "ci": [
+        0.060877739731415,
+        0.07249448558200927
+      ]
+    },
+    "uniform_GRPO": {
+      "mean": 0.0660068873658217,
+      "ci": [
+        0.059110459819101145,
+        0.07652174224730204
+      ]
+    },
+    "exact_sigma_sampling": {
+      "mean": 0.059738999218002055,
+      "ci": [
+        0.05485640690946067,
+        0.06573130897479162
+      ]
+    }
+  },
+  "ac_paired_diffs": {
+    "plugin_G0=1_minus_uniform_GRPO": {
+      "point": 0.01049876223581181,
+      "ci": [
+        0.005408974192062391,
+        0.01631384383248155
+      ],
+      "distinguishable": true
+    },
+    "plugin_G0=1_minus_exact_sigma_sampling": {
+      "point": 0.01676665038363146,
+      "ci": [
+        0.003934067980837244,
+        0.03213995668848323
+      ],
+      "distinguishable": true
+    },
+    "plugin_G0=4_minus_uniform_GRPO": {
+      "point": -0.00035563203452801395,
+      "ci": [
+        -0.013931276085353952,
+        0.012591422075160237
+      ],
+      "distinguishable": false
+    },
+    "plugin_G0=4_minus_exact_sigma_sampling": {
+      "point": 0.005912256113291638,
+      "ci": [
+        -0.003427436906999169,
+        0.013219938023699987
+      ],
+      "distinguishable": false
+    },
+    "plugin_G0=1_minus_plugin_G0=4": {
+      "point": 0.010854394270339823,
+      "ci": [
+        0.0014821770044896043,
+        0.02457706507389215
+      ],
+      "distinguishable": true
+    }
+  },
+  "ac_beats_rloo": {
+    "fraction": 0.6,
+    "per_book": {
+      "1000": true,
+      "1001": false,
+      "1002": true,
+      "1003": false,
+      "1004": false,
+      "1005": true,
+      "1006": false,
+      "1007": true,
+      "1008": true,
+      "1009": true
+    }
+  },
+  "bandit_beats_rloo": {
+    "fraction": 0.4,
+    "per_problem": {
+      "0": false,
+      "1": true,
+      "2": false,
+      "3": false,
+      "4": true,
+      "5": true,
+      "6": false,
+      "7": false,
+      "8": false,
+      "9": true
+    }
+  }
+}

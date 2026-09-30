@@ -1,0 +1,18 @@
+{
+  "ac_phi1": {
+    "correlation": 0.8431632939321981,
+    "slope": 1.0438497407535081,
+    "intercept": -7.273296028525968,
+    "n_replicates": 40,
+    "n_used": 40,
+    "n_dropped_nonpositive": 0
+  },
+  "bandit": {
+    "correlation": 0.8102021152442607,
+    "slope": 1.824048035567367,
+    "intercept": 1.3270278606304315,
+    "n_replicates": 48,
+    "n_used": 36,
+    "n_dropped_nonpositive": 12
+  }
+}
