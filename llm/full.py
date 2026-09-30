@@ -2,8 +2,13 @@
 k=10 only, per the spec) x 2 seeds (3 if time). GATED: only run this after the pilot has
 passed AND a human has given explicit OK -- do not invoke from pilot.py automatically.
 
+Resumable: pass --result_dir pointing at wherever completed run JSONs are being persisted
+(e.g. a mounted Drive folder); any (method,k,seed) whose "<method>_k<k>_seed<seed>.json"
+already exists there is skipped, so a run interrupted mid-sweep (e.g. a Colab disconnect)
+can continue from where it left off just by rerunning with the same --result_dir.
+
 Usage (on a CUDA machine, e.g. Colab A100):
-    cd llm && python full.py --seeds 0 1
+    cd llm && python full.py --seeds 0 1 --result_dir /content/drive/MyDrive/grpo_llm_results
 """
 import argparse
 import json
@@ -16,6 +21,14 @@ from run import run_one
 
 # (method, k) pairs exactly as specified: 3 methods x {k=1,k=10} + sigma_sampling at k=10 only
 CONFIGS = [(m, k) for m in ["grpo", "drgrpo", "global"] for k in C.K_VALUES] + [("sigma_sampling", 10)]
+
+
+def result_key(method, k, seed):
+    return f"{method}_k{k}_seed{seed}"
+
+
+def result_path(result_dir, method, k, seed):
+    return os.path.join(result_dir, f"{result_key(method, k, seed)}.json")
 
 
 def progress(history, family):
@@ -34,23 +47,13 @@ def ci95(values):
     return mean, mean - tcrit * sem, mean + tcrit * sem
 
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
-    args = ap.parse_args()
-
-    all_results = {}
-    for method, k in CONFIGS:
-        for seed in args.seeds:
-            key = f"{method}_k{k}_seed{seed}"
-            print(f"\n=== {key} ===")
-            res = run_one(method, k, seed)
-            all_results[key] = res
-
+def build_summary(all_results, seeds, configs=CONFIGS):
     summary = {}
-    for method, k in CONFIGS:
-        prog_a = [progress(all_results[f"{method}_k{k}_seed{s}"]["eval_history"], C.FAMILY_A) for s in args.seeds]
-        prog_b = [progress(all_results[f"{method}_k{k}_seed{s}"]["eval_history"], C.FAMILY_B) for s in args.seeds]
+    for method, k in configs:
+        prog_a = [progress(all_results[result_key(method, k, s)]["eval_history"], C.FAMILY_A) for s in seeds
+                  if result_key(method, k, s) in all_results]
+        prog_b = [progress(all_results[result_key(method, k, s)]["eval_history"], C.FAMILY_B) for s in seeds
+                  if result_key(method, k, s) in all_results]
         ratio_b_over_a = [b / a if a not in (0, float("nan")) else float("nan") for a, b in zip(prog_a, prog_b)]
         mean_a, lo_a, hi_a = ci95(prog_a)
         mean_b, lo_b, hi_b = ci95(prog_b)
@@ -59,10 +62,43 @@ if __name__ == "__main__":
             progress_B=dict(mean=mean_b, ci=[lo_b, hi_b], values=prog_b),
             B_over_A_ratio=dict(values=ratio_b_over_a, mean=float(np.nanmean(ratio_b_over_a))),
         )
-        print(f"{method} k={k}: progress_A={mean_a:+.4f} progress_B={mean_b:+.4f} "
-              f"B/A_ratio={np.nanmean(ratio_b_over_a):.2f}")
+    return summary
 
-    os.makedirs(C.RESULTS_DIR, exist_ok=True)
-    with open(os.path.join(C.RESULTS_DIR, "full_summary.json"), "w") as f:
+
+def run_sweep(seeds, result_dir, skip_existing=True):
+    """Runs every (method,k,seed) in CONFIGS x seeds, writing each result to result_dir
+    immediately after it completes. Skips any (method,k,seed) whose result file already
+    exists in result_dir when skip_existing=True (the resume path)."""
+    os.makedirs(result_dir, exist_ok=True)
+    all_results = {}
+    for method, k in CONFIGS:
+        for seed in seeds:
+            key = result_key(method, k, seed)
+            path = result_path(result_dir, method, k, seed)
+            if skip_existing and os.path.exists(path):
+                print(f"=== {key}: SKIPPED (result already exists at {path}) ===")
+                with open(path) as f:
+                    all_results[key] = json.load(f)
+                continue
+            print(f"\n=== {key} ===")
+            res = run_one(method, k, seed, out_dir=result_dir)
+            all_results[key] = res
+    return all_results
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
+    ap.add_argument("--result_dir", type=str, default=C.RESULTS_DIR)
+    ap.add_argument("--no_resume", action="store_true", help="rerun every config even if a result file already exists")
+    args = ap.parse_args()
+
+    all_results = run_sweep(args.seeds, args.result_dir, skip_existing=not args.no_resume)
+    summary = build_summary(all_results, args.seeds)
+    for name, s in summary.items():
+        print(f"{name}: progress_A={s['progress_A']['mean']:+.4f} progress_B={s['progress_B']['mean']:+.4f} "
+              f"B/A_ratio={s['B_over_A_ratio']['mean']:.2f}")
+
+    with open(os.path.join(args.result_dir, "full_summary.json"), "w") as f:
         json.dump(summary, f, indent=2)
-    print(f"\nwrote {C.RESULTS_DIR}/full_summary.json")
+    print(f"\nwrote {args.result_dir}/full_summary.json")

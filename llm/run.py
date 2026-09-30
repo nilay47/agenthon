@@ -63,6 +63,7 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR, dry_r
         per_device_train_batch_size=C.PROMPTS_PER_STEP * C.G,
         max_completion_length=200,  # short reasoning + "Answer: <int>" comfortably fits; keeps wall-clock down
         max_steps=max_steps,
+        temperature=C.TEMPERATURE,
         learning_rate=C.LR,
         beta=C.KL_BETA,
         bf16=True,
