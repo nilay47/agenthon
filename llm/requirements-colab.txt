@@ -1,0 +1,21 @@
+# Colab-safe requirements. Colab preinstalls a torch build matched to its own CUDA driver
+# (currently CUDA 12); letting pip resolve these packages' OWN torch dependency normally can
+# silently pull a newer torch wheel that expects a CUDA runtime Colab doesn't actually ship
+# (symptom: "ImportError: libcudart.so.13: cannot open shared object file" when importing
+# trl.trainer.grpo_trainer). This file deliberately excludes torch/torchvision/torchaudio/
+# triton and every nvidia-*/cuda-* package -- install it with --no-deps (see the notebook's
+# install cell), then separately install the lightweight, non-torch packages these five
+# actually need (also listed in the notebook) with normal resolution, since those can't
+# touch torch or CUDA at all.
+#
+# vLLM is intentionally NOT listed here: it pulls its own torch/CUDA build via its own
+# dependency pins, which is the single most likely cause of exactly this failure. Leave it
+# uninstalled by default (run.py's use_vllm falls back to plain HF generation automatically
+# when `import vllm` fails); only add it back by hand if you've confirmed a wheel matching
+# Colab's exact torch+CUDA build imports cleanly.
+
+trl>=1.14,<2
+peft>=0.21,<1
+transformers>=4.56,<6
+accelerate>=1.0,<2
+datasets>=3.0,<5
