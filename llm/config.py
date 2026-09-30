@@ -1,6 +1,28 @@
 """Shared constants for the LLM GRPO reward-scaling experiment (AISTATS)."""
+import torch
 
 MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
+
+# Device/precision: detected once here so every script (run.py, baseline_eval.py) agrees.
+# Not every CUDA GPU supports bf16 (e.g. pre-Ampere); fall back to fp16 on GPU, fp32 on CPU,
+# rather than assuming the target is always an A100.
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+BF16_SUPPORTED = torch.cuda.is_available() and torch.cuda.is_bf16_supported()
+MODEL_DTYPE = torch.bfloat16 if BF16_SUPPORTED else (torch.float16 if DEVICE == "cuda" else torch.float32)
+
+
+def load_causal_lm(model_name, dtype):
+    """transformers renamed from_pretrained's `torch_dtype` kwarg to `dtype` (the old name
+    now just warns); the exact version this happened in isn't pinned tightly enough in
+    requirements-colab.txt to assume either name is safe, so try the new name first and fall
+    back to the old one -- from_pretrained does raise TypeError on a truly unrecognized
+    kwarg (verified), so this fallback is reliable, not just defensive."""
+    from transformers import AutoModelForCausalLM
+
+    try:
+        return AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype)
+    except TypeError:
+        return AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=dtype)
 
 # LoRA
 LORA_R = 16

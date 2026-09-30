@@ -16,7 +16,7 @@ import os
 import time
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoTokenizer
 
 import config as C
 from data import build_family_datasets
@@ -113,8 +113,7 @@ if __name__ == "__main__":
     tokenizer = AutoTokenizer.from_pretrained(C.MODEL_NAME)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = AutoModelForCausalLM.from_pretrained(C.MODEL_NAME, torch_dtype=torch.bfloat16 if device == "cuda" else torch.float32).to(device)
+    model = C.load_causal_lm(C.MODEL_NAME, C.MODEL_DTYPE).to(C.DEVICE)
     model.eval()
 
     train_a, train_b, eval_a, eval_b = build_family_datasets(seed=C.SEED)

@@ -10,10 +10,9 @@ import json
 import os
 import time
 
-import torch
 from datasets import Dataset
 from peft import LoraConfig, get_peft_model
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoTokenizer
 from trl import GRPOConfig
 
 import config as C
@@ -36,7 +35,7 @@ def build_model_and_tokenizer():
     tokenizer = AutoTokenizer.from_pretrained(C.MODEL_NAME)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(C.MODEL_NAME, torch_dtype=torch.bfloat16)
+    model = C.load_causal_lm(C.MODEL_NAME, C.MODEL_DTYPE)
     lora_cfg = LoraConfig(r=C.LORA_R, lora_alpha=C.LORA_ALPHA, target_modules=C.LORA_TARGET_MODULES,
                            task_type="CAUSAL_LM")
     model = get_peft_model(model, lora_cfg)
@@ -44,8 +43,19 @@ def build_model_and_tokenizer():
     return model, tokenizer
 
 
-def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR, dry_run_model=None, dry_run_tokenizer=None):
+def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
+            prompts_per_step=None, g=None, max_completion_length=None, eval_every=None,
+            save_result=True, dry_run_model=None, dry_run_tokenizer=None):
+    """prompts_per_step/g/max_completion_length/eval_every default to config.py's values;
+    overriding them (to tiny values) is how the notebook's PREFLIGHT check exercises this
+    exact code path -- model load, LoRA, GRPOConfig, the sampler, the eval callback, and the
+    result-file save -- in a couple of seconds instead of a full run."""
     assert method in C.METHODS, method
+    prompts_per_step = C.PROMPTS_PER_STEP if prompts_per_step is None else prompts_per_step
+    g = C.G if g is None else g
+    max_completion_length = 200 if max_completion_length is None else max_completion_length
+    eval_every = C.EVAL_EVERY if eval_every is None else eval_every
+
     train_a, train_b, eval_a, eval_b = build_family_datasets(seed=seed)
     eval_sets = {C.FAMILY_A: eval_a, C.FAMILY_B: eval_b}
 
@@ -59,14 +69,15 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR, dry_r
         output_dir=os.path.join(out_dir, f"{method}_k{k}_seed{seed}_ckpt"),
         scale_rewards=C.METHOD_TO_SCALE_REWARDS[method],
         loss_type=C.LOSS_TYPE,
-        num_generations=C.G,
-        per_device_train_batch_size=C.PROMPTS_PER_STEP * C.G,
-        max_completion_length=200,  # short reasoning + "Answer: <int>" comfortably fits; keeps wall-clock down
+        num_generations=g,
+        per_device_train_batch_size=prompts_per_step * g,
+        max_completion_length=max_completion_length,  # short reasoning + "Answer: <int>" comfortably fits
         max_steps=max_steps,
         temperature=C.TEMPERATURE,
         learning_rate=C.LR,
         beta=C.KL_BETA,
-        bf16=True,
+        bf16=C.BF16_SUPPORTED,
+        fp16=(C.DEVICE == "cuda" and not C.BF16_SUPPORTED),
         seed=seed,
         logging_steps=5,
         save_strategy="no",
@@ -90,7 +101,7 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR, dry_r
         model=model, args=grpo_args, train_dataset=train_dataset,
         reward_funcs=[train_reward_fn], processing_class=tokenizer,
     )
-    eval_cb = FamilyEvalCallback(tokenizer, eval_sets, eval_every=C.EVAL_EVERY)
+    eval_cb = FamilyEvalCallback(tokenizer, eval_sets, eval_every=eval_every)
     trainer.add_callback(eval_cb)
     if method == "sigma_sampling":
         sigma_cb = SigmaSamplingCallback(trainer, family_prob_state, [C.FAMILY_A, C.FAMILY_B])
@@ -105,11 +116,12 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR, dry_r
     if method == "sigma_sampling":
         result["sigma_sampling_history"] = sigma_cb.history
 
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, f"{method}_k{k}_seed{seed}.json")
-    with open(out_path, "w") as f:
-        json.dump(result, f, indent=2)
-    print(f"wrote {out_path}  wall_clock={wall_clock_s:.1f}s  use_vllm={use_vllm}")
+    if save_result:
+        os.makedirs(out_dir, exist_ok=True)
+        out_path = os.path.join(out_dir, f"{method}_k{k}_seed{seed}.json")
+        with open(out_path, "w") as f:
+            json.dump(result, f, indent=2)
+        print(f"wrote {out_path}  wall_clock={wall_clock_s:.1f}s  use_vllm={use_vllm}")
     return result
 
 
