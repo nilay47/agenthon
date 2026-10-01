@@ -19,7 +19,7 @@ import config as C
 from data import build_family_datasets, build_train_dataset
 from reward import train_reward_fn
 from sampler import SigmaSamplingCallback, make_sigma_family_dataset
-from trainer import FamilyEvalCallback, FamilyTrackingGRPOTrainer
+from trainer import FamilyTrackingGRPOTrainer, PreferenceEvalCallback
 
 
 def _vllm_available():
@@ -58,11 +58,10 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
     assert method in C.METHODS, method
     prompts_per_step = C.PROMPTS_PER_STEP if prompts_per_step is None else prompts_per_step
     g = C.G if g is None else g
-    max_completion_length = 200 if max_completion_length is None else max_completion_length
+    max_completion_length = C.MAX_COMPLETION_LENGTH if max_completion_length is None else max_completion_length
     eval_every = C.EVAL_EVERY if eval_every is None else eval_every
 
-    train_a, train_b, eval_a, eval_b = build_family_datasets(seed=seed)
-    eval_sets = {C.FAMILY_A: eval_a, C.FAMILY_B: eval_b}
+    train_a, train_b = build_family_datasets(seed=seed)
 
     if dry_run_model is not None:
         model, tokenizer = dry_run_model, dry_run_tokenizer
@@ -83,7 +82,7 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         num_generations=g,
         per_device_train_batch_size=micro_batch,
         gradient_accumulation_steps=grad_accum,
-        max_completion_length=max_completion_length,  # short reasoning + "Answer: <int>" comfortably fits
+        max_completion_length=max_completion_length,  # the answer is just a number -- short by design
         max_steps=max_steps,
         temperature=C.TEMPERATURE,
         learning_rate=C.LR,
@@ -117,7 +116,7 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         model=model, args=grpo_args, train_dataset=train_dataset,
         reward_funcs=[train_reward_fn], processing_class=tokenizer,
     )
-    eval_cb = FamilyEvalCallback(tokenizer, eval_sets, eval_every=eval_every)
+    eval_cb = PreferenceEvalCallback(tokenizer, eval_every=eval_every, seed=seed)
     trainer.add_callback(eval_cb)
     if method == "sigma_sampling":
         sigma_cb = SigmaSamplingCallback(trainer, family_prob_state, [C.FAMILY_A, C.FAMILY_B])

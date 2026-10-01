@@ -1,40 +1,39 @@
 """Baseline sanity check for the untrained model, before spending any training budget.
-For each family: greedy eval on the 200 held-out prompts (mean unscaled reward, exact-match
-rate, parse rate), plus G=8 samples at training temperature on 50 held-out prompts to
-estimate the mean within-group reward std (the quantity GRPO's advantage normalization
-divides by -- if it's ~0, GRPO has no signal to learn from regardless of mean reward).
-
-PASS for a family if mean reward is in [BASELINE_REWARD_LO, BASELINE_REWARD_HI] AND group
-std is clearly above zero; otherwise WARN with a suggested easier/harder variant (change
-TASK_VARIANT_A / TASK_VARIANT_B in config.py -- a one-line switch -- and rerun this script).
+Reports the initial distribution of the parsed integer u (mean, median, 10-bin histogram
+over [0,100]) and parse rate from N_EVAL_FRESH greedy draws (random paraphrase each,
+family-agnostic -- u's distribution doesn't depend on family, only how it's SCORED does).
+Also reports the mean within-group std of u from G samples at training temperature, as an
+informational check that there's enough output variety for GRPO's advantage computation to
+have any signal at all (not a hard pass/fail gate -- no family-specific reward band applies
+to this task the way the old [0.2,0.7] band did to the arithmetic one).
 
 Usage:
     cd llm && python baseline_eval.py
 """
 import json
 import os
+import random
+import statistics
 import time
 
 import torch
 from transformers import AutoTokenizer
 
 import config as C
-from data import build_family_datasets
-from reward import parse_answer, unscaled_reward_batch
+from reward import clip_u, parse_u
 
 N_GROUP_STD_PROMPTS = 50
 
 
-def _generate(model, tokenizer, rows, do_sample, num_return_sequences=1, batch_size=25, max_new_tokens=200):
-    """Returns a flat list of decoded completions, length len(rows)*num_return_sequences,
-    grouped consecutively per prompt (prompt i's sequences occupy
-    [i*num_return_sequences, (i+1)*num_return_sequences))."""
+def _generate(model, tokenizer, prompt_texts, do_sample, num_return_sequences=1, batch_size=25,
+              max_new_tokens=C.MAX_NEW_TOKENS_EVAL):
     device = next(model.parameters()).device
     texts_out = []
-    for i in range(0, len(rows), batch_size):
-        chunk = rows[i : i + batch_size]
-        prompt_texts = [tokenizer.apply_chat_template(r["prompt"], tokenize=False, add_generation_prompt=True) for r in chunk]
-        enc = tokenizer(prompt_texts, return_tensors="pt", padding=True, padding_side="left").to(device)
+    for i in range(0, len(prompt_texts), batch_size):
+        chunk = prompt_texts[i : i + batch_size]
+        rendered = [tokenizer.apply_chat_template([{"role": "user", "content": p}], tokenize=False,
+                                                    add_generation_prompt=True) for p in chunk]
+        enc = tokenizer(rendered, return_tensors="pt", padding=True, padding_side="left").to(device)
         gen_kwargs = dict(max_new_tokens=max_new_tokens, pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id)
         if do_sample:
             gen_kwargs.update(do_sample=True, temperature=C.TEMPERATURE, num_return_sequences=num_return_sequences)
@@ -47,58 +46,13 @@ def _generate(model, tokenizer, rows, do_sample, num_return_sequences=1, batch_s
     return texts_out
 
 
-def evaluate_family(model, tokenizer, eval_rows, family_name):
-    true_answers = [r["true_answer"] for r in eval_rows]
-
-    # 1. Greedy eval on all 200 held-out prompts.
-    greedy_texts = _generate(model, tokenizer, eval_rows, do_sample=False)
-    rewards = unscaled_reward_batch(greedy_texts, true_answers)
-    preds = [parse_answer(t) for t in greedy_texts]
-    parse_rate = sum(p is not None for p in preds) / len(preds)
-    exact_match_rate = sum(p == t for p, t in zip(preds, true_answers)) / len(preds)
-    mean_reward = sum(rewards) / len(rewards)
-
-    # 2. G=8 samples at training temperature on a 50-prompt subset, for within-group std.
-    subset = eval_rows[:N_GROUP_STD_PROMPTS]
-    subset_true = [r["true_answer"] for r in subset]
-    sampled_texts = _generate(model, tokenizer, subset, do_sample=True, num_return_sequences=C.G)
-    group_stds = []
-    for i in range(len(subset)):
-        group_texts = sampled_texts[i * C.G : (i + 1) * C.G]
-        group_rewards = unscaled_reward_batch(group_texts, [subset_true[i]] * C.G)
-        mean_g = sum(group_rewards) / len(group_rewards)
-        var_g = sum((r - mean_g) ** 2 for r in group_rewards) / len(group_rewards)
-        group_stds.append(var_g ** 0.5)
-    mean_group_std = sum(group_stds) / len(group_stds)
-
-    return dict(family=family_name, mean_reward=mean_reward, exact_match_rate=exact_match_rate,
-                parse_rate=parse_rate, mean_group_std=mean_group_std, n_eval=len(eval_rows),
-                n_group_std_prompts=len(subset))
-
-
-def suggested_variant(family_letter, mean_reward):
-    variants = C.FAMILY_A_VARIANTS if family_letter == C.FAMILY_A else C.FAMILY_B_VARIANTS
-    current = C.TASK_VARIANT_A if family_letter == C.FAMILY_A else C.TASK_VARIANT_B
-    direction = "harder" if mean_reward > C.BASELINE_REWARD_HI else "easier"
-    switch_name = "TASK_VARIANT_A" if family_letter == C.FAMILY_A else "TASK_VARIANT_B"
-    target = variants.get(direction, {})
-    return f"set config.{switch_name} = '{direction}' (currently '{current}') -> {target}"
-
-
-def check_pass(result):
-    reward_ok = C.BASELINE_REWARD_LO <= result["mean_reward"] <= C.BASELINE_REWARD_HI
-    std_ok = result["mean_group_std"] >= C.BASELINE_GROUP_STD_MIN
-    passed = reward_ok and std_ok
-    if passed:
-        return True, "PASS"
-    reasons = []
-    if not reward_ok:
-        direction = "too easy (reward too high)" if result["mean_reward"] > C.BASELINE_REWARD_HI else "too hard (reward too low)"
-        reasons.append(f"mean_reward={result['mean_reward']:.3f} outside [{C.BASELINE_REWARD_LO},{C.BASELINE_REWARD_HI}] ({direction})")
-    if not std_ok:
-        reasons.append(f"mean_group_std={result['mean_group_std']:.4f} < {C.BASELINE_GROUP_STD_MIN} (not clearly above zero)")
-    suggestion = suggested_variant(result["family"], result["mean_reward"])
-    return False, f"WARN: {'; '.join(reasons)}. Suggested fix: {suggestion}"
+def histogram(values, n_bins=10, lo=0.0, hi=100.0):
+    width = (hi - lo) / n_bins
+    counts = [0] * n_bins
+    for v in values:
+        idx = min(n_bins - 1, max(0, int((v - lo) / width)))
+        counts[idx] += 1
+    return counts
 
 
 if __name__ == "__main__":
@@ -116,26 +70,40 @@ if __name__ == "__main__":
     model = C.load_causal_lm(C.MODEL_NAME, C.MODEL_DTYPE).to(C.DEVICE)
     model.eval()
 
-    train_a, train_b, eval_a, eval_b = build_family_datasets(seed=C.SEED)
-    print(f"variant A={C.TASK_VARIANT_A} ({C.FAMILY_A_VARIANTS[C.TASK_VARIANT_A]})  "
-          f"variant B={C.TASK_VARIANT_B} ({C.FAMILY_B_VARIANTS[C.TASK_VARIANT_B]})")
+    rng = random.Random(C.SEED)
 
-    results = {}
-    verdicts = {}
-    for fam_letter, eval_rows in [(C.FAMILY_A, eval_a), (C.FAMILY_B, eval_b)]:
-        print(f"\n=== Family {fam_letter} ===")
-        res = evaluate_family(model, tokenizer, eval_rows, fam_letter)
-        passed, detail = check_pass(res)
-        results[fam_letter] = res
-        verdicts[fam_letter] = dict(passed=passed, detail=detail)
-        print(f"  mean_reward={res['mean_reward']:.4f}  exact_match_rate={res['exact_match_rate']:.4f}  "
-              f"parse_rate={res['parse_rate']:.4f}  mean_group_std={res['mean_group_std']:.4f}")
-        print(f"  {detail}")
+    greedy_prompts = [rng.choice(C.PARAPHRASES) for _ in range(C.N_EVAL_FRESH)]
+    greedy_texts = _generate(model, tokenizer, greedy_prompts, do_sample=False)
+    us_raw = [parse_u(t) for t in greedy_texts]
+    parsable = [u for u in us_raw if u is not None]
+    parse_rate = len(parsable) / len(us_raw)
+    clipped = [clip_u(u) for u in parsable]
+    mean_u = statistics.mean(clipped) if clipped else float("nan")
+    median_u = statistics.median(clipped) if clipped else float("nan")
+    hist = histogram(clipped) if clipped else [0] * 10
 
+    print(f"\nGreedy (n={C.N_EVAL_FRESH}): parse_rate={parse_rate:.3f}  mean_u={mean_u:.2f}  median_u={median_u:.2f}")
+    print(f"  histogram over [0,100] in 10 bins: {hist}")
+
+    # Informational: within-group std of u at training temperature (G samples/prompt).
+    subset_prompts = [rng.choice(C.PARAPHRASES) for _ in range(N_GROUP_STD_PROMPTS)]
+    sampled_texts = _generate(model, tokenizer, subset_prompts, do_sample=True, num_return_sequences=C.G)
+    group_stds = []
+    for i in range(N_GROUP_STD_PROMPTS):
+        group_us = [parse_u(t) for t in sampled_texts[i * C.G : (i + 1) * C.G]]
+        group_clipped = [clip_u(u) for u in group_us if u is not None]
+        if len(group_clipped) >= 2:
+            group_stds.append(statistics.pstdev(group_clipped))
+    mean_group_std_u = statistics.mean(group_stds) if group_stds else 0.0
+
+    print(f"\nSampled (G={C.G} x {N_GROUP_STD_PROMPTS} prompts, training temperature): "
+          f"mean within-group std of u = {mean_group_std_u:.2f}"
+          + ("  (near 0 -- GRPO/global normalization will have little/no signal)" if mean_group_std_u < 1.0 else ""))
+
+    results = dict(n_eval=C.N_EVAL_FRESH, parse_rate=parse_rate, mean_u=mean_u, median_u=median_u,
+                    histogram=hist, mean_group_std_u=mean_group_std_u)
     os.makedirs(args.out_dir, exist_ok=True)
     out_path = os.path.join(args.out_dir, "baseline_eval.json")
     with open(out_path, "w") as f:
-        json.dump(dict(results=results, verdicts=verdicts,
-                        variant_a=C.TASK_VARIANT_A, variant_b=C.TASK_VARIANT_B,
-                        elapsed_s=time.time() - t0), f, indent=2)
+        json.dump(results, f, indent=2)
     print(f"\nwrote {out_path}  (elapsed {time.time()-t0:.1f}s)")

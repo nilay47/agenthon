@@ -1,4 +1,12 @@
-"""Shared constants for the LLM GRPO reward-scaling experiment (AISTATS)."""
+"""Shared constants for the LLM GRPO reward-scaling experiment (AISTATS).
+
+Task: a single fixed prompt (a few paraphrases, none revealing family), asking the model to
+pick an integer in [0,100]. Each training example carries a HIDDEN family label A/B (50/50,
+used only by the reward function and the sampler, never shown to the model): family A wants
+the parsed integer near 80, family B wants it near 20, and B's reward is scaled by k. Unlike
+the earlier arithmetic-skills design (where both families could improve independently), A and
+B's preferences directly conflict on the SAME output distribution, so k should visibly shift
+where the policy settles."""
 import torch
 
 MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
@@ -24,76 +32,71 @@ def load_causal_lm(model_name, dtype):
     except TypeError:
         return AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=dtype)
 
+
 # LoRA
 LORA_R = 16
 LORA_ALPHA = 32
 LORA_TARGET_MODULES = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
 
-# Data
-N_TRAIN_PER_FAMILY = 2000
-N_EVAL_PER_FAMILY = 200
-FAMILY_A = "A"  # multiplication
-FAMILY_B = "B"  # sum of N 3-digit numbers
+# Task: the fixed prompt, as paraphrases (same ask, no wording hints at family).
+PARAPHRASES = [
+    "Pick an integer between 0 and 100. Reply with only the number.",
+    "Choose a whole number from 0 to 100. Answer with just that number.",
+    "Give me an integer in the range 0 to 100. Respond with only the number.",
+    "Select a number between 0 and 100 (inclusive). Your answer should be just the number.",
+    "Think of an integer from 0 to 100 and respond with only that number.",
+    "Output a single integer between 0 and 100. Give only the number as your answer.",
+]
+FAMILY_A = "A"  # wants the parsed integer near TARGET_U["A"]
+FAMILY_B = "B"  # wants the parsed integer near TARGET_U["B"]; reward scaled by k
+N_TRAIN_PER_FAMILY = 2000  # static pool size for the non-sigma-sampling methods
 
-# Task difficulty variants -- ONE-LINE SWITCH: change TASK_VARIANT_A / TASK_VARIANT_B below.
-# If baseline_eval.py WARNs that a family is too easy (reward near 1, low group std) or too
-# hard (reward near 0), switch to "harder" or "easier" respectively and rerun baseline_eval.
-FAMILY_A_VARIANTS = {
-    "easier": dict(digits_x=1, digits_y=2),    # 1-digit x 2-digit
-    "default": dict(digits_x=2, digits_y=2),   # 2-digit x 2-digit
-    "harder": dict(digits_x=3, digits_y=2),    # 3-digit x 2-digit
-}
-FAMILY_B_VARIANTS = {
-    "easier": dict(n_terms=3, digits=3),       # sum of three 3-digit numbers
-    "default": dict(n_terms=4, digits=3),      # sum of four 3-digit numbers
-    "harder": dict(n_terms=5, digits=3),       # sum of five 3-digit numbers
-}
-TASK_VARIANT_A = "default"  # <-- one-line switch
-TASK_VARIANT_B = "default"  # <-- one-line switch
+# Reward: parse the first integer, clip to [0,100]; unparsable -> UNPARSABLE_PENALTY for
+# either family (never scaled by k). reward_A(u) = -((u-80)/50)^2, reward_B(u) = k*(-((u-20)/50)^2).
+TARGET_U = {FAMILY_A: 80.0, FAMILY_B: 20.0}
+REWARD_DENOM = 50.0
+UNPARSABLE_PENALTY = -1.0
 
-# Reward
-REWARD_SLOPE = 0.05  # exp(-|pred-true| / (REWARD_SLOPE*|true| + 1))
-
-# Baseline pass criterion (baseline_eval.py)
-BASELINE_REWARD_LO = 0.2
-BASELINE_REWARD_HI = 0.7
-BASELINE_GROUP_STD_MIN = 0.05  # "clearly above zero"
+# Eval (baseline_eval.py and PreferenceEvalCallback)
+N_EVAL_FRESH = 100       # "100 fresh greedy prompts" / "100 sampled completions"
+EVAL_EVERY = 10
+MAX_NEW_TOKENS_EVAL = 8  # only need the first integer
 
 # Training
-G = 8               # num_generations
+G = 8                    # num_generations
 PROMPTS_PER_STEP = 16
-MAX_STEPS = 150
+MAX_STEPS = 80
+MAX_COMPLETION_LENGTH = 8  # the answer is just a number -- short completions by design
 LR = 1e-5
-TEMPERATURE = 1.0    # sampling temperature, matches GRPOConfig's default -- set explicitly so
-                      # baseline_eval.py's "training temperature" sampling always matches run.py
+TEMPERATURE = 1.0        # sampling temperature, matches GRPOConfig's default -- set explicitly
+                          # so baseline_eval.py's "training temperature" sampling always agrees
 KL_BETA = 0.0
-EVAL_EVERY = 25
 SEED = 0
 
-# Backward micro-batching: one optimizer step still covers the full PROMPTS_PER_STEP*G
-# completions (group-relative advantages are computed by TRL over that FULL generation
-# batch, before any splitting -- verified against TRL 1.14.1 source: _prepare_inputs calls
-# _generate_and_score_completions once per `steps_per_generation` micro-steps, then
-# split_tensor_dict()s the result into per-device micro-batches for the actual
-# forward/backward), but each individual backward pass only materializes
-# MICRO_BATCH_COMPLETIONS completions' worth of logits. At G=8 and vocab~152k, backward on
-# the full 128-completion batch needs ~14 GiB just for grad_logits (confirmed: the OOM this
-# fixes reported "Tried to allocate 13.98 GiB"); 16 completions needs ~1/8 of that.
-MICRO_BATCH_COMPLETIONS = 16
-GRADIENT_CHECKPOINTING = True
+# Backward micro-batching: at MAX_COMPLETION_LENGTH=8 and vocab~152k, a full 128-completion
+# backward only needs ~128*8*152000*4 bytes =~ 0.6 GiB for grad_logits (vs. ~14.5 GiB at the
+# 200-token completions the earlier arithmetic task used) -- cheap enough to run the whole
+# generation batch in one backward, so MICRO_BATCH_COMPLETIONS is set >= PROMPTS_PER_STEP*G
+# (micro_batch_and_accum then naturally returns accum=1, i.e. no splitting) and gradient
+# checkpointing is off. Both knobs stay fully functional (see micro_batch_and_accum below) --
+# only the operating point changed for this task's much shorter completions.
+MICRO_BATCH_COMPLETIONS = 128
+GRADIENT_CHECKPOINTING = False
 
 
 def micro_batch_and_accum(prompts_per_step, g, target_micro_batch_completions=MICRO_BATCH_COMPLETIONS):
     """Returns (per_device_train_batch_size, gradient_accumulation_steps) such that their
     product equals prompts_per_step*g exactly (one full generation batch per optimizer
-    step), the micro-batch size is a multiple of g (never splits a single prompt's group
-    across two micro-batches), and it evenly divides the total (shrinking from the target
-    if needed, e.g. for PREFLIGHT's much smaller tiny-batch shapes)."""
+    step; TRL computes group-relative advantages over that FULL batch before splitting it
+    for backward -- see run.py's run_one for the verified mechanism), the micro-batch size
+    is a multiple of g (never splits a single prompt's group across two micro-batches), and
+    it evenly divides the total (shrinking from the target if needed)."""
     total = prompts_per_step * g
     micro = max(g, (min(target_micro_batch_completions, total) // g) * g)
     while total % micro != 0:
         micro -= g
     return micro, total // micro
+
 
 # scale_rewards mapping (method name -> TRL GRPOConfig.scale_rewards value), exactly as specified:
 #   "group" = GRPO, "batch" = global normalization, "none" = Dr. GRPO
@@ -101,7 +104,7 @@ METHOD_TO_SCALE_REWARDS = {"grpo": "group", "global": "batch", "drgrpo": "none",
 # loss_type held FIXED across every config (not part of the requested ablation; TRL's default
 # "dapo" dynamically depends on batch composition, so we pin "dr_grpo" -- the constant,
 # length-bias-free token normalizer -- so the ONLY varying axis across configs is scale_rewards
-# and k, matching what was actually asked for. See llm/README note in run.py's docstring.
+# and k, matching what was actually asked for.
 LOSS_TYPE = "dr_grpo"
 
 METHODS = ["grpo", "drgrpo", "global", "sigma_sampling"]
@@ -113,3 +116,12 @@ SIGMA_REESTIMATE_EVERY = 10
 SIGMA_UNIFORM_MIX = 0.1
 
 RESULTS_DIR = "llm/results"
+
+# Theoretical reference points for the summary figure (not used by training/eval logic,
+# purely annotation): GRPO's per-instance normalization is predicted to erase k's effect
+# entirely (both k land near the unweighted midpoint ~50); Dr.GRPO has no such normalization,
+# so k=10 is predicted to pull the policy most of the way to B's target (~25).
+PREDICTED_MEAN_U = {
+    "grpo": {1: 50.0, 10: 50.0},
+    "drgrpo": {1: 50.0, 10: 25.0},
+}

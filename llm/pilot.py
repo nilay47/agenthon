@@ -1,67 +1,45 @@
-"""PILOT: Dr.GRPO (scale_rewards='none'), k=1 and k=10, 1 seed, 150 steps each. Reports
-per-family eval curves and wall-clock per run, checks the pass criterion, and STOPS --
-the full 7-config x 2-3-seed sweep is gated on an explicit human OK after reading this.
+"""Pass-check helpers for the conflicting-preference task, reused by the notebook's direct
+full-sweep flow after seed 0 completes (there is no longer a separately gated pilot step --
+the 4 configs these checks need, Dr.GRPO/GRPO x k in {1,10}, are already part of the regular
+7-config sweep, so re-running them standalone would just duplicate GPU work).
 
-Usage (on a CUDA machine, e.g. Colab A100):
-    cd llm && python pilot.py
+Pass criteria:
+  (1) Dr.GRPO: k=10's final mean u is at least 8 LOWER than k=1's (shifted toward B's target
+      of 20) -- Dr.GRPO has no per-instance reward normalization, so weighting family B's
+      reward by k=10 should visibly pull the policy toward B's preference.
+  (2) GRPO: |final mean u, k=10 minus k=1| < 4 -- GRPO's per-instance std normalization is
+      predicted to erase k's effect almost entirely (both k land near the unweighted
+      midpoint, ~50).
 """
-import json
-import os
-
 import config as C
-from run import run_one
-
-PILOT_SEED = 0
 
 
-def progress(history, family):
-    if len(history) < 2:
-        return None
-    return history[-1][family] - history[0][family]
+def mean_u_series(result):
+    """(step, pooled mean u) for every logged eval step. 'Pooled' = averaging family A's and
+    family B's greedy mean_u: both are drawn from the IDENTICAL generation process (the model
+    never sees the family label), just scored through two different reward lenses, so
+    averaging them halves the paraphrase-sampling noise in the estimate of where the policy
+    actually sits."""
+    return [(e["step"], (e[C.FAMILY_A]["greedy"]["mean_u"] + e[C.FAMILY_B]["greedy"]["mean_u"]) / 2)
+            for e in result["eval_history"]]
 
 
-def check_pass(result_k1, result_k10):
-    h1, h10 = result_k1["eval_history"], result_k10["eval_history"]
-    if len(h1) < 2 or len(h10) < 2:
-        return False, "not enough eval checkpoints logged"
-    improves_k1 = progress(h1, C.FAMILY_A) > 0 and progress(h1, C.FAMILY_B) > 0
-    improves_k10 = progress(h10, C.FAMILY_A) > 0 and progress(h10, C.FAMILY_B) > 0
-    b_minus_a_k1 = progress(h1, C.FAMILY_B) - progress(h1, C.FAMILY_A)
-    b_minus_a_k10 = progress(h10, C.FAMILY_B) - progress(h10, C.FAMILY_A)
-    shifts_toward_b = b_minus_a_k10 > b_minus_a_k1
-    passed = improves_k1 and improves_k10 and shifts_toward_b
-    detail = (f"k=1 improves both: {improves_k1} (dA={progress(h1,C.FAMILY_A):+.4f}, dB={progress(h1,C.FAMILY_B):+.4f})\n"
-              f"k=10 improves both: {improves_k10} (dA={progress(h10,C.FAMILY_A):+.4f}, dB={progress(h10,C.FAMILY_B):+.4f})\n"
-              f"B-A progress, k=1: {b_minus_a_k1:+.4f}  k=10: {b_minus_a_k10:+.4f}  "
-              f"shifts toward B: {shifts_toward_b}")
-    return passed, detail
+def final_mean_u(result):
+    series = mean_u_series(result)
+    return series[-1][1] if series else float("nan")
 
 
-if __name__ == "__main__":
-    print("=== PILOT: Dr.GRPO (scale_rewards='none'), k=1 and k=10, seed=0, 150 steps ===\n")
-    result_k1 = run_one("drgrpo", k=1, seed=PILOT_SEED)
-    print()
-    result_k10 = run_one("drgrpo", k=10, seed=PILOT_SEED)
-
-    passed, detail = check_pass(result_k1, result_k10)
-    print("\n=== Pilot eval curves ===")
-    for label, res in [("k=1", result_k1), ("k=10", result_k10)]:
-        print(f"\nDr.GRPO {label} (wall_clock={res['wall_clock_s']:.1f}s):")
-        for e in res["eval_history"]:
-            print(f"  step={e['step']:>4}  A={e[C.FAMILY_A]:.4f}  B={e[C.FAMILY_B]:.4f}")
-
-    print("\n=== Pass criterion ===")
-    print(detail)
-    print(f"\nPILOT {'PASSED' if passed else 'FAILED'}")
-
-    os.makedirs(C.RESULTS_DIR, exist_ok=True)
-    with open(os.path.join(C.RESULTS_DIR, "pilot_summary.json"), "w") as f:
-        json.dump(dict(passed=passed, detail=detail,
-                        k1_wall_clock_s=result_k1["wall_clock_s"], k10_wall_clock_s=result_k10["wall_clock_s"],
-                        k1_eval_history=result_k1["eval_history"], k10_eval_history=result_k10["eval_history"]),
-                  f, indent=2)
-    print(f"\nwrote {C.RESULTS_DIR}/pilot_summary.json")
-    if not passed:
-        print("\nPilot did not pass -- STOPPING here per instructions. Adjust tasks before spending the full budget.")
-    else:
-        print("\nPilot passed. STOPPING here per instructions -- waiting for explicit OK before running the full 7-config sweep.")
+def check_pass(results_by_key):
+    """results_by_key: dict with keys 'drgrpo_k1', 'drgrpo_k10', 'grpo_k1', 'grpo_k10' ->
+    run_one()'s result dict. Returns (passed, detail, final_mean_u_by_key)."""
+    u = {key: final_mean_u(res) for key, res in results_by_key.items()}
+    drgrpo_shift = u["drgrpo_k1"] - u["drgrpo_k10"]
+    grpo_diff = abs(u["grpo_k10"] - u["grpo_k1"])
+    check1 = drgrpo_shift >= 8
+    check2 = grpo_diff < 4
+    passed = check1 and check2
+    detail = (f"Dr.GRPO: mean_u k=1={u['drgrpo_k1']:.2f}  k=10={u['drgrpo_k10']:.2f}  "
+              f"shift={drgrpo_shift:+.2f} (need >= 8): {'PASS' if check1 else 'FAIL'}\n"
+              f"GRPO: mean_u k=1={u['grpo_k1']:.2f}  k=10={u['grpo_k10']:.2f}  "
+              f"|diff|={grpo_diff:.2f} (need < 4): {'PASS' if check2 else 'FAIL'}")
+    return passed, detail, u

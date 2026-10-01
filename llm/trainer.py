@@ -1,18 +1,24 @@
-"""FamilyTrackingGRPOTrainer: a thin GRPOTrainer subclass that additionally logs each
-family's share of gradient contributions per step (mean |advantage| x count, matching the
-spec exactly), by hooking _generate_and_score_completions -- the one place in TRL's
-GRPOTrainer where the raw per-example dataset rows (which carry our 'family' column) and
-the freshly-computed advantages tensor are both in scope together. Also defines
-FamilyEvalCallback, which runs a greedy, UNSCALED-reward eval on each family's held-out set
-every EVAL_EVERY steps (bypassing the trainer's own reward path entirely, since that path
-always uses the training-time k-scaled reward function)."""
+"""FamilyTrackingGRPOTrainer: a thin GRPOTrainer subclass that logs each family's share of
+gradient contributions per step (mean |advantage| x count), by hooking
+_generate_and_score_completions -- the one place in TRL's GRPOTrainer where the raw
+per-example dataset rows (which carry our 'family' column) and the freshly-computed
+advantages tensor are both in scope together. Generic in what 'family' means, so it is
+unchanged by the task redesign below.
+
+PreferenceEvalCallback: every eval_every steps, draws N_EVAL_FRESH FRESH (random-paraphrase)
+prompts per family and evaluates BOTH greedy and training-temperature-sampled decoding,
+reporting mean/median u, parse rate, and unscaled mean reward for each -- independent of the
+trainer's own (k-scaled) reward path entirely."""
+import random
+import statistics
 import time
 
 import torch
 from transformers import TrainerCallback
 from trl import GRPOTrainer
 
-from reward import unscaled_reward_batch
+from config import FAMILY_A, FAMILY_B, MAX_NEW_TOKENS_EVAL, N_EVAL_FRESH, PARAPHRASES, TEMPERATURE
+from reward import clip_u, parse_u, unscaled_reward
 
 
 class FamilyTrackingGRPOTrainer(GRPOTrainer):
@@ -28,10 +34,10 @@ class FamilyTrackingGRPOTrainer(GRPOTrainer):
         A = advantages.shape[0]
         # `inputs` (len == A here) is ALREADY expanded to one row per completion -- each
         # underlying unique prompt appears as `num_generations` CONSECUTIVE rows with
-        # identical family/true_answer/scale (verified empirically: len(inputs) == B*G,
-        # not B). So a direct 1:1 index mapping is correct for the per-row |advantage|
-        # aggregation below; grouping for the within-group reward std (further down) needs
-        # the actual group size G = self.num_generations, not inferred from A/len(inputs).
+        # identical family/scale (verified empirically: len(inputs) == B*G, not B). So a
+        # direct 1:1 index mapping is correct for the per-row |advantage| aggregation below;
+        # grouping for the within-group reward std (further down) needs the actual group
+        # size G = self.num_generations, not inferred from A/len(inputs).
         if len(inputs) != A:
             return output  # defensive: skip logging rather than crash the run on a shape surprise
         families = [x["family"] for x in inputs]
@@ -70,37 +76,57 @@ class FamilyTrackingGRPOTrainer(GRPOTrainer):
         return output
 
 
-class FamilyEvalCallback(TrainerCallback):
-    """Greedy decoding on each family's held-out set every `eval_every` steps, unscaled
-    graded reward. Independent of the trainer's own (k-scaled, sampled) reward path."""
+class PreferenceEvalCallback(TrainerCallback):
+    """Every `eval_every` steps: for each family in (A, B), draws `n` FRESH (random
+    paraphrase) prompts and evaluates both greedy and training-temperature-sampled decoding,
+    reporting mean_u, median_u, parse_rate, and mean_reward (unscaled) for each mode."""
 
-    def __init__(self, tokenizer, eval_sets, eval_every=25, max_new_tokens=64, batch_size=50):
+    def __init__(self, tokenizer, paraphrases=PARAPHRASES, families=(FAMILY_A, FAMILY_B),
+                 n=N_EVAL_FRESH, eval_every=10, batch_size=50, max_new_tokens=MAX_NEW_TOKENS_EVAL, seed=0):
         self.tokenizer = tokenizer
-        self.eval_sets = eval_sets  # dict: family -> list of {prompt, true_answer}
+        self.paraphrases = paraphrases
+        self.families = families
+        self.n = n
         self.eval_every = eval_every
-        self.max_new_tokens = max_new_tokens
         self.batch_size = batch_size
-        self.history = []  # list of {step, wall_clock, family: mean_reward}
+        self.max_new_tokens = max_new_tokens
+        self.rng = random.Random(seed)
+        self.history = []
 
-    def _greedy_eval_family(self, model, rows):
+    def _draw_prompts(self):
+        return [self.rng.choice(self.paraphrases) for _ in range(self.n)]
+
+    def _generate_us(self, model, prompt_texts, do_sample):
         device = next(model.parameters()).device
-        rewards = []
+        us = []
         model.eval()
-        for i in range(0, len(rows), self.batch_size):
-            chunk = rows[i : i + self.batch_size]
-            texts = [self.tokenizer.apply_chat_template(r["prompt"], tokenize=False, add_generation_prompt=True) for r in chunk]
-            enc = self.tokenizer(texts, return_tensors="pt", padding=True, padding_side="left").to(device)
+        for i in range(0, len(prompt_texts), self.batch_size):
+            chunk = prompt_texts[i : i + self.batch_size]
+            rendered = [self.tokenizer.apply_chat_template([{"role": "user", "content": p}], tokenize=False,
+                                                             add_generation_prompt=True) for p in chunk]
+            enc = self.tokenizer(rendered, return_tensors="pt", padding=True, padding_side="left").to(device)
+            gen_kwargs = dict(max_new_tokens=self.max_new_tokens,
+                               pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id)
+            if do_sample:
+                gen_kwargs.update(do_sample=True, temperature=TEMPERATURE)
+            else:
+                gen_kwargs.update(do_sample=False)
             with torch.no_grad():
-                out_ids = model.generate(
-                    **enc, max_new_tokens=self.max_new_tokens, do_sample=False,
-                    pad_token_id=self.tokenizer.pad_token_id or self.tokenizer.eos_token_id,
-                )
+                out_ids = model.generate(**enc, **gen_kwargs)
             gen_ids = out_ids[:, enc["input_ids"].shape[1] :]
             gen_texts = self.tokenizer.batch_decode(gen_ids, skip_special_tokens=True)
-            true_answers = [r["true_answer"] for r in chunk]
-            rewards.extend(unscaled_reward_batch(gen_texts, true_answers))
+            us.extend(parse_u(t) for t in gen_texts)
         model.train()
-        return sum(rewards) / len(rewards)
+        return us
+
+    def _metrics_for(self, us_raw, family):
+        parsable = [u for u in us_raw if u is not None]
+        parse_rate = len(parsable) / len(us_raw) if us_raw else 0.0
+        clipped = [clip_u(u) for u in parsable]
+        mean_u = statistics.mean(clipped) if clipped else float("nan")
+        median_u = statistics.median(clipped) if clipped else float("nan")
+        mean_reward = statistics.mean(unscaled_reward(u, family) for u in us_raw) if us_raw else float("nan")
+        return dict(mean_u=mean_u, median_u=median_u, parse_rate=parse_rate, mean_reward=mean_reward)
 
     def on_step_end(self, args, state, control, model=None, **kwargs):
         if state.global_step == 0 or state.global_step % self.eval_every != 0:
@@ -108,9 +134,12 @@ class FamilyEvalCallback(TrainerCallback):
         model = model if model is not None else kwargs.get("model")
         t0 = time.time()
         entry = dict(step=int(state.global_step))
-        for fam, rows in self.eval_sets.items():
-            entry[fam] = self._greedy_eval_family(model, rows)
+        for fam in self.families:
+            us_greedy = self._generate_us(model, self._draw_prompts(), do_sample=False)
+            us_sampled = self._generate_us(model, self._draw_prompts(), do_sample=True)
+            entry[fam] = dict(greedy=self._metrics_for(us_greedy, fam), sampled=self._metrics_for(us_sampled, fam))
         entry["eval_wall_clock_s"] = time.time() - t0
         self.history.append(entry)
-        print(f"[eval @ step {state.global_step}] " + "  ".join(f"{k}={v:.4f}" for k, v in entry.items() if k not in ("step",)))
+        print(f"[eval @ step {state.global_step}] " + "  ".join(
+            f"{fam}:greedy_mean_u={entry[fam]['greedy']['mean_u']:.1f}" for fam in self.families))
         return control
