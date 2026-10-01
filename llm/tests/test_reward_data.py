@@ -119,3 +119,36 @@ def test_micro_batch_and_accum_still_splits_when_target_is_small():
     assert micro * accum == 128
     assert micro % 8 == 0
     assert micro == 16 and accum == 8
+
+
+def test_ci95_returns_native_python_floats():
+    # Regression test: dividing by np.sqrt(n) silently upgrades the result to
+    # numpy.float64; a comparison between two of those produces numpy.bool_, which (unlike
+    # numpy.float64, a float subclass) json.dump cannot serialize -- this broke
+    # pilot.check_pass's JSON dump on a real Colab run.
+    from pilot import ci95
+
+    mean, lo, hi = ci95([1.0, 2.0, 3.0])
+    assert type(mean) is float
+    assert type(lo) is float
+    assert type(hi) is float
+
+
+def test_check_pass_result_is_json_serializable():
+    import json
+
+    from pilot import check_pass
+
+    def fake_result(mean_u_final):
+        return dict(eval_history=[dict(step=10, A=dict(greedy=dict(mean_u=mean_u_final)),
+                                        B=dict(greedy=dict(mean_u=mean_u_final)))])
+
+    results = {
+        "grpo_k1": [fake_result(38.36), fake_result(25.0), fake_result(32.16)],
+        "grpo_k10": [fake_result(26.13), fake_result(25.0), fake_result(27.72)],
+        "drgrpo_k1": [fake_result(50), fake_result(49), fake_result(51)],
+        "drgrpo_k10": [fake_result(31), fake_result(30), fake_result(32)],
+    }
+    passed, detail, final_u = check_pass(results)
+    assert type(passed) is bool
+    json.dumps(dict(passed=passed, detail=detail, final_mean_u=final_u))  # must not raise

@@ -29,14 +29,18 @@ def final_mean_u(result):
 
 
 def ci95(values):
+    """Always returns native Python floats (not numpy.float64) -- dividing by np.sqrt(n)
+    silently upgrades the result to numpy.float64, and a comparison between two of those
+    produces numpy.bool_, which (unlike numpy.float64, a float subclass) json.dump cannot
+    serialize at all."""
     values = np.asarray(values, dtype=np.float64)
     n = len(values)
     if n < 2:
         return float(values.mean()), float("nan"), float("nan")
     mean = float(values.mean())
-    sem = float(values.std(ddof=1)) / np.sqrt(n)
+    sem = float(values.std(ddof=1)) / float(np.sqrt(n))
     tcrit = float(stats.t.ppf(0.975, df=n - 1))
-    return mean, mean - tcrit * sem, mean + tcrit * sem
+    return mean, float(mean - tcrit * sem), float(mean + tcrit * sem)
 
 
 def check_pass(results_by_key):
@@ -56,13 +60,13 @@ def check_pass(results_by_key):
 
     grpo_k1_mean, grpo_k1_lo, grpo_k1_hi = ci95(grpo_k1)
     grpo_k10_mean, grpo_k10_lo, grpo_k10_hi = ci95(grpo_k10)
-    check_grpo = grpo_k1_lo <= grpo_k10_mean <= grpo_k1_hi
+    check_grpo = bool(grpo_k1_lo <= grpo_k10_mean <= grpo_k1_hi)
 
     shifts = [k1 - k10 for k1, k10 in zip(drgrpo_k1, drgrpo_k10)]  # paired by seed
     shift_mean, shift_lo, shift_hi = ci95(shifts)
-    check_drgrpo = shift_lo > 0
+    check_drgrpo = bool(shift_lo > 0)
 
-    passed = check_grpo and check_drgrpo
+    passed = bool(check_grpo and check_drgrpo)
     detail = (
         f"GRPO: k=1 mean={grpo_k1_mean:.2f} (seed values {[round(v,2) for v in grpo_k1]}) "
         f"95% CI=[{grpo_k1_lo:.2f},{grpo_k1_hi:.2f}]\n"
