@@ -357,6 +357,40 @@ cells = [
         'with open(os.path.join(DRIVE_RESULTS_DIR, "full_summary.json"), "w") as f:',
         "    json.dump(summary, f, indent=2)",
     ),
+    md(
+        "## 11. k-sweep: add k=2, k=5 for GRPO/Dr.GRPO/Global",
+        "",
+        "Runs ONLY the missing `(method, k, seed)` combos -- `skip_existing=True` with no",
+        "deletion step, so the existing k=1/k=10 results (and everything else) are left alone.",
+        "18 new short runs (3 methods x 2 k-values x 3 seeds), saved to Drive as each finishes.",
+    ),
+    code(
+        "from k_sweep import K_SWEEP_NEW_CONFIGS",
+        "",
+        "k_sweep_new_results = run_sweep([0, 1, 2], DRIVE_RESULTS_DIR, skip_existing=True,",
+        "                                 configs=K_SWEEP_NEW_CONFIGS)",
+    ),
+    md(
+        "## 12. k-sweep table + figure",
+        "",
+        "Final SAMPLED mean u (mean +- 95% CI over 3 seeds) vs k in {1,2,5,10}, one marker",
+        "style per method, plus the analytic curve `u*(k) = (c_A + c_B*k)/(1+k)` (the",
+        "weighted-centroid prediction for a method whose k-scaling directly adds gradient",
+        "weight to family B, i.e. one WITHOUT GRPO's per-group cancellation) and a flat",
+        "reference line at GRPO's own empirical k=1 mean. Reads k=1/k=10 from `all_results`",
+        "(section 8) and k=2/k=5 from the Drive files just written above, so it works",
+        "whether or not this cell runs in the same session as the main sweep.",
+    ),
+    code(
+        "import os",
+        "from k_sweep import load_k_sweep_results, build_k_sweep_table, print_k_sweep_table, make_k_sweep_figure",
+        "",
+        "k_sweep_results = load_k_sweep_results(DRIVE_RESULTS_DIR)",
+        "k_sweep_table = build_k_sweep_table(k_sweep_results)",
+        "print_k_sweep_table(k_sweep_table)",
+        "k_sweep_fig_paths = make_k_sweep_figure(k_sweep_table, os.path.join(DRIVE_RESULTS_DIR, 'k_sweep'))",
+        'print("wrote", k_sweep_fig_paths)',
+    ),
 ]
 
 notebook = new_notebook(cells=cells, metadata={

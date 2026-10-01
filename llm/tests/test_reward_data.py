@@ -183,3 +183,17 @@ def test_check_pass_all_checks_pass_on_predicted_pattern():
     passed, detail, final_u = check_pass(results)
     assert passed is True
     assert final_u["checks"] == dict(grpo=True, drgrpo=True, global_=True, sigma_sampling=True)
+
+
+def test_analytic_u_star():
+    from k_sweep import analytic_u_star
+
+    # k=1: simple average of the two targets (90, 50) -> 70
+    assert abs(analytic_u_star(1) - 70.0) < 1e-9
+    # k -> large: approaches B's target (50) but never reaches it
+    assert 50.0 < analytic_u_star(1000) < 51.0
+    # k=0 (degenerate, not used in the sweep but should still be well-defined): A's target
+    assert abs(analytic_u_star(0) - 90.0) < 1e-9
+    # monotonically decreasing in k (A's target > B's target here)
+    values = [analytic_u_star(k) for k in [1, 2, 5, 10]]
+    assert values == sorted(values, reverse=True)

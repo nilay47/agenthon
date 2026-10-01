@@ -122,7 +122,8 @@ METHOD_TO_SCALE_REWARDS = {"grpo": "group", "global": "batch", "drgrpo": "none",
 LOSS_TYPE = "dr_grpo"
 
 METHODS = ["grpo", "drgrpo", "global", "sigma_sampling"]
-K_VALUES = [1, 10]
+K_VALUES = [1, 2, 5, 10]  # 2 and 5 added for the k-sweep (k_sweep.py); the main 7-config
+                          # sweep still only uses 1 and 10
 
 # sigma-sampling method (family-proportional-to-sigma_hat) specifics
 SIGMA_EMA_DECAY = 0.9
