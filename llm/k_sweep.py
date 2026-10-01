@@ -66,6 +66,39 @@ def build_k_sweep_table(results, methods=K_SWEEP_METHODS, k_values=K_SWEEP_VALUE
     return table
 
 
+def build_paired_vs_k1_table(results, method="grpo", k_values=K_SWEEP_VALUES, seeds=(0, 1, 2)):
+    """Per-seed final sampled mean u at each k, plus the paired difference vs that SAME
+    seed's own k=1 run, with mean+CI over seeds -- 'final data' item 2."""
+    per_seed = {k: {s: final_mean_u(results[(method, k, s)]) for s in seeds if (method, k, s) in results}
+                for k in k_values}
+    k1 = per_seed.get(1, {})
+    out = {"per_seed_final_mean_u": {str(k): {str(s): v for s, v in per_seed.get(k, {}).items()} for k in k_values},
+           "paired_diff_vs_k1": {}}
+    for k in k_values:
+        if k == 1:
+            continue
+        common = sorted(set(k1) & set(per_seed.get(k, {})))
+        diffs = [per_seed[k][s] - k1[s] for s in common]
+        mean, lo, hi = ci95(diffs) if diffs else (None, None, None)
+        out["paired_diff_vs_k1"][str(k)] = dict(per_seed={str(s): per_seed[k][s] - k1[s] for s in common},
+                                                  mean=mean, ci=([lo, hi] if mean is not None else None),
+                                                  n_seeds=len(common))
+    return out
+
+
+def print_paired_vs_k1_table(table):
+    print("\nper-seed final sampled mean u:")
+    for k, vals in table["per_seed_final_mean_u"].items():
+        vals_str = ", ".join(f"seed{s}={v:.2f}" for s, v in vals.items())
+        print(f"  k={k}: {vals_str}")
+    print("\npaired difference vs k=1 (same seed):")
+    for k, d in table["paired_diff_vs_k1"].items():
+        if d["mean"] is None:
+            print(f"  k={k}: (insufficient data)")
+            continue
+        print(f"  k={k}: mean={d['mean']:.2f}  95% CI=[{d['ci'][0]:.2f},{d['ci'][1]:.2f}]  n_seeds={d['n_seeds']}")
+
+
 def print_k_sweep_table(table):
     print(f"{'method':<12}{'k':>5}{'mean u':>10}{'95% CI':>20}{'n_seeds':>10}")
     for method in K_SWEEP_METHODS:

@@ -22,10 +22,15 @@ k's effect on the trained policy:
      across the entire training trajectory, not just at initialization.
 
 Eval always uses the unscaled (k=1) reward directly, bypassing the k-scaling entirely -- that
-part is unaffected by either rescaling."""
+part is unaffected by either rescaling.
+
+Uses `import config as C` + live `C.ATTR` lookups (matching run.py/baseline_eval.py), not
+`from config import ATTR` -- the latter binds a name into this module's own namespace at
+import time, so a caller later doing `config.REWARD_SCALE = ...` (e.g. the REWARD_SCALE=1
+ablation cell) would silently have no effect here."""
 import re
 
-from config import REWARD_DENOM, REWARD_SCALE, TARGET_U, UNPARSABLE_PENALTY
+import config as C
 
 _INT_RE = re.compile(r"-?\d+")
 
@@ -50,11 +55,11 @@ def unscaled_reward(u_raw, family):
     docstring) -- used by both eval and (via train_reward_fn) as the base that training then
     additionally scales by k for family B."""
     if u_raw is None:
-        base = UNPARSABLE_PENALTY
+        base = C.UNPARSABLE_PENALTY
     else:
         u = clip_u(u_raw)
-        base = -((u - TARGET_U[family]) / REWARD_DENOM) ** 2
-    return base * REWARD_SCALE
+        base = -((u - C.TARGET_U[family]) / C.REWARD_DENOM) ** 2
+    return base * C.REWARD_SCALE
 
 
 def train_reward_fn(prompts, completions, completion_ids, family, scale, **kwargs):

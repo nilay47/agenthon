@@ -197,3 +197,18 @@ def test_analytic_u_star():
     # monotonically decreasing in k (A's target > B's target here)
     values = [analytic_u_star(k) for k in [1, 2, 5, 10]]
     assert values == sorted(values, reverse=True)
+
+
+def test_reward_module_honors_live_config_monkeypatch():
+    """Regression test: reward.py used to do `from config import REWARD_SCALE`, a name
+    binding that would NOT see a later `config.REWARD_SCALE = ...` monkeypatch (e.g. the
+    REWARD_SCALE=1 TRL-epsilon ablation cell). It must now use `import config as C` + live
+    `C.REWARD_SCALE` lookups so the monkeypatch actually takes effect."""
+    original = C.REWARD_SCALE
+    try:
+        C.REWARD_SCALE = 1.0
+        assert unscaled_reward(None, C.FAMILY_A) == C.UNPARSABLE_PENALTY * 1.0
+        C.REWARD_SCALE = 100.0
+        assert unscaled_reward(None, C.FAMILY_A) == C.UNPARSABLE_PENALTY * 100.0
+    finally:
+        C.REWARD_SCALE = original
