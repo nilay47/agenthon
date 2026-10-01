@@ -70,6 +70,31 @@ KL_BETA = 0.0
 EVAL_EVERY = 25
 SEED = 0
 
+# Backward micro-batching: one optimizer step still covers the full PROMPTS_PER_STEP*G
+# completions (group-relative advantages are computed by TRL over that FULL generation
+# batch, before any splitting -- verified against TRL 1.14.1 source: _prepare_inputs calls
+# _generate_and_score_completions once per `steps_per_generation` micro-steps, then
+# split_tensor_dict()s the result into per-device micro-batches for the actual
+# forward/backward), but each individual backward pass only materializes
+# MICRO_BATCH_COMPLETIONS completions' worth of logits. At G=8 and vocab~152k, backward on
+# the full 128-completion batch needs ~14 GiB just for grad_logits (confirmed: the OOM this
+# fixes reported "Tried to allocate 13.98 GiB"); 16 completions needs ~1/8 of that.
+MICRO_BATCH_COMPLETIONS = 16
+GRADIENT_CHECKPOINTING = True
+
+
+def micro_batch_and_accum(prompts_per_step, g, target_micro_batch_completions=MICRO_BATCH_COMPLETIONS):
+    """Returns (per_device_train_batch_size, gradient_accumulation_steps) such that their
+    product equals prompts_per_step*g exactly (one full generation batch per optimizer
+    step), the micro-batch size is a multiple of g (never splits a single prompt's group
+    across two micro-batches), and it evenly divides the total (shrinking from the target
+    if needed, e.g. for PREFLIGHT's much smaller tiny-batch shapes)."""
+    total = prompts_per_step * g
+    micro = max(g, (min(target_micro_batch_completions, total) // g) * g)
+    while total % micro != 0:
+        micro -= g
+    return micro, total // micro
+
 # scale_rewards mapping (method name -> TRL GRPOConfig.scale_rewards value), exactly as specified:
 #   "group" = GRPO, "batch" = global normalization, "none" = Dr. GRPO
 METHOD_TO_SCALE_REWARDS = {"grpo": "group", "global": "batch", "drgrpo": "none", "sigma_sampling": "group"}

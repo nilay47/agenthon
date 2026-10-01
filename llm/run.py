@@ -39,13 +39,18 @@ def build_model_and_tokenizer():
     lora_cfg = LoraConfig(r=C.LORA_R, lora_alpha=C.LORA_ALPHA, target_modules=C.LORA_TARGET_MODULES,
                            task_type="CAUSAL_LM")
     model = get_peft_model(model, lora_cfg)
+    if C.GRADIENT_CHECKPOINTING:
+        # Required for gradient checkpointing to work through a PEFT model with a frozen
+        # base: without it, the base model's input embeddings carry requires_grad=False all
+        # the way through, and checkpointed activations silently detach from the graph.
+        model.enable_input_require_grads()
     model.print_trainable_parameters()
     return model, tokenizer
 
 
 def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
             prompts_per_step=None, g=None, max_completion_length=None, eval_every=None,
-            save_result=True, dry_run_model=None, dry_run_tokenizer=None):
+            save_result=True, extra_grpo_kwargs=None, dry_run_model=None, dry_run_tokenizer=None):
     """prompts_per_step/g/max_completion_length/eval_every default to config.py's values;
     overriding them (to tiny values) is how the notebook's PREFLIGHT check exercises this
     exact code path -- model load, LoRA, GRPOConfig, the sampler, the eval callback, and the
@@ -65,12 +70,19 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         model, tokenizer = build_model_and_tokenizer()
 
     use_vllm = _vllm_available()
+    # One optimizer step still covers the full prompts_per_step*g completions (TRL computes
+    # group-relative advantages over that whole generation batch before splitting it for
+    # backward -- see config.micro_batch_and_accum's docstring), but each individual
+    # backward pass only materializes micro_batch completions' worth of logits, keeping
+    # peak memory bounded regardless of prompts_per_step*g.
+    micro_batch, grad_accum = C.micro_batch_and_accum(prompts_per_step, g)
     grpo_kwargs = dict(
         output_dir=os.path.join(out_dir, f"{method}_k{k}_seed{seed}_ckpt"),
         scale_rewards=C.METHOD_TO_SCALE_REWARDS[method],
         loss_type=C.LOSS_TYPE,
         num_generations=g,
-        per_device_train_batch_size=prompts_per_step * g,
+        per_device_train_batch_size=micro_batch,
+        gradient_accumulation_steps=grad_accum,
         max_completion_length=max_completion_length,  # short reasoning + "Answer: <int>" comfortably fits
         max_steps=max_steps,
         temperature=C.TEMPERATURE,
@@ -78,6 +90,8 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         beta=C.KL_BETA,
         bf16=C.BF16_SUPPORTED,
         fp16=(C.DEVICE == "cuda" and not C.BF16_SUPPORTED),
+        gradient_checkpointing=C.GRADIENT_CHECKPOINTING,
+        gradient_checkpointing_kwargs={"use_reentrant": False} if C.GRADIENT_CHECKPOINTING else None,
         seed=seed,
         logging_steps=5,
         save_strategy="no",
@@ -86,6 +100,8 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         use_vllm=use_vllm,
         vllm_mode="colocate" if use_vllm else None,
     )
+    if extra_grpo_kwargs:
+        grpo_kwargs.update(extra_grpo_kwargs)
     grpo_args = GRPOConfig(**grpo_kwargs)
 
     if method == "sigma_sampling":
