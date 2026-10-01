@@ -29,20 +29,23 @@ def test_clip_u():
 
 
 def test_unscaled_reward():
-    assert unscaled_reward(None, C.FAMILY_A) == C.UNPARSABLE_PENALTY
-    assert unscaled_reward(None, C.FAMILY_B) == C.UNPARSABLE_PENALTY
-    assert abs(unscaled_reward(80, C.FAMILY_A) - 0.0) < 1e-9  # A's target
-    assert abs(unscaled_reward(20, C.FAMILY_B) - 0.0) < 1e-9  # B's target
+    # v3: REWARD_SCALE multiplies both the quadratic term and the unparsable penalty, for
+    # BOTH families, independent of k -- keeps TRL's hardcoded std-normalization epsilon
+    # negligible even once reward variance shrinks near a converged target.
+    assert unscaled_reward(None, C.FAMILY_A) == C.UNPARSABLE_PENALTY * C.REWARD_SCALE
+    assert unscaled_reward(None, C.FAMILY_B) == C.UNPARSABLE_PENALTY * C.REWARD_SCALE
+    assert abs(unscaled_reward(90, C.FAMILY_A) - 0.0) < 1e-9  # A's target
+    assert abs(unscaled_reward(50, C.FAMILY_B) - 0.0) < 1e-9  # B's target
     assert unscaled_reward(0, C.FAMILY_A) < 0
-    # 100 is closer to A's target (80) than 50 is -> less negative (better) reward
+    # 100 is closer to A's target (90) than 50 is -> less negative (better) reward
     assert unscaled_reward(100, C.FAMILY_A) > unscaled_reward(50, C.FAMILY_A)
-    # 20 is further from A's target (80) than 50 is -> more negative (worse) reward
+    # 20 is further from A's target (90) than 50 is -> more negative (worse) reward
     assert unscaled_reward(20, C.FAMILY_A) < unscaled_reward(50, C.FAMILY_A)
 
 
 def test_train_reward_fn_scales_family_b_entirely_including_unparsable():
-    comps = [[{"role": "assistant", "content": "80"}],   # family A, at target, scale 1
-             [{"role": "assistant", "content": "20"}],   # family B, at target, scale 10
+    comps = [[{"role": "assistant", "content": "90"}],   # family A, at target, scale 1
+             [{"role": "assistant", "content": "50"}],   # family B, at target, scale 10
              [{"role": "assistant", "content": "garbage"}]]  # unparsable, family B, scale 10
     out = train_reward_fn(prompts=[None] * 3, completions=comps, completion_ids=[None] * 3,
                            family=[C.FAMILY_A, C.FAMILY_B, C.FAMILY_B], scale=[1.0, 10.0, 10.0])
@@ -51,7 +54,7 @@ def test_train_reward_fn_scales_family_b_entirely_including_unparsable():
     # Uniform scaling is required for GRPO's (r-mean)/std normalization to be an exact
     # invariant of k -- a fixed, unscaled penalty here would reintroduce a k-dependent
     # distortion whenever a group mixes parsable and unparsable completions.
-    assert out[2] == C.UNPARSABLE_PENALTY * 10.0
+    assert out[2] == C.UNPARSABLE_PENALTY * C.REWARD_SCALE * 10.0
 
 
 def test_train_reward_fn_is_a_pure_rescaling_for_family_b():
@@ -70,10 +73,10 @@ def test_train_reward_fn_is_a_pure_rescaling_for_family_b():
 
 
 def test_unscaled_reward_batch():
-    out = unscaled_reward_batch(["80", "20", "garbage"], C.FAMILY_A)
+    out = unscaled_reward_batch(["90", "20", "garbage"], C.FAMILY_A)
     assert abs(out[0]) < 1e-9
     assert out[1] < 0
-    assert out[2] == C.UNPARSABLE_PENALTY
+    assert out[2] == C.UNPARSABLE_PENALTY * C.REWARD_SCALE
 
 
 def test_build_family_datasets_sizes_and_family_labels():
@@ -140,15 +143,43 @@ def test_check_pass_result_is_json_serializable():
     from pilot import check_pass
 
     def fake_result(mean_u_final):
-        return dict(eval_history=[dict(step=10, A=dict(greedy=dict(mean_u=mean_u_final)),
-                                        B=dict(greedy=dict(mean_u=mean_u_final)))])
+        # v3's primary metric is SAMPLED mean u, not greedy.
+        return dict(eval_history=[dict(step=10, A=dict(sampled=dict(mean_u=mean_u_final)),
+                                        B=dict(sampled=dict(mean_u=mean_u_final)))])
 
     results = {
-        "grpo_k1": [fake_result(38.36), fake_result(25.0), fake_result(32.16)],
-        "grpo_k10": [fake_result(26.13), fake_result(25.0), fake_result(27.72)],
-        "drgrpo_k1": [fake_result(50), fake_result(49), fake_result(51)],
-        "drgrpo_k10": [fake_result(31), fake_result(30), fake_result(32)],
+        "grpo_k1": [fake_result(69.0), fake_result(71.0), fake_result(70.0)],
+        "grpo_k10": [fake_result(70.0), fake_result(68.0), fake_result(72.0)],
+        "drgrpo_k1": [fake_result(70.0), fake_result(69.0), fake_result(71.0)],
+        "drgrpo_k10": [fake_result(54.0), fake_result(53.0), fake_result(55.0)],
+        "global_k1": [fake_result(70.0), fake_result(71.0), fake_result(69.0)],
+        "global_k10": [fake_result(55.0), fake_result(53.0), fake_result(54.0)],
+        "sigma_sampling_k10": [fake_result(55.0), fake_result(54.0), fake_result(53.0)],
     }
     passed, detail, final_u = check_pass(results)
     assert type(passed) is bool
     json.dumps(dict(passed=passed, detail=detail, final_mean_u=final_u))  # must not raise
+
+
+def test_check_pass_all_checks_pass_on_predicted_pattern():
+    """Matches config.PREDICTED_MEAN_U's qualitative pattern (GRPO flat ~70, Dr.GRPO/Global
+    shift to ~54 at k=10, sigma-sampling tracks Dr.GRPO's k=10) -- all four checks should
+    PASS when the data looks like the theory predicts."""
+    from pilot import check_pass
+
+    def fake_result(mean_u_final):
+        return dict(eval_history=[dict(step=10, A=dict(sampled=dict(mean_u=mean_u_final)),
+                                        B=dict(sampled=dict(mean_u=mean_u_final)))])
+
+    results = {
+        "grpo_k1": [fake_result(69.0), fake_result(71.0), fake_result(70.0)],
+        "grpo_k10": [fake_result(70.0), fake_result(68.0), fake_result(72.0)],
+        "drgrpo_k1": [fake_result(70.0), fake_result(69.0), fake_result(71.0)],
+        "drgrpo_k10": [fake_result(54.0), fake_result(53.0), fake_result(55.0)],
+        "global_k1": [fake_result(70.0), fake_result(71.0), fake_result(69.0)],
+        "global_k10": [fake_result(55.0), fake_result(53.0), fake_result(54.0)],
+        "sigma_sampling_k10": [fake_result(55.0), fake_result(54.0), fake_result(53.0)],
+    }
+    passed, detail, final_u = check_pass(results)
+    assert passed is True
+    assert final_u["checks"] == dict(grpo=True, drgrpo=True, global_=True, sigma_sampling=True)

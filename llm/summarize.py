@@ -68,7 +68,7 @@ def make_figure(summary, out_path_base):
         ax.grid(True, color="#e1e0d9", linewidth=0.7)
         ax.spines[["top", "right"]].set_visible(False)
         ax.legend(frameon=False, fontsize=8)
-    axes[0].set_ylabel("mean u (pooled across families, greedy)")
+    axes[0].set_ylabel("mean u (pooled across families, sampled)")
     fig.tight_layout()
     out_paths = []
     for ext in ["pdf", "png"]:

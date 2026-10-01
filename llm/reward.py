@@ -1,22 +1,31 @@
 """Conflicting-preference reward. Parse the first integer u from the completion; clip to
 [0,100]; unparsable -> UNPARSABLE_PENALTY (-1) as the BASE reward for either family. Family
-A wants u near TARGET_U['A']=80, family B wants u near TARGET_U['B']=20; family B's ENTIRE
-reward -- the squared-distance term AND the unparsable penalty alike -- is scaled by k (a
-per-example 'scale' dataset column) during TRAINING ONLY, so an unparsable completion from
-family B trains against -k, not -1.
+A wants u near TARGET_U['A'], family B wants u near TARGET_U['B']; the WHOLE base reward --
+the squared-distance term AND the unparsable penalty alike -- is multiplied by REWARD_SCALE
+for BOTH families, and family B's is further multiplied by k on top (a per-example 'scale'
+dataset column) during TRAINING ONLY, so an unparsable completion from family B trains
+against -REWARD_SCALE*k, not -1.
 
-This uniform scaling matters for more than bookkeeping: GRPO's per-group reward
-normalization, (r - mean(r)) / (std(r) + eps), is an exact affine-invariant of a PURE
-rescaling r -> k*r (up to the small eps), which is the whole mechanism behind GRPO being
-predicted to erase k's effect on the trained policy. If only the parsable rewards were
-scaled by k while the unparsable penalty stayed fixed at -1, the reward vector for any group
-containing both parsable and unparsable completions would NOT be a pure rescaling between
-k=1 and k=10, breaking that invariance in a k-dependent way whenever parse rate < 1 (which
-is generic, not an edge case, during early training). Eval always uses the unscaled (k=1)
-reward directly, bypassing this training-time scaling entirely -- that part is unaffected."""
+Two separate uniform-scaling requirements compound here, both serving the same goal -- making
+GRPO's per-group reward normalization, (r - mean(r)) / (std(r) + eps), an EXACT invariant of
+k's effect on the trained policy:
+  1. Scaling by k must apply to the ENTIRE reward (parsable or not). If only the parsable
+     rewards were scaled while the unparsable penalty stayed fixed, a group mixing parsable
+     and unparsable completions would NOT be a pure rescaling between k=1 and k=10, breaking
+     the invariance whenever parse rate < 1 (generic early in training, not an edge case).
+  2. Scaling by REWARD_SCALE must apply to BOTH families, independent of k. TRL hardcodes a
+     +1e-4 epsilon inside the std-normalization; near a target, the quadratic reward is flat,
+     so a group's natural reward std can itself shrink toward that epsilon as the policy
+     converges, at which point (r-mean)/(std+eps) stops being well-approximated by
+     (r-mean)/std and the "eps negligible" assumption behind the invariance breaks down
+     regardless of k. Scaling the whole reward (hence its std) by 100 keeps eps negligible
+     across the entire training trajectory, not just at initialization.
+
+Eval always uses the unscaled (k=1) reward directly, bypassing the k-scaling entirely -- that
+part is unaffected by either rescaling."""
 import re
 
-from config import REWARD_DENOM, TARGET_U, UNPARSABLE_PENALTY
+from config import REWARD_DENOM, REWARD_SCALE, TARGET_U, UNPARSABLE_PENALTY
 
 _INT_RE = re.compile(r"-?\d+")
 
@@ -37,12 +46,15 @@ def clip_u(u):
 
 def unscaled_reward(u_raw, family):
     """The graded reward for ONE family's interpretation of a parsed (possibly None) u,
-    with no k-scaling applied -- used by both eval and (via train_reward_fn) as the base
-    that training then scales."""
+    with no k-scaling applied (REWARD_SCALE IS applied -- it's not k-dependent, see module
+    docstring) -- used by both eval and (via train_reward_fn) as the base that training then
+    additionally scales by k for family B."""
     if u_raw is None:
-        return UNPARSABLE_PENALTY
-    u = clip_u(u_raw)
-    return -((u - TARGET_U[family]) / REWARD_DENOM) ** 2
+        base = UNPARSABLE_PENALTY
+    else:
+        u = clip_u(u_raw)
+        base = -((u - TARGET_U[family]) / REWARD_DENOM) ** 2
+    return base * REWARD_SCALE
 
 
 def train_reward_fn(prompts, completions, completion_ids, family, scale, **kwargs):

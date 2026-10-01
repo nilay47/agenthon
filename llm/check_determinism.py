@@ -6,21 +6,23 @@ are both reproducible across separate calls in the same process) and produce (ne
 identical advantages, since the only thing that differs is a uniform rescaling of the raw
 reward (now that the unparsable-penalty bug is fixed -- see reward.py). "Nearly" because TRL
 adds a small epsilon (1e-4) to the std before dividing, which only vanishes exactly as
-k -> infinity.
+k -> infinity -- v3's REWARD_SCALE=100 (see config.py) keeps that epsilon negligible relative
+to the (now much larger) natural reward std even once the policy has converged near a target,
+so the tolerance here is RELATIVE (<1e-4 of the advantages' own scale), not an absolute bound
+tied to the raw epsilon value.
 
-If the max difference is NOT small, something besides the raw reward scale is affecting
-advantages -- candidates to check: the epsilon itself (if GRPOConfig ever gets scale_rewards
-changed to something that doesn't normalize by std at all), KL beta (0 here, so shouldn't
-matter), PPO-style clipping (not enabled here), or a difference in the actual generated
-completions (would show up as different group compositions / reward values, not just
-different advantages).
+If the relative difference is NOT small, something besides the raw reward scale is affecting
+advantages -- candidates to check: REWARD_SCALE being too small for the current reward
+std, KL beta (0 here, so shouldn't matter), PPO-style clipping (not enabled here), or a
+difference in the actual generated completions (would show up as different group
+compositions / reward values, not just different advantages).
 
 Usage: cd llm && python check_determinism.py
 """
 from run import run_one
 
 
-def run_check(seed=0):
+def run_check(seed=0, rel_tol=1e-4):
     print("Running GRPO k=1, 1 step...")
     _, trainer_k1 = run_one("grpo", k=1, seed=seed, max_steps=1, save_result=False, return_trainer=True)
     print("Running GRPO k=10, 1 step...")
@@ -38,17 +40,21 @@ def run_check(seed=0):
             print(f"raw reward ratio (k10/k1) where k=1 reward != 0 (mix of family A's 1.0 and "
                   f"family B's 10.0 is expected): min={min(ratio_where_nonzero):.4f} max={max(ratio_where_nonzero):.4f}")
 
-    max_diff = (adv_k1 - adv_k10).abs().max().item()
-    print(f"\nmax |advantage_k1 - advantage_k10| = {max_diff:.6e}  (expect <= ~1e-4, TRL's eps)")
-    passed = max_diff <= 1e-3
+    max_abs_diff = (adv_k1 - adv_k10).abs().max().item()
+    scale = max(adv_k1.abs().max().item(), adv_k10.abs().max().item(), 1e-12)
+    rel_diff = max_abs_diff / scale
+    print(f"\nmax |advantage_k1 - advantage_k10| = {max_abs_diff:.6e}  (advantage scale ~{scale:.4f})")
+    print(f"relative difference = {rel_diff:.6e}  (require < {rel_tol:.0e})")
+    passed = rel_diff < rel_tol
     if not passed:
         print("NOT matching -- something besides the raw reward scale is affecting advantages.")
         print("  Check: whether the two runs actually generated the SAME completions (compare")
-        print("  first_step_rewards directly), the eps in GRPO's std-normalization, KL beta,")
-        print("  clipping, or any other scale_rewards-adjacent config difference between calls.")
+        print("  first_step_rewards directly), whether REWARD_SCALE is large enough for the")
+        print("  current reward std, KL beta, clipping, or any other scale_rewards-adjacent")
+        print("  config difference between calls.")
     else:
         print("DETERMINISM CHECK PASSED: GRPO's advantages are scale-invariant to k, as predicted.")
-    return passed, max_diff
+    return passed, rel_diff
 
 
 if __name__ == "__main__":

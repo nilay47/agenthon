@@ -3,10 +3,17 @@
 Task: a single fixed prompt (a few paraphrases, none revealing family), asking the model to
 pick an integer in [0,100]. Each training example carries a HIDDEN family label A/B (50/50,
 used only by the reward function and the sampler, never shown to the model): family A wants
-the parsed integer near 80, family B wants it near 20, and B's reward is scaled by k. Unlike
-the earlier arithmetic-skills design (where both families could improve independently), A and
-B's preferences directly conflict on the SAME output distribution, so k should visibly shift
-where the policy settles."""
+the parsed integer near TARGET_U['A'], family B wants it near TARGET_U['B'], and B's whole
+reward is scaled by k. A and B's preferences directly conflict on the SAME output
+distribution, so k should visibly shift where the policy settles -- unless an estimator's own
+reward normalization cancels that shift out.
+
+v3: both targets moved inward (90/50, from 80/20) and both families' base rewards are scaled
+by REWARD_SCALE=100 (see its docstring below) -- TRL hardcodes a +1e-4 epsilon inside GRPO's
+group-std normalization, which stops being negligible once the natural reward std near a flat
+quadratic optimum gets small, breaking the EXACT k-invariance GRPO's normalization is
+predicted to provide. Rescaling the whole reward by 100 makes eps negligible again regardless
+of how converged the policy is."""
 import torch
 
 MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
@@ -52,10 +59,17 @@ FAMILY_B = "B"  # wants the parsed integer near TARGET_U["B"]; reward scaled by 
 N_TRAIN_PER_FAMILY = 2000  # static pool size for the non-sigma-sampling methods
 
 # Reward: parse the first integer, clip to [0,100]; unparsable -> UNPARSABLE_PENALTY for
-# either family (never scaled by k). reward_A(u) = -((u-80)/50)^2, reward_B(u) = k*(-((u-20)/50)^2).
-TARGET_U = {FAMILY_A: 80.0, FAMILY_B: 20.0}
+# either family (never scaled by k). base_reward_A(u) = -((u-90)/50)^2, base_reward_B(u) =
+# -((u-50)/50)^2; the WHOLE base reward (quadratic term AND the unparsable penalty alike) is
+# then multiplied by REWARD_SCALE, and family B's is further multiplied by k on top (so an
+# unparsable completion from family B trains against -REWARD_SCALE*k, e.g. -1000 at k=10).
+TARGET_U = {FAMILY_A: 90.0, FAMILY_B: 50.0}
 REWARD_DENOM = 50.0
 UNPARSABLE_PENALTY = -1.0
+# See the module docstring: makes TRL's hardcoded std-normalization epsilon (1e-4) negligible
+# relative to the (now ~100x larger) natural reward std, restoring GRPO's exact k-invariance
+# even once the policy has converged near a target and reward variance within a group shrinks.
+REWARD_SCALE = 100.0
 
 # Eval (baseline_eval.py and PreferenceEvalCallback)
 N_EVAL_FRESH = 100       # "100 fresh greedy prompts" / "100 sampled completions"
@@ -65,7 +79,7 @@ MAX_NEW_TOKENS_EVAL = 8  # only need the first integer
 # Training
 G = 8                    # num_generations
 PROMPTS_PER_STEP = 16
-MAX_STEPS = 80
+MAX_STEPS = 120
 MAX_COMPLETION_LENGTH = 8  # the answer is just a number -- short completions by design
 LR = 1e-5
 TEMPERATURE = 1.0        # sampling temperature, matches GRPOConfig's default -- set explicitly
@@ -118,10 +132,14 @@ SIGMA_UNIFORM_MIX = 0.1
 RESULTS_DIR = "llm/results"
 
 # Theoretical reference points for the summary figure (not used by training/eval logic,
-# purely annotation): GRPO's per-instance normalization is predicted to erase k's effect
-# entirely (both k land near the unweighted midpoint ~50); Dr.GRPO has no such normalization,
-# so k=10 is predicted to pull the policy most of the way to B's target (~25).
+# purely annotation): GRPO's per-GROUP normalization is predicted to erase k's effect
+# entirely (both k land near the unweighted midpoint, (90+50)/2=70). Dr.GRPO has no such
+# normalization. Global normalization divides by a POOLED std across the WHOLE (mixed-family,
+# mixed-scale) batch rather than per-group, so a single group's own uniform k-rescaling is
+# NOT exactly cancelled by it either -- unlike GRPO, it does not have the per-group
+# cancellation property, so it's predicted to show a k-shift much like Dr.GRPO's.
 PREDICTED_MEAN_U = {
-    "grpo": {1: 50.0, 10: 50.0},
-    "drgrpo": {1: 50.0, 10: 25.0},
+    "grpo": {1: 70.0, 10: 70.0},
+    "drgrpo": {1: 70.0, 10: 54.0},
+    "global": {1: 70.0, 10: 54.0},
 }

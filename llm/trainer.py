@@ -7,11 +7,14 @@ unchanged by the task redesign below.
 
 PreferenceEvalCallback: every eval_every steps, draws N_EVAL_FRESH FRESH (random-paraphrase)
 prompts per family and evaluates BOTH greedy and training-temperature-sampled decoding,
-reporting mean/median u, parse rate, and unscaled mean reward for each -- independent of the
-trainer's own (k-scaled) reward path entirely."""
+reporting mean/median u, parse rate, unscaled mean reward, and a collapse indicator (fraction
+of samples equal to the modal parsed answer) for each -- independent of the trainer's own
+(k-scaled) reward path entirely. The SAMPLED metrics are the primary ones used downstream
+(pilot.py / summarize.py); greedy is logged alongside for comparison."""
 import random
 import statistics
 import time
+from collections import Counter
 
 import torch
 from transformers import TrainerCallback
@@ -133,7 +136,16 @@ class PreferenceEvalCallback(TrainerCallback):
         mean_u = statistics.mean(clipped) if clipped else float("nan")
         median_u = statistics.median(clipped) if clipped else float("nan")
         mean_reward = statistics.mean(unscaled_reward(u, family) for u in us_raw) if us_raw else float("nan")
-        return dict(mean_u=mean_u, median_u=median_u, parse_rate=parse_rate, mean_reward=mean_reward)
+        # Collapse indicator: fraction of ALL samples (parsable or not) equal to the modal
+        # (most common) parsed integer -- a large fraction means the policy has collapsed to
+        # repeating a single answer rather than genuinely converging a distribution around it.
+        if clipped:
+            modal_value, modal_count = Counter(clipped).most_common(1)[0]
+        else:
+            modal_value, modal_count = None, 0
+        modal_fraction = modal_count / len(us_raw) if us_raw else 0.0
+        return dict(mean_u=mean_u, median_u=median_u, parse_rate=parse_rate, mean_reward=mean_reward,
+                    modal_value=modal_value, modal_fraction=modal_fraction)
 
     def on_step_end(self, args, state, control, model=None, **kwargs):
         if state.global_step == 0 or state.global_step % self.eval_every != 0:
