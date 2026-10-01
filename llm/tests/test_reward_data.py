@@ -40,7 +40,7 @@ def test_unscaled_reward():
     assert unscaled_reward(20, C.FAMILY_A) < unscaled_reward(50, C.FAMILY_A)
 
 
-def test_train_reward_fn_scales_family_b_only_and_never_scales_unparsable():
+def test_train_reward_fn_scales_family_b_entirely_including_unparsable():
     comps = [[{"role": "assistant", "content": "80"}],   # family A, at target, scale 1
              [{"role": "assistant", "content": "20"}],   # family B, at target, scale 10
              [{"role": "assistant", "content": "garbage"}]]  # unparsable, family B, scale 10
@@ -48,7 +48,25 @@ def test_train_reward_fn_scales_family_b_only_and_never_scales_unparsable():
                            family=[C.FAMILY_A, C.FAMILY_B, C.FAMILY_B], scale=[1.0, 10.0, 10.0])
     assert abs(out[0]) < 1e-9
     assert abs(out[1]) < 1e-9
-    assert out[2] == C.UNPARSABLE_PENALTY  # NOT scaled by k=10
+    # Uniform scaling is required for GRPO's (r-mean)/std normalization to be an exact
+    # invariant of k -- a fixed, unscaled penalty here would reintroduce a k-dependent
+    # distortion whenever a group mixes parsable and unparsable completions.
+    assert out[2] == C.UNPARSABLE_PENALTY * 10.0
+
+
+def test_train_reward_fn_is_a_pure_rescaling_for_family_b():
+    """The property the whole reward design depends on: for ANY completions, family B's
+    reward vector at k=10 must equal EXACTLY 10x its k=1 reward vector (a pure rescaling,
+    required for GRPO's group normalization to be k-invariant)."""
+    comps = [[{"role": "assistant", "content": "20"}], [{"role": "assistant", "content": "55"}],
+             [{"role": "assistant", "content": "garbage"}], [{"role": "assistant", "content": "0"}]]
+    family = [C.FAMILY_B] * 4
+    out_k1 = train_reward_fn(prompts=[None] * 4, completions=comps, completion_ids=[None] * 4,
+                              family=family, scale=[1.0] * 4)
+    out_k10 = train_reward_fn(prompts=[None] * 4, completions=comps, completion_ids=[None] * 4,
+                               family=family, scale=[10.0] * 4)
+    for r1, r10 in zip(out_k1, out_k10):
+        assert abs(r10 - 10.0 * r1) < 1e-9
 
 
 def test_unscaled_reward_batch():

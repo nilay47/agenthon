@@ -25,6 +25,8 @@ class FamilyTrackingGRPOTrainer(GRPOTrainer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.family_share_log = []  # list of dicts: {step, family: {mean_abs_adv, count, share}}
+        self.first_step_advantages = None  # captured once, for check_determinism.py
+        self.first_step_rewards = None
 
     def _generate_and_score_completions(self, inputs):
         output = super()._generate_and_score_completions(inputs)
@@ -32,6 +34,11 @@ class FamilyTrackingGRPOTrainer(GRPOTrainer):
             return output  # only track gradient-contribution share during training
         advantages = output["advantages"]
         A = advantages.shape[0]
+        if self.first_step_advantages is None:
+            self.first_step_advantages = advantages.detach().clone()
+            reward_lists = list(self._logs["rewards"].values())
+            if reward_lists:
+                self.first_step_rewards = torch.tensor(list(reward_lists[0])[-A:], dtype=torch.float64)
         # `inputs` (len == A here) is ALREADY expanded to one row per completion -- each
         # underlying unique prompt appears as `num_generations` CONSECUTIVE rows with
         # identical family/scale (verified empirically: len(inputs) == B*G, not B). So a

@@ -16,10 +16,8 @@ import argparse
 import json
 import os
 
-import numpy as np
-
 import config as C
-from pilot import final_mean_u, mean_u_series
+from pilot import ci95, final_mean_u, mean_u_series
 from run import run_one
 
 # Exact order requested: Dr.GRPO k=1, Dr.GRPO k=10, GRPO k=1, GRPO k=10,
@@ -36,18 +34,6 @@ def result_path(result_dir, method, k, seed):
     return os.path.join(result_dir, f"{result_key(method, k, seed)}.json")
 
 
-def ci95(values):
-    values = np.asarray(values, dtype=np.float64)
-    n = len(values)
-    if n < 2:
-        return float(values.mean()), float("nan"), float("nan")
-    from scipy import stats
-    mean = float(values.mean())
-    sem = float(values.std(ddof=1)) / np.sqrt(n)
-    tcrit = float(stats.t.ppf(0.975, df=n - 1))
-    return mean, mean - tcrit * sem, mean + tcrit * sem
-
-
 def build_summary(all_results, seeds, configs=CONFIGS):
     """Per config: final (pooled) mean u across seeds, mean +- 95% CI, plus the full mean-u-
     over-steps series per seed (for the figure)."""
@@ -62,15 +48,18 @@ def build_summary(all_results, seeds, configs=CONFIGS):
     return summary
 
 
-def run_sweep(seeds, result_dir, skip_existing=True):
-    """Runs every (method,k) in CONFIGS for each seed, SEED-MAJOR (all 7 configs at seed[0]
+def run_sweep(seeds, result_dir, skip_existing=True, configs=CONFIGS):
+    """Runs every (method,k) in `configs` for each seed, SEED-MAJOR (all configs at seed[0]
     before any config at seed[1]), writing each result to result_dir immediately after it
     completes. Skips any (method,k,seed) whose result file already exists in result_dir when
-    skip_existing=True (the resume path)."""
+    skip_existing=True (the resume path). Pass a narrower `configs` list (e.g. just
+    [("grpo",1),("grpo",10)]) for a targeted partial rerun -- e.g. after fixing a bug that
+    only invalidated some configs' prior results (delete those specific result files first so
+    skip_existing doesn't just reload the stale ones)."""
     os.makedirs(result_dir, exist_ok=True)
     all_results = {}
     for seed in seeds:
-        for method, k in CONFIGS:
+        for method, k in configs:
             key = result_key(method, k, seed)
             path = result_path(result_dir, method, k, seed)
             if skip_existing and os.path.exists(path):

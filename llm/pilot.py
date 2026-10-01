@@ -1,16 +1,15 @@
-"""Pass-check helpers for the conflicting-preference task, reused by the notebook's direct
-full-sweep flow after seed 0 completes (there is no longer a separately gated pilot step --
-the 4 configs these checks need, Dr.GRPO/GRPO x k in {1,10}, are already part of the regular
-7-config sweep, so re-running them standalone would just duplicate GPU work).
+"""Pass-check helpers for the conflicting-preference task.
 
-Pass criteria:
-  (1) Dr.GRPO: k=10's final mean u is at least 8 LOWER than k=1's (shifted toward B's target
-      of 20) -- Dr.GRPO has no per-instance reward normalization, so weighting family B's
-      reward by k=10 should visibly pull the policy toward B's preference.
-  (2) GRPO: |final mean u, k=10 minus k=1| < 4 -- GRPO's per-instance std normalization is
-      predicted to erase k's effect almost entirely (both k land near the unweighted
-      midpoint, ~50).
+Seed-aware (not a single-seed check): GRPO's per-instance reward normalization is predicted
+to make the policy invariant to k UP TO SEED NOISE -- so the right test is whether k=10's
+mean lands inside k=1's own seed-to-seed spread, not whether a single seed's difference
+happens to be small. Dr.GRPO has no such normalization, so its k=1-vs-k=10 shift should be a
+real effect that survives seed noise -- the paired (per-seed) shift's 95% CI should exclude
+zero entirely.
 """
+import numpy as np
+from scipy import stats
+
 import config as C
 
 
@@ -29,17 +28,53 @@ def final_mean_u(result):
     return series[-1][1] if series else float("nan")
 
 
+def ci95(values):
+    values = np.asarray(values, dtype=np.float64)
+    n = len(values)
+    if n < 2:
+        return float(values.mean()), float("nan"), float("nan")
+    mean = float(values.mean())
+    sem = float(values.std(ddof=1)) / np.sqrt(n)
+    tcrit = float(stats.t.ppf(0.975, df=n - 1))
+    return mean, mean - tcrit * sem, mean + tcrit * sem
+
+
 def check_pass(results_by_key):
     """results_by_key: dict with keys 'drgrpo_k1', 'drgrpo_k10', 'grpo_k1', 'grpo_k10' ->
-    run_one()'s result dict. Returns (passed, detail, final_mean_u_by_key)."""
-    u = {key: final_mean_u(res) for key, res in results_by_key.items()}
-    drgrpo_shift = u["drgrpo_k1"] - u["drgrpo_k10"]
-    grpo_diff = abs(u["grpo_k10"] - u["grpo_k1"])
-    check1 = drgrpo_shift >= 8
-    check2 = grpo_diff < 4
-    passed = check1 and check2
-    detail = (f"Dr.GRPO: mean_u k=1={u['drgrpo_k1']:.2f}  k=10={u['drgrpo_k10']:.2f}  "
-              f"shift={drgrpo_shift:+.2f} (need >= 8): {'PASS' if check1 else 'FAIL'}\n"
-              f"GRPO: mean_u k=1={u['grpo_k1']:.2f}  k=10={u['grpo_k10']:.2f}  "
-              f"|diff|={grpo_diff:.2f} (need < 4): {'PASS' if check2 else 'FAIL'}")
-    return passed, detail, u
+    LIST of run_one() result dicts, one per seed, SAME seed order across all four keys (so
+    the Dr.GRPO shift can be paired per seed).
+
+    (1) GRPO check: k=10's mean final mean-u must fall within k=1's own 95% seed-to-seed CI
+        -- i.e. indistinguishable from k=1's natural seed variability.
+    (2) Dr.GRPO check: the paired (per-seed) shift (k=1 minus k=10) must have a 95% CI that
+        excludes zero -- i.e. the shift toward B's target is a real effect, not seed noise.
+    """
+    grpo_k1 = [final_mean_u(r) for r in results_by_key["grpo_k1"]]
+    grpo_k10 = [final_mean_u(r) for r in results_by_key["grpo_k10"]]
+    drgrpo_k1 = [final_mean_u(r) for r in results_by_key["drgrpo_k1"]]
+    drgrpo_k10 = [final_mean_u(r) for r in results_by_key["drgrpo_k10"]]
+
+    grpo_k1_mean, grpo_k1_lo, grpo_k1_hi = ci95(grpo_k1)
+    grpo_k10_mean, grpo_k10_lo, grpo_k10_hi = ci95(grpo_k10)
+    check_grpo = grpo_k1_lo <= grpo_k10_mean <= grpo_k1_hi
+
+    shifts = [k1 - k10 for k1, k10 in zip(drgrpo_k1, drgrpo_k10)]  # paired by seed
+    shift_mean, shift_lo, shift_hi = ci95(shifts)
+    check_drgrpo = shift_lo > 0
+
+    passed = check_grpo and check_drgrpo
+    detail = (
+        f"GRPO: k=1 mean={grpo_k1_mean:.2f} (seed values {[round(v,2) for v in grpo_k1]}) "
+        f"95% CI=[{grpo_k1_lo:.2f},{grpo_k1_hi:.2f}]\n"
+        f"      k=10 mean={grpo_k10_mean:.2f} (seed values {[round(v,2) for v in grpo_k10]}) "
+        f"95% CI=[{grpo_k10_lo:.2f},{grpo_k10_hi:.2f}]\n"
+        f"      k=10 mean within k=1's CI: {'PASS' if check_grpo else 'FAIL'}\n"
+        f"Dr.GRPO: paired shift (k=1 minus k=10) per seed = {[round(s,2) for s in shifts]}\n"
+        f"         mean shift={shift_mean:+.2f}  95% CI=[{shift_lo:+.2f},{shift_hi:+.2f}]\n"
+        f"         CI excludes zero (shift is a real, seed-robust effect): {'PASS' if check_drgrpo else 'FAIL'}"
+    )
+    final_u = dict(grpo_k1=dict(mean=grpo_k1_mean, ci=[grpo_k1_lo, grpo_k1_hi], values=grpo_k1),
+                    grpo_k10=dict(mean=grpo_k10_mean, ci=[grpo_k10_lo, grpo_k10_hi], values=grpo_k10),
+                    drgrpo_k1=dict(values=drgrpo_k1), drgrpo_k10=dict(values=drgrpo_k10),
+                    drgrpo_shift=dict(mean=shift_mean, ci=[shift_lo, shift_hi], values=shifts))
+    return passed, detail, final_u

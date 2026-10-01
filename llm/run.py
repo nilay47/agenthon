@@ -10,6 +10,7 @@ import json
 import os
 import time
 
+import torch
 from datasets import Dataset
 from peft import LoraConfig, get_peft_model
 from transformers import AutoTokenizer
@@ -50,17 +51,28 @@ def build_model_and_tokenizer():
 
 def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
             prompts_per_step=None, g=None, max_completion_length=None, eval_every=None,
-            save_result=True, extra_grpo_kwargs=None, dry_run_model=None, dry_run_tokenizer=None):
+            save_result=True, return_trainer=False, extra_grpo_kwargs=None,
+            dry_run_model=None, dry_run_tokenizer=None):
     """prompts_per_step/g/max_completion_length/eval_every default to config.py's values;
     overriding them (to tiny values) is how the notebook's PREFLIGHT check exercises this
     exact code path -- model load, LoRA, GRPOConfig, the sampler, the eval callback, and the
-    result-file save -- in a couple of seconds instead of a full run."""
+    result-file save -- in a couple of seconds instead of a full run.
+
+    return_trainer=True additionally returns the FamilyTrackingGRPOTrainer instance (e.g. to
+    read its .first_step_advantages for the determinism check in check_determinism.py)."""
     assert method in C.METHODS, method
     prompts_per_step = C.PROMPTS_PER_STEP if prompts_per_step is None else prompts_per_step
     g = C.G if g is None else g
     max_completion_length = C.MAX_COMPLETION_LENGTH if max_completion_length is None else max_completion_length
     eval_every = C.EVAL_EVERY if eval_every is None else eval_every
 
+    # Seed BEFORE building the model: LoRA's own random init happens here, before the
+    # trainer (which re-seeds via GRPOConfig(seed=...) internally) even exists, so two
+    # separate run_one() calls with the same seed would otherwise get DIFFERENT LoRA init
+    # (and hence different generated completions) depending on whatever global RNG state
+    # happened to be left over from prior calls in the same process. Required for
+    # check_determinism.py's cross-k comparison to be meaningful.
+    torch.manual_seed(seed)
     train_a, train_b = build_family_datasets(seed=seed)
 
     if dry_run_model is not None:
@@ -137,6 +149,8 @@ def run_one(method, k, seed, max_steps=C.MAX_STEPS, out_dir=C.RESULTS_DIR,
         with open(out_path, "w") as f:
             json.dump(result, f, indent=2)
         print(f"wrote {out_path}  wall_clock={wall_clock_s:.1f}s  use_vllm={use_vllm}")
+    if return_trainer:
+        return result, trainer
     return result
 
 
