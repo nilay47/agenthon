@@ -1,11 +1,15 @@
 """Step 1: baseline sanity check for the UNTRAINED model, before spending any GPU budget on
 training. Reports accuracy, completion-length and n_steps distributions, and each grader's
 unscaled reward mean/std, on the FULL 200-problem reserved held-out set (more statistical
-power than the periodic 100-subset used during training, and this only runs once).
+power than the periodic 100-subset used during training, and this only runs once). Also runs
+the true WITHIN-GROUP reward-std check (G samples of the SAME prompt, see
+trainer.HeldOutEvalCallback.group_reward_std) on a smaller subset.
 
-Accuracy must be clearly above 0 here -- otherwise both graders are near-constant-zero for
-almost every training example and GRPO has no useful signal to learn from at all. This is
-reported loudly but does not hard-exit (the pilot gate in Step 2 is the actual gate).
+THIS IS A HARD GATE (`gate_passed` in the saved JSON): both must hold, or pilot_gate.py
+refuses to spend GPU time on Step 2 at all --
+  1. accuracy >= config.BASELINE_MIN_ACCURACY
+  2. BOTH graders' group reward std > 0 (otherwise GRPO's advantage computation has literally
+     nothing to work with for that grader, regardless of accuracy)
 
 Mirrors llm/baseline_eval.py: a raw (non-LoRA) base-model forward pass is functionally
 identical to a freshly-initialized LoRA wrapper (zero-init adapters contribute nothing), so
@@ -55,26 +59,42 @@ if __name__ == "__main__":
     cb = HeldOutEvalCallback(tokenizer, held_out, eval_every=1)  # eval_every unused by run_eval directly
     per_example = cb.run_eval(model)
     summary = cb.summarize(per_example)
+    print("Running group reward-std check "
+          f"({C.N_GROUP_STD_PROMPTS} prompts x G={C.G} samples each)...")
+    group_std = cb.group_reward_std(model)
 
     n_tokens_dist = length_distribution([m["n_tokens"] for m in per_example])
     n_steps_dist = length_distribution([m["n_steps"] for m in per_example])
 
-    print(f"\nn={summary['n']}  accuracy={summary['accuracy']:.3f}")
-    if summary["accuracy"] < 0.02:
-        print("  WARNING: accuracy is ~0 -- both graders will be near-constant-zero for almost "
-              "every training example; GRPO will have little/no useful signal. Check the prompt "
-              "template and model before training.")
-    else:
-        print("  accuracy is clearly above 0 -- baseline looks learnable.")
+    print(f"\nn={summary['n']}  accuracy={summary['accuracy']:.3f}  (gate: >= {C.BASELINE_MIN_ACCURACY})")
     print(f"completion length (tokens): {n_tokens_dist}")
     print(f"n_steps (reasoning lines before '####'): {n_steps_dist}")
     print(f"grader A (reasoning rubric, 0-10): mean={summary['reward_a']['mean']:.3f}  "
-          f"std={summary['reward_a']['std']:.3f}")
+          f"population_std={summary['reward_a']['std']:.3f}  "
+          f"group_std={group_std['reward_a_group_std']:.3f}  (gate: > 0)")
     print(f"grader B (terse verifier, 0-1):    mean={summary['reward_b']['mean']:.3f}  "
-          f"std={summary['reward_b']['std']:.3f}")
+          f"population_std={summary['reward_b']['std']:.3f}  "
+          f"group_std={group_std['reward_b_group_std']:.3f}  (gate: > 0)")
+
+    accuracy_ok = summary["accuracy"] >= C.BASELINE_MIN_ACCURACY
+    group_std_ok = group_std["reward_a_group_std"] > 0 and group_std["reward_b_group_std"] > 0
+    gate_passed = bool(accuracy_ok and group_std_ok)
+
+    print(f"\n=== BASELINE GATE: {'PASS' if gate_passed else 'FAIL'} ===")
+    if not gate_passed:
+        if not accuracy_ok:
+            print(f"  FAIL: accuracy {summary['accuracy']:.3f} < required {C.BASELINE_MIN_ACCURACY} -- "
+                  "check the prompt template and model before training.")
+        if not group_std_ok:
+            print(f"  FAIL: group reward std is 0 for at least one grader "
+                  f"(A={group_std['reward_a_group_std']:.3f}, B={group_std['reward_b_group_std']:.3f}) -- "
+                  "GRPO's advantage computation has nothing to work with for that grader. Check the "
+                  "reward function design (e.g. grader B's taper denominator vs typical completion length).")
+        print("  Step 2 (pilot gate) will refuse to run until this passes.")
 
     results = dict(n=summary["n"], accuracy=summary["accuracy"], n_tokens_distribution=n_tokens_dist,
-                    n_steps_distribution=n_steps_dist, reward_a=summary["reward_a"], reward_b=summary["reward_b"])
+                    n_steps_distribution=n_steps_dist, reward_a=summary["reward_a"], reward_b=summary["reward_b"],
+                    group_reward_std=group_std, gate_passed=gate_passed)
     os.makedirs(args.out_dir, exist_ok=True)
     out_path = os.path.join(args.out_dir, "baseline_eval.json")
     with open(out_path, "w") as f:

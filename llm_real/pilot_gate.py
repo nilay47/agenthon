@@ -5,9 +5,13 @@ completion length exceeds GRPO's by at least PILOT_GATE_MIN_LENGTH_SHIFT_FRAC (1
 
 This is a GATE: the notebook stops here regardless of outcome. A FAIL here means either the
 predicted effect doesn't show up on this real task (not just the synthetic one llm/ already
-validated), or the pilot's signal is too weak/noisy (e.g. accuracy ~0, so neither grader has
-much to differentiate on) -- diagnostics are printed either way, comparing against the Step-1
-baseline's numbers if results/baseline_eval.json exists.
+validated), or the pilot's signal is too weak/noisy -- diagnostics are printed either way,
+comparing against the Step-1 baseline's numbers if results/baseline_eval.json exists.
+
+Will NOT run at all if results/baseline_eval.json's own gate_passed is False (or missing) --
+if the baseline itself shows no learnable signal (accuracy too low, or either grader's group
+reward std is 0), spending GPU time on the pilot can't tell you anything useful. Run
+baseline_eval.py first.
 
 Usage: cd llm_real && python pilot_gate.py
 """
@@ -26,7 +30,23 @@ def _final_eval(result):
     return result["eval_history"][-1] if result["eval_history"] else None
 
 
-def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True):
+def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_baseline_pass=True):
+    baseline_path = os.path.join(out_dir, "baseline_eval.json")
+    if require_baseline_pass:
+        if not os.path.exists(baseline_path):
+            msg = f"STOPPED: {baseline_path} not found -- run baseline_eval.py first."
+            print(msg)
+            return dict(seed=seed, passed=False, skipped=True, reason=msg)
+        with open(baseline_path) as f:
+            baseline = json.load(f)
+        if not baseline.get("gate_passed", False):
+            msg = (f"STOPPED: baseline gate did not pass (accuracy={baseline.get('accuracy'):.3f}, "
+                   f"required >= {C.BASELINE_MIN_ACCURACY}; group_reward_std="
+                   f"{baseline.get('group_reward_std')}) -- fix the reward/prompt design and rerun "
+                   "baseline_eval.py before spending GPU time on the pilot gate.")
+            print(msg)
+            return dict(seed=seed, passed=False, skipped=True, reason=msg, baseline=baseline)
+
     results = {}
     wall_clocks = {}
     for method in ["drgrpo", "grpo"]:

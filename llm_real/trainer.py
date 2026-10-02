@@ -5,10 +5,12 @@ generalized to the 'grader' dataset column instead of 'family'.
 
 HeldOutEvalCallback: every eval_every steps, generates SAMPLED (training-temperature)
 completions for a FIXED set of real GSM8K held-out problems and reports accuracy, mean
-completion length (tokens), mean n_steps, each grader's unscaled mean reward, and each
-grader's reward STD across the held-out set (a diagnostic for TRL's reward-normalization
-epsilon negligibility, same spirit as llm/'s within-group-std check, just computed over the
-whole held-out set rather than per training group)."""
+completion length (tokens), mean n_steps, and each grader's unscaled mean reward (plus its
+ACROSS-PROBLEM population std, one sample per problem -- summarize()'s reward_a/reward_b
+"std"). group_reward_std() is a SEPARATE, more expensive check: true WITHIN-group reward std
+(G samples of the SAME prompt, matching GRPO's own group size) -- the actual quantity GRPO's
+advantage computation depends on, and what config.BASELINE_MIN_ACCURACY's sibling gate
+(both graders' group reward std > 0) checks before the pilot runs at all."""
 import statistics
 import time
 
@@ -16,7 +18,7 @@ import torch
 from transformers import TrainerCallback
 from trl import GRPOTrainer
 
-from config import MAX_COMPLETION_LENGTH, TEMPERATURE
+import config as C
 from reward import eval_metrics_for_completion
 
 
@@ -71,7 +73,7 @@ class HeldOutEvalCallback(TrainerCallback):
     real held-out GSM8K problems (`held_out`, each {prompt, gold}), scored under BOTH graders."""
 
     def __init__(self, tokenizer, held_out, eval_every=20, batch_size=25,
-                 max_new_tokens=MAX_COMPLETION_LENGTH, temperature=TEMPERATURE):
+                 max_new_tokens=C.MAX_COMPLETION_LENGTH, temperature=C.TEMPERATURE):
         self.tokenizer = tokenizer
         self.held_out = held_out
         self.eval_every = eval_every
@@ -107,6 +109,47 @@ class HeldOutEvalCallback(TrainerCallback):
             model.train()
         return per_example
 
+    def group_reward_std(self, model, n_prompts=None, g=None):
+        """True WITHIN-group reward std: for each of n_prompts held-out problems (a FIXED
+        prefix of self.held_out), draws g SAMPLES of the SAME prompt (matching GRPO's own
+        group size) and computes each grader's reward std WITHIN that group, then averages
+        across prompts. This is the quantity GRPO's own advantage computation actually
+        depends on -- distinct from summarize()'s across-DIFFERENT-problem population std
+        (one sample per problem), which can be nonzero even if every individual group is
+        reward-degenerate (e.g. every sample in every group gets the same reward)."""
+        n_prompts = C.N_GROUP_STD_PROMPTS if n_prompts is None else n_prompts
+        g = C.G if g is None else g
+        subset = self.held_out[:n_prompts]
+        device = next(model.parameters()).device
+        eos_token_id = self.tokenizer.eos_token_id
+        pad_token_id = self.tokenizer.pad_token_id or eos_token_id
+        was_training = model.training
+        model.eval()
+        a_stds, b_stds = [], []
+        for ex in subset:
+            rendered = self.tokenizer.apply_chat_template([{"role": "user", "content": ex["prompt"]}],
+                                                            tokenize=False, add_generation_prompt=True)
+            enc = self.tokenizer([rendered], return_tensors="pt", padding=True, padding_side="left").to(device)
+            with torch.no_grad():
+                out_ids = model.generate(**enc, max_new_tokens=self.max_new_tokens, do_sample=True,
+                                          temperature=self.temperature, pad_token_id=pad_token_id,
+                                          num_return_sequences=g)
+            gen_ids = out_ids[:, enc["input_ids"].shape[1] :]
+            gen_texts = self.tokenizer.batch_decode(gen_ids, skip_special_tokens=True)
+            rewards_a, rewards_b = [], []
+            for row_ids, text in zip(gen_ids, gen_texts):
+                n_tokens = _completion_token_length(row_ids, eos_token_id)
+                m = eval_metrics_for_completion(text, ex["gold"], n_tokens)
+                rewards_a.append(m["reward_a"])
+                rewards_b.append(m["reward_b"])
+            a_stds.append(statistics.pstdev(rewards_a) if len(rewards_a) > 1 else 0.0)
+            b_stds.append(statistics.pstdev(rewards_b) if len(rewards_b) > 1 else 0.0)
+        if was_training:
+            model.train()
+        return dict(reward_a_group_std=statistics.mean(a_stds) if a_stds else 0.0,
+                    reward_b_group_std=statistics.mean(b_stds) if b_stds else 0.0,
+                    n_prompts=len(subset), g=g)
+
     @staticmethod
     def summarize(per_example):
         if not per_example:
@@ -134,10 +177,13 @@ class HeldOutEvalCallback(TrainerCallback):
         t0 = time.time()
         per_example = self.run_eval(model)
         summary = self.summarize(per_example)
-        entry = dict(step=int(state.global_step), eval_wall_clock_s=time.time() - t0, **summary)
+        group_std = self.group_reward_std(model)
+        entry = dict(step=int(state.global_step), eval_wall_clock_s=time.time() - t0,
+                      group_reward_std=group_std, **summary)
         self.history.append(entry)
         print(f"[eval @ step {state.global_step}] accuracy={summary['accuracy']:.2f}  "
               f"mean_n_tokens={summary['mean_n_tokens']:.1f}  mean_n_steps={summary['mean_n_steps']:.1f}  "
               f"reward_a={summary['reward_a']['mean']:.2f}(std={summary['reward_a']['std']:.2f})  "
-              f"reward_b={summary['reward_b']['mean']:.2f}(std={summary['reward_b']['std']:.2f})")
+              f"reward_b={summary['reward_b']['mean']:.2f}(std={summary['reward_b']['std']:.2f})  "
+              f"group_std=[A={group_std['reward_a_group_std']:.2f}, B={group_std['reward_b_group_std']:.2f}]")
         return control

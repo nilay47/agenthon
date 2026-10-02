@@ -24,11 +24,32 @@ def test_parse_gold_answer():
     assert parse_gold_answer("Thousands separator.\n#### 1,200") == 1200
 
 
-def test_parse_final_answer():
+def test_parse_final_answer_hash_tier():
     assert parse_final_answer("reasoning...\n#### 18") == 18
-    assert parse_final_answer("no marker here") is None
     assert parse_final_answer("#### 1,024") == 1024
-    assert parse_final_answer("#### not-a-number") is None
+
+
+def test_parse_final_answer_boxed_tier():
+    # no '####' marker -> falls back to \boxed{...}
+    assert parse_final_answer("The answer is \\boxed{42}.") == 42
+    assert parse_final_answer("reasoning\n\\boxed{1,200}\nmore text") == 1200
+
+
+def test_parse_final_answer_last_number_tier():
+    # no '####' and no \boxed -> falls back to the LAST number anywhere in the text
+    assert parse_final_answer("I think it's 7, no wait, 12, final answer 18") == 18
+    assert parse_final_answer("Natalia sold 48 clips, half as many is 24, total 72") == 72
+
+
+def test_parse_final_answer_tier_precedence():
+    # '####' wins even if \boxed{} or a later number is also present
+    assert parse_final_answer("\\boxed{99}\n#### 42\nextra 7") == 42
+    # \boxed{} wins over a later bare number when no '####' is present
+    assert parse_final_answer("\\boxed{42}\nactually 7") == 42
+
+
+def test_parse_final_answer_truly_unparsable():
+    assert parse_final_answer("no number anywhere in this text") is None
 
 
 def test_count_reasoning_steps():
@@ -52,21 +73,23 @@ def test_grader_a_reward_reasoning_rubric():
     assert grader_a_reward(parsed=None, gold=10, n_steps=6) == 0.0
 
 
-def test_grader_b_reward_terse_verifier():
-    assert grader_b_reward(parsed=10, gold=10, n_tokens=40) == 1.0  # exactly at the cap
-    assert grader_b_reward(parsed=10, gold=10, n_tokens=41) == 0.0  # one token over -> hard cliff
-    assert grader_b_reward(parsed=10, gold=10, n_tokens=5) == 1.0
-    assert grader_b_reward(parsed=9, gold=10, n_tokens=5) == 0.0  # incorrect -> zero even if terse
-    assert grader_b_reward(parsed=None, gold=10, n_tokens=5) == 0.0
+def test_grader_b_reward_terse_verifier_smooth():
+    # smooth linear taper: correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
+    assert grader_b_reward(parsed=10, gold=10, n_tokens=0) == 1.0  # shortest possible -> full credit
+    assert abs(grader_b_reward(parsed=10, gold=10, n_tokens=100) - 0.5) < 1e-9  # halfway -> half credit
+    assert grader_b_reward(parsed=10, gold=10, n_tokens=C.TERSE_SMOOTH_DENOM) == 0.0  # at the denom -> 0
+    assert grader_b_reward(parsed=10, gold=10, n_tokens=C.TERSE_SMOOTH_DENOM * 2) == 0.0  # beyond -> still 0, not negative
+    assert grader_b_reward(parsed=9, gold=10, n_tokens=0) == 0.0  # incorrect -> zero even if terse
+    assert grader_b_reward(parsed=None, gold=10, n_tokens=0) == 0.0
 
 
 def test_train_reward_fn_routes_by_grader():
     comps = [[{"role": "assistant", "content": "a\nb\nc\nd\ne\nf\n#### 7"}],  # grader A, 6 steps, correct
-             [{"role": "assistant", "content": "#### 7"}]]  # grader B, 0 tokens of "reasoning", correct, terse
+             [{"role": "assistant", "content": "#### 7"}]]  # grader B, short + correct
     out = train_reward_fn(prompts=[None] * 2, completions=comps, completion_ids=[[0] * 3, [0] * 3],
                            gold=[7, 7], grader=[C.GRADER_A, C.GRADER_B])
     assert out[0] == 10.0
-    assert out[1] == 1.0
+    assert abs(out[1] - (1.0 - 3 / C.TERSE_SMOOTH_DENOM)) < 1e-9
 
 
 def test_train_reward_fn_unparsable_is_zero_for_both_graders():
@@ -82,7 +105,7 @@ def test_eval_metrics_for_completion_scores_both_graders():
     assert m["correct"] is True
     assert m["n_steps"] == 6
     assert m["reward_a"] == 10.0
-    assert m["reward_b"] == 1.0  # 30 <= 40
+    assert abs(m["reward_b"] - (1.0 - 30 / C.TERSE_SMOOTH_DENOM)) < 1e-9
 
 
 def test_build_train_rows_grader_assignment_is_seeded_and_balanced():
@@ -115,3 +138,13 @@ def test_micro_batch_and_accum():
     assert micro * accum == C.PROMPTS_PER_STEP * C.G
     assert micro % C.G == 0
     assert micro <= C.MICRO_BATCH_COMPLETIONS
+
+
+def test_v2_config_values():
+    # v2 redesign: shorter run, smooth grader B, explicit baseline gate thresholds.
+    assert C.MAX_STEPS == 80
+    assert C.MAX_COMPLETION_LENGTH == 200
+    assert C.TERSE_SMOOTH_DENOM == 200
+    assert C.BASELINE_MIN_ACCURACY == 0.20
+    assert C.N_GROUP_STD_PROMPTS > 0
+    assert C.PROMPT_TEMPLATE.format(question="Q") == "Q\n\nSolve step by step, then give the final answer as '#### <number>'."

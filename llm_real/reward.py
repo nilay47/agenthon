@@ -1,12 +1,21 @@
 """Conflicting-grader reward for the Day-1 realistic (GSM8K) task.
 
-Both graders require a parsable "#### <number>" final answer (reward 0 if unparsable, for
-either grader). Correctness is shared between them; verbosity conflicts:
+Correctness is shared between the two graders; verbosity conflicts:
   - Grader A ("reasoning rubric", 0-10): 10 * correct * min(1, n_steps/6), where n_steps is
     the number of non-empty lines BEFORE the final answer line -- rewards worked reasoning,
     saturating at 6 steps.
-  - Grader B ("terse verifier", 0-1): correct * 1[completion token length <= 40] -- rewards a
-    correct answer delivered tersely, a hard cliff rather than a graded preference.
+  - Grader B ("terse verifier", 0-1, SMOOTH): correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
+    -- a linear taper to 0 by TERSE_SMOOTH_DENOM tokens, not a hard cliff. v1 used a hard cliff
+    (correct * 1[n_tokens<=40]) that essentially no real-model completion ever satisfied,
+    leaving grader B (and its group reward std) identically 0 everywhere -- no signal, no
+    conflict with grader A to speak of.
+
+parse_final_answer falls back through three tiers, each only tried if the previous found
+nothing: "#### <n>" (GSM8K's own format), then "\\boxed{<n>}" (common LLM final-answer
+convention), then the LAST number anywhere in the completion. v1's strict "#### only" parse
+left most of an early-training or untrained model's completions unparsable -- reward 0 for
+BOTH graders regardless of correctness -- starving both the accuracy signal and grader B's
+reward of variance.
 
 Uses `import config as C` (live lookups), matching llm/'s established convention -- not
 `from config import ATTR`, which would bind a stale name at import time."""
@@ -14,19 +23,31 @@ import re
 
 import config as C
 
-_FINAL_RE = re.compile(r"####\s*(-?[\d,]+)")
+_HASH_RE = re.compile(r"####\s*(-?[\d,]+)")
+_BOXED_RE = re.compile(r"\\boxed\{(-?[\d,]+)\}")
+_LAST_NUMBER_RE = re.compile(r"-?\d[\d,]*")
+
+
+def _to_int(digits_str):
+    try:
+        return int(digits_str.replace(",", ""))
+    except ValueError:
+        return None
 
 
 def parse_final_answer(text):
     """Model-completion parse (vs data.parse_gold_answer, which parses GSM8K's OWN answer
-    field) -- unparsable (no '#### <number>') returns None, scored as 0 by either grader."""
-    m = _FINAL_RE.search(text)
-    if m is None:
-        return None
-    try:
-        return int(m.group(1).replace(",", ""))
-    except ValueError:
-        return None
+    field, always '#### <n>'). Returns None only if NO tier finds anything parsable at all."""
+    m = _HASH_RE.search(text)
+    if m is not None:
+        return _to_int(m.group(1))
+    m = _BOXED_RE.search(text)
+    if m is not None:
+        return _to_int(m.group(1))
+    matches = _LAST_NUMBER_RE.findall(text)
+    if matches:
+        return _to_int(matches[-1])
+    return None
 
 
 def count_reasoning_steps(text):
@@ -49,7 +70,7 @@ def grader_b_reward(parsed, gold, n_tokens):
     if parsed is None:
         return 0.0
     correct = float(parsed == gold)
-    return correct * float(n_tokens <= C.TERSE_MAX_TOKENS)
+    return correct * max(0.0, 1.0 - n_tokens / C.TERSE_SMOOTH_DENOM)
 
 
 def reward_for_grader(text, gold, grader, n_tokens):
