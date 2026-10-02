@@ -1,6 +1,7 @@
 """CPU-only, GPU-free unit tests for llm_real's reward parsing and data logic. The GRPOTrainer
 integration itself is validated separately via an end-to-end dry run against a tiny
 random-weight Qwen2.5 checkpoint (yujiepan/qwen2.5-tiny-random), not repeated here."""
+import json
 import os
 import sys
 
@@ -76,7 +77,8 @@ def test_grader_a_reward_reasoning_rubric():
 def test_grader_b_reward_terse_verifier_smooth():
     # smooth linear taper: correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
     assert grader_b_reward(parsed=10, gold=10, n_tokens=0) == 1.0  # shortest possible -> full credit
-    assert abs(grader_b_reward(parsed=10, gold=10, n_tokens=100) - 0.5) < 1e-9  # halfway -> half credit
+    halfway = C.TERSE_SMOOTH_DENOM // 2
+    assert abs(grader_b_reward(parsed=10, gold=10, n_tokens=halfway) - 0.5) < 1e-9  # halfway -> half credit
     assert grader_b_reward(parsed=10, gold=10, n_tokens=C.TERSE_SMOOTH_DENOM) == 0.0  # at the denom -> 0
     assert grader_b_reward(parsed=10, gold=10, n_tokens=C.TERSE_SMOOTH_DENOM * 2) == 0.0  # beyond -> still 0, not negative
     assert grader_b_reward(parsed=9, gold=10, n_tokens=0) == 0.0  # incorrect -> zero even if terse
@@ -140,11 +142,42 @@ def test_micro_batch_and_accum():
     assert micro <= C.MICRO_BATCH_COMPLETIONS
 
 
-def test_v2_config_values():
-    # v2 redesign: shorter run, smooth grader B, explicit baseline gate thresholds.
+def test_v3_config_values():
+    # v3/attempt 4: raised completion cap + taper denom (v2's 200-token cap was truncating
+    # completions), model primary/fallback pair, new ratio-based pre-registered gate.
     assert C.MAX_STEPS == 80
-    assert C.MAX_COMPLETION_LENGTH == 200
-    assert C.TERSE_SMOOTH_DENOM == 200
+    assert C.MAX_COMPLETION_LENGTH == 320
+    assert C.TERSE_SMOOTH_DENOM == 400
     assert C.BASELINE_MIN_ACCURACY == 0.20
     assert C.N_GROUP_STD_PROMPTS > 0
+    assert C.MODEL_NAME == "Qwen/Qwen2.5-0.5B-Instruct"
+    assert C.MODEL_NAME_FALLBACK == "Qwen/Qwen2.5-1.5B-Instruct"
+    assert C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO == 0.85
     assert C.PROMPT_TEMPLATE.format(question="Q") == "Q\n\nSolve step by step, then give the final answer as '#### <number>'."
+
+
+def test_attempts_log_records_and_preserves_prior_entries(tmp_path):
+    from attempts_log import config_snapshot, record_attempt
+
+    out_dir = str(tmp_path)
+    e1 = record_attempt(out_dir, stage="baseline", config=config_snapshot(C), outcome=dict(gate_passed=False))
+    assert e1["attempt_number"] == 1
+    assert e1["stage"] == "baseline"
+    assert e1["outcome"]["gate_passed"] is False
+    assert "prediction" in e1 and len(e1["prediction"]) > 0
+
+    e2 = record_attempt(out_dir, stage="pilot", config=config_snapshot(C), outcome=dict(passed=True))
+    assert e2["attempt_number"] == 2  # appended, not overwritten
+
+    with open(os.path.join(out_dir, "attempts.json")) as f:
+        log = json.load(f)
+    assert len(log) == 2
+    assert log[0]["outcome"]["gate_passed"] is False  # first entry untouched by the second write
+
+
+def test_attempts_log_config_snapshot_model_name_override():
+    from attempts_log import config_snapshot
+
+    snap = config_snapshot(C, model_name=C.MODEL_NAME_FALLBACK)
+    assert snap["model_name"] == C.MODEL_NAME_FALLBACK
+    assert snap["model_name_fallback"] == C.MODEL_NAME_FALLBACK  # the field name itself is unaffected

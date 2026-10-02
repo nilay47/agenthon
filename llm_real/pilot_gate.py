@@ -1,7 +1,9 @@
 """Step 2: PILOT GATE (1 seed). Runs Dr.GRPO and GRPO on the GSM8K conflicting-grader mix and
 checks whether Dr.GRPO's lack of per-group reward normalization visibly pulls it toward the
-verbose (0-10, "reasoning rubric") grader relative to GRPO -- PASS if Dr.GRPO's final mean
-completion length exceeds GRPO's by at least PILOT_GATE_MIN_LENGTH_SHIFT_FRAC (15%).
+verbose (0-10, "reasoning rubric") grader relative to GRPO.
+
+PRE-REGISTERED gate, kept exactly as specified (not tuned post-hoc): PASS iff GRPO's final mean
+completion length <= config.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO x Dr.GRPO's.
 
 This is a GATE: the notebook stops here regardless of outcome. A FAIL here means either the
 predicted effect doesn't show up on this real task (not just the synthetic one llm/ already
@@ -13,12 +15,16 @@ if the baseline itself shows no learnable signal (accuracy too low, or either gr
 reward std is 0), spending GPU time on the pilot can't tell you anything useful. Run
 baseline_eval.py first.
 
+Every call (refused or completed) appends one entry to DRIVE_RESULTS_DIR/attempts.json via
+attempts_log.record_attempt, so a failed pilot stays reported like a failed baseline does.
+
 Usage: cd llm_real && python pilot_gate.py
 """
 import json
 import os
 
 import config as C
+from attempts_log import config_snapshot, record_attempt
 from run import run_one
 
 
@@ -36,7 +42,9 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
         if not os.path.exists(baseline_path):
             msg = f"STOPPED: {baseline_path} not found -- run baseline_eval.py first."
             print(msg)
-            return dict(seed=seed, passed=False, skipped=True, reason=msg)
+            outcome = dict(seed=seed, passed=False, skipped=True, reason=msg)
+            record_attempt(out_dir, stage="pilot", config=config_snapshot(C), outcome=outcome)
+            return outcome
         with open(baseline_path) as f:
             baseline = json.load(f)
         if not baseline.get("gate_passed", False):
@@ -45,7 +53,10 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
                    f"{baseline.get('group_reward_std')}) -- fix the reward/prompt design and rerun "
                    "baseline_eval.py before spending GPU time on the pilot gate.")
             print(msg)
-            return dict(seed=seed, passed=False, skipped=True, reason=msg, baseline=baseline)
+            outcome = dict(seed=seed, passed=False, skipped=True, reason=msg, baseline=baseline)
+            record_attempt(out_dir, stage="pilot", config=config_snapshot(C, model_name=baseline.get("model_name")),
+                            outcome=outcome)
+            return outcome
 
     results = {}
     wall_clocks = {}
@@ -68,15 +79,22 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
                                 f"MAX_STEPS is probably smaller than EVAL_EVERY")
 
     len_drgrpo, len_grpo = finals["drgrpo"]["mean_n_tokens"], finals["grpo"]["mean_n_tokens"]
-    frac_shift = (len_drgrpo - len_grpo) / len_grpo if len_grpo > 0 else float("nan")
-    passed = bool(frac_shift >= C.PILOT_GATE_MIN_LENGTH_SHIFT_FRAC)
+    ratio = len_grpo / len_drgrpo if len_drgrpo > 0 else float("nan")
+    passed = bool(ratio <= C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO)
 
     print(f"\n=== PILOT GATE (seed={seed}) ===")
     print(f"Dr.GRPO: final mean completion length = {len_drgrpo:.2f} tokens  "
-          f"(accuracy={finals['drgrpo']['accuracy']:.3f}, wall_clock={wall_clocks['drgrpo']:.1f}s)")
+          f"accuracy={finals['drgrpo']['accuracy']:.3f}  "
+          f"reward_a={finals['drgrpo']['reward_a']['mean']:.3f}  "
+          f"reward_b={finals['drgrpo']['reward_b']['mean']:.3f}  "
+          f"(wall_clock={wall_clocks['drgrpo']:.1f}s)")
     print(f"GRPO:    final mean completion length = {len_grpo:.2f} tokens  "
-          f"(accuracy={finals['grpo']['accuracy']:.3f}, wall_clock={wall_clocks['grpo']:.1f}s)")
-    print(f"relative shift (drgrpo-grpo)/grpo = {frac_shift:.3f}  (require >= {C.PILOT_GATE_MIN_LENGTH_SHIFT_FRAC})")
+          f"accuracy={finals['grpo']['accuracy']:.3f}  "
+          f"reward_a={finals['grpo']['reward_a']['mean']:.3f}  "
+          f"reward_b={finals['grpo']['reward_b']['mean']:.3f}  "
+          f"(wall_clock={wall_clocks['grpo']:.1f}s)")
+    print(f"ratio grpo_len/drgrpo_len = {ratio:.3f}  "
+          f"(require <= {C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO})")
     print(f"\n{'PASS' if passed else 'FAIL'}")
 
     diagnostics = None
@@ -101,7 +119,7 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
         else:
             print(f"  (no {baseline_path} found -- run baseline_eval.py first for a length/accuracy-moved-at-all check)")
 
-    summary = dict(seed=seed, passed=passed, frac_shift=frac_shift,
+    summary = dict(seed=seed, passed=passed, ratio_grpo_to_drgrpo_length=ratio,
                     drgrpo=dict(final=finals["drgrpo"], wall_clock_s=wall_clocks["drgrpo"]),
                     grpo=dict(final=finals["grpo"], wall_clock_s=wall_clocks["grpo"]),
                     diagnostics=diagnostics)
@@ -110,6 +128,8 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
     with open(out_path, "w") as f:
         json.dump(summary, f, indent=2)
     print(f"\nwrote {out_path}")
+
+    record_attempt(out_dir, stage="pilot", config=config_snapshot(C, model_name=C.MODEL_NAME), outcome=summary)
     return summary
 
 

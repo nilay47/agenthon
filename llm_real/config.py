@@ -25,6 +25,16 @@ was identically 0 everywhere, giving it no gradient signal and defeating the who
 having two CONFLICTING graders. Replaced with a smooth linear taper so grader B has signal
 across the whole completion-length range, not just below a cliff nothing ever reaches.
 
+v3 (attempt 4): v2's MAX_COMPLETION_LENGTH=200 turned out to BE the problem it was trying to
+avoid -- attempt 3's baseline showed median completion length pinned at exactly 200 (the cap:
+answers were getting truncated before finishing) and grader B's reward near 0 because
+1-n/TERSE_SMOOTH_DENOM(=200) is itself near 0 once completions sit at the cap. Raised
+MAX_COMPLETION_LENGTH to 320 (less truncation) and TERSE_SMOOTH_DENOM to 400 (so grader B still
+has real range once completions are longer). MODEL_NAME is now a primary/fallback pair:
+baseline_eval.py tries MODEL_NAME first and automatically retries with MODEL_NAME_FALLBACK (a
+larger model, more likely to clear the accuracy gate) if the primary fails -- see
+baseline_eval.py's docstring for exactly how the switch and its memory/time checks work.
+
 This is a GATED pilot (STOP after the pilot gate in run_colab.ipynb, same spirit as llm/'s
 original pilot-first design before v3): the only comparison run here is Dr.GRPO vs GRPO, 1
 seed, checking whether Dr.GRPO's lack of per-group reward normalization visibly pulls it
@@ -33,6 +43,8 @@ but now on a real task with real, independently meaningful graders instead of an
 import torch
 
 MODEL_NAME = "Qwen/Qwen2.5-0.5B-Instruct"
+MODEL_NAME_FALLBACK = "Qwen/Qwen2.5-1.5B-Instruct"  # tried automatically if MODEL_NAME fails the
+                                                      # baseline accuracy gate -- see baseline_eval.py
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BF16_SUPPORTED = torch.cuda.is_available() and torch.cuda.is_bf16_supported()
@@ -64,7 +76,7 @@ GRADER_A = "A"  # reasoning rubric, 0-10, rewards worked reasoning up to REASONI
 GRADER_B = "B"  # terse verifier, 0-1, smooth linear taper to 0 by TERSE_SMOOTH_DENOM tokens
 REASONING_STEPS_CAP = 6
 REASONING_MAX_SCORE = 10.0
-TERSE_SMOOTH_DENOM = 200  # grader_b_reward = correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
+TERSE_SMOOTH_DENOM = 400  # grader_b_reward = correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
 
 # Eval: 200 GSM8K test-split problems reserved once (never trained on); the baseline check
 # (Step 1) evaluates on all 200, periodic in-training eval (every EVAL_EVERY steps) uses a
@@ -81,15 +93,17 @@ PROMPTS_PER_STEP = 8
 MAX_STEPS = 80  # v2: down from 100 (target ~20 min/run, from ~25) -- tune down further (or
                  # MICRO_BATCH_COMPLETIONS up) if a Colab A100 preflight run shows this won't
                  # fit -- see run_colab.ipynb's 5c preflight cell
-MAX_COMPLETION_LENGTH = 200  # v2: down from 256 (real worked solutions still need much more
-                              # room than llm/'s 8-token task, just a bit less than before)
+MAX_COMPLETION_LENGTH = 320  # v3: up from 200 -- v2's 200-token cap was itself truncating
+                              # most completions (median length pinned at the cap), which both
+                              # hurt accuracy (cut off before the final answer) and starved
+                              # grader B's reward (near 0 once length sits at TERSE_SMOOTH_DENOM)
 LR = 1e-5
 TEMPERATURE = 1.0
 KL_BETA = 0.0
 SEED = 0
 
-# Backward micro-batching: at MAX_COMPLETION_LENGTH=200 and vocab~152k, a full
-# G*PROMPTS_PER_STEP=64-completion backward would need ~64*200*152000*4 bytes =~ 7.3 GiB just
+# Backward micro-batching: at MAX_COMPLETION_LENGTH=320 and vocab~152k, a full
+# G*PROMPTS_PER_STEP=64-completion backward would need ~64*320*152000*4 bytes =~ 11.6 GiB just
 # for grad_logits -- keep a conservative micro-batch so peak memory stays bounded regardless of
 # the base model + optimizer state overhead (this is the same concern llm/config.py's docstring
 # notes the ORIGINAL 200-token arithmetic task hit at ~14.5 GiB at a larger batch, before that
@@ -118,11 +132,12 @@ METHODS = ["grpo", "drgrpo"]
 
 RESULTS_DIR = "llm_real/results"
 
-# Pilot gate (Step 2) pass condition: Dr.GRPO's final mean completion length (tokens) must
-# exceed GRPO's by at least this fraction, since Dr.GRPO lacks GRPO's per-group reward
-# normalization and is predicted to be pulled toward the 0-10 (verbose) grader's larger
-# relative gradient weight whenever a group mixes both graders' examples.
-PILOT_GATE_MIN_LENGTH_SHIFT_FRAC = 0.15
+# Pilot gate (Step 2) pass condition -- PRE-REGISTERED, kept exactly as specified, not tuned
+# post-hoc: PASS iff GRPO's final mean completion length <= this fraction x Dr.GRPO's. Dr.GRPO
+# lacks GRPO's per-group reward normalization and is predicted to be pulled toward the 0-10
+# (verbose) grader's larger relative gradient weight whenever a group mixes both graders'
+# examples, so Dr.GRPO should end up noticeably longer (GRPO noticeably shorter, in ratio).
+PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO = 0.85
 
 # Baseline gate (Step 1) -- must PASS before Step 2 spends any GPU time: the untrained model's
 # accuracy must be clearly above chance AND both graders must have real WITHIN-GROUP reward
