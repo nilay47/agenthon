@@ -136,6 +136,10 @@ if __name__ == "__main__":
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--out_dir", type=str, default=C.RESULTS_DIR)
+    ap.add_argument("--skip_fallback", action="store_true",
+                     help="Never try MODEL_NAME_FALLBACK, even if the primary model fails the "
+                          "gate -- use when a prior attempt already confirmed the primary passes "
+                          "and this run is only re-checking the reward design, not the model.")
     args = ap.parse_args()
 
     print("Loading GSM8K...")
@@ -149,7 +153,10 @@ if __name__ == "__main__":
 
     final = primary
     fallback = None
-    if not primary["gate_passed"]:
+    if not primary["gate_passed"] and args.skip_fallback:
+        print(f"\n{C.MODEL_NAME} did not pass the baseline gate, but --skip_fallback was set -- "
+              f"not trying {C.MODEL_NAME_FALLBACK}.")
+    elif not primary["gate_passed"]:
         print(f"\n{C.MODEL_NAME} did not pass the baseline gate -- "
               f"automatically retrying with fallback {C.MODEL_NAME_FALLBACK}...")
         fallback = run_baseline_for_model(C.MODEL_NAME_FALLBACK, held_out)

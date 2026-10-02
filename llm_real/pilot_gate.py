@@ -2,8 +2,9 @@
 checks whether Dr.GRPO's lack of per-group reward normalization visibly pulls it toward the
 verbose (0-10, "reasoning rubric") grader relative to GRPO.
 
-PRE-REGISTERED gate, kept exactly as specified (not tuned post-hoc): PASS iff GRPO's final mean
-completion length <= config.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO x Dr.GRPO's.
+PRE-REGISTERED gate (attempt 5), kept exactly as specified (not tuned post-hoc): PASS iff
+Dr.GRPO's final mean completion length >= config.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO x
+GRPO's.
 
 This is a GATE: the notebook stops here regardless of outcome. A FAIL here means either the
 predicted effect doesn't show up on this real task (not just the synthetic one llm/ already
@@ -79,8 +80,8 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
                                 f"MAX_STEPS is probably smaller than EVAL_EVERY")
 
     len_drgrpo, len_grpo = finals["drgrpo"]["mean_n_tokens"], finals["grpo"]["mean_n_tokens"]
-    ratio = len_grpo / len_drgrpo if len_drgrpo > 0 else float("nan")
-    passed = bool(ratio <= C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO)
+    ratio = len_drgrpo / len_grpo if len_grpo > 0 else float("nan")
+    passed = bool(ratio >= C.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO)
 
     print(f"\n=== PILOT GATE (seed={seed}) ===")
     print(f"Dr.GRPO: final mean completion length = {len_drgrpo:.2f} tokens  "
@@ -93,9 +94,17 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
           f"reward_a={finals['grpo']['reward_a']['mean']:.3f}  "
           f"reward_b={finals['grpo']['reward_b']['mean']:.3f}  "
           f"(wall_clock={wall_clocks['grpo']:.1f}s)")
-    print(f"ratio grpo_len/drgrpo_len = {ratio:.3f}  "
-          f"(require <= {C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO})")
+    print(f"ratio drgrpo_len/grpo_len = {ratio:.3f}  "
+          f"(require >= {C.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO})")
     print(f"\n{'PASS' if passed else 'FAIL'}")
+
+    print("\nlength trajectory (mean_n_tokens per eval step):")
+    length_trajectory = {}
+    for m in ["drgrpo", "grpo"]:
+        traj = [(e["step"], e["mean_n_tokens"]) for e in results[m]["eval_history"]]
+        length_trajectory[m] = traj
+        traj_str = ", ".join(f"step{s}={length:.1f}" for s, length in traj)
+        print(f"  {m}: {traj_str}")
 
     diagnostics = None
     if not passed:
@@ -119,7 +128,8 @@ def run_pilot_gate(seed=0, out_dir=C.RESULTS_DIR, skip_existing=True, require_ba
         else:
             print(f"  (no {baseline_path} found -- run baseline_eval.py first for a length/accuracy-moved-at-all check)")
 
-    summary = dict(seed=seed, passed=passed, ratio_grpo_to_drgrpo_length=ratio,
+    summary = dict(seed=seed, passed=passed, ratio_drgrpo_to_grpo_length=ratio,
+                    length_trajectory=length_trajectory,
                     drgrpo=dict(final=finals["drgrpo"], wall_clock_s=wall_clocks["drgrpo"]),
                     grpo=dict(final=finals["grpo"], wall_clock_s=wall_clocks["grpo"]),
                     diagnostics=diagnostics)

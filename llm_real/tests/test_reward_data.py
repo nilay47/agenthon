@@ -60,18 +60,16 @@ def test_count_reasoning_steps():
     assert count_reasoning_steps("just rambling, no marker at all") == 1
 
 
-def test_grader_a_reward_reasoning_rubric():
-    # correct, 6+ steps -> full score
-    assert grader_a_reward(parsed=10, gold=10, n_steps=6) == 10.0
-    assert grader_a_reward(parsed=10, gold=10, n_steps=12) == 10.0  # saturates, doesn't exceed
-    # correct, 3 steps -> half credit
-    assert abs(grader_a_reward(parsed=10, gold=10, n_steps=3) - 5.0) < 1e-9
-    # correct, 0 steps -> zero credit despite being correct
-    assert grader_a_reward(parsed=10, gold=10, n_steps=0) == 0.0
-    # incorrect -> zero regardless of steps
-    assert grader_a_reward(parsed=9, gold=10, n_steps=6) == 0.0
-    # unparsable -> zero
-    assert grader_a_reward(parsed=None, gold=10, n_steps=6) == 0.0
+def test_grader_a_reward_reasoning_rubric_token_based():
+    # attempt 5: token-based, saturates at MAX_COMPLETION_LENGTH (not a trivially-reached
+    # line-count cap, which gave no gradient once the model naturally exceeded it).
+    cap = C.MAX_COMPLETION_LENGTH
+    assert grader_a_reward(parsed=10, gold=10, n_tokens=cap) == 10.0
+    assert grader_a_reward(parsed=10, gold=10, n_tokens=cap * 2) == 10.0  # saturates, doesn't exceed
+    assert abs(grader_a_reward(parsed=10, gold=10, n_tokens=cap // 2) - 5.0) < 1e-9  # halfway -> half credit
+    assert grader_a_reward(parsed=10, gold=10, n_tokens=0) == 0.0  # 0 tokens -> zero credit
+    assert grader_a_reward(parsed=9, gold=10, n_tokens=cap) == 0.0  # incorrect -> zero regardless of length
+    assert grader_a_reward(parsed=None, gold=10, n_tokens=cap) == 0.0  # unparsable -> zero
 
 
 def test_grader_b_reward_terse_verifier_smooth():
@@ -86,11 +84,11 @@ def test_grader_b_reward_terse_verifier_smooth():
 
 
 def test_train_reward_fn_routes_by_grader():
-    comps = [[{"role": "assistant", "content": "a\nb\nc\nd\ne\nf\n#### 7"}],  # grader A, 6 steps, correct
+    comps = [[{"role": "assistant", "content": "a\nb\nc\nd\ne\nf\n#### 7"}],  # grader A, correct
              [{"role": "assistant", "content": "#### 7"}]]  # grader B, short + correct
     out = train_reward_fn(prompts=[None] * 2, completions=comps, completion_ids=[[0] * 3, [0] * 3],
                            gold=[7, 7], grader=[C.GRADER_A, C.GRADER_B])
-    assert out[0] == 10.0
+    assert abs(out[0] - 10.0 * (3 / C.MAX_COMPLETION_LENGTH)) < 1e-9  # grader A: token-based now
     assert abs(out[1] - (1.0 - 3 / C.TERSE_SMOOTH_DENOM)) < 1e-9
 
 
@@ -105,8 +103,8 @@ def test_eval_metrics_for_completion_scores_both_graders():
     text = "a\nb\nc\nd\ne\nf\n#### 7"
     m = eval_metrics_for_completion(text, gold=7, n_tokens=30)
     assert m["correct"] is True
-    assert m["n_steps"] == 6
-    assert m["reward_a"] == 10.0
+    assert m["n_steps"] == 6  # still computed as a diagnostic, just not fed into grader A anymore
+    assert abs(m["reward_a"] - 10.0 * (30 / C.MAX_COMPLETION_LENGTH)) < 1e-9
     assert abs(m["reward_b"] - (1.0 - 30 / C.TERSE_SMOOTH_DENOM)) < 1e-9
 
 
@@ -142,17 +140,19 @@ def test_micro_batch_and_accum():
     assert micro <= C.MICRO_BATCH_COMPLETIONS
 
 
-def test_v3_config_values():
-    # v3/attempt 4: raised completion cap + taper denom (v2's 200-token cap was truncating
-    # completions), model primary/fallback pair, new ratio-based pre-registered gate.
+def test_v4_config_values():
+    # v4/attempt 5: raised LR, gate reverted to a Dr.GRPO>=1.15x-GRPO framing, no more
+    # REASONING_STEPS_CAP (grader A is token-based now).
     assert C.MAX_STEPS == 80
     assert C.MAX_COMPLETION_LENGTH == 320
     assert C.TERSE_SMOOTH_DENOM == 400
+    assert C.LR == 5e-5
     assert C.BASELINE_MIN_ACCURACY == 0.20
     assert C.N_GROUP_STD_PROMPTS > 0
     assert C.MODEL_NAME == "Qwen/Qwen2.5-0.5B-Instruct"
     assert C.MODEL_NAME_FALLBACK == "Qwen/Qwen2.5-1.5B-Instruct"
-    assert C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO == 0.85
+    assert C.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO == 1.15
+    assert not hasattr(C, "REASONING_STEPS_CAP")
     assert C.PROMPT_TEMPLATE.format(question="Q") == "Q\n\nSolve step by step, then give the final answer as '#### <number>'."
 
 
@@ -181,3 +181,12 @@ def test_attempts_log_config_snapshot_model_name_override():
     snap = config_snapshot(C, model_name=C.MODEL_NAME_FALLBACK)
     assert snap["model_name"] == C.MODEL_NAME_FALLBACK
     assert snap["model_name_fallback"] == C.MODEL_NAME_FALLBACK  # the field name itself is unaffected
+
+
+def test_attempts_log_config_snapshot_tracks_lr_and_new_gate():
+    from attempts_log import config_snapshot
+
+    snap = config_snapshot(C)
+    assert snap["lr"] == C.LR
+    assert snap["pilot_gate_min_drgrpo_to_grpo_length_ratio"] == C.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO
+    assert "reasoning_steps_cap" not in snap

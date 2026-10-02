@@ -5,7 +5,7 @@ prompt is a REAL GSM8K question (no synthetic reward-scale knob like llm/'s k) a
 assigned (50/50, hidden from the model) to one of two graders that disagree about HOW to
 answer correctly, not WHETHER:
   - Grader A, "reasoning rubric" (0-10, like an LLM-judge score): rewards a correct final
-    answer that shows worked reasoning, up to 6 steps.
+    answer that grows with completion length, saturating at MAX_COMPLETION_LENGTH tokens.
   - Grader B, "terse verifier" (0-1, SMOOTH -- see reward.grader_b_reward): rewards a correct
     final answer that tapers linearly to 0 as length approaches TERSE_SMOOTH_DENOM tokens.
 Final-answer parsing falls back through three tiers (reward.parse_final_answer): "#### <n>",
@@ -34,6 +34,19 @@ has real range once completions are longer). MODEL_NAME is now a primary/fallbac
 baseline_eval.py tries MODEL_NAME first and automatically retries with MODEL_NAME_FALLBACK (a
 larger model, more likely to clear the accuracy gate) if the primary fails -- see
 baseline_eval.py's docstring for exactly how the switch and its memory/time checks work.
+
+v4 (attempt 5): attempt 4's pilot FAILED (GRPO/Dr.GRPO length ratio 0.972, required <=0.85) for
+two compounding reasons -- (1) grader A's old line-count cap (REASONING_STEPS_CAP=6) saturated
+trivially (the model naturally writes well over 6 lines), so grader A gave NO gradient pushing
+length up past that point -- no real conflict with grader B's terseness pull; (2) LR=1e-5 was
+too small for LoRA to move completion length more than ~10-18 tokens over 80 steps regardless.
+Fixes: grader A now scores `10 * correct * min(1, n_tokens/MAX_COMPLETION_LENGTH)` -- token-based
+like grader B, saturating only at the FULL completion budget, so it keeps pulling toward longer
+completions across the whole length range instead of maxing out almost immediately. LR raised to
+5e-5. REASONING_STEPS_CAP is gone (n_steps -- reasoning LINE count -- is still computed and
+reported as a diagnostic, just no longer fed into grader A's reward). The pilot gate's pass
+condition is also restated as PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO (Dr.GRPO >= 1.15x
+GRPO) -- pre-registered for this attempt, replacing v3's ratio framing.
 
 This is a GATED pilot (STOP after the pilot gate in run_colab.ipynb, same spirit as llm/'s
 original pilot-first design before v3): the only comparison run here is Dr.GRPO vs GRPO, 1
@@ -72,9 +85,8 @@ DATASET_NAME = "openai/gsm8k"
 DATASET_CONFIG = "main"
 PROMPT_TEMPLATE = "{question}\n\nSolve step by step, then give the final answer as '#### <number>'."
 
-GRADER_A = "A"  # reasoning rubric, 0-10, rewards worked reasoning up to REASONING_STEPS_CAP lines
+GRADER_A = "A"  # reasoning rubric, 0-10, grows with length, saturating at MAX_COMPLETION_LENGTH
 GRADER_B = "B"  # terse verifier, 0-1, smooth linear taper to 0 by TERSE_SMOOTH_DENOM tokens
-REASONING_STEPS_CAP = 6
 REASONING_MAX_SCORE = 10.0
 TERSE_SMOOTH_DENOM = 400  # grader_b_reward = correct * max(0, 1 - n_tokens/TERSE_SMOOTH_DENOM)
 
@@ -97,7 +109,8 @@ MAX_COMPLETION_LENGTH = 320  # v3: up from 200 -- v2's 200-token cap was itself 
                               # most completions (median length pinned at the cap), which both
                               # hurt accuracy (cut off before the final answer) and starved
                               # grader B's reward (near 0 once length sits at TERSE_SMOOTH_DENOM)
-LR = 1e-5
+LR = 5e-5  # attempt 5: 1e-5 was too small for LoRA to move completion length meaningfully
+           # (only 10-18 tokens over 80 steps in attempt 4)
 TEMPERATURE = 1.0
 KL_BETA = 0.0
 SEED = 0
@@ -132,12 +145,12 @@ METHODS = ["grpo", "drgrpo"]
 
 RESULTS_DIR = "llm_real/results"
 
-# Pilot gate (Step 2) pass condition -- PRE-REGISTERED, kept exactly as specified, not tuned
-# post-hoc: PASS iff GRPO's final mean completion length <= this fraction x Dr.GRPO's. Dr.GRPO
-# lacks GRPO's per-group reward normalization and is predicted to be pulled toward the 0-10
-# (verbose) grader's larger relative gradient weight whenever a group mixes both graders'
-# examples, so Dr.GRPO should end up noticeably longer (GRPO noticeably shorter, in ratio).
-PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO = 0.85
+# Pilot gate (Step 2) pass condition -- PRE-REGISTERED for attempt 5, kept exactly as
+# specified, not tuned post-hoc: PASS iff Dr.GRPO's final mean completion length >= this
+# fraction x GRPO's. Dr.GRPO lacks GRPO's per-group reward normalization and is predicted to
+# be pulled toward the 0-10 (verbose) grader's larger relative gradient weight whenever a
+# group mixes both graders' examples, so Dr.GRPO should end up noticeably longer than GRPO.
+PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO = 1.15
 
 # Baseline gate (Step 1) -- must PASS before Step 2 spends any GPU time: the untrained model's
 # accuracy must be clearly above chance AND both graders must have real WITHIN-GROUP reward

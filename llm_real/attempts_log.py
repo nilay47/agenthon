@@ -7,13 +7,15 @@ import json
 import os
 
 # Fixed across attempts -- the theory this whole pilot is testing, stated once so it can't be
-# quietly re-worded to fit whatever happened after the fact.
+# quietly re-worded to fit whatever happened after the fact. Each logged entry freezes a COPY
+# of this string at call time, so updating it here only affects FUTURE attempts -- past
+# entries in attempts.json keep whatever prediction was live when they were written.
 PRE_REGISTERED_PREDICTION = (
     "GRPO's per-group reward normalization is predicted to suppress grader B's (terse "
     "verifier's) pull on the policy relative to Dr.GRPO, which lacks that normalization -- so "
     "Dr.GRPO's completions should end up LONGER (pulled toward grader A's reasoning rubric) "
-    "than GRPO's. Gate: PASS iff GRPO's final mean completion length <= "
-    "config.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO x Dr.GRPO's."
+    "than GRPO's. Gate: PASS iff Dr.GRPO's final mean completion length >= "
+    "config.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO x GRPO's."
 )
 
 
@@ -28,11 +30,11 @@ def config_snapshot(C, model_name=None):
         max_steps=C.MAX_STEPS,
         prompts_per_step=C.PROMPTS_PER_STEP,
         g=C.G,
+        lr=C.LR,
         terse_smooth_denom=C.TERSE_SMOOTH_DENOM,
-        reasoning_steps_cap=C.REASONING_STEPS_CAP,
         reasoning_max_score=C.REASONING_MAX_SCORE,
         baseline_min_accuracy=C.BASELINE_MIN_ACCURACY,
-        pilot_gate_max_grpo_to_drgrpo_length_ratio=C.PILOT_GATE_MAX_GRPO_TO_DRGRPO_LENGTH_RATIO,
+        pilot_gate_min_drgrpo_to_grpo_length_ratio=C.PILOT_GATE_MIN_DRGRPO_TO_GRPO_LENGTH_RATIO,
         prompt_template=C.PROMPT_TEMPLATE,
     )
 
