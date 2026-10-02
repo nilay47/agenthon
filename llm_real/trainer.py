@@ -10,7 +10,14 @@ ACROSS-PROBLEM population std, one sample per problem -- summarize()'s reward_a/
 "std"). group_reward_std() is a SEPARATE, more expensive check: true WITHIN-group reward std
 (G samples of the SAME prompt, matching GRPO's own group size) -- the actual quantity GRPO's
 advantage computation depends on, and what config.BASELINE_MIN_ACCURACY's sibling gate
-(both graders' group reward std > 0) checks before the pilot runs at all."""
+(both graders' group reward std > 0) checks before the pilot runs at all.
+
+first_step_generation_output / first_step_lora_grad: captured once (first call only), for
+gradient_field.py's validate_loss_equivalence() -- the FULL real _compute_loss inputs dict
+(prompt/completion ids+masks+advantages) and the REAL resulting LoRA gradient (read right after
+Trainer.training_step()'s own accelerator.backward() call, before optimizer.step()/zero_grad()
+touch it), so an independent replay of _compute_loss on the same inputs can be checked against
+training's own gradient to a tight relative tolerance."""
 import statistics
 import time
 
@@ -28,6 +35,16 @@ class GraderTrackingGRPOTrainer(GRPOTrainer):
         self.grader_share_log = []  # list of dicts: {step, grader: {mean_abs_adv, count, share}}
         self.first_step_advantages = None  # captured once, for a determinism check
         self.first_step_rewards = None
+        self.first_step_generation_output = None  # captured once, for gradient_field.py
+        self.first_step_lora_grad = None
+
+    def training_step(self, model, inputs, num_items_in_batch=None):
+        loss = super().training_step(model, inputs, num_items_in_batch=num_items_in_batch)
+        if self.first_step_lora_grad is None and self.model.training:
+            grads = [p.grad.detach().reshape(-1) for p in model.parameters() if p.requires_grad and p.grad is not None]
+            if grads:
+                self.first_step_lora_grad = torch.cat(grads).to("cpu", dtype=torch.float32).numpy().copy()
+        return loss
 
     def _generate_and_score_completions(self, inputs):
         output = super()._generate_and_score_completions(inputs)
@@ -40,6 +57,14 @@ class GraderTrackingGRPOTrainer(GRPOTrainer):
             reward_lists = list(self._logs["rewards"].values())
             if reward_lists:
                 self.first_step_rewards = torch.tensor(list(reward_lists[0])[-A:], dtype=torch.float64)
+        if self.first_step_generation_output is None:
+            self.first_step_generation_output = dict(
+                prompt_ids=output["prompt_ids"].detach().clone(),
+                prompt_mask=output["prompt_mask"].detach().clone(),
+                completion_ids=output["completion_ids"].detach().clone(),
+                completion_mask=output["completion_mask"].detach().clone(),
+                advantages=advantages.detach().clone(),
+            )
         if len(inputs) != A:
             return output  # defensive: skip logging rather than crash on a shape surprise
         graders = [x["grader"] for x in inputs]
