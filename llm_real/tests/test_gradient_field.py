@@ -228,3 +228,92 @@ def test_diagnose_handles_crash_and_isolates_deterministic_flag(monkeypatch):
         assert torch.are_deterministic_algorithms_enabled() == original_was_deterministic
     finally:
         torch.use_deterministic_algorithms(original_was_deterministic)
+
+
+def test_pad_and_cat_pads_shorter_chunks_to_global_max():
+    from gradient_field import _pad_and_cat
+
+    a = torch.tensor([[1, 2, 3], [4, 5, 6]])       # (2, 3)
+    b = torch.tensor([[7, 8]])                      # (1, 2) -- shorter, needs padding
+    out = _pad_and_cat([a, b], pad_value=0)
+    assert out.shape == (3, 3)
+    assert out[0].tolist() == [1, 2, 3]
+    assert out[1].tolist() == [4, 5, 6]
+    assert out[2].tolist() == [7, 8, 0]  # padded with 0 on the right
+
+
+def test_per_group_gradient_microbatched_is_invariant_to_chunk_size(monkeypatch):
+    """dr_grpo's loss normalizer divides by the CALLING batch's own row count, so a realistic
+    per_group_gradient returns roughly the SAME value regardless of how large a chunk it's
+    called on (each row contributes about equally, already normalized away) -- verified here
+    with a constant fake per_group_gradient. per_group_gradient_microbatched's (chunk_size/g)
+    rescaling must then make the TOTAL identical whether the group is processed as one chunk
+    or split into several -- this is the exact property that makes microbatching for memory
+    safety mathematically exact rather than an approximation."""
+    import gradient_field as gf
+
+    const_grad = np.array([1.0, 2.0, 3.0], dtype=np.float32)
+
+    def fake_per_group_gradient(trainer, model, prompt_ids, prompt_mask, completion_ids, completion_mask,
+                                 advantages, device):
+        return const_grad.copy()
+
+    monkeypatch.setattr(gf, "per_group_gradient", fake_per_group_gradient)
+
+    g = 8
+    prompt_ids = torch.zeros(g, 4, dtype=torch.long)
+    prompt_mask = torch.ones(g, 4, dtype=torch.long)
+    completion_ids = torch.zeros(g, 4, dtype=torch.long)
+    completion_mask = torch.ones(g, 4, dtype=torch.long)
+    advantages = torch.zeros(g)
+
+    whole = gf.per_group_gradient_microbatched(None, None, prompt_ids, prompt_mask, completion_ids,
+                                                completion_mask, advantages, torch.device("cpu"), micro_batch_size=8)
+    split_in_4s = gf.per_group_gradient_microbatched(None, None, prompt_ids, prompt_mask, completion_ids,
+                                                      completion_mask, advantages, torch.device("cpu"), micro_batch_size=4)
+    split_in_2s = gf.per_group_gradient_microbatched(None, None, prompt_ids, prompt_mask, completion_ids,
+                                                      completion_mask, advantages, torch.device("cpu"), micro_batch_size=2)
+    np.testing.assert_allclose(whole, const_grad)
+    np.testing.assert_allclose(split_in_4s, const_grad)
+    np.testing.assert_allclose(split_in_2s, const_grad)
+
+
+def test_item1_results_save_and_load_roundtrip(tmp_path):
+    from gradient_field import load_item1_results, save_item1_results
+
+    out_dir = str(tmp_path)
+    grams = {("gA", "gA"): np.array([[1.0, 2.0], [2.0, 4.0]]),
+              ("gA", "gB"): np.array([[0.5, 0.5], [0.5, 0.5]])}
+    stats = dict(angle_deg=dict(point=15.0, mean=15.2, ci=[10.0, 20.0]))
+    per_prompt = [dict(reward_a_mean=1.0, reward_b_mean=2.0, reward_a_std=0.1, reward_b_std=0.2,
+                        mean_n_tokens=50.0, mean_n_steps=3.0)]
+
+    save_item1_results(out_dir, grams, stats, median_std_ratio_a_over_b=0.5,
+                        per_prompt_diagnostics=per_prompt, n_prompts=2, g_main=8)
+
+    loaded = load_item1_results(out_dir, expected_n_prompts=2, expected_g_main=8)
+    assert loaded is not None
+    loaded_grams, loaded_stats, loaded_ratio, loaded_per_prompt = loaded
+    np.testing.assert_allclose(loaded_grams[("gA", "gA")], grams[("gA", "gA")])
+    np.testing.assert_allclose(loaded_grams[("gA", "gB")], grams[("gA", "gB")])
+    assert loaded_stats == stats
+    assert loaded_ratio == 0.5
+    assert loaded_per_prompt == per_prompt
+
+
+def test_item1_results_mismatch_triggers_recompute_not_silent_reuse(tmp_path):
+    from gradient_field import load_item1_results, save_item1_results
+
+    out_dir = str(tmp_path)
+    save_item1_results(out_dir, {("gA", "gA"): np.array([[1.0]])}, dict(), 0.5, [], n_prompts=128, g_main=8)
+
+    # same file exists, but a DIFFERENT n_prompts is now configured -> must not reuse stale data
+    assert load_item1_results(out_dir, expected_n_prompts=64, expected_g_main=8) is None
+    assert load_item1_results(out_dir, expected_n_prompts=128, expected_g_main=16) is None
+    assert load_item1_results(out_dir, expected_n_prompts=128, expected_g_main=8) is not None
+
+
+def test_item1_results_missing_file_returns_none(tmp_path):
+    from gradient_field import load_item1_results
+
+    assert load_item1_results(str(tmp_path), expected_n_prompts=128, expected_g_main=8) is None

@@ -66,6 +66,18 @@ GRPO_EPS = 1e-4  # TRL's hardcoded std-normalization epsilon -- see grpo_trainer
 SUBSTANTIVE_ANGLE_DEG = 20.0
 SUBSTANTIVE_COS_AB = 0.1
 
+# Memory safety for the finite-G curve (item 3): G_FINITE_MAX=64 completions at
+# MAX_COMPLETION_LENGTH=320 tokens, fp32 (the setting the loss-equivalence diagnostic picks on
+# an A100 -- 2x the memory of bf16), OOM'd when generated/gradient-computed as a single
+# 64-row batch. GENERATION_CHUNK_SIZE bounds peak generation memory (KV cache + logits) by
+# generating g_max completions GENERATION_CHUNK_SIZE at a time per prompt instead of one
+# num_return_sequences=g_max call. GRADIENT_MICRO_BATCH_SIZE bounds peak backward-pass memory
+# the same way for per_group_gradient calls on groups larger than this -- see
+# per_group_gradient_microbatched's docstring for why this is mathematically exact, not an
+# approximation, given dr_grpo's loss normalizer.
+GENERATION_CHUNK_SIZE = 8
+GRADIENT_MICRO_BATCH_SIZE = 8
+
 # Loss-equivalence diagnostic (A100 run diverged from the CPU dry run: 1.8e-2 relative, vs
 # exactly 0.0 on CPU). Each axis is a candidate source of GPU-vs-CPU numeric divergence --
 # "lora_dropout_zero" is confirmed a no-op by direct inspection (this project's LoraConfig
@@ -163,6 +175,51 @@ def generate_groups(model, tokenizer, prompts_batch, g, max_new_tokens, temperat
     return per_prompt
 
 
+def _pad_and_cat(tensors, pad_value):
+    """Concatenates a list of (g_i, L_i) tensors along dim 0, right-padding each to the GLOBAL
+    max L_i with pad_value first -- needed to stitch together completions generated in several
+    SEPARATE generate() calls (generate_group_chunked), each of which pads to its OWN chunk's
+    max length independently."""
+    max_len = max(t.shape[1] for t in tensors)
+    padded = []
+    for t in tensors:
+        if t.shape[1] < max_len:
+            pad = torch.full((t.shape[0], max_len - t.shape[1]), pad_value, dtype=t.dtype)
+            t = torch.cat([t, pad], dim=1)
+        padded.append(t)
+    return torch.cat(padded, dim=0)
+
+
+def generate_group_chunked(model, tokenizer, prompt_entry, g_total, max_new_tokens, temperature, device,
+                            chunk_size=None):
+    """Generates g_total i.i.d. samples for ONE prompt by calling generate_groups g_total/chunk_size
+    times with num_return_sequences=chunk_size each, instead of a single num_return_sequences=g_total
+    call -- bounds peak generation memory (KV cache + logits) to a chunk_size-sized batch
+    regardless of g_total. Needed for g_total=G_FINITE_MAX=64 at MAX_COMPLETION_LENGTH=320 and
+    fp32, which OOM'd as a single call on an A100. Calls torch.cuda.empty_cache() between
+    chunks. chunk_size defaults to GENERATION_CHUNK_SIZE, resolved live (not a bound default --
+    see finite_g_curve's docstring for why that matters)."""
+    chunk_size = GENERATION_CHUNK_SIZE if chunk_size is None else chunk_size
+    pad_token_id = tokenizer.pad_token_id or tokenizer.eos_token_id
+    chunks = []
+    texts = []
+    for start in range(0, g_total, chunk_size):
+        n = min(chunk_size, g_total - start)
+        grp = generate_groups(model, tokenizer, [prompt_entry], n, max_new_tokens, temperature, device)[0]
+        chunks.append(grp)
+        texts.extend(grp["texts"])
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
+    completion_ids = _pad_and_cat([c["completion_ids"] for c in chunks], pad_token_id)
+    completion_mask = _pad_and_cat([c["completion_mask"] for c in chunks], 0)
+    # Same single prompt in every chunk -- its own encoding is identical across chunks, so any
+    # chunk's prompt_ids/prompt_mask (already shape (chunk_g, prompt_len)) can be re-repeated.
+    prompt_ids = chunks[0]["prompt_ids"][:1].repeat(g_total, 1)
+    prompt_mask = chunks[0]["prompt_mask"][:1].repeat(g_total, 1)
+    return dict(prompt_ids=prompt_ids, prompt_mask=prompt_mask, completion_ids=completion_ids,
+                completion_mask=completion_mask, texts=texts, gold=prompt_entry["gold"])
+
+
 def score_group(texts, gold, completion_mask):
     """Both graders' unscaled rewards for every completion in a group, using the TRUE generated
     token count (completion_mask.sum(dim=1)) -- same convention as reward.train_reward_fn."""
@@ -220,6 +277,37 @@ def per_group_gradient(trainer, model, prompt_ids, prompt_mask, completion_ids, 
     grad = torch.cat([p.grad.detach().reshape(-1) for _, p in named]).to("cpu", dtype=torch.float32).numpy()
     model.zero_grad(set_to_none=True)
     return grad
+
+
+def per_group_gradient_microbatched(trainer, model, prompt_ids, prompt_mask, completion_ids, completion_mask,
+                                     advantages, device, micro_batch_size=None):
+    """Same result as per_group_gradient (to float32 numerical precision) but bounds peak
+    backward-pass memory by processing the group micro_batch_size rows at a time, accumulating
+    on CPU (per_group_gradient's own return value is already a CPU numpy array, so accumulation
+    is automatic) and calling torch.cuda.empty_cache() between chunks -- for memory-constrained
+    settings (large group size G, fp32, long completions; this is what G_FINITE_MAX=64 at
+    MAX_COMPLETION_LENGTH=320 needed on an A100 after OOMing as a single call).
+
+    Mathematically EXACT, not an approximation: dr_grpo's loss normalizer is `1/(B*L)` where B
+    is the CALLING batch's own row count (see per_group_gradient's docstring) -- so a chunk of
+    size c called in isolation is normalized by `1/(c*L)` instead of the full group's `1/(G*L)`.
+    Multiplying each chunk's raw gradient by `(c/G)` before summing exactly redistributes the
+    full group's normalizer across chunks: sum_chunks[grad_c * (c/G)] = sum_chunks[grad_c/G] =
+    (1/G) * sum_chunks[grad_c], identical to what a single G-sized call computes."""
+    micro_batch_size = GRADIENT_MICRO_BATCH_SIZE if micro_batch_size is None else micro_batch_size
+    g = prompt_ids.shape[0]
+    total_grad = None
+    for start in range(0, g, micro_batch_size):
+        end = min(start + micro_batch_size, g)
+        chunk_size = end - start
+        grad = per_group_gradient(trainer, model, prompt_ids[start:end], prompt_mask[start:end],
+                                   completion_ids[start:end], completion_mask[start:end],
+                                   advantages[start:end], device)
+        grad = grad * (chunk_size / g)
+        total_grad = grad if total_grad is None else total_grad + grad
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
+    return total_grad
 
 
 def build_trainer(model, tokenizer, seed, extra_grpo_kwargs=None):
@@ -502,12 +590,24 @@ def bootstrap_stats(grams, n_prompts, n_bootstrap=None, seed=None):
 
 def finite_g_curve(trainer, model, device, prompts, g_values=None, g_max=None,
                     n_subsamples=None, seed=None, max_new_tokens=None,
-                    temperature=None, tokenizer=None, batch_size=4):
-    """For each of `prompts`, draws g_max completions once, computes the per-prompt GRPO-style
-    (50/50 grader mixture) update U_64 from all g_max, then for each G in g_values draws
-    n_subsamples random NESTED subsets of size G (without replacement, true subsets of the same
-    g_max completions, not independent resamples) and records cos(U_G, U_64). Returns per-prompt
-    raw cosines (for pooling) plus the pooled median/5-95% range per G.
+                    temperature=None, tokenizer=None, generation_chunk_size=None,
+                    gradient_micro_batch_size=None):
+    """For each of `prompts`, draws g_max completions once (via generate_group_chunked, in
+    chunks of generation_chunk_size -- a single num_return_sequences=g_max call OOM'd at
+    g_max=64/MAX_COMPLETION_LENGTH=320/fp32 on an A100), computes the per-prompt GRPO-style
+    (50/50 grader mixture) update U_64 from all g_max (via per_group_gradient_microbatched, in
+    chunks of gradient_micro_batch_size -- mathematically exact, see that function's docstring),
+    then for each G in g_values draws n_subsamples random NESTED subsets of size G (without
+    replacement, true subsets of the same g_max completions, not independent resamples) and
+    records cos(U_G, U_64) (also microbatched, for the larger G values). Returns the pooled
+    median/5-95% range of cos(U_G, U_64) per G.
+
+    Processes ONE prompt at a time (not batched across prompts, unlike item 1's design) --
+    batching multiple prompts' full g_max draws together was the other half of the original
+    OOM (4 prompts x 64 completions = 256 rows in one generate() call). Calls
+    torch.cuda.empty_cache() between prompts (generate_group_chunked and
+    per_group_gradient_microbatched already do so between their own chunks) and prints peak CUDA
+    memory per prompt.
 
     Defaults resolve from the module/config globals INSIDE the function body (not as default
     argument values) so overriding e.g. gradient_field.FINITE_G_VALUES before calling actually
@@ -520,50 +620,58 @@ def finite_g_curve(trainer, model, device, prompts, g_values=None, g_max=None,
     seed = BOOTSTRAP_SEED if seed is None else seed
     max_new_tokens = C.MAX_COMPLETION_LENGTH if max_new_tokens is None else max_new_tokens
     temperature = C.TEMPERATURE if temperature is None else temperature
+    generation_chunk_size = GENERATION_CHUNK_SIZE if generation_chunk_size is None else generation_chunk_size
+    gradient_micro_batch_size = GRADIENT_MICRO_BATCH_SIZE if gradient_micro_batch_size is None else gradient_micro_batch_size
     rng = np.random.default_rng(seed)
-    per_prompt_u64 = []
     per_g_cosines = {g: [] for g in g_values}
     n_prompts_total = len(prompts)
-    n_done = 0
     t_start = time.time()
 
-    for i in range(0, n_prompts_total, batch_size):
-        batch = prompts[i : i + batch_size]
-        groups = generate_groups(model, tokenizer, batch, g_max, max_new_tokens, temperature, device)
-        for grp in groups:
-            rewards_a, rewards_b, _, _ = score_group(grp["texts"], grp["gold"], grp["completion_mask"])
-            adv_a = compute_advantages(rewards_a, "grpo")
-            adv_b = compute_advantages(rewards_b, "grpo")
-            adv_mix = (adv_a + adv_b) / 2  # 50/50 grader mixture, matching U = (U_A+U_B)/2 elsewhere
-            u64 = per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"],
-                                      grp["completion_ids"], grp["completion_mask"], adv_mix, device)
-            per_prompt_u64.append(u64)
-            u64_norm = np.linalg.norm(u64)
+    for n_done, prompt_entry in enumerate(prompts, start=1):
+        if device.type == "cuda":
+            torch.cuda.reset_peak_memory_stats()
+        grp = generate_group_chunked(model, tokenizer, prompt_entry, g_max, max_new_tokens, temperature, device,
+                                      chunk_size=generation_chunk_size)
+        rewards_a, rewards_b, _, _ = score_group(grp["texts"], grp["gold"], grp["completion_mask"])
+        adv_a = compute_advantages(rewards_a, "grpo")
+        adv_b = compute_advantages(rewards_b, "grpo")
+        adv_mix = (adv_a + adv_b) / 2  # 50/50 grader mixture, matching U = (U_A+U_B)/2 elsewhere
+        u64 = per_group_gradient_microbatched(trainer, model, grp["prompt_ids"], grp["prompt_mask"],
+                                               grp["completion_ids"], grp["completion_mask"], adv_mix, device,
+                                               micro_batch_size=gradient_micro_batch_size)
+        u64_norm = np.linalg.norm(u64)
 
-            for g in g_values:
-                for _ in range(n_subsamples):
-                    sub_idx = rng.choice(g_max, size=g, replace=False)
-                    sub_idx_t = torch.as_tensor(sub_idx, dtype=torch.long)
-                    sub_rewards_a, sub_rewards_b = rewards_a[sub_idx_t], rewards_b[sub_idx_t]
-                    sub_adv = (compute_advantages(sub_rewards_a, "grpo") + compute_advantages(sub_rewards_b, "grpo")) / 2
-                    u_g = per_group_gradient(trainer, model, grp["prompt_ids"][sub_idx_t], grp["prompt_mask"][sub_idx_t],
-                                              grp["completion_ids"][sub_idx_t], grp["completion_mask"][sub_idx_t],
-                                              sub_adv, device)
-                    u_g_norm = np.linalg.norm(u_g)
-                    if u_g_norm < 1e-12 or u64_norm < 1e-12:
-                        # Degenerate group (e.g. a reward-std-zero subsample -> zero GRPO
-                        # advantages -> zero gradient): direction is undefined, not "0 cosine" --
-                        # NaN is the honest value, surfaced in the reported n so it's visible
-                        # rather than silently averaged in as if it were a real near-orthogonal draw.
-                        per_g_cosines[g].append(float("nan"))
-                        continue
-                    cos = float(np.dot(u_g, u64) / (u_g_norm * u64_norm))
-                    per_g_cosines[g].append(min(1.0, max(-1.0, cos)))
+        for g in g_values:
+            for _ in range(n_subsamples):
+                sub_idx = rng.choice(g_max, size=g, replace=False)
+                sub_idx_t = torch.as_tensor(sub_idx, dtype=torch.long)
+                sub_rewards_a, sub_rewards_b = rewards_a[sub_idx_t], rewards_b[sub_idx_t]
+                sub_adv = (compute_advantages(sub_rewards_a, "grpo") + compute_advantages(sub_rewards_b, "grpo")) / 2
+                u_g = per_group_gradient_microbatched(trainer, model, grp["prompt_ids"][sub_idx_t],
+                                                       grp["prompt_mask"][sub_idx_t], grp["completion_ids"][sub_idx_t],
+                                                       grp["completion_mask"][sub_idx_t], sub_adv, device,
+                                                       micro_batch_size=gradient_micro_batch_size)
+                u_g_norm = np.linalg.norm(u_g)
+                if u_g_norm < 1e-12 or u64_norm < 1e-12:
+                    # Degenerate group (e.g. a reward-std-zero subsample -> zero GRPO
+                    # advantages -> zero gradient): direction is undefined, not "0 cosine" --
+                    # NaN is the honest value, surfaced in the reported n so it's visible
+                    # rather than silently averaged in as if it were a real near-orthogonal draw.
+                    per_g_cosines[g].append(float("nan"))
+                    continue
+                cos = float(np.dot(u_g, u64) / (u_g_norm * u64_norm))
+                per_g_cosines[g].append(min(1.0, max(-1.0, cos)))
 
-            n_done += 1
-            elapsed = time.time() - t_start
-            eta = elapsed / n_done * (n_prompts_total - n_done)
-            print(f"  finite-G: {n_done}/{n_prompts_total} prompts done, elapsed={elapsed:.1f}s, ETA ~{eta:.1f}s")
+        if device.type == "cuda":
+            torch.cuda.empty_cache()
+            peak_gb = torch.cuda.max_memory_reserved() / 1024**3
+            mem_str = f"  peak_reserved={peak_gb:.2f}GB"
+        else:
+            mem_str = ""
+        elapsed = time.time() - t_start
+        eta = elapsed / n_done * (n_prompts_total - n_done)
+        print(f"  finite-G: {n_done}/{n_prompts_total} prompts done, elapsed={elapsed:.1f}s, "
+              f"ETA ~{eta:.1f}s{mem_str}")
 
     summary = {}
     for g in g_values:
@@ -622,6 +730,54 @@ def pre_register(out_dir):
                            prediction=PRE_REGISTERED_GRADIENT_FIELD_PREDICTION)
 
 
+def item1_results_path(out_dir):
+    return os.path.join(out_dir, "gradient_field_item1.json")
+
+
+def save_item1_results(out_dir, grams, stats, median_std_ratio_a_over_b, per_prompt_diagnostics, n_prompts, g_main):
+    """Saves everything item 3 (and a re-run of the bootstrap) needs WITHOUT ever re-generating
+    or re-computing gradients: the Gram matrices themselves (small -- n_prompts x n_prompts per
+    pair, not the ~35MB-per-vector raw gradients), the bootstrap stats, and the per-prompt
+    diagnostics. Written as soon as item 1 finishes, BEFORE item 3 (the OOM-prone one) starts --
+    so a crash in item 3 never loses item 1's expensive 128-prompt computation."""
+    serializable_grams = {f"{a}|{b}": v.tolist() for (a, b), v in grams.items()}
+    payload = dict(n_prompts=n_prompts, g_main=g_main, grams=serializable_grams, stats=stats,
+                    median_std_ratio_a_over_b=median_std_ratio_a_over_b, per_prompt_diagnostics=per_prompt_diagnostics)
+    os.makedirs(out_dir, exist_ok=True)
+    path = item1_results_path(out_dir)
+    with open(path, "w") as f:
+        json.dump(payload, f, indent=2)
+    print(f"wrote {path}")
+    return path
+
+
+def load_item1_results(out_dir, expected_n_prompts, expected_g_main):
+    """Returns None if no saved item 1 results exist, or if they exist but don't match the
+    CURRENT N_PROMPTS/G_MAIN (stale results from a different config -- recompute rather than use
+    silently-mismatched data). Otherwise returns (grams, stats, median_std_ratio_a_over_b,
+    per_prompt_diagnostics) exactly as save_item1_results wrote them."""
+    path = item1_results_path(out_dir)
+    if not os.path.exists(path):
+        return None
+    with open(path) as f:
+        payload = json.load(f)
+    if payload["n_prompts"] != expected_n_prompts or payload["g_main"] != expected_g_main:
+        print(f"  {path} exists but was computed with n_prompts={payload['n_prompts']}, "
+              f"g_main={payload['g_main']} (current: {expected_n_prompts}, {expected_g_main}) -- "
+              "recomputing instead of using stale results.")
+        return None
+    grams = {tuple(k.split("|")): np.array(v, dtype=np.float64) for k, v in payload["grams"].items()}
+    return grams, payload["stats"], payload["median_std_ratio_a_over_b"], payload["per_prompt_diagnostics"]
+
+
+def print_item1_stats(stats, median_std_ratio_a_over_b):
+    print("\n=== Item 1 RESULTS (bootstrap over prompts, 95% CI) ===")
+    for key in ["angle_deg", "cos_AB_dr", "ratio_dr", "ratio_grpo", "R"]:
+        s = stats[key]
+        print(f"  {key}: point={s['point']:.4f}  mean={s['mean']:.4f}  95% CI=[{s['ci'][0]:.4f},{s['ci'][1]:.4f}]")
+    print(f"  median per-prompt std ratio s_A/s_B: {median_std_ratio_a_over_b:.4f}")
+
+
 def main(args):
     t0 = time.time()
 
@@ -656,74 +812,97 @@ def main(args):
     trainer = build_trainer(model, tokenizer, args.seed, extra_grpo_kwargs=extra_grpo_kwargs)
     device = next(model.parameters()).device
 
-    print(f"\n=== Item 1: paired design, {N_PROMPTS} prompts x G={G_MAIN} ===")
-    gA, gB, hA, hB = [], [], [], []
-    per_prompt_diagnostics = []
-    t_item1 = time.time()
-    batch_size = 8
-    for b_start in range(0, N_PROMPTS, batch_size):
-        batch = prompts[b_start : b_start + batch_size]
-        groups = generate_groups(model, tokenizer, batch, G_MAIN, C.MAX_COMPLETION_LENGTH, C.TEMPERATURE, device)
-        for grp in groups:
-            rewards_a, rewards_b, n_steps_list, n_tokens_list = score_group(grp["texts"], grp["gold"], grp["completion_mask"])
-            adv_a_dr, adv_b_dr = compute_advantages(rewards_a, "dr_grpo"), compute_advantages(rewards_b, "dr_grpo")
-            adv_a_grpo, adv_b_grpo = compute_advantages(rewards_a, "grpo"), compute_advantages(rewards_b, "grpo")
-            gA.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
-                                          grp["completion_mask"], adv_a_dr, device))
-            gB.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
-                                          grp["completion_mask"], adv_b_dr, device))
-            hA.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
-                                          grp["completion_mask"], adv_a_grpo, device))
-            hB.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
-                                          grp["completion_mask"], adv_b_grpo, device))
-            per_prompt_diagnostics.append(dict(
-                reward_a_mean=float(rewards_a.mean()), reward_b_mean=float(rewards_b.mean()),
-                reward_a_std=float(rewards_a.std(unbiased=True)) if len(rewards_a) > 1 else 0.0,
-                reward_b_std=float(rewards_b.std(unbiased=True)) if len(rewards_b) > 1 else 0.0,
-                mean_n_tokens=float(np.mean(n_tokens_list)), mean_n_steps=float(np.mean(n_steps_list))))
-        n_done = min(b_start + batch_size, N_PROMPTS)
-        elapsed = time.time() - t_item1
-        eta = elapsed / n_done * (N_PROMPTS - n_done)
-        print(f"  {n_done}/{N_PROMPTS} prompts done, elapsed={elapsed:.1f}s, ETA for item 1 ~{eta:.1f}s")
+    loaded = load_item1_results(args.out_dir, N_PROMPTS, G_MAIN)
+    if loaded is not None:
+        print(f"\n=== Item 1: found saved results at {item1_results_path(args.out_dir)} -- loading, not recomputing ===")
+        grams, stats, median_std_ratio_a_over_b, per_prompt_diagnostics = loaded
+    else:
+        print(f"\n=== Item 1: paired design, {N_PROMPTS} prompts x G={G_MAIN} ===")
+        gA, gB, hA, hB = [], [], [], []
+        per_prompt_diagnostics = []
+        t_item1 = time.time()
+        batch_size = 8
+        for b_start in range(0, N_PROMPTS, batch_size):
+            batch = prompts[b_start : b_start + batch_size]
+            groups = generate_groups(model, tokenizer, batch, G_MAIN, C.MAX_COMPLETION_LENGTH, C.TEMPERATURE, device)
+            for grp in groups:
+                rewards_a, rewards_b, n_steps_list, n_tokens_list = score_group(grp["texts"], grp["gold"], grp["completion_mask"])
+                adv_a_dr, adv_b_dr = compute_advantages(rewards_a, "dr_grpo"), compute_advantages(rewards_b, "dr_grpo")
+                adv_a_grpo, adv_b_grpo = compute_advantages(rewards_a, "grpo"), compute_advantages(rewards_b, "grpo")
+                gA.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
+                                              grp["completion_mask"], adv_a_dr, device))
+                gB.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
+                                              grp["completion_mask"], adv_b_dr, device))
+                hA.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
+                                              grp["completion_mask"], adv_a_grpo, device))
+                hB.append(per_group_gradient(trainer, model, grp["prompt_ids"], grp["prompt_mask"], grp["completion_ids"],
+                                              grp["completion_mask"], adv_b_grpo, device))
+                per_prompt_diagnostics.append(dict(
+                    reward_a_mean=float(rewards_a.mean()), reward_b_mean=float(rewards_b.mean()),
+                    reward_a_std=float(rewards_a.std(unbiased=True)) if len(rewards_a) > 1 else 0.0,
+                    reward_b_std=float(rewards_b.std(unbiased=True)) if len(rewards_b) > 1 else 0.0,
+                    mean_n_tokens=float(np.mean(n_tokens_list)), mean_n_steps=float(np.mean(n_steps_list))))
+            n_done = min(b_start + batch_size, N_PROMPTS)
+            elapsed = time.time() - t_item1
+            eta = elapsed / n_done * (N_PROMPTS - n_done)
+            print(f"  {n_done}/{N_PROMPTS} prompts done, elapsed={elapsed:.1f}s, ETA for item 1 ~{eta:.1f}s")
 
-    gA, gB, hA, hB = (np.stack(v) for v in (gA, gB, hA, hB))
-    s_a_over_s_b = [d["reward_a_std"] / (d["reward_b_std"] + 1e-12) for d in per_prompt_diagnostics
-                     if d["reward_b_std"] > 0]
-    median_std_ratio_a_over_b = float(np.median(s_a_over_s_b)) if s_a_over_s_b else float("nan")
+        gA, gB, hA, hB = (np.stack(v) for v in (gA, gB, hA, hB))
+        s_a_over_s_b = [d["reward_a_std"] / (d["reward_b_std"] + 1e-12) for d in per_prompt_diagnostics
+                         if d["reward_b_std"] > 0]
+        median_std_ratio_a_over_b = float(np.median(s_a_over_s_b)) if s_a_over_s_b else float("nan")
 
-    print("Building Gram matrices and running the bootstrap...")
-    grams = build_gram_matrices(dict(gA=gA, gB=gB, hA=hA, hB=hB))
-    del gA, gB, hA, hB
-    stats = bootstrap_stats(grams, N_PROMPTS)
+        print("Building Gram matrices and running the bootstrap...")
+        grams = build_gram_matrices(dict(gA=gA, gB=gB, hA=hA, hB=hB))
+        del gA, gB, hA, hB
+        stats = bootstrap_stats(grams, N_PROMPTS)
 
-    print(f"\n=== Item 3: finite-G curve, {N_FINITE_G_PROMPTS} prompts, G_max={G_FINITE_MAX} ===")
-    t_item3 = time.time()
-    finite_g_prompts = prompts[:N_FINITE_G_PROMPTS]
-    finite_g_summary = finite_g_curve(trainer, model, device, finite_g_prompts, tokenizer=tokenizer)
-    print(f"  item 3 elapsed={time.time()-t_item3:.1f}s")
-    fig_paths = save_finite_g_figure(finite_g_summary, os.path.join(args.out_dir, "gradient_field_finite_g"))
+        # Save + print IMMEDIATELY, before item 3 (the OOM-prone one) starts -- so a crash
+        # there can never lose this expensive 128-prompt computation.
+        save_item1_results(args.out_dir, grams, stats, median_std_ratio_a_over_b, per_prompt_diagnostics,
+                            N_PROMPTS, G_MAIN)
 
+    print_item1_stats(stats, median_std_ratio_a_over_b)
     substantive = bool(stats["angle_deg"]["point"] >= SUBSTANTIVE_ANGLE_DEG and stats["cos_AB_dr"]["point"] <= SUBSTANTIVE_COS_AB)
-
-    print("\n=== RESULTS (bootstrap over prompts, 95% CI) ===")
-    for key in ["angle_deg", "cos_AB_dr", "ratio_dr", "ratio_grpo", "R"]:
-        s = stats[key]
-        print(f"  {key}: point={s['point']:.4f}  mean={s['mean']:.4f}  95% CI=[{s['ci'][0]:.4f},{s['ci'][1]:.4f}]")
-    print(f"  median per-prompt std ratio s_A/s_B: {median_std_ratio_a_over_b:.4f}")
     print(f"\nSUBSTANTIVE: {substantive}  "
           f"(angle>={SUBSTANTIVE_ANGLE_DEG}: {stats['angle_deg']['point']>=SUBSTANTIVE_ANGLE_DEG}, "
           f"cos_AB<={SUBSTANTIVE_COS_AB}: {stats['cos_AB_dr']['point']<=SUBSTANTIVE_COS_AB})")
 
-    results = dict(
+    item1_results = dict(
         n_prompts=N_PROMPTS, g_main=G_MAIN, seed=args.seed,
         loss_equivalence_diagnosis=dict(winning_settings=sorted(winning_settings), table=eq_table,
                                          dropout_note=dropout_note),
         bootstrap=stats, median_std_ratio_a_over_b=median_std_ratio_a_over_b,
         per_prompt_diagnostics=per_prompt_diagnostics,
-        finite_g_curve=finite_g_summary, finite_g_figure_paths=fig_paths,
         substantive=substantive, substantive_criterion=PRE_REGISTERED_GRADIENT_FIELD_PREDICTION,
-        total_elapsed_s=time.time() - t0,
     )
+
+    print(f"\n=== Item 3: finite-G curve, {N_FINITE_G_PROMPTS} prompts, G_max={G_FINITE_MAX} ===")
+    t_item3 = time.time()
+    finite_g_prompts = prompts[:N_FINITE_G_PROMPTS]
+    try:
+        finite_g_summary = finite_g_curve(trainer, model, device, finite_g_prompts, tokenizer=tokenizer)
+        fig_paths = save_finite_g_figure(finite_g_summary, os.path.join(args.out_dir, "gradient_field_finite_g"))
+        print(f"  item 3 elapsed={time.time()-t_item3:.1f}s")
+    except Exception as e:  # noqa: BLE001 -- item 1's results (already saved+printed above) must survive this
+        print(f"\n=== Item 3 FAILED after {time.time()-t_item3:.1f}s: {e!r} ===")
+        print("Item 1's results were already saved to Drive and printed above, unaffected by this failure.")
+        results = dict(item1_results, finite_g_curve=None, finite_g_figure_paths=None,
+                        item3_failed=True, item3_error=repr(e), total_elapsed_s=time.time() - t0)
+        out_path = os.path.join(args.out_dir, "gradient_field.json")
+        os.makedirs(args.out_dir, exist_ok=True)
+        with open(out_path, "w") as f:
+            json.dump(results, f, indent=2)
+        print(f"wrote {out_path} (item 1 only -- item 3 failed)")
+        record_attempt(args.out_dir, stage="gradient_field_result", config=config_snapshot(C),
+                        outcome=dict(substantive=substantive, bootstrap=stats,
+                                     median_std_ratio_a_over_b=median_std_ratio_a_over_b,
+                                     item3_failed=True, item3_error=repr(e)),
+                        prediction=PRE_REGISTERED_GRADIENT_FIELD_PREDICTION)
+        return results
+
+    results = dict(item1_results, finite_g_curve=finite_g_summary, finite_g_figure_paths=fig_paths,
+                    item3_failed=False, total_elapsed_s=time.time() - t0)
     os.makedirs(args.out_dir, exist_ok=True)
     out_path = os.path.join(args.out_dir, "gradient_field.json")
     with open(out_path, "w") as f:
