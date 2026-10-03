@@ -1,0 +1,407 @@
+{
+  "config": {
+    "methods": [
+      "rloo",
+      "drgrpo",
+      "grpo",
+      "batchnorm",
+      "grpo_sigma_sample"
+    ],
+    "budgets": {
+      "1x": 1500,
+      "2x": 3000
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "chosen_lr": {
+      "ac": {
+        "rloo": 0.01,
+        "drgrpo": 0.01,
+        "grpo": 0.02,
+        "batchnorm": 0.01,
+        "grpo_sigma_sample": 0.01
+      },
+      "bandit": {
+        "rloo": 0.02,
+        "drgrpo": 0.02,
+        "grpo": 0.01,
+        "batchnorm": 0.02,
+        "grpo_sigma_sample": 0.1
+      }
+    },
+    "n_ac_books": 10,
+    "n_bandit_problems": 10,
+    "cluster_bootstrap": {
+      "B": 10000,
+      "rng_seed": 20261001,
+      "unit": "problem/book"
+    }
+  },
+  "table": [
+    {
+      "testbed": "ac",
+      "method": "rloo",
+      "budget": "1x",
+      "lr": 0.01,
+      "mean_regret": 0.04904947386145227,
+      "ci95": [
+        0.03810591427124005,
+        0.061436393305800585
+      ],
+      "mean_dist_true_star": 0.0380997887466775,
+      "mean_dist_grpo_star": 0.041291188046474775,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "rloo",
+      "budget": "2x",
+      "lr": 0.01,
+      "mean_regret": 0.04882312740482314,
+      "ci95": [
+        0.03802260538092897,
+        0.06117263119128364
+      ],
+      "mean_dist_true_star": 0.04095724204832188,
+      "mean_dist_grpo_star": 0.04588873201890208,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "drgrpo",
+      "budget": "1x",
+      "lr": 0.01,
+      "mean_regret": 0.04921593390784777,
+      "ci95": [
+        0.03809186723806491,
+        0.06190203373097098
+      ],
+      "mean_dist_true_star": 0.035561885885023764,
+      "mean_dist_grpo_star": 0.03983638489298804,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "drgrpo",
+      "budget": "2x",
+      "lr": 0.01,
+      "mean_regret": 0.04889812185243869,
+      "ci95": [
+        0.03795414762961298,
+        0.06149941315446033
+      ],
+      "mean_dist_true_star": 0.036377935356305346,
+      "mean_dist_grpo_star": 0.04024271981566766,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "grpo",
+      "budget": "1x",
+      "lr": 0.02,
+      "mean_regret": 0.05442785796024762,
+      "ci95": [
+        0.039622227428375414,
+        0.07301276105067424
+      ],
+      "mean_dist_true_star": 0.040400361894602804,
+      "mean_dist_grpo_star": 0.03281934169523359,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "grpo",
+      "budget": "2x",
+      "lr": 0.02,
+      "mean_regret": 0.05560720172767424,
+      "ci95": [
+        0.04105700621133206,
+        0.07298462782864591
+      ],
+      "mean_dist_true_star": 0.04135060085068314,
+      "mean_dist_grpo_star": 0.03237040955773684,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "batchnorm",
+      "budget": "1x",
+      "lr": 0.01,
+      "mean_regret": 0.0489483514922617,
+      "ci95": [
+        0.03816525364982969,
+        0.06130984096685239
+      ],
+      "mean_dist_true_star": 0.03827886102502208,
+      "mean_dist_grpo_star": 0.043110582013088025,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "batchnorm",
+      "budget": "2x",
+      "lr": 0.01,
+      "mean_regret": 0.04870212101629487,
+      "ci95": [
+        0.03777341158229369,
+        0.061261755849291395
+      ],
+      "mean_dist_true_star": 0.04169235219861389,
+      "mean_dist_grpo_star": 0.04576959639994011,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "grpo_sigma_sample",
+      "budget": "1x",
+      "lr": 0.01,
+      "mean_regret": 0.049437727164075795,
+      "ci95": [
+        0.038298410889516465,
+        0.06191963450827941
+      ],
+      "mean_dist_true_star": 0.029928894492520744,
+      "mean_dist_grpo_star": 0.032537440355065665,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "ac",
+      "method": "grpo_sigma_sample",
+      "budget": "2x",
+      "lr": 0.01,
+      "mean_regret": 0.04951093010026831,
+      "ci95": [
+        0.03849829484336747,
+        0.06187154882226434
+      ],
+      "mean_dist_true_star": 0.03801133355055495,
+      "mean_dist_grpo_star": 0.042516579131105285,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "rloo",
+      "budget": "1x",
+      "lr": 0.02,
+      "mean_regret": 0.004638605360983724,
+      "ci95": [
+        0.002537083757032908,
+        0.007024271133284969
+      ],
+      "mean_dist_true_star": 0.5921166857887195,
+      "mean_dist_grpo_star": 1.5086920669850294,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "rloo",
+      "budget": "2x",
+      "lr": 0.02,
+      "mean_regret": 0.003202058706647805,
+      "ci95": [
+        0.0018685033532677092,
+        0.004804755065090719
+      ],
+      "mean_dist_true_star": 0.15832889428358224,
+      "mean_dist_grpo_star": 1.398934775500115,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "drgrpo",
+      "budget": "1x",
+      "lr": 0.02,
+      "mean_regret": 0.006195535367662383,
+      "ci95": [
+        0.0024788798963269816,
+        0.011347972067526498
+      ],
+      "mean_dist_true_star": 0.5918115754104376,
+      "mean_dist_grpo_star": 1.5010779057366361,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "drgrpo",
+      "budget": "2x",
+      "lr": 0.02,
+      "mean_regret": 0.0028180506318264804,
+      "ci95": [
+        0.0016206058343638085,
+        0.00438480487307531
+      ],
+      "mean_dist_true_star": 0.15773845778455017,
+      "mean_dist_grpo_star": 1.4002936739760816,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "grpo",
+      "budget": "1x",
+      "lr": 0.01,
+      "mean_regret": 0.05241723994407804,
+      "ci95": [
+        0.020403048138065,
+        0.09283923985343334
+      ],
+      "mean_dist_true_star": 1.758487959313821,
+      "mean_dist_grpo_star": 1.3696515291731015,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "grpo",
+      "budget": "2x",
+      "lr": 0.01,
+      "mean_regret": 0.041618982050317166,
+      "ci95": [
+        0.01915881550028594,
+        0.06469045190443495
+      ],
+      "mean_dist_true_star": 1.3381225127796958,
+      "mean_dist_grpo_star": 0.5926831034281048,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "batchnorm",
+      "budget": "1x",
+      "lr": 0.02,
+      "mean_regret": 0.003777853961489997,
+      "ci95": [
+        0.0020575193014207645,
+        0.005803350107072475
+      ],
+      "mean_dist_true_star": 0.4258531909817262,
+      "mean_dist_grpo_star": 1.4521769986399002,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "batchnorm",
+      "budget": "2x",
+      "lr": 0.02,
+      "mean_regret": 0.002583995443174972,
+      "ci95": [
+        0.0015635686320686726,
+        0.0038051460632569914
+      ],
+      "mean_dist_true_star": 0.11459514960530973,
+      "mean_dist_grpo_star": 1.394333236904466,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "grpo_sigma_sample",
+      "budget": "1x",
+      "lr": 0.1,
+      "mean_regret": 0.036243832315963745,
+      "ci95": [
+        0.018082773282461884,
+        0.05847229959146902
+      ],
+      "mean_dist_true_star": 0.3148779374052102,
+      "mean_dist_grpo_star": 1.4717377793254327,
+      "n_problems": 10,
+      "n_seeds": 5
+    },
+    {
+      "testbed": "bandit",
+      "method": "grpo_sigma_sample",
+      "budget": "2x",
+      "lr": 0.1,
+      "mean_regret": 0.030647188461479572,
+      "ci95": [
+        0.01747744834577125,
+        0.04739063585817477
+      ],
+      "mean_dist_true_star": 0.277125058049198,
+      "mean_dist_grpo_star": 1.5117546671587199,
+      "n_problems": 10,
+      "n_seeds": 5
+    }
+  ],
+  "rankings": {
+    "ac_1x": [
+      "batchnorm",
+      "rloo",
+      "drgrpo",
+      "grpo_sigma_sample",
+      "grpo"
+    ],
+    "ac_2x": [
+      "batchnorm",
+      "rloo",
+      "drgrpo",
+      "grpo_sigma_sample",
+      "grpo"
+    ],
+    "bandit_1x": [
+      "batchnorm",
+      "rloo",
+      "drgrpo",
+      "grpo_sigma_sample",
+      "grpo"
+    ],
+    "bandit_2x": [
+      "batchnorm",
+      "drgrpo",
+      "rloo",
+      "grpo_sigma_sample",
+      "grpo"
+    ]
+  },
+  "original_shared_lr_1x_ranking": {
+    "ac": {
+      "ranking": [
+        "batchnorm",
+        "rloo",
+        "drgrpo",
+        "grpo"
+      ],
+      "means": {
+        "rloo": 0.05439569412193945,
+        "drgrpo": 0.0545930904408275,
+        "grpo": 0.060759961328225025,
+        "batchnorm": 0.05403349598776374
+      }
+    },
+    "bandit": {
+      "ranking": [
+        "rloo",
+        "drgrpo",
+        "batchnorm",
+        "grpo"
+      ],
+      "means": {
+        "rloo": 0.006859994936224169,
+        "drgrpo": 0.00757360474676419,
+        "grpo": 0.04185374688177257,
+        "batchnorm": 0.008710657402378648
+      }
+    }
+  }
+}
