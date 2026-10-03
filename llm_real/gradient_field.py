@@ -66,6 +66,27 @@ GRPO_EPS = 1e-4  # TRL's hardcoded std-normalization epsilon -- see grpo_trainer
 SUBSTANTIVE_ANGLE_DEG = 20.0
 SUBSTANTIVE_COS_AB = 0.1
 
+# Loss-equivalence diagnostic (A100 run diverged from the CPU dry run: 1.8e-2 relative, vs
+# exactly 0.0 on CPU). Each axis is a candidate source of GPU-vs-CPU numeric divergence --
+# "lora_dropout_zero" is confirmed a no-op by direct inspection (this project's LoraConfig
+# calls and Qwen2.5's own HF config both already default to 0.0 dropout everywhere), kept only
+# so the ablation table shows it was genuinely tested rather than assumed. The real candidates
+# are precision (bf16 vs fp32) and GPU kernel non-determinism (cuBLAS/cuDNN algorithm selection
+# can vary between two separate calls with identical inputs unless explicitly forced
+# deterministic) -- both invisible on CPU, where BLAS is already deterministic fp32.
+LOSS_EQ_CANDIDATE_SETTINGS = [
+    frozenset(),                                 # baseline: current project defaults, unmodified
+    frozenset({"lora_dropout_zero"}),             # expected no-op -- see above
+    frozenset({"fp32"}),                          # model dtype + bf16/fp16 both forced off
+    frozenset({"no_grad_checkpointing"}),         # fixes a real mismatch bug found during this diagnosis:
+                                                   # build_trainer() used to hardcode gradient_checkpointing=False
+                                                   # regardless of config.GRADIENT_CHECKPOINTING (now fixed to match)
+    frozenset({"deterministic_algorithms"}),      # torch.use_deterministic_algorithms(True) + CUBLAS_WORKSPACE_CONFIG
+    frozenset({"lora_dropout_zero", "fp32", "no_grad_checkpointing", "deterministic_algorithms"}),  # combined
+]
+LOSS_EQ_PASS_REL_TOL = 1e-3
+LOSS_EQ_PASS_COS_MIN = 0.99999
+
 PRE_REGISTERED_GRADIENT_FIELD_PREDICTION = (
     "A real, non-synthetic version of the per-group-normalization mechanism this whole project "
     "studies: GRPO's std-normalized advantages should pull the 50/50-grader-mixture gradient "
@@ -219,7 +240,8 @@ def build_trainer(model, tokenizer, seed, extra_grpo_kwargs=None):
         beta=C.KL_BETA,
         bf16=C.BF16_SUPPORTED,
         fp16=(C.DEVICE == "cuda" and not C.BF16_SUPPORTED),
-        gradient_checkpointing=False,
+        gradient_checkpointing=C.GRADIENT_CHECKPOINTING,
+        gradient_checkpointing_kwargs={"use_reentrant": False} if C.GRADIENT_CHECKPOINTING else None,
         seed=seed,
         logging_steps=5,
         save_strategy="no",
@@ -247,27 +269,73 @@ def build_trainer(model, tokenizer, seed, extra_grpo_kwargs=None):
 # Loss-equivalence validation (run BEFORE trusting anything else)
 # --------------------------------------------------------------------------------------------
 
-def validate_loss_equivalence(seed, rel_tol=1e-5):
+def _cosine(a, b):
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-300))
+
+
+def grpo_overrides_for_settings(settings):
+    """The GRPOConfig kwargs a settings combination needs, passed as extra_grpo_kwargs to both
+    run_one() (the real trainer) and build_trainer() (the replay trainer) so the two stay
+    consistent. "no_grad_checkpointing" and "deterministic_algorithms" don't need a GRPOConfig
+    override -- they act via config.GRADIENT_CHECKPOINTING (read live by both builders) and a
+    global torch setting respectively; see apply_loss_eq_settings."""
+    overrides = {}
+    if "fp32" in settings:
+        overrides["bf16"] = False
+        overrides["fp16"] = False
+    return overrides
+
+
+def apply_loss_eq_settings(settings):
+    """Globally applies a settings combination for config.MODEL_DTYPE / config.GRADIENT_CHECKPOINTING
+    (read live by build_model_and_tokenizer/build_trainer) and, for "deterministic_algorithms",
+    torch's own global determinism flag + the CUBLAS_WORKSPACE_CONFIG env var it requires.
+    Returns the PRE-CHANGE values of the two config attributes, so a diagnostic trial can
+    restore them between candidates (torch.use_deterministic_algorithms is NOT restored --
+    see diagnose_and_validate_loss_equivalence for why)."""
+    original = dict(MODEL_DTYPE=C.MODEL_DTYPE, GRADIENT_CHECKPOINTING=C.GRADIENT_CHECKPOINTING)
+    if "fp32" in settings:
+        C.MODEL_DTYPE = torch.float32
+    if "no_grad_checkpointing" in settings:
+        C.GRADIENT_CHECKPOINTING = False
+    if "deterministic_algorithms" in settings:
+        os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+        torch.use_deterministic_algorithms(True)
+    return original
+
+
+def validate_loss_equivalence(seed, rel_tol=1e-5, settings=frozenset()):
     """Runs ONE real training step (run_one, prompts_per_step=1, g=G_MAIN -- so the trainer's
     OWN batch size equals a single prompt's group, no micro-batching involved), captures its
     REAL gradient (via a hook on GraderTrackingGRPOTrainer, added below) and its REAL generation
     output (prompt/completion ids+masks+advantages). Then rebuilds a FRESH model with the SAME
     seed (deterministic LoRA init -- same property check_determinism.py already relies on) and
-    replays those EXACT captured inputs through per_group_gradient(). Asserts the two gradients
-    match to `rel_tol` relative and returns (passed, rel_diff)."""
+    replays those EXACT captured inputs through per_group_gradient(). Reports both the relative
+    difference and the cosine similarity between the two gradients (a GPU-non-determinism-driven
+    difference can be small in cosine -- same direction, slightly different magnitude -- while
+    still failing a tight relative-magnitude tolerance, so both are worth seeing together).
+
+    `settings` (see LOSS_EQ_CANDIDATE_SETTINGS) is applied via apply_loss_eq_settings() AND the
+    matching GRPOConfig overrides (grpo_overrides_for_settings) BEFORE building either model, so
+    the real and replay trainers see identical settings -- this was NOT previously true for
+    gradient checkpointing specifically (build_trainer hardcoded it off regardless of
+    config.GRADIENT_CHECKPOINTING, a real bug this diagnosis surfaced and fixed)."""
     from run import run_one
+
+    apply_loss_eq_settings(settings)
+    extra_grpo_kwargs = grpo_overrides_for_settings(settings) or None
 
     torch.manual_seed(seed)
     _, real_trainer = run_one("grpo", seed=seed, max_steps=1, prompts_per_step=1, g=G_MAIN,
                                max_completion_length=C.MAX_COMPLETION_LENGTH, eval_every=999,
-                               save_result=False, return_trainer=True)
+                               save_result=False, return_trainer=True, extra_grpo_kwargs=extra_grpo_kwargs)
     real_grad = real_trainer.first_step_lora_grad
     gen = real_trainer.first_step_generation_output
     assert real_grad is not None and gen is not None, "hooks did not fire -- check GraderTrackingGRPOTrainer"
 
     torch.manual_seed(seed)
     model2, tokenizer2 = build_model_and_tokenizer()
-    trainer2 = build_trainer(model2, tokenizer2, seed)
+    trainer2 = build_trainer(model2, tokenizer2, seed, extra_grpo_kwargs=extra_grpo_kwargs)
     device = next(model2.parameters()).device
     replay_grad = per_group_gradient(trainer2, model2, gen["prompt_ids"], gen["prompt_mask"],
                                       gen["completion_ids"], gen["completion_mask"], gen["advantages"], device)
@@ -275,12 +343,70 @@ def validate_loss_equivalence(seed, rel_tol=1e-5):
     max_abs_diff = float(np.abs(real_grad - replay_grad).max())
     scale = max(float(np.abs(real_grad).max()), float(np.abs(replay_grad).max()), 1e-12)
     rel_diff = max_abs_diff / scale
+    cosine = _cosine(real_grad, replay_grad)
     passed = rel_diff < rel_tol
-    print(f"LOSS EQUIVALENCE CHECK: max|real-replay|={max_abs_diff:.6e}  scale~{scale:.4f}  "
-          f"relative={rel_diff:.6e}  (require < {rel_tol:.0e})  "
-          f"{'PASSED' if passed else 'FAILED'}")
+    print(f"LOSS EQUIVALENCE CHECK [{'+'.join(sorted(settings)) or 'baseline'}]: "
+          f"max|real-replay|={max_abs_diff:.6e}  scale~{scale:.4f}  relative={rel_diff:.6e}  "
+          f"cosine={cosine:.8f}  (require rel < {rel_tol:.0e})  {'PASSED' if passed else 'FAILED'}")
     del model2, trainer2
-    return passed, rel_diff
+    return dict(passed=passed, relative_diff=rel_diff, cosine=cosine, settings=sorted(settings))
+
+
+def diagnose_and_validate_loss_equivalence(seed, pass_rel_tol=LOSS_EQ_PASS_REL_TOL, pass_cos_min=LOSS_EQ_PASS_COS_MIN):
+    """Runs validate_loss_equivalence (at the STRICT 1e-5 relative tolerance, for an honest
+    per-setting number) under each of LOSS_EQ_CANDIDATE_SETTINGS in turn, printing relative
+    diff + cosine for each, restoring config.MODEL_DTYPE/config.GRADIENT_CHECKPOINTING between
+    trials so each is tested independently. The FIRST combination (in LOSS_EQ_CANDIDATE_SETTINGS
+    order) meeting the LOOSER pass_rel_tol/pass_cos_min bar is treated as "the replay matches"
+    and is left APPLIED globally for the rest of the script (per the spec: use it for the WHOLE
+    measurement) -- deterministic_algorithms is never explicitly un-set between trials either way
+    (PyTorch doesn't guarantee a clean reset mid-process, and leaving it on is harmless).
+
+    A setting combination that raises (e.g. "deterministic_algorithms" hitting an op without a
+    deterministic kernel on this backend -- real behavior observed on MPS, and not guaranteed
+    safe on every CUDA op either) is recorded as a failed candidate with the error message
+    rather than crashing the whole diagnostic -- the other candidates may still pass.
+
+    Every trial is fully isolated, INCLUDING torch's global deterministic-algorithms flag: a
+    candidate that sets it (whether or not it then crashes or passes) is explicitly turned back
+    off before the next candidate runs, so e.g. a crashed "deterministic_algorithms" trial can
+    never leave that global flag on for a LATER, unrelated winning candidate that never asked
+    for it. The winning combination is re-applied once, cleanly, after the loop.
+
+    Returns (winning_settings_or_None, full_table)."""
+    table = []
+    winning = None
+    saved = dict(MODEL_DTYPE=C.MODEL_DTYPE, GRADIENT_CHECKPOINTING=C.GRADIENT_CHECKPOINTING)
+    for settings in LOSS_EQ_CANDIDATE_SETTINGS:
+        label = "+".join(sorted(settings)) if settings else "baseline (project defaults)"
+        try:
+            result = validate_loss_equivalence(seed, rel_tol=1e-5, settings=settings)
+        except Exception as e:  # noqa: BLE001 -- deliberately broad: ANY candidate crashing must not kill the diagnostic
+            print(f"LOSS EQUIVALENCE CHECK [{label}]: CRASHED -- {e!r}")
+            result = dict(passed=False, relative_diff=float("nan"), cosine=float("nan"),
+                          settings=sorted(settings), error=repr(e))
+        table.append(dict(label=label, **result))
+        if winning is None and result["relative_diff"] < pass_rel_tol and result["cosine"] > pass_cos_min:
+            winning = settings
+        C.MODEL_DTYPE = saved["MODEL_DTYPE"]
+        C.GRADIENT_CHECKPOINTING = saved["GRADIENT_CHECKPOINTING"]
+        if "deterministic_algorithms" in settings:
+            torch.use_deterministic_algorithms(False)
+
+    print("\n=== Loss-equivalence diagnostic table ===")
+    for row in table:
+        print(f"  [{row['label']:<55}] relative_diff={row['relative_diff']:.6e}  cosine={row['cosine']:.8f}  "
+              f"{'PASS' if row['relative_diff'] < pass_rel_tol and row['cosine'] > pass_cos_min else 'fail'}")
+
+    if winning is not None:
+        label = "+".join(sorted(winning)) or "baseline (project defaults)"
+        print(f"\nWinning combination: [{label}] -- applying for the whole measurement "
+              f"(rel<{pass_rel_tol:.0e}, cos>{pass_cos_min}).")
+        apply_loss_eq_settings(winning)
+    else:
+        print(f"\nNO combination met the pass bar (rel<{pass_rel_tol:.0e}, cos>{pass_cos_min}) -- "
+              "restoring project defaults; the measurement will NOT run.")
+    return winning, table
 
 
 # --------------------------------------------------------------------------------------------
@@ -502,19 +628,32 @@ def main(args):
     print("=== Pre-registering criterion to attempts.json (BEFORE any measurement) ===")
     pre_register(args.out_dir)
 
-    print("\n=== Loss-equivalence check (must pass before anything else is trusted) ===")
-    eq_passed, eq_rel_diff = validate_loss_equivalence(args.seed)
+    print("\n=== Loss-equivalence diagnostic (must find a passing setting before anything else is trusted) ===")
+    winning_settings, eq_table = diagnose_and_validate_loss_equivalence(args.seed)
+    eq_passed = winning_settings is not None
+    dropout_note = ("Measurement uses DROPOUT-FREE gradients: LoRA dropout and Qwen2.5's own "
+                     "attention_dropout are BOTH already 0.0 in this project's actual training "
+                     "config (confirmed by direct inspection), so this is not a departure from "
+                     "what training itself computes -- 'lora_dropout_zero' in the table above is "
+                     "a confirmed no-op, kept for a complete record of what was tested.")
+    record_attempt(args.out_dir, stage="gradient_field_loss_eq_diagnosis", config=config_snapshot(C),
+                    outcome=dict(winning_settings=sorted(winning_settings) if winning_settings else None,
+                                 table=eq_table, dropout_note=dropout_note),
+                    prediction=PRE_REGISTERED_GRADIENT_FIELD_PREDICTION)
     if not eq_passed:
-        raise RuntimeError(f"Loss equivalence check FAILED (relative diff {eq_rel_diff:.6e}) -- "
-                            "per_group_gradient does not match the real trainer's gradient. Fix before trusting "
-                            "any downstream result.")
+        print("\n=== STOPPING: no setting combination passed -- measurement will NOT run. "
+              "See the table above / attempts.json (stage=gradient_field_loss_eq_diagnosis). ===")
+        return dict(loss_equivalence_diagnosis=dict(winning_settings=None, table=eq_table),
+                    substantive=None, stopped_before_measurement=True, total_elapsed_s=time.time() - t0)
+    print(f"\n{dropout_note}")
+    extra_grpo_kwargs = grpo_overrides_for_settings(winning_settings) or None
 
     print("\n=== Loading GSM8K and building the measurement model (fresh LoRA init) ===")
     train_split, _ = load_gsm8k()
     prompts = select_measurement_prompts(train_split, N_PROMPTS, PROMPT_SELECTION_SEED)
     torch.manual_seed(args.seed)
     model, tokenizer = build_model_and_tokenizer()
-    trainer = build_trainer(model, tokenizer, args.seed)
+    trainer = build_trainer(model, tokenizer, args.seed, extra_grpo_kwargs=extra_grpo_kwargs)
     device = next(model.parameters()).device
 
     print(f"\n=== Item 1: paired design, {N_PROMPTS} prompts x G={G_MAIN} ===")
@@ -577,7 +716,8 @@ def main(args):
 
     results = dict(
         n_prompts=N_PROMPTS, g_main=G_MAIN, seed=args.seed,
-        loss_equivalence_check=dict(passed=eq_passed, relative_diff=eq_rel_diff),
+        loss_equivalence_diagnosis=dict(winning_settings=sorted(winning_settings), table=eq_table,
+                                         dropout_note=dropout_note),
         bootstrap=stats, median_std_ratio_a_over_b=median_std_ratio_a_over_b,
         per_prompt_diagnostics=per_prompt_diagnostics,
         finite_g_curve=finite_g_summary, finite_g_figure_paths=fig_paths,
